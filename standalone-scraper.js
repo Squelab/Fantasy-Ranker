@@ -451,7 +451,7 @@ async function scrapeAllPlayers() {
       
       // Delay between batches (except for last batch)
       if (i + batchSize < players.length) {
-        const delay = 4000;
+        const delay = 2000;
         console.log(`⏱️  Waiting ${delay/1000} seconds before next batch...`);
         await new Promise(resolve => setTimeout(resolve, delay));
       }
