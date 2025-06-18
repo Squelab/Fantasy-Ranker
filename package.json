@@ -1,0 +1,23 @@
+{
+  "name": "fantasypros-scraper",
+  "version": "1.0.0",
+  "description": "Scrapes fantasy football player data from FantasyPros",
+  "main": "standalone-scraper.js",
+  "scripts": {
+    "start": "node standalone-scraper.js",
+    "scrape": "node standalone-scraper.js"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "cheerio": "^1.0.0"
+  },
+  "keywords": [
+    "fantasy",
+    "football", 
+    "nfl",
+    "scraper",
+    "fantasypros"
+  ],
+  "author": "Elam Schwey",
+  "license": "MIT"
+}
