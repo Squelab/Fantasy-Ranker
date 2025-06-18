@@ -11,11 +11,11 @@ on:
       target_repo:
         description: 'Target repository (owner/repo-name)'
         required: false
-        default: 'your-username/fantasy-ai-data'
+        default: 'Squelab/Fantasy-Ranker-AI'
       batch_size:
         description: 'Batch size for scraping'
         required: false
-        default: '3'
+        default: '5'
 
 jobs:
   scrape-and-deploy:
