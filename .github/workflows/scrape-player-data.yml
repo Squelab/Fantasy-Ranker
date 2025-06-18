@@ -2,18 +2,14 @@ name: Scrape Fantasy Player Data
 
 on:
   # Run daily at 6 AM UTC (during NFL offseason/preseason)
-  # schedule:
-    # - cron: '0 6 * * *'
+  schedule:
+    - cron: '0 6 * * *'
   
   # Allow manual triggering
   workflow_dispatch:
     inputs:
-      target_repo:
-        description: 'Target repository (owner/repo-name)'
-        required: false
-        default: 'Squelab/Fantasy-Ranker-AI'
       batch_size:
-        description: 'Batch size for scraping'
+        description: 'Batch size for scraping (3=slower but safer, 5=faster)'
         required: false
         default: '5'
 
@@ -33,14 +29,21 @@ jobs:
         
     - name: Install dependencies
       run: |
-        npm init -y
+        # Create package.json if it doesn't exist
+        if [ ! -f "package.json" ]; then
+          echo "📦 Creating package.json..."
+          npm init -y
+        fi
+        
+        echo "📦 Installing dependencies..."
         npm install axios cheerio
         
     - name: Run fantasy scraper
       env:
         NODE_ENV: production
+        BATCH_SIZE: ${{ github.event.inputs.batch_size || '5' }}
       run: |
-        echo "🚀 Starting FantasyPros scraper..."
+        echo "🚀 Starting FantasyPros scraper with batch size ${BATCH_SIZE}..."
         node standalone-scraper.js
         echo "📊 Scraping completed!"
         
@@ -56,68 +59,39 @@ jobs:
           exit 1
         fi
         
-    - name: Setup target repo access
+    - name: Commit updated data to repository
       env:
-        TARGET_REPO: ${{ github.event.inputs.target_repo || 'your-username/fantasy-ai-data' }}
-        GITHUB_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name 'Fantasy Data Bot'
         git config --global user.email 'bot@fantasydatabot.com'
         
-    - name: Clone target repository
-      env:
-        TARGET_REPO: ${{ github.event.inputs.target_repo || 'your-username/fantasy-ai-data' }}
-        GITHUB_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
-      run: |
-        echo "📥 Cloning target repository: $TARGET_REPO"
-        git clone https://$GITHUB_TOKEN@github.com/$TARGET_REPO.git target-repo
+        # Add the new data file
+        git add player-data.json
         
-    - name: Update target repository
-      env:
-        TARGET_REPO: ${{ github.event.inputs.target_repo || 'your-username/fantasy-ai-data' }}
-      run: |
-        cd target-repo
+        # Create/update README with data info
+        if [ ! -f "README.md" ]; then
+          echo "# Fantasy AI with Player Data" > README.md
+        fi
         
-        # Copy the new data file
-        cp ../player-data.json ./player-data.json
-        
-        # Create/update README with timestamp
-        echo "# Fantasy Player Data" > README.md
+        # Add data section to README
         echo "" >> README.md
+        echo "## 📊 Latest Player Data" >> README.md
         echo "**Last Updated:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> README.md
         echo "**Players:** $(jq '.total_players' player-data.json)" >> README.md
         echo "**Season:** $(jq '.current_nfl_season' player-data.json)" >> README.md
+        echo "**File:** \`player-data.json\`" >> README.md
         echo "" >> README.md
-        echo "This data is automatically updated daily by [FantasyPros Scraper](https://github.com/$(echo $GITHUB_REPOSITORY))." >> README.md
-        echo "" >> README.md
-        echo "## Data Structure" >> README.md
-        echo "\`\`\`json" >> README.md
-        echo "{" >> README.md
-        echo "  \"success\": true," >> README.md
-        echo "  \"timestamp\": \"$(jq -r '.timestamp' player-data.json)\"," >> README.md
-        echo "  \"current_nfl_season\": $(jq '.current_nfl_season' player-data.json)," >> README.md
-        echo "  \"total_players\": $(jq '.total_players' player-data.json)," >> README.md
-        echo "  \"stats\": $(jq '.stats' player-data.json)," >> README.md
-        echo "  \"data\": {" >> README.md
-        echo "    \"player_name\": {" >> README.md
-        echo "      \"name\": \"Player Name\"," >> README.md
-        echo "      \"position\": \"QB|RB|WR|TE\"," >> README.md
-        echo "      \"team\": \"TEAM\"," >> README.md
-        echo "      \"seasons\": { \"2024\": { ... } }" >> README.md
-        echo "    }" >> README.md
-        echo "  }" >> README.md
-        echo "}" >> README.md
-        echo "\`\`\`" >> README.md
         
         # Check if anything changed
-        if git diff --quiet; then
+        if git diff --cached --quiet; then
           echo "📭 No changes detected - data unchanged"
         else
           echo "📝 Changes detected - committing update"
-          git add .
+          git add README.md
           git commit -m "📊 Update fantasy player data - $(date -u '+%Y-%m-%d %H:%M UTC')"
-          git push origin main
-          echo "✅ Successfully pushed updated data to $TARGET_REPO"
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:main
+          echo "✅ Successfully updated player data in repository"
         fi
         
     - name: Summary
