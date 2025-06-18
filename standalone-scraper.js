@@ -402,7 +402,7 @@ async function scrapeAllPlayers() {
     console.log(`📅 Current NFL season: ${getCurrentNFLSeason()}`);
     
     const players = await getTop250Players();
-    const batchSize = 3;
+    const batchSize = 5;
     
     console.log(`🎯 Processing ${players.length} players in batches of ${batchSize}...`);
     
