@@ -50,11 +50,11 @@ jobs:
         
     - name: Verify output file
       run: |
-        if [ -f "For-AI/Stats/player-stats.json" ]; then
+        if [ -f "Player-Context/Stats/player-stats.json" ]; then
           echo "✅ player-stats.json created successfully"
-          echo "📁 File size: $(du -h For-AI/Stats/player-stats.json | cut -f1)"
-          echo "🔢 Player count: $(jq '.total_players' For-AI/Stats/player-stats.json)"
-          echo "📅 Generated: $(jq -r '.timestamp' For-AI/Stats/player-stats.json)"
+          echo "📁 File size: $(du -h Player-Context/Stats/player-stats.json | cut -f1)"
+          echo "🔢 Player count: $(jq '.total_players' Player-Context/Stats/player-stats.json)"
+          echo "📅 Generated: $(jq -r '.timestamp' Player-Context/Stats/player-stats.json)"
         else
           echo "❌ player-stats.json not found!"
           exit 1
@@ -68,7 +68,7 @@ jobs:
         git config --global user.email 'bot@fantasydatabot.com'
         
         # Add the new data file
-        git add For-AI/Stats/player-stats.json
+        git add Player-Context/Stats/player-stats.json
         
         # Create/update README with data info
         if [ ! -f "README.md" ]; then
@@ -79,9 +79,9 @@ jobs:
         echo "" >> README.md
         echo "## 📊 Latest Player Data" >> README.md
         echo "**Last Updated:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> README.md
-        echo "**Players:** $(jq '.total_players' For-AI/Stats/player-stats.json)" >> README.md
-        echo "**Season:** $(jq '.current_nfl_season' For-AI/Stats/player-stats.json)" >> README.md
-        echo "**File:** \`For-AI/Stats/player-stats.json\`" >> README.md
+        echo "**Players:** $(jq '.total_players' Player-Context/Stats/player-stats.json)" >> README.md
+        echo "**Season:** $(jq '.current_nfl_season' Player-Context/Stats/player-stats.json)" >> README.md
+        echo "**File:** \`Player-Context/Stats/player-stats.json\`" >> README.md
         echo "" >> README.md
         
         # Check if anything changed
@@ -99,11 +99,11 @@ jobs:
       if: always()
       run: |
         echo "🎯 **Scraping Summary**"
-        if [ -f "For-AI/Stats/player-stats.json" ]; then
-          echo "✅ **Success:** $(jq '.stats.successful' For-AI/Stats/player-stats.json) players"
-          echo "❌ **Failed:** $(jq '.stats.failed' For-AI/Stats/player-stats.json) players" 
-          echo "🚫 **Invalid:** $(jq '.stats.wrong_player' For-AI/Stats/player-stats.json) players"
-          echo "📊 **Total:** $(jq '.total_players' For-AI/Stats/player-stats.json) players in database"
+        if [ -f "Player-Context/Stats/player-stats.json" ]; then
+          echo "✅ **Success:** $(jq '.stats.successful' Player-Context/Stats/player-stats.json) players"
+          echo "❌ **Failed:** $(jq '.stats.failed' Player-Context/Stats/player-stats.json) players" 
+          echo "🚫 **Invalid:** $(jq '.stats.wrong_player' Player-Context/Stats/player-stats.json) players"
+          echo "📊 **Total:** $(jq '.total_players' Player-Context/Stats/player-stats.json) players in database"
         else
           echo "❌ **Failed:** No data file generated"
         fi
