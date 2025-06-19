@@ -320,11 +320,11 @@ async function scrapeAllPlayerInjuries() {
     };
     
     // Create output directory
-    await fs.mkdir('For-AI/Injury', { recursive: true });
+    await fs.mkdir('Player-Context/Injury', { recursive: true });
     
     // Write to JSON file
-    await fs.writeFile('For-AI/Injury/injury-history.json', JSON.stringify(finalData, null, 2));
-    console.log(`📁 Data saved to For-AI/Injury/injury-history.json`);
+    await fs.writeFile('Player-Context/Injury/injury-history.json', JSON.stringify(finalData, null, 2));
+    console.log(`📁 Data saved to Player-Context/Injury/injury-history.json`);
     
     return finalData;
     
