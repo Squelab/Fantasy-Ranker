@@ -50,17 +50,17 @@ jobs:
         node standalone-scraper.js
         echo "📊 Scraping completed!"
         
-    - name: Verify output file
-      run: |
-        if [ -f "for-ai/stats/player-stats.json" ]; then
-          echo "✅ player-stats.json created successfully"
-          echo "📁 File size: $(du -h for-ai/stats/player-stats.json | cut -f1)"
-          echo "🔢 Player count: $(jq '.total_players' for-ai/stats/player-stats.json)"
-          echo "📅 Generated: $(jq -r '.timestamp' for-ai/stats/player-stats.json)"
-        else
-          echo "❌ player-stats.json not found!"
-          exit 1
-        fi
+   - name: Verify output file
+     run: |
+       if [ -f "For-AI/Stats/player-stats.json" ]; then
+         echo "✅ player-stats.json created successfully"
+         echo "📁 File size: $(du -h For-AI/Stats/player-stats.json | cut -f1)"
+         echo "🔢 Player count: $(jq '.total_players' For-AI/Stats/player-stats.json)"
+         echo "📅 Generated: $(jq -r '.timestamp' For-AI/Stats/player-stats.json)"
+       else
+         echo "❌ player-stats.json not found!"
+         exit 1
+       fi
         
     - name: Commit updated data to repository
       env:
