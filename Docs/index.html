@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy Football Rankings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-900 min-h-screen text-gray-100">
+    <div class="container mx-auto p-4 max-w-6xl">
+        <!-- Header Controls -->
+        <div class="bg-slate-800 rounded-lg shadow-xl p-6 mb-6 border border-slate-700">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                <input type="text" id="rankerName" placeholder="Your Name" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none h-10">
+                <select id="scoringFormat" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 focus:border-blue-500 focus:outline-none h-10">
+                    <option value="PPR">PPR</option>
+                    <option value="Half PPR">Half PPR</option>
+                    <option value="Standard">Standard</option>
+                </select>
+                <label class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 cursor-pointer transition-colors flex items-center justify-center text-center h-10">
+                    Load Rankings
+                    <input type="file" id="loadFileInput" accept=".json" class="hidden">
+                </label>
+                <button id="saveBtn" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors h-10">Save Rankings</button>
+            </div>
+
+            <h1 id="rankingsTitle" class="text-2xl font-bold text-center text-gray-100 mt-4">
+                Your 2025 PPR Fantasy Football Rankings
+            </h1>
+        </div>
+
+        <!-- Recently Drafted Section -->
+        <div id="recentlyDraftedSection" class="bg-red-950 rounded-lg shadow-xl p-4 mb-6 hidden border border-red-900">
+            <h3 class="text-lg font-semibold text-red-400 mb-3">Recently Drafted</h3>
+            <div id="recentlyDraftedList" class="space-y-2"></div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="bg-slate-800 rounded-lg shadow-xl p-4 mb-6 border border-slate-700">
+            <div class="grid grid-cols-2 gap-4">
+                <button id="draftBtn" class="bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-700 transition-colors h-10">Draft Day</button>
+                <button id="printBtn" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors h-10">Printable</button>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="bg-slate-800 rounded-lg shadow-xl p-4 mb-6 border border-slate-700">
+            <input type="text" id="searchInput" placeholder="Search players..." class="w-full bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">
+        </div>
+
+        <!-- Rankings List -->
+        <div class="bg-slate-800 rounded-lg shadow-xl p-4 border border-slate-700">
+            <div id="playersList"></div>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        const state = {
+            players: [],
+            filteredPlayers: [],
+            draftedPlayers: [],
+            isDraftMode: false,
+            dragState: {
+                element: null,
+                index: -1,
+                placeholder: null,
+                isDragging: false,
+                startX: 0,
+                startY: 0,
+                originalRect: null,
+                timers: { touch: null, resize: null }
+            }
+        };
+
+        // Configuration
+        const cfg = {
+            year: new Date().getFullYear(),
+            risks: ['Low', 'Medium', 'High'],
+            riskBtnColors: { High: 'bg-red-600', Medium: 'bg-yellow-600', Low: 'bg-green-600' },
+            posColors: { 
+                QB: 'bg-purple-900/50 border-l-4 border-purple-600', 
+                RB: 'bg-blue-900/50 border-l-4 border-blue-600', 
+                WR: 'bg-green-900/50 border-l-4 border-green-600', 
+                TE: 'bg-orange-900/50 border-l-4 border-orange-600', 
+                K: 'bg-pink-900/50 border-l-4 border-pink-600', 
+                DST: 'bg-gray-700/50 border-l-4 border-gray-600' 
+            },
+            positionColors: { 
+                QB: 'text-purple-300 bg-purple-900/50', 
+                RB: 'text-blue-300 bg-blue-900/50', 
+                WR: 'text-green-300 bg-green-900/50', 
+                TE: 'text-orange-300 bg-orange-900/50', 
+                K: 'text-pink-300 bg-pink-900/50', 
+                DST: 'text-gray-300 bg-gray-700/50' 
+            }
+        };
+
+        // Utilities
+        const $ = id => document.getElementById(id);
+        const on = (el, evt, fn, opts) => el.addEventListener(evt, fn, opts);
+        const debounce = (fn, ms) => { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }};
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            on($('rankerName'), 'input', updateTitle);
+            on($('scoringFormat'), 'change', () => { updateTitle(); loadPlayersFromFile(); });
+            on($('searchInput'), 'input', debounce(filterPlayers, 150));
+            on($('loadFileInput'), 'change', loadRankings);
+            on($('saveBtn'), 'click', saveRankings);
+            on($('printBtn'), 'click', downloadPrintable);
+            on($('draftBtn'), 'click', toggleDraftMode);
+            
+            on(window, 'resize', () => {
+                cancelDragOperation();
+                clearTimeout(state.dragState.timers.resize);
+                state.dragState.timers.resize = setTimeout(filterPlayers, 250);
+            });
+            
+            updateTitle();
+            loadPlayersFromFile();
+        });
+
+        // Title management
+        function updateTitle() {
+            const name = $('rankerName').value.trim();
+            const format = $('scoringFormat').value || 'PPR';
+            $('rankingsTitle').textContent = `${name ? name + "'s" : 'Your'} ${cfg.year} ${format} Fantasy Football Rankings`;
+        }
+
+        // Data loading
+        function loadPlayersFromFile() {
+            const format = $('scoringFormat').value || 'PPR';
+            const fileMap = { 'PPR': 'PPR.json', 'Half PPR': 'HPPR.json', 'Standard': 'STD.json' };
+            const filename = fileMap[format] || 'PPR.json';
+            
+            fetch(`../Player-Context/Expert-Consensus/${filename}`)
+                .then(r => r.ok ? r.json() : Promise.reject())
+                .then(d => {
+                    const allPlayers = d.players || d;
+                    // Filter to only skill positions (QB, RB, WR, TE) and limit to top 200
+                    const skillPlayers = allPlayers
+                        .filter(p => ['QB', 'RB', 'WR', 'TE'].includes(p.position))
+                        .slice(0, 200);
+                    
+                    state.players = skillPlayers.map((p, i) => ({
+                        ...p, 
+                        id: p.id || `p${i}`, 
+                        risk: p.risk || 'Medium', 
+                        notes: p.notes || '', 
+                        overallRank: i + 1
+                    }));
+                    recalculateRanks();
+                    filterPlayers();
+                });
+        }
+
+        // Player management
+        function recalculateRanks() {
+            const posCounts = {};
+            state.players.forEach((p, i) => {
+                posCounts[p.position] = (posCounts[p.position] || 0) + 1;
+                p.overallRank = i + 1;
+                p.positionRank = posCounts[p.position];
+            });
+        }
+
+        function filterPlayers() {
+            const search = $('searchInput').value.toLowerCase();
+            state.filteredPlayers = state.players.filter(p => 
+                p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search)
+            );
+            renderPlayers();
+        }
+
+        function updatePlayerOrder() {
+            const newOrder = Array.from(document.querySelectorAll('.player-item')).map(el => 
+                state.players.find(p => p.id === el.dataset.playerId)
+            ).filter(Boolean);
+            state.players = newOrder;
+            recalculateRanks();
+            filterPlayers();
+        }
+
+        // Rendering
+        function renderPlayers() {
+            const container = $('playersList');
+            container.innerHTML = state.filteredPlayers.map((p, i) => {
+                const actionBtn = state.isDraftMode ? 
+                    `<button onclick="draftPlayer('${p.id}')" class="bg-red-600 w-8 h-8 rounded text-xs font-bold text-white hover:bg-red-700 transition-colors">D</button>` :
+                    `<button onclick="cycleRisk('${p.id}')" class="${cfg.riskBtnColors[p.risk]} w-8 h-8 rounded text-xs font-bold text-white hover:opacity-80 transition-opacity">${p.risk[0]}</button>`;
+
+                const notes = state.isDraftMode ? 
+                    `<div class="w-full border border-slate-600 rounded px-2 py-1 text-sm h-12 bg-slate-700 text-gray-300">${p.notes || ''}</div>` :
+                    `<textarea placeholder="Add notes..." onchange="updateNotes('${p.id}', this.value)" maxlength="165" class="w-full bg-slate-700 border border-slate-600 rounded px-2 py-1 text-sm resize-none h-12 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">${p.notes}</textarea>`;
+
+                return `<div class="player-item ${cfg.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
+                    <div class="p-2 flex items-stretch gap-1">
+                        <div class="drag-area flex items-center gap-1 flex-grow ${!state.isDraftMode ? 'cursor-move' : ''}">
+                            <div class="w-12 text-center font-bold text-2xl text-gray-100">${p.overallRank}</div>
+                            <span class="${cfg.positionColors[p.position]} px-2 py-1 rounded text-sm font-medium">${p.position}${p.positionRank}</span>
+                            <div class="px-2 flex-grow">
+                                <div class="font-semibold text-gray-100">${p.name}</div>
+                                <div class="text-xs text-gray-400 flex justify-between items-center">
+                                    <span>${p.team}</span>
+                                    ${p.adp ? `<span class="text-grey-400">ADP: ${p.adp}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notes-section px-2 flex items-center overflow-hidden">${notes}</div>
+                        <div class="w-10 flex items-center">${actionBtn}</div>
+                    </div>
+                </div>`;
+            }).join('');
+            
+            if (!state.isDraftMode) setupDragHandlers();
+        }
+
+        function renderRecentlyDrafted() {
+            $('recentlyDraftedList').innerHTML = state.draftedPlayers.slice(0, 3).map(p => 
+                `<div class="bg-slate-900 border border-slate-700 rounded-lg p-2 cursor-pointer hover:bg-slate-800 transition-colors">
+                    <div class="flex items-center gap-2">
+                        <span class="${cfg.positionColors[p.position]} px-2 py-1 rounded text-xs font-medium">${p.position}</span>
+                        <div class="flex-grow">
+                            <span class="font-semibold text-gray-100">${p.name}</span>
+                            <span class="text-xs text-gray-400 ml-2">${p.team}</span>
+                        </div>
+                        <button onclick="undraftPlayer('${p.id}')" class="bg-blue-600 text-white px-2 py-1 rounded text-xs hover:bg-blue-700 transition-colors">UNDO</button>
+                    </div>
+                </div>`
+            ).join('');
+        }
+
+        // Drag and drop handling
+        function setupDragHandlers() {
+            document.querySelectorAll('.drag-area').forEach(item => {
+                on(item, 'touchstart', handleTouchStart, { passive: false });
+                on(item, 'touchmove', handleTouchMove, { passive: false });
+                on(item, 'touchend', handleTouchEnd, { passive: false });
+                on(item, 'mousedown', handleMouseDown);
+            });
+        }
+
+        function initDrag(element, clientX, clientY) {
+            const rect = element.getBoundingClientRect();
+            Object.assign(state.dragState, {
+                element,
+                index: parseInt(element.dataset.index),
+                isDragging: true,
+                startX: clientX,
+                startY: clientY,
+                originalRect: { left: rect.left, top: rect.top }
+            });
+            
+            state.dragState.placeholder = element.cloneNode(true);
+            state.dragState.placeholder.classList.add('drag-placeholder');
+            element.parentNode.insertBefore(state.dragState.placeholder, element);
+            
+            element.classList.add('drag-active');
+            Object.assign(element.style, {
+                width: rect.width + 'px',
+                height: rect.height + 'px',
+                left: rect.left + 'px',
+                top: rect.top + 'px'
+            });
+        }
+
+        function moveDrag(clientX, clientY) {
+            if (!state.dragState.isDragging || !state.dragState.element) return;
+            
+            const { element, startX, startY, originalRect, placeholder } = state.dragState;
+            element.style.left = (originalRect.left + clientX - startX) + 'px';
+            element.style.top = (originalRect.top + clientY - startY) + 'px';
+            
+            element.style.pointerEvents = 'none';
+            const elementBelow = document.elementFromPoint(clientX, clientY);
+            element.style.pointerEvents = 'auto';
+            
+            const targetItem = elementBelow?.closest('.player-item:not(.drag-active)');
+            if (targetItem && placeholder) {
+                const targetRect = targetItem.getBoundingClientRect();
+                const before = clientY < targetRect.top + targetRect.height / 2;
+                targetItem.parentNode.insertBefore(placeholder, before ? targetItem : targetItem.nextSibling);
+            }
+        }
+
+        function endDrag() {
+            if (!state.dragState.isDragging) return;
+            
+            const { element, placeholder } = state.dragState;
+            if (element && placeholder) {
+                placeholder.parentNode.replaceChild(element, placeholder);
+                element.classList.remove('drag-active');
+                ['width', 'height', 'left', 'top'].forEach(prop => element.style[prop] = '');
+                updatePlayerOrder();
+            }
+            
+            Object.assign(state.dragState, { element: null, placeholder: null, isDragging: false });
+        }
+
+        function cancelDragOperation() {
+            clearTimeout(state.dragState.timers.touch);
+            endDrag();
+        }
+
+        // Touch handlers
+        function handleTouchStart(e) {
+            const touch = e.touches[0];
+            const playerItem = e.target.closest('.player-item');
+            state.dragState.timers.touch = setTimeout(() => {
+                initDrag(playerItem, touch.clientX, touch.clientY);
+                if (navigator.vibrate) navigator.vibrate(50);
+            }, 200);
+        }
+
+        function handleTouchMove(e) {
+            if (!state.dragState.isDragging) {
+                const touch = e.touches[0];
+                const moveX = Math.abs(touch.clientX - state.dragState.startX);
+                const moveY = Math.abs(touch.clientY - state.dragState.startY);
+                if (moveX > 10 || moveY > 10) clearTimeout(state.dragState.timers.touch);
+                return;
+            }
+            e.preventDefault();
+            moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+        }
+
+        function handleTouchEnd() {
+            clearTimeout(state.dragState.timers.touch);
+            endDrag();
+        }
+
+        // Mouse handlers
+        function handleMouseDown(e) {
+            e.preventDefault();
+            initDrag(e.target.closest('.player-item'), e.clientX, e.clientY);
+            on(document, 'mousemove', handleMouseMove);
+            on(document, 'mouseup', handleMouseUp);
+        }
+
+        function handleMouseMove(e) {
+            if (!state.dragState.isDragging) return;
+            e.preventDefault();
+            moveDrag(e.clientX, e.clientY);
+        }
+
+        function handleMouseUp() {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+            endDrag();
+        }
+
+        // Player actions
+        window.cycleRisk = id => {
+            const p = state.players.find(x => x.id === id);
+            if (p) {
+                const i = cfg.risks.indexOf(p.risk);
+                p.risk = cfg.risks[(i + 1) % 3];
+                filterPlayers();
+            }
+        };
+
+        window.updateNotes = (id, notes) => {
+            const p = state.players.find(x => x.id === id);
+            if (p) p.notes = notes;
+        };
+
+        window.draftPlayer = id => {
+            const i = state.players.findIndex(p => p.id === id);
+            if (i !== -1) {
+                state.draftedPlayers.unshift(state.players.splice(i, 1)[0]);
+                filterPlayers();
+                renderRecentlyDrafted();
+            }
+        };
+
+        window.undraftPlayer = id => {
+            const i = state.draftedPlayers.findIndex(p => p.id === id);
+            if (i !== -1) {
+                state.players.push(state.draftedPlayers.splice(i, 1)[0]);
+                state.players.sort((a, b) => a.overallRank - b.overallRank);
+                filterPlayers();
+                renderRecentlyDrafted();
+            }
+        };
+
+        function toggleDraftMode() {
+            state.isDraftMode = !state.isDraftMode;
+            const btn = $('draftBtn');
+            btn.textContent = state.isDraftMode ? 'Exit Draft' : 'Draft Day';
+            btn.className = `${state.isDraftMode ? 'bg-red-600' : 'bg-orange-600'} text-white px-4 py-2 rounded-md hover:${state.isDraftMode ? 'bg-red-700' : 'bg-orange-700'} transition-colors h-10`;
+            $('recentlyDraftedSection').classList.toggle('hidden');
+            renderPlayers();
+            if (state.isDraftMode) renderRecentlyDrafted();
+        }
+
+        // File operations
+        function loadRankings(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = e => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (data.players && !data.rankerName) {
+                        state.players = data.players.map((p, i) => ({
+                            ...p, id: p.id || `p${i}`, risk: p.risk || 'Medium',
+                            notes: p.notes || '', overallRank: i + 1
+                        }));
+                        recalculateRanks();
+                    } else {
+                        $('rankerName').value = data.rankerName || '';
+                        $('scoringFormat').value = data.scoringFormat || 'PPR';
+                        state.players = data.players || [];
+                        state.draftedPlayers = data.draftedPlayers || [];
+                    }
+                    updateTitle();
+                    filterPlayers();
+                    if (state.isDraftMode) renderRecentlyDrafted();
+                } catch (err) {
+                    alert('Error loading file: ' + err.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function saveRankings() {
+            const data = {
+                rankerName: $('rankerName').value.trim(),
+                year: cfg.year,
+                scoringFormat: $('scoringFormat').value,
+                players: state.players, 
+                draftedPlayers: state.draftedPlayers
+            };
+
+            const name = data.rankerName || 'Your';
+            downloadFile(JSON.stringify(data, null, 2), `${name}${cfg.year}${data.scoringFormat || 'PPR'}Rankings.json`, 'application/json');
+        }
+
+        function downloadPrintable() {
+            const name = $('rankerName').value.trim() || 'Your';
+            const scoring = $('scoringFormat').value || 'PPR';
+            downloadFile(generatePrintableHTML(), `${name}${cfg.year}${scoring}Printable.html`, 'text/html');
+        }
+
+        function downloadFile(content, filename, type) {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([content], { type }));
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(a.href);
+        }
+
+        function generatePrintableHTML() {
+            const title = $('rankingsTitle').textContent;
+            const perCol = 25, perPage = 50;
+            
+            const genColumn = players => players.map(p => {
+                const [first, ...last] = p.name.split(/\s+/);
+                const riskClass = p.risk ? `risk-${p.risk.toLowerCase()}` : '';
+                const adpText = p.adp ? `ADP: ${p.adp}` : '';
+                return `<div class="player ${riskClass}">
+                    <div class="rank">${p.overallRank}</div>
+                    <div class="position ${p.position}">${p.position}${p.positionRank}</div>
+                    <div class="player-info">
+                        <div class="name"><div class="first-name">${first}</div><div class="last-name">${last.join(' ')}</div></div>
+                        <div class="team-adp">
+                            <span class="team">${p.team}</span>
+                            ${adpText ? `<span class="adp">${adpText}</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="notes">${p.notes || ''}</div>
+                </div>`;
+            }).join('');
+
+            const pages = [];
+            for (let i = 0; i < state.players.length; i += perPage) {
+                const pageNum = Math.floor(i / perPage) + 1;
+                pages.push(`<div class="page">
+                    <div class="header">
+                        <div class="subtitle">${title} - Generated on ${new Date().toLocaleDateString()}</div>
+                        <div class="url-header">https://squelab.github.io/FantasyFootballRanker/</div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">${genColumn(state.players.slice(i, i + perCol))}</div>
+                        <div class="column">${genColumn(state.players.slice(i + perCol, i + perPage))}</div>
+                    </div>
+                    <div class="page-footer">
+                        <span>https://squelab.github.io/FantasyRanker/</span>
+                        <span>Page ${pageNum} of ${Math.ceil(state.players.length / perPage)}</span>
+                    </div>
+                </div>`);
+            }
+
+            return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${title}</title><style>
+*{margin:0;padding:0;box-sizing:border-box}body{font:10px/1.1 Arial,sans-serif;color:#333;background:#fff}
+.page{width:8.5in;height:11in;margin:0 auto;padding:.2in;page-break-after:always;position:relative;display:flex;flex-direction:column}
+.page:last-child{page-break-after:avoid}.header{text-align:center;margin-bottom:.1in;padding-bottom:3px;display:flex;justify-content:space-between;align-items:center}
+.url-header{font-size:9px;color:#666}.subtitle{font-size:10px;color:#666;flex-grow:1}
+.columns{display:flex;gap:.1in;flex-grow:1}.column{width:3.85in}
+.player{position:relative;margin-bottom:2px;height:28px;width:3.85in;border-radius:2px;border-left:3px solid #d1d5db}
+.player.risk-high{border-left:3px solid #dc2626}
+.player.risk-medium{border-left:3px solid #d97706}
+.player.risk-low{border-left:3px solid #16a34a}
+.rank{position:absolute;left:4px;top:6px;width:18px;height:16px;font:bold 11px/16px Arial;color:#111;text-align:center}
+.position{position:absolute;left:25px;top:6px;width:28px;height:16px;font:bold 7px/16px Arial;text-align:center;color:#000}
+.player-info{position:absolute;left:56px;top:2px;width:85px;height:24px;overflow:hidden}
+.name{font:bold 8px/9px Arial}.first-name,.last-name{display:block;height:9px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.team-adp{font-size:6px;height:7px;line-height:7px;display:flex;justify-content:space-between}
+.team{color:#666}.adp{color:#888}
+.notes{position:absolute;left:144px;top:2px;width:2.25in;height:24px;background:#fff;border:1px solid #d1d5db;
+border-radius:2px;padding:2px 3px;font-size:6px;color:#374151;word-wrap:break-word;overflow:hidden;line-height:7px}
+.page-footer{position:absolute;bottom:.1in;left:.2in;right:.2in;display:flex;justify-content:space-between;font-size:9px;color:#666}
+@media print{body{margin:0}.page{margin:0;page-break-after:always}.page:last-child{page-break-after:avoid}}
+</style></head><body>${pages.join('')}</body></html>`;
+        }
+    </script>
+</body>
+</html>
