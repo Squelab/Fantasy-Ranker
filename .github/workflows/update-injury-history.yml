@@ -46,7 +46,7 @@ jobs:
         BATCH_SIZE: ${{ github.event.inputs.batch_size || '5' }}
       run: |
         echo "🚀 Starting Fox Sports injury scraper with batch size ${BATCH_SIZE}..."
-        node injury-history-scraper.js
+        node Scraper/injury-history-scraper.js
         echo "📊 Injury scraping completed!"
         
     - name: Verify output file
