@@ -1,4 +1,4 @@
-name: Update Player Injury Data
+name: Update Player Injury History
 
 on:
   schedule:
