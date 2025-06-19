@@ -136,7 +136,7 @@
             const fileMap = { 'PPR': 'PPR.json', 'Half PPR': 'HPPR.json', 'Standard': 'STD.json' };
             const filename = fileMap[format] || 'PPR.json';
             
-            fetch(/data/${filename})
+            fetch(`./data/${filename}`)
                 .then(r => r.ok ? r.json() : Promise.reject())
                 .then(d => {
                     const allPlayers = d.players || d;
