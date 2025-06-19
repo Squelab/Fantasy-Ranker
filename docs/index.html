@@ -115,9 +115,11 @@
             currentFormat: 'PPR', // Track current format
             dragState: {
                 element: null,
+                dragElement: null,
                 index: -1,
                 placeholder: null,
                 isDragging: false,
+                pendingDrag: false,
                 startX: 0,
                 startY: 0,
                 originalRect: null,
@@ -473,49 +475,61 @@
             endDrag();
         }
 
-        // Touch handlers
+        // Touch handlers - Final clean version
         function handleTouchStart(e) {
+            // Prevent multiple drags
+            if (state.dragState.isDragging || state.dragState.timers.touch) return;
+            
             const touch = e.touches[0];
             const playerItem = e.target.closest('.player-item');
+            if (!playerItem) return;
             
-            // Store initial touch position for drag detection
-            Object.assign(state.dragState, {
-                startX: touch.clientX,
-                startY: touch.clientY
-            });
+            // Initialize drag attempt
+            state.dragState.startX = touch.clientX;
+            state.dragState.startY = touch.clientY;
+            state.dragState.pendingDrag = true;
             
-            // Set timer for long press detection
+            // 150ms delay for intentional drags
             state.dragState.timers.touch = setTimeout(() => {
-                initDrag(playerItem, touch.clientX, touch.clientY);
-                if (navigator.vibrate) navigator.vibrate(50);
-            }, 120);
+                if (state.dragState.pendingDrag) {
+                    initDrag(playerItem, touch.clientX, touch.clientY);
+                    if (navigator.vibrate) navigator.vibrate(50);
+                }
+            }, 150);
         }
 
         function handleTouchMove(e) {
             const touch = e.touches[0];
             
-            if (!state.dragState.isDragging) {
-                // Check if user is trying to scroll (quick movement)
+            // During delay period - check for scroll intent
+            if (state.dragState.pendingDrag && !state.dragState.isDragging) {
                 const moveX = Math.abs(touch.clientX - state.dragState.startX);
                 const moveY = Math.abs(touch.clientY - state.dragState.startY);
                 
-                // If significant movement before drag initiated, cancel drag and allow scroll
-                if (moveX > 10 || moveY > 10) {
-                    clearTimeout(state.dragState.timers.touch);
+                if (moveX > 15 || moveY > 15) {
+                    cancelPendingDrag();
                 }
-                
-                // Don't prevent default - allow normal scrolling
-                return;
+                return; // Allow scrolling
             }
             
-            // Only prevent default when actively dragging
-            e.preventDefault();
-            moveDrag(touch.clientX, touch.clientY);
+            // Active drag - move element
+            if (state.dragState.isDragging) {
+                e.preventDefault();
+                moveDrag(touch.clientX, touch.clientY);
+            }
         }
 
         function handleTouchEnd() {
-            clearTimeout(state.dragState.timers.touch);
+            cancelPendingDrag();
             endDrag();
+        }
+
+        function cancelPendingDrag() {
+            state.dragState.pendingDrag = false;
+            if (state.dragState.timers.touch) {
+                clearTimeout(state.dragState.timers.touch);
+                state.dragState.timers.touch = null;
+            }
         }
 
         // Mouse handlers
