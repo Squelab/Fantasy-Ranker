@@ -1,23 +1,35 @@
 {
-  "name": "fantasypros-scraper",
+  "name": "Fantasy-Ranker-ai",
   "version": "1.0.0",
-  "description": "Scrapes fantasy football player data from FantasyPros",
-  "main": "standalone-scraper.js",
+  "description": "Fantasy football AI tool with scrapers for stats and injury data",
   "scripts": {
-    "start": "node standalone-scraper.js",
-    "scrape": "node standalone-scraper.js"
+    "scrape:stats": "node Scrapers/stats-scraper.js", 
+    "scrape:injuries": "node Scrapers/injury-history-scraper.js",
+    "scrape:all": "npm run scrape:stats && npm run scrape:injuries",
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "dependencies": {
-    "axios": "^1.10.0",
-    "cheerio": "^1.0.0"
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/squelab/Fantasy-Ranker-AI.git"
   },
   "keywords": [
-    "fantasy",
-    "football", 
+    "fantasy-football",
     "nfl",
     "scraper",
-    "fantasypros"
+    "ai",
+    "stats",
+    "injuries",
+    "data-collection"
   ],
-  "author": "Elam Schwey",
-  "license": "MIT"
+  "author": "Squelab",
+  "license": "MIT",
+  "homepage": "https://github.com/squelab/Fantasy-Ranker-AI#readme"
 }
