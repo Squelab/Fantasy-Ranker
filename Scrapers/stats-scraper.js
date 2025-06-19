@@ -473,7 +473,7 @@ async function scrapeAllPlayers() {
     };
     
     // Create output directory and write to correct path
-    const outputDir = 'For-AI/Stats';
+    const outputDir = 'Player-Context/Stats';
     const outputPath = path.join(outputDir, 'player-stats.json');
     
     // Ensure directory exists
