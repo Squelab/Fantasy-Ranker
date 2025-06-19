@@ -186,62 +186,44 @@ async function scrapePlayerInjuries(player, adpPlayers) {
       
       const $ = cheerio.load(response.data);
       
-      // Check for "player not found" or similar messages
+      // Check for obvious error pages
       const pageText = $('body').text().toLowerCase();
-      if (pageText.includes('player not found') || 
-          pageText.includes('page not found') ||
-          pageText.includes('404')) {
+      if (pageText.includes('page not found') || 
+          pageText.includes('404 error') ||
+          pageText.includes('does not exist') ||
+          pageText.length < 500) {  // Very short pages are likely errors
         continue;
       }
       
-      // Extract position from page
-      const pagePosition = extractPositionFromPage($);
+      // Check if this looks like a real player page
+      const hasPlayerElements = $('body').text().includes('INJURIES') || 
+                               $('body').text().includes('STATS') ||
+                               $('body').text().includes('GAME LOG') ||
+                               $('body').text().includes('NEWS');
       
-      // Extract injury data
+      if (!hasPlayerElements) {
+        console.log(`    Not a player page - missing player elements`);
+        continue;
+      }
+      
+      // Extract injury data (but don't require it)
       const injuries = extractInjuryData($);
-      
-      console.log(`    Found position: ${pagePosition}, injuries: ${injuries.length}`);
-      
-      // Position validation
-      const positionMatch = pagePosition === player.position;
-      
-      // Recent activity check (or empty for rookies/clean players)
       const recentActivity = hasRecentActivity(injuries);
       
-      // Simplified validation: if we find injury data, it's likely the right player
-      // Skip position validation for now since extraction is failing
-      if (injuries.length > 0) {
-        console.log(`✅ ${player.name}: Found player with injury data at ${urlSuffix}`);
-        console.log(`    Injuries: ${injuries.length}, Recent: ${recentActivity}`);
-        
-        return {
-          name: player.name,
-          position: player.position,
-          team: player.team,
-          adp: player.adp,
-          injuries: injuries,
-          total_injuries: injuries.length,
-          has_recent_injuries: recentActivity,
-          url_used: urlSuffix,
-          scraped_at: new Date().toISOString()
-        };
-      } else if (injuries.length === 0 && index === 0) {
-        // For players with no injuries, only accept the base URL (first variation)
-        console.log(`✅ ${player.name}: Clean injury record at base URL ${urlSuffix}`);
-        
-        return {
-          name: player.name,
-          position: player.position,
-          team: player.team,
-          adp: player.adp,
-          injuries: [],
-          total_injuries: 0,
-          has_recent_injuries: false,
-          url_used: urlSuffix,
-          clean_record: true,
-          scraped_at: new Date().toISOString()
-        };
-      }
+      console.log(`✅ ${player.name}: Found valid player page at ${urlSuffix}`);
+      console.log(`    Injuries: ${injuries.length}, Recent: ${recentActivity}`);
+      
+      return {
+        name: player.name,
+        position: player.position,
+        team: player.team,
+        adp: player.adp,
+        injuries: injuries,
+        total_injuries: injuries.length,
+        has_recent_injuries: recentActivity,
+        url_used: urlSuffix,
+        scraped_at: new Date().toISOString()
+      };
       
     } catch (error) {
       if (error.response && error.response.status === 404) {
