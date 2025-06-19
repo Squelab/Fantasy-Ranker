@@ -7,14 +7,6 @@ on:
     
     # Monthly during offseason (Mar-Aug): First Wednesday 7:00 AM UTC  
     - cron: '0 7 1-7 3,4,5,6,7,8 3' 
-  
-  # Allow manual triggering
-  workflow_dispatch:
-    inputs:
-      batch_size:
-        description: 'Batch size for scraping (3=slower but safer, 5=faster)'
-        required: false
-        default: '5'
 
 jobs:
   scrape-injury-data:
@@ -44,7 +36,7 @@ jobs:
     - name: Create output directory
       run: |
         echo "📁 Creating output directory..."
-        mkdir -p for-ai/injury
+        mkdir -p For-AI/Injury
         
     - name: Run Fox Sports injury scraper
       env:
@@ -108,13 +100,13 @@ jobs:
       if: always()
       run: |
         echo "🎯 **Injury Scraping Summary**"
-        if [ -f "for-ai/injury/injury-history.json" ]; then
-          echo "✅ **Success:** $(jq '.stats.successful' for-ai/injury/injury-history.json) players"
-          echo "❌ **Failed:** $(jq '.stats.failed' for-ai/injury/injury-history.json) players" 
-          echo "🚫 **Invalid:** $(jq '.stats.wrong_player' for-ai/injury/injury-history.json) players"
-          echo "📊 **Total:** $(jq '.total_players' for-ai/injury/injury-history.json) players in database"
-          echo "🏥 **Injuries:** $(jq '[.data[] | .injuries | length] | add' for-ai/injury/injury-history.json) total injury records"
-          echo "🆕 **Rookies:** $(jq '[.data[] | select(.is_likely_rookie == true)] | length' for-ai/injury/injury-history.json) likely rookies found"
+        if [ -f "For-AI/Injury/injury-history.json" ]; then
+          echo "✅ **Success:** $(jq '.stats.successful' For-AI/Injury/injury-history.json) players"
+          echo "❌ **Failed:** $(jq '.stats.failed' For-AI/Injury/injury-history.json) players" 
+          echo "🚫 **Invalid:** $(jq '.stats.wrong_player' For-AI/Injury/injury-history.json) players"
+          echo "📊 **Total:** $(jq '.total_players' For-AI/Injury/injury-history.json) players in database"
+          echo "🏥 **Injuries:** $(jq '[.data[] | .injuries | length] | add' For-AI/Injury/injury-history.json) total injury records"
+          echo "🆕 **Rookies:** $(jq '[.data[] | select(.is_likely_rookie == true)] | length' For-AI/Injury/injury-history.json) likely rookies found"
         else
           echo "❌ **Failed:** No injury data file generated"
         fi
