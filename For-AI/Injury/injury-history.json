@@ -1,6 +1,6 @@
 {
   "success": true,
-  "timestamp": "2025-06-19T03:12:04.797Z",
+  "timestamp": "2025-06-19T15:27:45.552Z",
   "current_nfl_season": 2024,
   "stats": {
     "successful": 250,
@@ -8,7 +8,7 @@
     "wrong_player": 0
   },
   "total_players": 250,
-  "total_injuries": 1387,
+  "total_injuries": 1382,
   "data": {
     "ja_marr_chase": {
       "name": "Ja'Marr Chase",
@@ -74,7 +74,7 @@
       "total_injuries": 9,
       "has_recent_injuries": true,
       "url_used": "jamarr-chase-player-injuries",
-      "scraped_at": "2025-06-19T03:09:19.117Z"
+      "scraped_at": "2025-06-19T15:24:22.729Z"
     },
     "bijan_robinson": {
       "name": "Bijan Robinson",
@@ -85,7 +85,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "bijan-robinson-player-injuries",
-      "scraped_at": "2025-06-19T03:09:18.881Z"
+      "scraped_at": "2025-06-19T15:24:21.796Z"
     },
     "justin_jefferson": {
       "name": "Justin Jefferson",
@@ -121,7 +121,7 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "justin-jefferson-player-injuries",
-      "scraped_at": "2025-06-19T03:09:18.454Z"
+      "scraped_at": "2025-06-19T15:24:21.727Z"
     },
     "saquon_barkley": {
       "name": "Saquon Barkley",
@@ -235,7 +235,7 @@
       "total_injuries": 17,
       "has_recent_injuries": true,
       "url_used": "saquon-barkley-player-injuries",
-      "scraped_at": "2025-06-19T03:09:18.535Z"
+      "scraped_at": "2025-06-19T15:24:21.646Z"
     },
     "ceedee_lamb": {
       "name": "CeeDee Lamb",
@@ -283,7 +283,7 @@
       "total_injuries": 6,
       "has_recent_injuries": true,
       "url_used": "ceedee-lamb-player-injuries",
-      "scraped_at": "2025-06-19T03:09:18.497Z"
+      "scraped_at": "2025-06-19T15:24:21.691Z"
     },
     "jahmyr_gibbs": {
       "name": "Jahmyr Gibbs",
@@ -307,7 +307,7 @@
       "total_injuries": 2,
       "has_recent_injuries": true,
       "url_used": "jahmyr-gibbs-player-injuries",
-      "scraped_at": "2025-06-19T03:09:21.928Z"
+      "scraped_at": "2025-06-19T15:24:25.722Z"
     },
     "malik_nabers": {
       "name": "Malik Nabers",
@@ -349,7 +349,7 @@
       "total_injuries": 5,
       "has_recent_injuries": true,
       "url_used": "malik-nabers-player-injuries",
-      "scraped_at": "2025-06-19T03:09:21.811Z"
+      "scraped_at": "2025-06-19T15:24:26.525Z"
     },
     "puka_nacua": {
       "name": "Puka Nacua",
@@ -397,18 +397,7 @@
       "total_injuries": 6,
       "has_recent_injuries": true,
       "url_used": "puka-nacua-player-injuries",
-      "scraped_at": "2025-06-19T03:09:21.759Z"
-    },
-    "ashton_jeanty": {
-      "name": "Ashton Jeanty",
-      "position": "RB",
-      "team": "LV",
-      "adp": 9,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "ashton-jeanty-player-injuries",
-      "scraped_at": "2025-06-19T03:09:21.915Z"
+      "scraped_at": "2025-06-19T15:24:25.638Z"
     },
     "amon_ra_st__brown": {
       "name": "Amon-Ra St. Brown",
@@ -419,7 +408,18 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "amonra-st-brown-player-injuries",
-      "scraped_at": "2025-06-19T03:09:21.746Z"
+      "scraped_at": "2025-06-19T15:24:25.552Z"
+    },
+    "ashton_jeanty": {
+      "name": "Ashton Jeanty",
+      "position": "RB",
+      "team": "LV",
+      "adp": 9.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "ashton-jeanty-player-injuries",
+      "scraped_at": "2025-06-19T15:24:25.907Z"
     },
     "christian_mccaffrey": {
       "name": "Christian McCaffrey",
@@ -539,13 +539,13 @@
       "total_injuries": 18,
       "has_recent_injuries": true,
       "url_used": "christian-mccaffrey-player-injuries",
-      "scraped_at": "2025-06-19T03:09:25.257Z"
+      "scraped_at": "2025-06-19T15:24:30.585Z"
     },
     "nico_collins": {
       "name": "Nico Collins",
       "position": "WR",
       "team": "HOU",
-      "adp": 12,
+      "adp": 11.5,
       "injuries": [
         {
           "season": "2024",
@@ -617,7 +617,7 @@
       "total_injuries": 11,
       "has_recent_injuries": true,
       "url_used": "nico-collins-player-injuries",
-      "scraped_at": "2025-06-19T03:09:26.272Z"
+      "scraped_at": "2025-06-19T15:24:29.653Z"
     },
     "derrick_henry": {
       "name": "Derrick Henry",
@@ -647,7 +647,7 @@
       "total_injuries": 3,
       "has_recent_injuries": false,
       "url_used": "derrick-henry-player-injuries",
-      "scraped_at": "2025-06-19T03:09:24.675Z"
+      "scraped_at": "2025-06-19T15:24:29.536Z"
     },
     "brian_thomas_jr_": {
       "name": "Brian Thomas Jr.",
@@ -658,7 +658,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "brian-thomas-jr-player-injuries",
-      "scraped_at": "2025-06-19T03:09:24.572Z"
+      "scraped_at": "2025-06-19T15:24:29.225Z"
     },
     "drake_london": {
       "name": "Drake London",
@@ -688,7 +688,7 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "drake-london-player-injuries",
-      "scraped_at": "2025-06-19T03:09:26.067Z"
+      "scraped_at": "2025-06-19T15:24:30.386Z"
     },
     "de_von_achane": {
       "name": "De'Von Achane",
@@ -724,7 +724,7 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "devon-achane-player-injuries",
-      "scraped_at": "2025-06-19T03:09:29.482Z"
+      "scraped_at": "2025-06-19T15:24:33.761Z"
     },
     "brock_bowers": {
       "name": "Brock Bowers",
@@ -735,7 +735,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "brock-bowers-player-injuries",
-      "scraped_at": "2025-06-19T03:09:29.673Z"
+      "scraped_at": "2025-06-19T15:24:33.565Z"
     },
     "a_j__brown": {
       "name": "A.J. Brown",
@@ -819,7 +819,7 @@
       "total_injuries": 12,
       "has_recent_injuries": true,
       "url_used": "aj-brown-player-injuries",
-      "scraped_at": "2025-06-19T03:09:30.132Z"
+      "scraped_at": "2025-06-19T15:24:33.687Z"
     },
     "ladd_mcconkey": {
       "name": "Ladd McConkey",
@@ -861,7 +861,7 @@
       "total_injuries": 5,
       "has_recent_injuries": true,
       "url_used": "ladd-mcconkey-player-injuries",
-      "scraped_at": "2025-06-19T03:09:28.457Z"
+      "scraped_at": "2025-06-19T15:24:33.653Z"
     },
     "jonathan_taylor": {
       "name": "Jonathan Taylor",
@@ -939,13 +939,13 @@
       "total_injuries": 11,
       "has_recent_injuries": true,
       "url_used": "jonathan-taylor-player-injuries",
-      "scraped_at": "2025-06-19T03:09:29.271Z"
+      "scraped_at": "2025-06-19T15:24:33.780Z"
     },
     "bucky_irving": {
       "name": "Bucky Irving",
       "position": "RB",
       "team": "TB",
-      "adp": 23.5,
+      "adp": 23,
       "injuries": [
         {
           "season": "2024",
@@ -981,13 +981,13 @@
       "total_injuries": 5,
       "has_recent_injuries": true,
       "url_used": "bucky-irving-player-injuries",
-      "scraped_at": "2025-06-19T03:09:32.382Z"
+      "scraped_at": "2025-06-19T15:24:36.786Z"
     },
     "josh_jacobs": {
       "name": "Josh Jacobs",
       "position": "RB",
       "team": "GB",
-      "adp": 25,
+      "adp": 24.5,
       "injuries": [
         {
           "season": "2024",
@@ -1107,7 +1107,7 @@
       "total_injuries": 19,
       "has_recent_injuries": true,
       "url_used": "josh-jacobs-player-injuries",
-      "scraped_at": "2025-06-19T03:09:32.324Z"
+      "scraped_at": "2025-06-19T15:24:36.844Z"
     },
     "tee_higgins": {
       "name": "Tee Higgins",
@@ -1245,7 +1245,7 @@
       "total_injuries": 21,
       "has_recent_injuries": true,
       "url_used": "tee-higgins-player-injuries",
-      "scraped_at": "2025-06-19T03:09:32.296Z"
+      "scraped_at": "2025-06-19T15:24:36.917Z"
     },
     "trey_mcbride": {
       "name": "Trey McBride",
@@ -1275,7 +1275,7 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "trey-mcbride-player-injuries",
-      "scraped_at": "2025-06-19T03:09:32.269Z"
+      "scraped_at": "2025-06-19T15:24:36.604Z"
     },
     "garrett_wilson": {
       "name": "Garrett Wilson",
@@ -1293,7 +1293,7 @@
       "total_injuries": 1,
       "has_recent_injuries": true,
       "url_used": "garrett-wilson-player-injuries",
-      "scraped_at": "2025-06-19T03:09:32.304Z"
+      "scraped_at": "2025-06-19T15:24:37.519Z"
     },
     "jaxon_smith_njigba": {
       "name": "Jaxon Smith-Njigba",
@@ -1304,18 +1304,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "jaxon-smithnjigba-player-injuries",
-      "scraped_at": "2025-06-19T03:09:34.929Z"
-    },
-    "josh_allen": {
-      "name": "Josh Allen",
-      "position": "QB",
-      "team": "BUF",
-      "adp": 29,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "josh-allen-player-injuries",
-      "scraped_at": "2025-06-19T03:09:34.593Z"
+      "scraped_at": "2025-06-19T15:24:40.127Z"
     },
     "lamar_jackson": {
       "name": "Lamar Jackson",
@@ -1447,7 +1436,18 @@
       "total_injuries": 20,
       "has_recent_injuries": true,
       "url_used": "lamar-jackson-player-injuries",
-      "scraped_at": "2025-06-19T03:09:34.554Z"
+      "scraped_at": "2025-06-19T15:24:40.350Z"
+    },
+    "josh_allen": {
+      "name": "Josh Allen",
+      "position": "QB",
+      "team": "BUF",
+      "adp": 30,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "josh-allen-player-injuries",
+      "scraped_at": "2025-06-19T15:24:41.265Z"
     },
     "chase_brown": {
       "name": "Chase Brown",
@@ -1477,7 +1477,7 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "chase-brown-player-injuries",
-      "scraped_at": "2025-06-19T03:09:35.151Z"
+      "scraped_at": "2025-06-19T15:24:41.047Z"
     },
     "rashee_rice": {
       "name": "Rashee Rice",
@@ -1495,7 +1495,18 @@
       "total_injuries": 1,
       "has_recent_injuries": true,
       "url_used": "rashee-rice-player-injuries",
-      "scraped_at": "2025-06-19T03:09:35.100Z"
+      "scraped_at": "2025-06-19T15:24:40.470Z"
+    },
+    "marvin_harrison_jr_": {
+      "name": "Marvin Harrison Jr.",
+      "position": "WR",
+      "team": "ARI",
+      "adp": 31.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "marvin-harrison-jr-player-injuries",
+      "scraped_at": "2025-06-19T15:24:43.842Z"
     },
     "kyren_williams": {
       "name": "Kyren Williams",
@@ -1525,7 +1536,7 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "kyren-williams-player-injuries",
-      "scraped_at": "2025-06-19T03:09:38.066Z"
+      "scraped_at": "2025-06-19T15:24:43.883Z"
     },
     "terry_mclaurin": {
       "name": "Terry McLaurin",
@@ -1597,18 +1608,7 @@
       "total_injuries": 10,
       "has_recent_injuries": false,
       "url_used": "terry-mclaurin-player-injuries",
-      "scraped_at": "2025-06-19T03:09:37.958Z"
-    },
-    "marvin_harrison_jr_": {
-      "name": "Marvin Harrison Jr.",
-      "position": "WR",
-      "team": "ARI",
-      "adp": 32,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "marvin-harrison-jr-player-injuries",
-      "scraped_at": "2025-06-19T03:09:37.855Z"
+      "scraped_at": "2025-06-19T15:24:44.787Z"
     },
     "tyreek_hill": {
       "name": "Tyreek Hill",
@@ -1752,13 +1752,13 @@
       "total_injuries": 22,
       "has_recent_injuries": true,
       "url_used": "tyreek-hill-player-injuries",
-      "scraped_at": "2025-06-19T03:09:37.946Z"
+      "scraped_at": "2025-06-19T15:24:43.874Z"
     },
     "davante_adams": {
       "name": "Davante Adams",
       "position": "WR",
       "team": "LAR",
-      "adp": 33,
+      "adp": 32.5,
       "injuries": [
         {
           "season": "2024",
@@ -1872,7 +1872,7 @@
       "total_injuries": 18,
       "has_recent_injuries": true,
       "url_used": "davante-adams-player-injuries",
-      "scraped_at": "2025-06-19T03:09:37.881Z"
+      "scraped_at": "2025-06-19T15:24:44.091Z"
     },
     "breece_hall": {
       "name": "Breece Hall",
@@ -1926,7 +1926,7 @@
       "total_injuries": 7,
       "has_recent_injuries": true,
       "url_used": "breece-hall-player-injuries",
-      "scraped_at": "2025-06-19T03:09:40.652Z"
+      "scraped_at": "2025-06-19T15:24:47.903Z"
     },
     "jayden_daniels": {
       "name": "Jayden Daniels",
@@ -1944,13 +1944,13 @@
       "total_injuries": 1,
       "has_recent_injuries": true,
       "url_used": "jayden-daniels-player-injuries",
-      "scraped_at": "2025-06-19T03:09:41.044Z"
+      "scraped_at": "2025-06-19T15:24:48.702Z"
     },
     "mike_evans": {
       "name": "Mike Evans",
       "position": "WR",
       "team": "TB",
-      "adp": 37,
+      "adp": 36.5,
       "injuries": [
         {
           "season": "2024",
@@ -2040,13 +2040,24 @@
       "total_injuries": 14,
       "has_recent_injuries": true,
       "url_used": "mike-evans-player-injuries",
-      "scraped_at": "2025-06-19T03:09:40.765Z"
+      "scraped_at": "2025-06-19T15:24:48.129Z"
+    },
+    "dj_moore": {
+      "name": "DJ Moore",
+      "position": "WR",
+      "team": "CHI",
+      "adp": 42,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "dj-moore-player-injuries",
+      "scraped_at": "2025-06-19T15:24:47.296Z"
     },
     "jalen_hurts": {
       "name": "Jalen Hurts",
       "position": "QB",
       "team": "PHI",
-      "adp": 41.5,
+      "adp": 42.5,
       "injuries": [
         {
           "season": "2024",
@@ -2094,13 +2105,13 @@
       "total_injuries": 7,
       "has_recent_injuries": true,
       "url_used": "jalen-hurts-player-injuries",
-      "scraped_at": "2025-06-19T03:09:40.681Z"
+      "scraped_at": "2025-06-19T15:24:47.511Z"
     },
     "james_cook": {
       "name": "James Cook",
       "position": "RB",
       "team": "BUF",
-      "adp": 42,
+      "adp": 42.5,
       "injuries": [
         {
           "season": "2024",
@@ -2112,18 +2123,7 @@
       "total_injuries": 1,
       "has_recent_injuries": true,
       "url_used": "james-cook-player-injuries",
-      "scraped_at": "2025-06-19T03:09:40.701Z"
-    },
-    "dj_moore": {
-      "name": "DJ Moore",
-      "position": "WR",
-      "team": "CHI",
-      "adp": 42,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "dj-moore-player-injuries",
-      "scraped_at": "2025-06-19T03:09:43.680Z"
+      "scraped_at": "2025-06-19T15:24:51.522Z"
     },
     "xavier_worthy": {
       "name": "Xavier Worthy",
@@ -2134,7 +2134,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "xavier-worthy-player-injuries",
-      "scraped_at": "2025-06-19T03:09:43.705Z"
+      "scraped_at": "2025-06-19T15:24:52.241Z"
     },
     "george_kittle": {
       "name": "George Kittle",
@@ -2266,7 +2266,7 @@
       "total_injuries": 20,
       "has_recent_injuries": true,
       "url_used": "george-kittle-player-injuries",
-      "scraped_at": "2025-06-19T03:09:43.136Z"
+      "scraped_at": "2025-06-19T15:24:51.651Z"
     },
     "joe_burrow": {
       "name": "Joe Burrow",
@@ -2290,7 +2290,18 @@
       "total_injuries": 2,
       "has_recent_injuries": true,
       "url_used": "joe-burrow-player-injuries",
-      "scraped_at": "2025-06-19T03:09:43.148Z"
+      "scraped_at": "2025-06-19T15:24:51.541Z"
+    },
+    "tetairoa_mcmillan": {
+      "name": "Tetairoa McMillan",
+      "position": "WR",
+      "team": "CAR",
+      "adp": 47.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "tetairoa-mcmillan-player-injuries",
+      "scraped_at": "2025-06-19T15:24:51.616Z"
     },
     "kenneth_walker_iii": {
       "name": "Kenneth Walker III",
@@ -2301,18 +2312,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "kenneth-walker-iii-player-injuries",
-      "scraped_at": "2025-06-19T03:09:43.166Z"
-    },
-    "tetairoa_mcmillan": {
-      "name": "Tetairoa McMillan",
-      "position": "WR",
-      "team": "CAR",
-      "adp": 48,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "tetairoa-mcmillan-player-injuries",
-      "scraped_at": "2025-06-19T03:09:45.750Z"
+      "scraped_at": "2025-06-19T15:24:56.373Z"
     },
     "dk_metcalf": {
       "name": "DK Metcalf",
@@ -2354,7 +2354,37 @@
       "total_injuries": 5,
       "has_recent_injuries": true,
       "url_used": "dk-metcalf-player-injuries",
-      "scraped_at": "2025-06-19T03:09:45.768Z"
+      "scraped_at": "2025-06-19T15:24:54.572Z"
+    },
+    "jameson_williams": {
+      "name": "Jameson Williams",
+      "position": "WR",
+      "team": "DET",
+      "adp": 48.5,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "2",
+          "injury": "Ankle",
+          "status": "Questionable"
+        },
+        {
+          "season": "2023",
+          "week": "18",
+          "injury": "Ankle",
+          "status": "Out"
+        },
+        {
+          "season": "2023",
+          "week": "5",
+          "injury": "NIR",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 3,
+      "has_recent_injuries": true,
+      "url_used": "jameson-williams-player-injuries",
+      "scraped_at": "2025-06-19T15:24:55.388Z"
     },
     "devonta_smith": {
       "name": "DeVonta Smith",
@@ -2396,7 +2426,7 @@
       "total_injuries": 5,
       "has_recent_injuries": true,
       "url_used": "devonta-smith-player-injuries",
-      "scraped_at": "2025-06-19T03:09:45.793Z"
+      "scraped_at": "2025-06-19T15:24:55.281Z"
     },
     "omarion_hampton": {
       "name": "Omarion Hampton",
@@ -2407,7 +2437,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "omarion-hampton-player-injuries",
-      "scraped_at": "2025-06-19T03:09:45.776Z"
+      "scraped_at": "2025-06-19T15:24:55.362Z"
     },
     "courtland_sutton": {
       "name": "Courtland Sutton",
@@ -2497,7 +2527,7 @@
       "total_injuries": 13,
       "has_recent_injuries": true,
       "url_used": "courtland-sutton-player-injuries",
-      "scraped_at": "2025-06-19T03:09:45.813Z"
+      "scraped_at": "2025-06-19T15:25:00.818Z"
     },
     "alvin_kamara": {
       "name": "Alvin Kamara",
@@ -2617,37 +2647,7 @@
       "total_injuries": 18,
       "has_recent_injuries": true,
       "url_used": "alvin-kamara-player-injuries",
-      "scraped_at": "2025-06-19T03:09:49.150Z"
-    },
-    "jameson_williams": {
-      "name": "Jameson Williams",
-      "position": "WR",
-      "team": "DET",
-      "adp": 49.5,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "2",
-          "injury": "Ankle",
-          "status": "Questionable"
-        },
-        {
-          "season": "2023",
-          "week": "18",
-          "injury": "Ankle",
-          "status": "Out"
-        },
-        {
-          "season": "2023",
-          "week": "5",
-          "injury": "NIR",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 3,
-      "has_recent_injuries": true,
-      "url_used": "jameson-williams-player-injuries",
-      "scraped_at": "2025-06-19T03:09:48.835Z"
+      "scraped_at": "2025-06-19T15:25:00.734Z"
     },
     "chuba_hubbard": {
       "name": "Chuba Hubbard",
@@ -2683,7 +2683,7 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "chuba-hubbard-player-injuries",
-      "scraped_at": "2025-06-19T03:09:48.655Z"
+      "scraped_at": "2025-06-19T15:25:00.149Z"
     },
     "zay_flowers": {
       "name": "Zay Flowers",
@@ -2737,7 +2737,7 @@
       "total_injuries": 7,
       "has_recent_injuries": true,
       "url_used": "zay-flowers-player-injuries",
-      "scraped_at": "2025-06-19T03:09:48.879Z"
+      "scraped_at": "2025-06-19T15:24:59.405Z"
     },
     "joe_mixon": {
       "name": "Joe Mixon",
@@ -2869,7 +2869,7 @@
       "total_injuries": 20,
       "has_recent_injuries": true,
       "url_used": "joe-mixon-player-injuries",
-      "scraped_at": "2025-06-19T03:09:48.855Z"
+      "scraped_at": "2025-06-19T15:24:59.001Z"
     },
     "rj_harvey": {
       "name": "RJ Harvey",
@@ -2880,7 +2880,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "rj-harvey-player-injuries",
-      "scraped_at": "2025-06-19T03:09:52.199Z"
+      "scraped_at": "2025-06-19T15:25:03.807Z"
     },
     "jaylen_waddle": {
       "name": "Jaylen Waddle",
@@ -2946,43 +2946,13 @@
       "total_injuries": 9,
       "has_recent_injuries": true,
       "url_used": "jaylen-waddle-player-injuries",
-      "scraped_at": "2025-06-19T03:09:52.890Z"
-    },
-    "george_pickens": {
-      "name": "George Pickens",
-      "position": "WR",
-      "team": "DAL",
-      "adp": 61,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "16",
-          "injury": "Hamstring",
-          "status": "Out"
-        },
-        {
-          "season": "2024",
-          "week": "15",
-          "injury": "Hamstring",
-          "status": "Out"
-        },
-        {
-          "season": "2024",
-          "week": "14",
-          "injury": "Hamstring",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 3,
-      "has_recent_injuries": true,
-      "url_used": "george-pickens-player-injuries",
-      "scraped_at": "2025-06-19T03:09:52.170Z"
+      "scraped_at": "2025-06-19T15:25:03.826Z"
     },
     "james_conner": {
       "name": "James Conner",
       "position": "RB",
       "team": "ARI",
-      "adp": 61,
+      "adp": 60.5,
       "injuries": [
         {
           "season": "2024",
@@ -3144,7 +3114,37 @@
       "total_injuries": 26,
       "has_recent_injuries": true,
       "url_used": "james-conner-player-injuries",
-      "scraped_at": "2025-06-19T03:09:52.474Z"
+      "scraped_at": "2025-06-19T15:25:05.027Z"
+    },
+    "george_pickens": {
+      "name": "George Pickens",
+      "position": "WR",
+      "team": "DAL",
+      "adp": 61,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "16",
+          "injury": "Hamstring",
+          "status": "Out"
+        },
+        {
+          "season": "2024",
+          "week": "15",
+          "injury": "Hamstring",
+          "status": "Out"
+        },
+        {
+          "season": "2024",
+          "week": "14",
+          "injury": "Hamstring",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 3,
+      "has_recent_injuries": true,
+      "url_used": "george-pickens-player-injuries",
+      "scraped_at": "2025-06-19T15:25:03.782Z"
     },
     "chris_godwin": {
       "name": "Chris Godwin",
@@ -3264,7 +3264,7 @@
       "total_injuries": 18,
       "has_recent_injuries": true,
       "url_used": "chris-godwin-player-injuries",
-      "scraped_at": "2025-06-19T03:09:53.082Z"
+      "scraped_at": "2025-06-19T15:25:03.703Z"
     },
     "travis_hunter": {
       "name": "Travis Hunter",
@@ -3275,7 +3275,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "travis-hunter-player-injuries",
-      "scraped_at": "2025-06-19T03:09:55.927Z"
+      "scraped_at": "2025-06-19T15:25:09.029Z"
     },
     "treveyon_henderson": {
       "name": "TreVeyon Henderson",
@@ -3286,7 +3286,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "treveyon-henderson-player-injuries",
-      "scraped_at": "2025-06-19T03:09:56.020Z"
+      "scraped_at": "2025-06-19T15:25:08.643Z"
     },
     "jauan_jennings": {
       "name": "Jauan Jennings",
@@ -3334,13 +3334,13 @@
       "total_injuries": 6,
       "has_recent_injuries": true,
       "url_used": "jauan-jennings-player-injuries",
-      "scraped_at": "2025-06-19T03:09:56.424Z"
+      "scraped_at": "2025-06-19T15:25:08.106Z"
     },
     "jerry_jeudy": {
       "name": "Jerry Jeudy",
       "position": "WR",
       "team": "CLE",
-      "adp": 65,
+      "adp": 64.5,
       "injuries": [
         {
           "season": "2023",
@@ -3412,13 +3412,13 @@
       "total_injuries": 11,
       "has_recent_injuries": true,
       "url_used": "jerry-jeudy-player-injuries",
-      "scraped_at": "2025-06-19T03:09:56.038Z"
+      "scraped_at": "2025-06-19T15:25:07.911Z"
     },
     "david_montgomery": {
       "name": "David Montgomery",
       "position": "RB",
       "team": "DET",
-      "adp": 65.5,
+      "adp": 66,
       "injuries": [
         {
           "season": "2024",
@@ -3496,7 +3496,7 @@
       "total_injuries": 12,
       "has_recent_injuries": true,
       "url_used": "david-montgomery-player-injuries",
-      "scraped_at": "2025-06-19T03:09:56.232Z"
+      "scraped_at": "2025-06-19T15:25:08.124Z"
     },
     "calvin_ridley": {
       "name": "Calvin Ridley",
@@ -3556,7 +3556,7 @@
       "total_injuries": 8,
       "has_recent_injuries": false,
       "url_used": "calvin-ridley-player-injuries",
-      "scraped_at": "2025-06-19T03:09:59.446Z"
+      "scraped_at": "2025-06-19T15:25:12.462Z"
     },
     "jordan_addison": {
       "name": "Jordan Addison",
@@ -3586,7 +3586,7 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "jordan-addison-player-injuries",
-      "scraped_at": "2025-06-19T03:09:59.256Z"
+      "scraped_at": "2025-06-19T15:25:12.126Z"
     },
     "sam_laporta": {
       "name": "Sam LaPorta",
@@ -3622,61 +3622,13 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "sam-laporta-player-injuries",
-      "scraped_at": "2025-06-19T03:09:59.372Z"
-    },
-    "patrick_mahomes_ii": {
-      "name": "Patrick Mahomes II",
-      "position": "QB",
-      "team": "KC",
-      "adp": 70,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "18",
-          "injury": "Ankle",
-          "status": "Doubtful"
-        },
-        {
-          "season": "2023",
-          "week": "18",
-          "injury": "Ankle",
-          "status": "Doubtful"
-        },
-        {
-          "season": "2019",
-          "week": "9",
-          "injury": "Knee",
-          "status": "Questionable"
-        },
-        {
-          "season": "2019",
-          "week": "8",
-          "injury": "Knee",
-          "status": "Out"
-        },
-        {
-          "season": "2018",
-          "week": "15",
-          "injury": "-",
-          "status": "None"
-        },
-        {
-          "season": "2018",
-          "week": "11",
-          "injury": "-",
-          "status": "None"
-        }
-      ],
-      "total_injuries": 6,
-      "has_recent_injuries": true,
-      "url_used": "patrick-mahomes-ii-player-injuries",
-      "scraped_at": "2025-06-19T03:09:59.624Z"
+      "scraped_at": "2025-06-19T15:25:14.322Z"
     },
     "chris_olave": {
       "name": "Chris Olave",
       "position": "WR",
       "team": "NO",
-      "adp": 70,
+      "adp": 69,
       "injuries": [
         {
           "season": "2024",
@@ -3754,13 +3706,13 @@
       "total_injuries": 12,
       "has_recent_injuries": true,
       "url_used": "chris-olave-player-injuries",
-      "scraped_at": "2025-06-19T03:10:00.800Z"
+      "scraped_at": "2025-06-19T15:25:13.665Z"
     },
     "rome_odunze": {
       "name": "Rome Odunze",
       "position": "WR",
       "team": "CHI",
-      "adp": 70.5,
+      "adp": 69.5,
       "injuries": [
         {
           "season": "2024",
@@ -3772,13 +3724,61 @@
       "total_injuries": 1,
       "has_recent_injuries": true,
       "url_used": "rome-odunze-player-injuries",
-      "scraped_at": "2025-06-19T03:10:03.922Z"
+      "scraped_at": "2025-06-19T15:25:14.032Z"
+    },
+    "patrick_mahomes_ii": {
+      "name": "Patrick Mahomes II",
+      "position": "QB",
+      "team": "KC",
+      "adp": 71.5,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "18",
+          "injury": "Ankle",
+          "status": "Doubtful"
+        },
+        {
+          "season": "2023",
+          "week": "18",
+          "injury": "Ankle",
+          "status": "Doubtful"
+        },
+        {
+          "season": "2019",
+          "week": "9",
+          "injury": "Knee",
+          "status": "Questionable"
+        },
+        {
+          "season": "2019",
+          "week": "8",
+          "injury": "Knee",
+          "status": "Out"
+        },
+        {
+          "season": "2018",
+          "week": "15",
+          "injury": "-",
+          "status": "None"
+        },
+        {
+          "season": "2018",
+          "week": "11",
+          "injury": "-",
+          "status": "None"
+        }
+      ],
+      "total_injuries": 6,
+      "has_recent_injuries": true,
+      "url_used": "patrick-mahomes-ii-player-injuries",
+      "scraped_at": "2025-06-19T15:25:17.412Z"
     },
     "baker_mayfield": {
       "name": "Baker Mayfield",
       "position": "QB",
       "team": "TB",
-      "adp": 72,
+      "adp": 72.5,
       "injuries": [
         {
           "season": "2023",
@@ -3826,7 +3826,7 @@
       "total_injuries": 7,
       "has_recent_injuries": true,
       "url_used": "baker-mayfield-player-injuries",
-      "scraped_at": "2025-06-19T03:10:04.126Z"
+      "scraped_at": "2025-06-19T15:25:17.307Z"
     },
     "quinshon_judkins": {
       "name": "Quinshon Judkins",
@@ -3837,29 +3837,29 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "quinshon-judkins-player-injuries",
-      "scraped_at": "2025-06-19T03:10:03.933Z"
+      "scraped_at": "2025-06-19T15:25:18.300Z"
     },
     "kaleb_johnson": {
       "name": "Kaleb Johnson",
       "position": "RB",
       "team": "PIT",
-      "adp": 74,
+      "adp": 73.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "kaleb-johnson-player-injuries",
-      "scraped_at": "2025-06-19T03:10:04.141Z"
+      "scraped_at": "2025-06-19T15:25:17.342Z"
     },
     "deebo_samuel_sr_": {
       "name": "Deebo Samuel Sr.",
       "position": "WR",
       "team": "WAS",
-      "adp": 75.5,
+      "adp": 75,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "deebo-samuel-sr-player-injuries",
-      "scraped_at": "2025-06-19T03:10:03.322Z"
+      "scraped_at": "2025-06-19T15:25:16.955Z"
     },
     "tony_pollard": {
       "name": "Tony Pollard",
@@ -3937,24 +3937,13 @@
       "total_injuries": 11,
       "has_recent_injuries": true,
       "url_used": "tony-pollard-player-injuries",
-      "scraped_at": "2025-06-19T03:10:06.973Z"
-    },
-    "aaron_jones_sr_": {
-      "name": "Aaron Jones Sr.",
-      "position": "RB",
-      "team": "MIN",
-      "adp": 76.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "aaron-jones-sr-player-injuries",
-      "scraped_at": "2025-06-19T03:10:06.666Z"
+      "scraped_at": "2025-06-19T15:25:21.259Z"
     },
     "jakobi_meyers": {
       "name": "Jakobi Meyers",
       "position": "WR",
       "team": "LV",
-      "adp": 78.5,
+      "adp": 78,
       "injuries": [
         {
           "season": "2024",
@@ -4068,13 +4057,24 @@
       "total_injuries": 18,
       "has_recent_injuries": true,
       "url_used": "jakobi-meyers-player-injuries",
-      "scraped_at": "2025-06-19T03:10:07.871Z"
+      "scraped_at": "2025-06-19T15:25:21.353Z"
+    },
+    "aaron_jones_sr_": {
+      "name": "Aaron Jones Sr.",
+      "position": "RB",
+      "team": "MIN",
+      "adp": 78,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "aaron-jones-sr-player-injuries",
+      "scraped_at": "2025-06-19T15:25:21.000Z"
     },
     "ricky_pearsall": {
       "name": "Ricky Pearsall",
       "position": "WR",
       "team": "SF",
-      "adp": 80,
+      "adp": 79,
       "injuries": [
         {
           "season": "2024",
@@ -4086,24 +4086,13 @@
       "total_injuries": 1,
       "has_recent_injuries": true,
       "url_used": "ricky-pearsall-player-injuries",
-      "scraped_at": "2025-06-19T03:10:06.996Z"
-    },
-    "bo_nix": {
-      "name": "Bo Nix",
-      "position": "QB",
-      "team": "DEN",
-      "adp": 80.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "bo-nix-player-injuries",
-      "scraped_at": "2025-06-19T03:10:06.881Z"
+      "scraped_at": "2025-06-19T15:25:21.268Z"
     },
     "d_andre_swift": {
       "name": "D'Andre Swift",
       "position": "RB",
       "team": "CHI",
-      "adp": 80.5,
+      "adp": 80,
       "injuries": [
         {
           "season": "2024",
@@ -4259,7 +4248,7 @@
       "total_injuries": 25,
       "has_recent_injuries": true,
       "url_used": "dandre-swift-player-injuries",
-      "scraped_at": "2025-06-19T03:10:11.218Z"
+      "scraped_at": "2025-06-19T15:25:22.535Z"
     },
     "khalil_shakir": {
       "name": "Khalil Shakir",
@@ -4283,7 +4272,18 @@
       "total_injuries": 2,
       "has_recent_injuries": true,
       "url_used": "khalil-shakir-player-injuries",
-      "scraped_at": "2025-06-19T03:10:12.203Z"
+      "scraped_at": "2025-06-19T15:25:25.408Z"
+    },
+    "bo_nix": {
+      "name": "Bo Nix",
+      "position": "QB",
+      "team": "DEN",
+      "adp": 81.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "bo-nix-player-injuries",
+      "scraped_at": "2025-06-19T15:25:26.519Z"
     },
     "isiah_pacheco": {
       "name": "Isiah Pacheco",
@@ -4294,13 +4294,13 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "isiah-pacheco-player-injuries",
-      "scraped_at": "2025-06-19T03:10:10.421Z"
+      "scraped_at": "2025-06-19T15:25:25.225Z"
     },
     "t_j__hockenson": {
       "name": "T.J. Hockenson",
       "position": "TE",
       "team": "MIN",
-      "adp": 85,
+      "adp": 84.5,
       "injuries": [
         {
           "season": "2024",
@@ -4378,13 +4378,13 @@
       "total_injuries": 12,
       "has_recent_injuries": true,
       "url_used": "tj-hockenson-player-injuries",
-      "scraped_at": "2025-06-19T03:10:10.812Z"
+      "scraped_at": "2025-06-19T15:25:26.559Z"
     },
     "kyler_murray": {
       "name": "Kyler Murray",
       "position": "QB",
       "team": "ARI",
-      "adp": 86,
+      "adp": 87,
       "injuries": [
         {
           "season": "2023",
@@ -4462,7 +4462,7 @@
       "total_injuries": 12,
       "has_recent_injuries": true,
       "url_used": "kyler-murray-player-injuries",
-      "scraped_at": "2025-06-19T03:10:10.825Z"
+      "scraped_at": "2025-06-19T15:25:25.711Z"
     },
     "jayden_reed": {
       "name": "Jayden Reed",
@@ -4498,18 +4498,18 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "jayden-reed-player-injuries",
-      "scraped_at": "2025-06-19T03:10:14.237Z"
+      "scraped_at": "2025-06-19T15:25:30.323Z"
     },
     "brian_robinson_jr_": {
       "name": "Brian Robinson Jr.",
       "position": "RB",
       "team": "WAS",
-      "adp": 90,
+      "adp": 89.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "brian-robinson-jr-player-injuries",
-      "scraped_at": "2025-06-19T03:10:14.864Z"
+      "scraped_at": "2025-06-19T15:25:29.229Z"
     },
     "josh_downs": {
       "name": "Josh Downs",
@@ -4569,13 +4569,13 @@
       "total_injuries": 8,
       "has_recent_injuries": true,
       "url_used": "josh-downs-player-injuries",
-      "scraped_at": "2025-06-19T03:10:14.279Z"
+      "scraped_at": "2025-06-19T15:25:29.473Z"
     },
     "stefon_diggs": {
       "name": "Stefon Diggs",
       "position": "WR",
       "team": "NE",
-      "adp": 93,
+      "adp": 92.5,
       "injuries": [
         {
           "season": "2020",
@@ -4617,49 +4617,7 @@
       "total_injuries": 6,
       "has_recent_injuries": false,
       "url_used": "stefon-diggs-player-injuries",
-      "scraped_at": "2025-06-19T03:10:14.267Z"
-    },
-    "brock_purdy": {
-      "name": "Brock Purdy",
-      "position": "QB",
-      "team": "SF",
-      "adp": 94.5,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "18",
-          "injury": "Elbow",
-          "status": "Out"
-        },
-        {
-          "season": "2024",
-          "week": "13",
-          "injury": "Right Shoulder",
-          "status": "Questionable"
-        },
-        {
-          "season": "2024",
-          "week": "12",
-          "injury": "Right Shoulder",
-          "status": "Out"
-        },
-        {
-          "season": "2023",
-          "week": "8",
-          "injury": "Concussion",
-          "status": "Questionable"
-        },
-        {
-          "season": "2022",
-          "week": "15",
-          "injury": "Oblique",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 5,
-      "has_recent_injuries": true,
-      "url_used": "brock-purdy-player-injuries",
-      "scraped_at": "2025-06-19T03:10:14.296Z"
+      "scraped_at": "2025-06-19T15:25:30.131Z"
     },
     "travis_kelce": {
       "name": "Travis Kelce",
@@ -4719,102 +4677,108 @@
       "total_injuries": 8,
       "has_recent_injuries": true,
       "url_used": "travis-kelce-player-injuries",
-      "scraped_at": "2025-06-19T03:10:16.980Z"
+      "scraped_at": "2025-06-19T15:25:29.627Z"
     },
-    "justin_fields": {
-      "name": "Justin Fields",
-      "position": "QB",
-      "team": "NYJ",
-      "adp": 94.5,
+    "jaylen_warren": {
+      "name": "Jaylen Warren",
+      "position": "RB",
+      "team": "PIT",
+      "adp": 95,
       "injuries": [
         {
           "season": "2024",
-          "week": "17",
-          "injury": "Abdominal",
+          "week": "11",
+          "injury": "Back",
           "status": "Questionable"
         },
         {
           "season": "2024",
-          "week": "16",
-          "injury": "Abdominal",
+          "week": "6",
+          "injury": "Knee",
+          "status": "Questionable"
+        },
+        {
+          "season": "2024",
+          "week": "5",
+          "injury": "Knee",
           "status": "Out"
         },
         {
-          "season": "2023",
-          "week": "10",
-          "injury": "Thumb",
-          "status": "Doubtful"
-        },
-        {
-          "season": "2023",
-          "week": "9",
-          "injury": "Thumb",
-          "status": "Doubtful"
-        },
-        {
-          "season": "2023",
-          "week": "8",
-          "injury": "Thumb",
-          "status": "Out"
-        },
-        {
-          "season": "2023",
-          "week": "7",
-          "injury": "Thumb",
+          "season": "2024",
+          "week": "4",
+          "injury": "Knee",
           "status": "Out"
         },
         {
           "season": "2022",
-          "week": "18",
-          "injury": "Hip",
-          "status": "Out"
-        },
-        {
-          "season": "2022",
-          "week": "12",
-          "injury": "Shoulder",
-          "status": "Questionable"
-        },
-        {
-          "season": "2021",
-          "week": "17",
-          "injury": "Ankle",
-          "status": "Questionable"
-        },
-        {
-          "season": "2021",
-          "week": "16",
-          "injury": "Ankle",
-          "status": "Questionable"
-        },
-        {
-          "season": "2021",
           "week": "13",
-          "injury": "Ribs",
-          "status": "Doubtful"
+          "injury": "Hamstring",
+          "status": "Questionable"
         },
         {
-          "season": "2021",
+          "season": "2022",
           "week": "12",
-          "injury": "Ribs",
+          "injury": "Hamstring",
           "status": "Out"
         }
       ],
-      "total_injuries": 12,
+      "total_injuries": 6,
       "has_recent_injuries": true,
-      "url_used": "justin-fields-player-injuries",
-      "scraped_at": "2025-06-19T03:10:17.907Z"
+      "url_used": "jaylen-warren-player-injuries",
+      "scraped_at": "2025-06-19T15:25:33.500Z"
     },
     "caleb_williams": {
       "name": "Caleb Williams",
       "position": "QB",
       "team": "CHI",
-      "adp": 95,
+      "adp": 95.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "caleb-williams-player-injuries",
-      "scraped_at": "2025-06-19T03:10:17.683Z"
+      "scraped_at": "2025-06-19T15:25:33.300Z"
+    },
+    "brock_purdy": {
+      "name": "Brock Purdy",
+      "position": "QB",
+      "team": "SF",
+      "adp": 95.5,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "18",
+          "injury": "Elbow",
+          "status": "Out"
+        },
+        {
+          "season": "2024",
+          "week": "13",
+          "injury": "Right Shoulder",
+          "status": "Questionable"
+        },
+        {
+          "season": "2024",
+          "week": "12",
+          "injury": "Right Shoulder",
+          "status": "Out"
+        },
+        {
+          "season": "2023",
+          "week": "8",
+          "injury": "Concussion",
+          "status": "Questionable"
+        },
+        {
+          "season": "2022",
+          "week": "15",
+          "injury": "Oblique",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 5,
+      "has_recent_injuries": true,
+      "url_used": "brock-purdy-player-injuries",
+      "scraped_at": "2025-06-19T15:25:33.308Z"
     },
     "cooper_kupp": {
       "name": "Cooper Kupp",
@@ -4904,55 +4868,91 @@
       "total_injuries": 13,
       "has_recent_injuries": true,
       "url_used": "cooper-kupp-player-injuries",
-      "scraped_at": "2025-06-19T03:10:17.883Z"
+      "scraped_at": "2025-06-19T15:25:33.279Z"
     },
-    "jaylen_warren": {
-      "name": "Jaylen Warren",
-      "position": "RB",
-      "team": "PIT",
+    "justin_fields": {
+      "name": "Justin Fields",
+      "position": "QB",
+      "team": "NYJ",
       "adp": 95.5,
       "injuries": [
         {
           "season": "2024",
-          "week": "11",
-          "injury": "Back",
+          "week": "17",
+          "injury": "Abdominal",
           "status": "Questionable"
         },
         {
           "season": "2024",
-          "week": "6",
-          "injury": "Knee",
-          "status": "Questionable"
-        },
-        {
-          "season": "2024",
-          "week": "5",
-          "injury": "Knee",
+          "week": "16",
+          "injury": "Abdominal",
           "status": "Out"
         },
         {
-          "season": "2024",
-          "week": "4",
-          "injury": "Knee",
+          "season": "2023",
+          "week": "10",
+          "injury": "Thumb",
+          "status": "Doubtful"
+        },
+        {
+          "season": "2023",
+          "week": "9",
+          "injury": "Thumb",
+          "status": "Doubtful"
+        },
+        {
+          "season": "2023",
+          "week": "8",
+          "injury": "Thumb",
+          "status": "Out"
+        },
+        {
+          "season": "2023",
+          "week": "7",
+          "injury": "Thumb",
           "status": "Out"
         },
         {
           "season": "2022",
-          "week": "13",
-          "injury": "Hamstring",
-          "status": "Questionable"
+          "week": "18",
+          "injury": "Hip",
+          "status": "Out"
         },
         {
           "season": "2022",
           "week": "12",
-          "injury": "Hamstring",
+          "injury": "Shoulder",
+          "status": "Questionable"
+        },
+        {
+          "season": "2021",
+          "week": "17",
+          "injury": "Ankle",
+          "status": "Questionable"
+        },
+        {
+          "season": "2021",
+          "week": "16",
+          "injury": "Ankle",
+          "status": "Questionable"
+        },
+        {
+          "season": "2021",
+          "week": "13",
+          "injury": "Ribs",
+          "status": "Doubtful"
+        },
+        {
+          "season": "2021",
+          "week": "12",
+          "injury": "Ribs",
           "status": "Out"
         }
       ],
-      "total_injuries": 6,
+      "total_injuries": 12,
       "has_recent_injuries": true,
-      "url_used": "jaylen-warren-player-injuries",
-      "scraped_at": "2025-06-19T03:10:17.919Z"
+      "url_used": "justin-fields-player-injuries",
+      "scraped_at": "2025-06-19T15:25:32.459Z"
     },
     "jared_goff": {
       "name": "Jared Goff",
@@ -5000,7 +5000,7 @@
       "total_injuries": 6,
       "has_recent_injuries": false,
       "url_used": "jared-goff-player-injuries",
-      "scraped_at": "2025-06-19T03:10:21.459Z"
+      "scraped_at": "2025-06-19T15:25:36.488Z"
     },
     "brandon_aiyuk": {
       "name": "Brandon Aiyuk",
@@ -5036,7 +5036,7 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "brandon-aiyuk-player-injuries",
-      "scraped_at": "2025-06-19T03:10:20.956Z"
+      "scraped_at": "2025-06-19T15:25:36.478Z"
     },
     "matthew_golden": {
       "name": "Matthew Golden",
@@ -5047,7 +5047,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "matthew-golden-player-injuries",
-      "scraped_at": "2025-06-19T03:10:21.050Z"
+      "scraped_at": "2025-06-19T15:25:36.655Z"
     },
     "darnell_mooney": {
       "name": "Darnell Mooney",
@@ -5125,29 +5125,40 @@
       "total_injuries": 11,
       "has_recent_injuries": true,
       "url_used": "darnell-mooney-player-injuries",
-      "scraped_at": "2025-06-19T03:10:21.243Z"
+      "scraped_at": "2025-06-19T15:25:37.315Z"
     },
     "najee_harris": {
       "name": "Najee Harris",
       "position": "RB",
       "team": "LAC",
-      "adp": 101,
+      "adp": 100.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "najee-harris-player-injuries",
-      "scraped_at": "2025-06-19T03:10:21.261Z"
+      "scraped_at": "2025-06-19T15:25:37.696Z"
     },
     "tyrone_tracy_jr_": {
       "name": "Tyrone Tracy Jr.",
       "position": "RB",
       "team": "NYG",
-      "adp": 101.5,
+      "adp": 101,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "tyrone-tracy-jr-player-injuries",
-      "scraped_at": "2025-06-19T03:10:24.223Z"
+      "scraped_at": "2025-06-19T15:25:40.563Z"
+    },
+    "michael_pittman_jr_": {
+      "name": "Michael Pittman Jr.",
+      "position": "WR",
+      "team": "IND",
+      "adp": 103.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "michael-pittman-jr-player-injuries",
+      "scraped_at": "2025-06-19T15:25:40.292Z"
     },
     "dak_prescott": {
       "name": "Dak Prescott",
@@ -5201,48 +5212,7 @@
       "total_injuries": 7,
       "has_recent_injuries": true,
       "url_used": "dak-prescott-player-injuries",
-      "scraped_at": "2025-06-19T03:10:24.470Z"
-    },
-    "michael_pittman_jr_": {
-      "name": "Michael Pittman Jr.",
-      "position": "WR",
-      "team": "IND",
-      "adp": 104,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "michael-pittman-jr-player-injuries",
-      "scraped_at": "2025-06-19T03:10:23.945Z"
-    },
-    "justin_herbert": {
-      "name": "Justin Herbert",
-      "position": "QB",
-      "team": "LAC",
-      "adp": 105,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "4",
-          "injury": "Ankle",
-          "status": "Questionable"
-        },
-        {
-          "season": "2024",
-          "week": "3",
-          "injury": "Ankle",
-          "status": "Questionable"
-        },
-        {
-          "season": "2022",
-          "week": "3",
-          "injury": "Ribs",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 3,
-      "has_recent_injuries": true,
-      "url_used": "justin-herbert-player-injuries",
-      "scraped_at": "2025-06-19T03:10:24.398Z"
+      "scraped_at": "2025-06-19T15:25:40.858Z"
     },
     "mark_andrews": {
       "name": "Mark Andrews",
@@ -5356,18 +5326,18 @@
       "total_injuries": 17,
       "has_recent_injuries": true,
       "url_used": "mark-andrews-player-injuries",
-      "scraped_at": "2025-06-19T03:10:24.793Z"
+      "scraped_at": "2025-06-19T15:25:40.833Z"
     },
     "cam_skattebo": {
       "name": "Cam Skattebo",
       "position": "RB",
       "team": "NYG",
-      "adp": 105.5,
+      "adp": 105,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "cam-skattebo-player-injuries",
-      "scraped_at": "2025-06-19T03:10:27.010Z"
+      "scraped_at": "2025-06-19T15:25:41.716Z"
     },
     "evan_engram": {
       "name": "Evan Engram",
@@ -5511,7 +5481,37 @@
       "total_injuries": 22,
       "has_recent_injuries": true,
       "url_used": "evan-engram-player-injuries",
-      "scraped_at": "2025-06-19T03:10:27.001Z"
+      "scraped_at": "2025-06-19T15:25:45.104Z"
+    },
+    "justin_herbert": {
+      "name": "Justin Herbert",
+      "position": "QB",
+      "team": "LAC",
+      "adp": 106.5,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "4",
+          "injury": "Ankle",
+          "status": "Questionable"
+        },
+        {
+          "season": "2024",
+          "week": "3",
+          "injury": "Ankle",
+          "status": "Questionable"
+        },
+        {
+          "season": "2022",
+          "week": "3",
+          "injury": "Ribs",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 3,
+      "has_recent_injuries": true,
+      "url_used": "justin-herbert-player-injuries",
+      "scraped_at": "2025-06-19T15:25:45.923Z"
     },
     "jordan_mason": {
       "name": "Jordan Mason",
@@ -5547,7 +5547,7 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "jordan-mason-player-injuries",
-      "scraped_at": "2025-06-19T03:10:27.899Z"
+      "scraped_at": "2025-06-19T15:25:45.340Z"
     },
     "jonnu_smith": {
       "name": "Jonnu Smith",
@@ -5619,7 +5619,7 @@
       "total_injuries": 10,
       "has_recent_injuries": false,
       "url_used": "jonnu-smith-player-injuries",
-      "scraped_at": "2025-06-19T03:10:27.985Z"
+      "scraped_at": "2025-06-19T15:25:44.703Z"
     },
     "emeka_egbuka": {
       "name": "Emeka Egbuka",
@@ -5630,7 +5630,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "emeka-egbuka-player-injuries",
-      "scraped_at": "2025-06-19T03:10:28.209Z"
+      "scraped_at": "2025-06-19T15:25:45.151Z"
     },
     "zach_charbonnet": {
       "name": "Zach Charbonnet",
@@ -5654,13 +5654,24 @@
       "total_injuries": 2,
       "has_recent_injuries": true,
       "url_used": "zach-charbonnet-player-injuries",
-      "scraped_at": "2025-06-19T03:10:31.336Z"
+      "scraped_at": "2025-06-19T15:25:48.969Z"
+    },
+    "travis_etienne_jr_": {
+      "name": "Travis Etienne Jr.",
+      "position": "RB",
+      "team": "JAC",
+      "adp": 111.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "travis-etienne-jr-player-injuries",
+      "scraped_at": "2025-06-19T15:25:48.526Z"
     },
     "drake_maye": {
       "name": "Drake Maye",
       "position": "QB",
       "team": "NE",
-      "adp": 111.5,
+      "adp": 112,
       "injuries": [
         {
           "season": "2024",
@@ -5678,18 +5689,7 @@
       "total_injuries": 2,
       "has_recent_injuries": true,
       "url_used": "drake-maye-player-injuries",
-      "scraped_at": "2025-06-19T03:10:31.551Z"
-    },
-    "travis_etienne_jr_": {
-      "name": "Travis Etienne Jr.",
-      "position": "RB",
-      "team": "JAC",
-      "adp": 111.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "travis-etienne-jr-player-injuries",
-      "scraped_at": "2025-06-19T03:10:30.800Z"
+      "scraped_at": "2025-06-19T15:25:49.147Z"
     },
     "jordan_love": {
       "name": "Jordan Love",
@@ -5725,13 +5725,13 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "jordan-love-player-injuries",
-      "scraped_at": "2025-06-19T03:10:31.533Z"
+      "scraped_at": "2025-06-19T15:25:48.813Z"
     },
     "keon_coleman": {
       "name": "Keon Coleman",
       "position": "WR",
       "team": "BUF",
-      "adp": 116,
+      "adp": 114.5,
       "injuries": [
         {
           "season": "2024",
@@ -5761,13 +5761,13 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "keon-coleman-player-injuries",
-      "scraped_at": "2025-06-19T03:10:31.351Z"
+      "scraped_at": "2025-06-19T15:25:48.909Z"
     },
     "david_njoku": {
       "name": "David Njoku",
       "position": "TE",
       "team": "CLE",
-      "adp": 117,
+      "adp": 115.5,
       "injuries": [
         {
           "season": "2024",
@@ -5947,37 +5947,7 @@
       "total_injuries": 29,
       "has_recent_injuries": true,
       "url_used": "david-njoku-player-injuries",
-      "scraped_at": "2025-06-19T03:10:34.687Z"
-    },
-    "c_j__stroud": {
-      "name": "C.J. Stroud",
-      "position": "QB",
-      "team": "HOU",
-      "adp": 118.5,
-      "injuries": [
-        {
-          "season": "2023",
-          "week": "16",
-          "injury": "Concussion",
-          "status": "Out"
-        },
-        {
-          "season": "2023",
-          "week": "15",
-          "injury": "Concussion",
-          "status": "Doubtful"
-        },
-        {
-          "season": "2023",
-          "week": "2",
-          "injury": "Shoulder",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 3,
-      "has_recent_injuries": true,
-      "url_used": "cj-stroud-player-injuries",
-      "scraped_at": "2025-06-19T03:10:34.574Z"
+      "scraped_at": "2025-06-19T15:25:52.554Z"
     },
     "rhamondre_stevenson": {
       "name": "Rhamondre Stevenson",
@@ -6067,7 +6037,7 @@
       "total_injuries": 13,
       "has_recent_injuries": true,
       "url_used": "rhamondre-stevenson-player-injuries",
-      "scraped_at": "2025-06-19T03:10:34.897Z"
+      "scraped_at": "2025-06-19T15:25:52.915Z"
     },
     "rashid_shaheed": {
       "name": "Rashid Shaheed",
@@ -6097,13 +6067,73 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "rashid-shaheed-player-injuries",
-      "scraped_at": "2025-06-19T03:10:34.875Z"
+      "scraped_at": "2025-06-19T15:25:52.518Z"
+    },
+    "javonte_williams": {
+      "name": "Javonte Williams",
+      "position": "RB",
+      "team": "DAL",
+      "adp": 120,
+      "injuries": [
+        {
+          "season": "2023",
+          "week": "5",
+          "injury": "Quad",
+          "status": "Questionable"
+        },
+        {
+          "season": "2021",
+          "week": "17",
+          "injury": "Knee",
+          "status": "Questionable"
+        },
+        {
+          "season": "2021",
+          "week": "15",
+          "injury": "Knee",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 3,
+      "has_recent_injuries": true,
+      "url_used": "javonte-williams-player-injuries",
+      "scraped_at": "2025-06-19T15:25:52.540Z"
+    },
+    "c_j__stroud": {
+      "name": "C.J. Stroud",
+      "position": "QB",
+      "team": "HOU",
+      "adp": 120.5,
+      "injuries": [
+        {
+          "season": "2023",
+          "week": "16",
+          "injury": "Concussion",
+          "status": "Out"
+        },
+        {
+          "season": "2023",
+          "week": "15",
+          "injury": "Concussion",
+          "status": "Doubtful"
+        },
+        {
+          "season": "2023",
+          "week": "2",
+          "injury": "Shoulder",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 3,
+      "has_recent_injuries": true,
+      "url_used": "cj-stroud-player-injuries",
+      "scraped_at": "2025-06-19T15:25:52.311Z"
     },
     "trevor_lawrence": {
       "name": "Trevor Lawrence",
       "position": "QB",
       "team": "JAC",
-      "adp": 120,
+      "adp": 120.5,
       "injuries": [
         {
           "season": "2024",
@@ -6205,37 +6235,7 @@
       "total_injuries": 16,
       "has_recent_injuries": true,
       "url_used": "trevor-lawrence-player-injuries",
-      "scraped_at": "2025-06-19T03:10:34.605Z"
-    },
-    "javonte_williams": {
-      "name": "Javonte Williams",
-      "position": "RB",
-      "team": "DAL",
-      "adp": 120,
-      "injuries": [
-        {
-          "season": "2023",
-          "week": "5",
-          "injury": "Quad",
-          "status": "Questionable"
-        },
-        {
-          "season": "2021",
-          "week": "17",
-          "injury": "Knee",
-          "status": "Questionable"
-        },
-        {
-          "season": "2021",
-          "week": "15",
-          "injury": "Knee",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 3,
-      "has_recent_injuries": true,
-      "url_used": "javonte-williams-player-injuries",
-      "scraped_at": "2025-06-19T03:10:38.226Z"
+      "scraped_at": "2025-06-19T15:25:56.087Z"
     },
     "j_j__mccarthy": {
       "name": "J.J. McCarthy",
@@ -6246,7 +6246,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "jj-mccarthy-player-injuries",
-      "scraped_at": "2025-06-19T03:10:37.814Z"
+      "scraped_at": "2025-06-19T15:25:55.903Z"
     },
     "jayden_higgins": {
       "name": "Jayden Higgins",
@@ -6257,78 +6257,24 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "jayden-higgins-player-injuries",
-      "scraped_at": "2025-06-19T03:10:37.833Z"
+      "scraped_at": "2025-06-19T15:25:57.155Z"
     },
-    "tre_harris": {
-      "name": "Tre Harris",
-      "position": "WR",
-      "team": "LAC",
-      "adp": 124.5,
+    "tyler_warren": {
+      "name": "Tyler Warren",
+      "position": "TE",
+      "team": "IND",
+      "adp": 124,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
-      "url_used": "tre-harris-player-injuries",
-      "scraped_at": "2025-06-19T03:10:39.023Z"
-    },
-    "rashod_bateman": {
-      "name": "Rashod Bateman",
-      "position": "WR",
-      "team": "BAL",
-      "adp": 124.5,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "16",
-          "injury": "Foot",
-          "status": "Questionable"
-        },
-        {
-          "season": "2023",
-          "week": "4",
-          "injury": "Hamstring",
-          "status": "Out"
-        },
-        {
-          "season": "2022",
-          "week": "8",
-          "injury": "Foot",
-          "status": "Questionable"
-        },
-        {
-          "season": "2022",
-          "week": "7",
-          "injury": "Foot",
-          "status": "Questionable"
-        },
-        {
-          "season": "2022",
-          "week": "6",
-          "injury": "Foot",
-          "status": "Out"
-        },
-        {
-          "season": "2022",
-          "week": "5",
-          "injury": "Foot",
-          "status": "Out"
-        },
-        {
-          "season": "2021",
-          "week": "9",
-          "injury": "Groin",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 7,
-      "has_recent_injuries": true,
-      "url_used": "rashod-bateman-player-injuries",
-      "scraped_at": "2025-06-19T03:10:37.926Z"
+      "url_used": "tyler-warren-player-injuries",
+      "scraped_at": "2025-06-19T15:25:56.131Z"
     },
     "christian_kirk": {
       "name": "Christian Kirk",
       "position": "WR",
       "team": "HOU",
-      "adp": 124.5,
+      "adp": 124,
       "injuries": [
         {
           "season": "2024",
@@ -6388,46 +6334,89 @@
       "total_injuries": 9,
       "has_recent_injuries": true,
       "url_used": "christian-kirk-player-injuries",
-      "scraped_at": "2025-06-19T03:10:42.561Z"
+      "scraped_at": "2025-06-19T15:25:56.498Z"
     },
-    "tyler_warren": {
-      "name": "Tyler Warren",
-      "position": "TE",
-      "team": "IND",
-      "adp": 125,
+    "tre_harris": {
+      "name": "Tre Harris",
+      "position": "WR",
+      "team": "LAC",
+      "adp": 124.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
-      "url_used": "tyler-warren-player-injuries",
-      "scraped_at": "2025-06-19T03:10:42.378Z"
+      "url_used": "tre-harris-player-injuries",
+      "scraped_at": "2025-06-19T15:26:00.632Z"
+    },
+    "rashod_bateman": {
+      "name": "Rashod Bateman",
+      "position": "WR",
+      "team": "BAL",
+      "adp": 125,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "16",
+          "injury": "Foot",
+          "status": "Questionable"
+        },
+        {
+          "season": "2023",
+          "week": "4",
+          "injury": "Hamstring",
+          "status": "Out"
+        },
+        {
+          "season": "2022",
+          "week": "8",
+          "injury": "Foot",
+          "status": "Questionable"
+        },
+        {
+          "season": "2022",
+          "week": "7",
+          "injury": "Foot",
+          "status": "Questionable"
+        },
+        {
+          "season": "2022",
+          "week": "6",
+          "injury": "Foot",
+          "status": "Out"
+        },
+        {
+          "season": "2022",
+          "week": "5",
+          "injury": "Foot",
+          "status": "Out"
+        },
+        {
+          "season": "2021",
+          "week": "9",
+          "injury": "Groin",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 7,
+      "has_recent_injuries": true,
+      "url_used": "rashod-bateman-player-injuries",
+      "scraped_at": "2025-06-19T15:26:00.371Z"
     },
     "luther_burden_iii": {
       "name": "Luther Burden III",
       "position": "WR",
       "team": "CHI",
-      "adp": 126,
+      "adp": 127,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "luther-burden-iii-player-injuries",
-      "scraped_at": "2025-06-19T03:10:41.785Z"
-    },
-    "bhayshul_tuten": {
-      "name": "Bhayshul Tuten",
-      "position": "RB",
-      "team": "JAC",
-      "adp": 128.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "bhayshul-tuten-player-injuries",
-      "scraped_at": "2025-06-19T03:10:42.350Z"
+      "scraped_at": "2025-06-19T15:25:59.874Z"
     },
     "tyjae_spears": {
       "name": "Tyjae Spears",
       "position": "RB",
       "team": "TEN",
-      "adp": 130,
+      "adp": 129,
       "injuries": [
         {
           "season": "2024",
@@ -6475,7 +6464,36 @@
       "total_injuries": 7,
       "has_recent_injuries": true,
       "url_used": "tyjae-spears-player-injuries",
-      "scraped_at": "2025-06-19T03:10:42.050Z"
+      "scraped_at": "2025-06-19T15:26:01.605Z"
+    },
+    "bhayshul_tuten": {
+      "name": "Bhayshul Tuten",
+      "position": "RB",
+      "team": "JAC",
+      "adp": 129,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "bhayshul-tuten-player-injuries",
+      "scraped_at": "2025-06-19T15:26:01.273Z"
+    },
+    "tucker_kraft": {
+      "name": "Tucker Kraft",
+      "position": "TE",
+      "team": "GB",
+      "adp": 130.5,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "1",
+          "injury": "Back",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 1,
+      "has_recent_injuries": true,
+      "url_used": "tucker-kraft-player-injuries",
+      "scraped_at": "2025-06-19T15:26:05.404Z"
     },
     "marvin_mims_jr_": {
       "name": "Marvin Mims Jr.",
@@ -6493,31 +6511,13 @@
       "total_injuries": 1,
       "has_recent_injuries": true,
       "url_used": "marvin-mims-jr-player-injuries",
-      "scraped_at": "2025-06-19T03:10:45.504Z"
-    },
-    "tucker_kraft": {
-      "name": "Tucker Kraft",
-      "position": "TE",
-      "team": "GB",
-      "adp": 131.5,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "1",
-          "injury": "Back",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 1,
-      "has_recent_injuries": true,
-      "url_used": "tucker-kraft-player-injuries",
-      "scraped_at": "2025-06-19T03:10:46.306Z"
+      "scraped_at": "2025-06-19T15:26:04.569Z"
     },
     "tua_tagovailoa": {
       "name": "Tua Tagovailoa",
       "position": "QB",
       "team": "MIA",
-      "adp": 134.5,
+      "adp": 135,
       "injuries": [
         {
           "season": "2024",
@@ -6619,35 +6619,35 @@
       "total_injuries": 16,
       "has_recent_injuries": true,
       "url_used": "tua-tagovailoa-player-injuries",
-      "scraped_at": "2025-06-19T03:10:45.898Z"
-    },
-    "jaydon_blue": {
-      "name": "Jaydon Blue",
-      "position": "RB",
-      "team": "DAL",
-      "adp": 134.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "jaydon-blue-player-injuries",
-      "scraped_at": "2025-06-19T03:10:45.389Z"
+      "scraped_at": "2025-06-19T15:26:05.390Z"
     },
     "michael_penix_jr_": {
       "name": "Michael Penix Jr.",
       "position": "QB",
       "team": "ATL",
-      "adp": 135.5,
+      "adp": 135,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "michael-penix-jr-player-injuries",
-      "scraped_at": "2025-06-19T03:10:45.113Z"
+      "scraped_at": "2025-06-19T15:26:04.242Z"
+    },
+    "jaydon_blue": {
+      "name": "Jaydon Blue",
+      "position": "RB",
+      "team": "DAL",
+      "adp": 135.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "jaydon-blue-player-injuries",
+      "scraped_at": "2025-06-19T15:26:05.434Z"
     },
     "marquise_brown": {
       "name": "Marquise Brown",
       "position": "WR",
       "team": "KC",
-      "adp": 136,
+      "adp": 135.5,
       "injuries": [
         {
           "season": "2024",
@@ -6839,43 +6839,61 @@
       "total_injuries": 31,
       "has_recent_injuries": true,
       "url_used": "marquise-brown-player-injuries",
-      "scraped_at": "2025-06-19T03:10:49.262Z"
+      "scraped_at": "2025-06-19T15:26:09.420Z"
     },
-    "rachaad_white": {
-      "name": "Rachaad White",
+    "j_k__dobbins": {
+      "name": "J.K. Dobbins",
       "position": "RB",
-      "team": "TB",
+      "team": "DEN",
       "adp": 138.5,
       "injuries": [
         {
           "season": "2024",
-          "week": "7",
-          "injury": "Foot",
+          "week": "WC",
+          "injury": "Ankle",
           "status": "Questionable"
         },
         {
           "season": "2024",
-          "week": "6",
-          "injury": "Foot",
-          "status": "Doubtful"
-        },
-        {
-          "season": "2024",
-          "week": "4",
-          "injury": "Illness",
+          "week": "17",
+          "injury": "Knee",
           "status": "Questionable"
         },
         {
-          "season": "2023",
-          "week": "12",
+          "season": "2024",
+          "week": "13",
+          "injury": "Knee",
+          "status": "Out"
+        },
+        {
+          "season": "2022",
+          "week": "16",
+          "injury": "NIR-Rest",
+          "status": "None"
+        },
+        {
+          "season": "2022",
+          "week": "3",
+          "injury": "Knee",
+          "status": "Questionable"
+        },
+        {
+          "season": "2022",
+          "week": "2",
+          "injury": "Knee",
+          "status": "Questionable"
+        },
+        {
+          "season": "2022",
+          "week": "1",
           "injury": "Knee",
           "status": "Questionable"
         }
       ],
-      "total_injuries": 4,
+      "total_injuries": 7,
       "has_recent_injuries": true,
-      "url_used": "rachaad-white-player-injuries",
-      "scraped_at": "2025-06-19T03:10:49.426Z"
+      "url_used": "jk-dobbins-player-injuries",
+      "scraped_at": "2025-06-19T15:26:08.948Z"
     },
     "colston_loveland": {
       "name": "Colston Loveland",
@@ -6886,31 +6904,13 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "colston-loveland-player-injuries",
-      "scraped_at": "2025-06-19T03:10:49.628Z"
-    },
-    "bryce_young": {
-      "name": "Bryce Young",
-      "position": "QB",
-      "team": "CAR",
-      "adp": 140,
-      "injuries": [
-        {
-          "season": "2023",
-          "week": "3",
-          "injury": "Ankle",
-          "status": "Out"
-        }
-      ],
-      "total_injuries": 1,
-      "has_recent_injuries": true,
-      "url_used": "bryce-young-player-injuries",
-      "scraped_at": "2025-06-19T03:10:49.243Z"
+      "scraped_at": "2025-06-19T15:26:08.516Z"
     },
     "dalton_kincaid": {
       "name": "Dalton Kincaid",
       "position": "TE",
       "team": "BUF",
-      "adp": 140,
+      "adp": 139.5,
       "injuries": [
         {
           "season": "2024",
@@ -6946,13 +6946,78 @@
       "total_injuries": 5,
       "has_recent_injuries": true,
       "url_used": "dalton-kincaid-player-injuries",
-      "scraped_at": "2025-06-19T03:10:49.232Z"
+      "scraped_at": "2025-06-19T15:26:08.507Z"
+    },
+    "rachaad_white": {
+      "name": "Rachaad White",
+      "position": "RB",
+      "team": "TB",
+      "adp": 139.5,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "7",
+          "injury": "Foot",
+          "status": "Questionable"
+        },
+        {
+          "season": "2024",
+          "week": "6",
+          "injury": "Foot",
+          "status": "Doubtful"
+        },
+        {
+          "season": "2024",
+          "week": "4",
+          "injury": "Illness",
+          "status": "Questionable"
+        },
+        {
+          "season": "2023",
+          "week": "12",
+          "injury": "Knee",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 4,
+      "has_recent_injuries": true,
+      "url_used": "rachaad-white-player-injuries",
+      "scraped_at": "2025-06-19T15:26:09.034Z"
+    },
+    "bryce_young": {
+      "name": "Bryce Young",
+      "position": "QB",
+      "team": "CAR",
+      "adp": 141,
+      "injuries": [
+        {
+          "season": "2023",
+          "week": "3",
+          "injury": "Ankle",
+          "status": "Out"
+        }
+      ],
+      "total_injuries": 1,
+      "has_recent_injuries": true,
+      "url_used": "bryce-young-player-injuries",
+      "scraped_at": "2025-06-19T15:26:12.356Z"
+    },
+    "kyle_williams": {
+      "name": "Kyle Williams",
+      "position": "WR",
+      "team": "NE",
+      "adp": 141.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "kyle-williams-player-injuries",
+      "scraped_at": "2025-06-19T15:26:12.023Z"
     },
     "matthew_stafford": {
       "name": "Matthew Stafford",
       "position": "QB",
       "team": "LAR",
-      "adp": 141.5,
+      "adp": 142,
       "injuries": [
         {
           "season": "2024",
@@ -7096,85 +7161,7 @@
       "total_injuries": 23,
       "has_recent_injuries": true,
       "url_used": "matthew-stafford-player-injuries",
-      "scraped_at": "2025-06-19T03:10:52.758Z"
-    },
-    "ray_davis": {
-      "name": "Ray Davis",
-      "position": "RB",
-      "team": "BUF",
-      "adp": 141.5,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "DC",
-          "injury": "Concussion",
-          "status": "Questionable"
-        },
-        {
-          "season": "2024",
-          "week": "7",
-          "injury": "Calf",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 2,
-      "has_recent_injuries": true,
-      "url_used": "ray-davis-player-injuries",
-      "scraped_at": "2025-06-19T03:10:53.155Z"
-    },
-    "j_k__dobbins": {
-      "name": "J.K. Dobbins",
-      "position": "RB",
-      "team": "DEN",
-      "adp": 141.5,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "WC",
-          "injury": "Ankle",
-          "status": "Questionable"
-        },
-        {
-          "season": "2024",
-          "week": "17",
-          "injury": "Knee",
-          "status": "Questionable"
-        },
-        {
-          "season": "2024",
-          "week": "13",
-          "injury": "Knee",
-          "status": "Out"
-        },
-        {
-          "season": "2022",
-          "week": "16",
-          "injury": "NIR-Rest",
-          "status": "None"
-        },
-        {
-          "season": "2022",
-          "week": "3",
-          "injury": "Knee",
-          "status": "Questionable"
-        },
-        {
-          "season": "2022",
-          "week": "2",
-          "injury": "Knee",
-          "status": "Questionable"
-        },
-        {
-          "season": "2022",
-          "week": "1",
-          "injury": "Knee",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 7,
-      "has_recent_injuries": true,
-      "url_used": "jk-dobbins-player-injuries",
-      "scraped_at": "2025-06-19T03:10:52.370Z"
+      "scraped_at": "2025-06-19T15:26:12.459Z"
     },
     "tank_bigsby": {
       "name": "Tank Bigsby",
@@ -7204,24 +7191,67 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "tank-bigsby-player-injuries",
-      "scraped_at": "2025-06-19T03:10:52.652Z"
+      "scraped_at": "2025-06-19T15:26:12.493Z"
     },
-    "kyle_williams": {
-      "name": "Kyle Williams",
-      "position": "WR",
-      "team": "NE",
-      "adp": 143,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "kyle-williams-player-injuries",
-      "scraped_at": "2025-06-19T03:10:52.136Z"
+    "ray_davis": {
+      "name": "Ray Davis",
+      "position": "RB",
+      "team": "BUF",
+      "adp": 142,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "DC",
+          "injury": "Concussion",
+          "status": "Questionable"
+        },
+        {
+          "season": "2024",
+          "week": "7",
+          "injury": "Calf",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 2,
+      "has_recent_injuries": true,
+      "url_used": "ray-davis-player-injuries",
+      "scraped_at": "2025-06-19T15:26:12.388Z"
+    },
+    "trey_benson": {
+      "name": "Trey Benson",
+      "position": "RB",
+      "team": "ARI",
+      "adp": 142,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "17",
+          "injury": "Ankle",
+          "status": "Questionable"
+        },
+        {
+          "season": "2024",
+          "week": "16",
+          "injury": "Ankle",
+          "status": "Out"
+        },
+        {
+          "season": "2024",
+          "week": "7",
+          "injury": "Illness",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 3,
+      "has_recent_injuries": true,
+      "url_used": "trey-benson-player-injuries",
+      "scraped_at": "2025-06-19T15:26:16.153Z"
     },
     "dallas_goedert": {
       "name": "Dallas Goedert",
       "position": "TE",
       "team": "PHI",
-      "adp": 143,
+      "adp": 142,
       "injuries": [
         {
           "season": "2024",
@@ -7281,37 +7311,7 @@
       "total_injuries": 9,
       "has_recent_injuries": true,
       "url_used": "dallas-goedert-player-injuries",
-      "scraped_at": "2025-06-19T03:10:56.473Z"
-    },
-    "trey_benson": {
-      "name": "Trey Benson",
-      "position": "RB",
-      "team": "ARI",
-      "adp": 143,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "17",
-          "injury": "Ankle",
-          "status": "Questionable"
-        },
-        {
-          "season": "2024",
-          "week": "16",
-          "injury": "Ankle",
-          "status": "Out"
-        },
-        {
-          "season": "2024",
-          "week": "7",
-          "injury": "Illness",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 3,
-      "has_recent_injuries": true,
-      "url_used": "trey-benson-player-injuries",
-      "scraped_at": "2025-06-19T03:10:56.169Z"
+      "scraped_at": "2025-06-19T15:26:15.718Z"
     },
     "isaac_guerendo": {
       "name": "Isaac Guerendo",
@@ -7335,24 +7335,24 @@
       "total_injuries": 2,
       "has_recent_injuries": true,
       "url_used": "isaac-guerendo-player-injuries",
-      "scraped_at": "2025-06-19T03:10:56.484Z"
+      "scraped_at": "2025-06-19T15:26:16.611Z"
     },
     "cedric_tillman": {
       "name": "Cedric Tillman",
       "position": "WR",
       "team": "CLE",
-      "adp": 146,
+      "adp": 146.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "cedric-tillman-player-injuries",
-      "scraped_at": "2025-06-19T03:10:55.676Z"
+      "scraped_at": "2025-06-19T15:26:15.126Z"
     },
     "geno_smith": {
       "name": "Geno Smith",
       "position": "QB",
       "team": "LV",
-      "adp": 147.5,
+      "adp": 148.5,
       "injuries": [
         {
           "season": "2023",
@@ -7370,7 +7370,7 @@
       "total_injuries": 2,
       "has_recent_injuries": true,
       "url_used": "geno-smith-player-injuries",
-      "scraped_at": "2025-06-19T03:10:55.886Z"
+      "scraped_at": "2025-06-19T15:26:15.601Z"
     },
     "jake_ferguson": {
       "name": "Jake Ferguson",
@@ -7418,24 +7418,13 @@
       "total_injuries": 6,
       "has_recent_injuries": true,
       "url_used": "jake-ferguson-player-injuries",
-      "scraped_at": "2025-06-19T03:11:00.002Z"
-    },
-    "jack_bech": {
-      "name": "Jack Bech",
-      "position": "WR",
-      "team": "LV",
-      "adp": 151,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "jack-bech-player-injuries",
-      "scraped_at": "2025-06-19T03:10:59.546Z"
+      "scraped_at": "2025-06-19T15:26:19.719Z"
     },
     "austin_ekeler": {
       "name": "Austin Ekeler",
       "position": "RB",
       "team": "WAS",
-      "adp": 151,
+      "adp": 150.5,
       "injuries": [
         {
           "season": "2024",
@@ -7537,13 +7526,13 @@
       "total_injuries": 16,
       "has_recent_injuries": true,
       "url_used": "austin-ekeler-player-injuries",
-      "scraped_at": "2025-06-19T03:10:59.510Z"
+      "scraped_at": "2025-06-19T15:26:19.483Z"
     },
     "jalen_mcmillan": {
       "name": "Jalen McMillan",
       "position": "WR",
       "team": "TB",
-      "adp": 151.5,
+      "adp": 152,
       "injuries": [
         {
           "season": "2024",
@@ -7579,7 +7568,7 @@
       "total_injuries": 5,
       "has_recent_injuries": true,
       "url_used": "jalen-mcmillan-player-injuries",
-      "scraped_at": "2025-06-19T03:10:59.521Z"
+      "scraped_at": "2025-06-19T15:26:19.794Z"
     },
     "isaiah_likely": {
       "name": "Isaiah Likely",
@@ -7609,24 +7598,13 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "isaiah-likely-player-injuries",
-      "scraped_at": "2025-06-19T03:10:59.422Z"
-    },
-    "cameron_ward": {
-      "name": "Cameron Ward",
-      "position": "QB",
-      "team": "TEN",
-      "adp": 155,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "cameron-ward-player-injuries",
-      "scraped_at": "2025-06-19T03:11:02.493Z"
+      "scraped_at": "2025-06-19T15:26:19.561Z"
     },
     "adam_thielen": {
       "name": "Adam Thielen",
       "position": "WR",
       "team": "CAR",
-      "adp": 155.5,
+      "adp": 155,
       "injuries": [
         {
           "season": "2024",
@@ -7746,7 +7724,29 @@
       "total_injuries": 19,
       "has_recent_injuries": true,
       "url_used": "adam-thielen-player-injuries",
-      "scraped_at": "2025-06-19T03:11:02.836Z"
+      "scraped_at": "2025-06-19T15:26:21.001Z"
+    },
+    "jack_bech": {
+      "name": "Jack Bech",
+      "position": "WR",
+      "team": "LV",
+      "adp": 155.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "jack-bech-player-injuries",
+      "scraped_at": "2025-06-19T15:26:24.068Z"
+    },
+    "cameron_ward": {
+      "name": "Cameron Ward",
+      "position": "QB",
+      "team": "TEN",
+      "adp": 155.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "cameron-ward-player-injuries",
+      "scraped_at": "2025-06-19T15:26:23.721Z"
     },
     "kyle_pitts": {
       "name": "Kyle Pitts",
@@ -7776,13 +7776,13 @@
       "total_injuries": 3,
       "has_recent_injuries": false,
       "url_used": "kyle-pitts-player-injuries",
-      "scraped_at": "2025-06-19T03:11:03.357Z"
+      "scraped_at": "2025-06-19T15:26:24.375Z"
     },
     "quentin_johnston": {
       "name": "Quentin Johnston",
       "position": "WR",
       "team": "LAC",
-      "adp": 159.5,
+      "adp": 159,
       "injuries": [
         {
           "season": "2024",
@@ -7806,13 +7806,13 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "quentin-johnston-player-injuries",
-      "scraped_at": "2025-06-19T03:11:02.929Z"
+      "scraped_at": "2025-06-19T15:26:25.261Z"
     },
     "sam_darnold": {
       "name": "Sam Darnold",
       "position": "QB",
       "team": "SEA",
-      "adp": 161.5,
+      "adp": 162,
       "injuries": [
         {
           "season": "2021",
@@ -7920,13 +7920,13 @@
       "total_injuries": 17,
       "has_recent_injuries": false,
       "url_used": "sam-darnold-player-injuries",
-      "scraped_at": "2025-06-19T03:11:03.329Z"
+      "scraped_at": "2025-06-19T15:26:24.396Z"
     },
     "romeo_doubs": {
       "name": "Romeo Doubs",
       "position": "WR",
       "team": "GB",
-      "adp": 163.5,
+      "adp": 163,
       "injuries": [
         {
           "season": "2024",
@@ -7986,18 +7986,18 @@
       "total_injuries": 9,
       "has_recent_injuries": true,
       "url_used": "romeo-doubs-player-injuries",
-      "scraped_at": "2025-06-19T03:11:06.432Z"
+      "scraped_at": "2025-06-19T15:26:28.648Z"
     },
     "tyler_allgeier": {
       "name": "Tyler Allgeier",
       "position": "RB",
       "team": "ATL",
-      "adp": 163.5,
+      "adp": 163,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "tyler-allgeier-player-injuries",
-      "scraped_at": "2025-06-19T03:11:06.280Z"
+      "scraped_at": "2025-06-19T15:26:29.574Z"
     },
     "pat_freiermuth": {
       "name": "Pat Freiermuth",
@@ -8027,7 +8027,7 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "pat-freiermuth-player-injuries",
-      "scraped_at": "2025-06-19T03:11:07.083Z"
+      "scraped_at": "2025-06-19T15:26:29.128Z"
     },
     "rico_dowdle": {
       "name": "Rico Dowdle",
@@ -8057,13 +8057,13 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "rico-dowdle-player-injuries",
-      "scraped_at": "2025-06-19T03:11:07.107Z"
+      "scraped_at": "2025-06-19T15:26:28.352Z"
     },
     "zach_ertz": {
       "name": "Zach Ertz",
       "position": "TE",
       "team": "WAS",
-      "adp": 166,
+      "adp": 166.5,
       "injuries": [
         {
           "season": "2024",
@@ -8129,24 +8129,24 @@
       "total_injuries": 10,
       "has_recent_injuries": true,
       "url_used": "zach-ertz-player-injuries",
-      "scraped_at": "2025-06-19T03:11:06.301Z"
+      "scraped_at": "2025-06-19T15:26:28.391Z"
     },
     "jaylen_wright": {
       "name": "Jaylen Wright",
       "position": "RB",
       "team": "MIA",
-      "adp": 168,
+      "adp": 167,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "jaylen-wright-player-injuries",
-      "scraped_at": "2025-06-19T03:11:10.421Z"
+      "scraped_at": "2025-06-19T15:26:33.109Z"
     },
     "wan_dale_robinson": {
       "name": "Wan'Dale Robinson",
       "position": "WR",
       "team": "NYG",
-      "adp": 168,
+      "adp": 167.5,
       "injuries": [
         {
           "season": "2023",
@@ -8212,13 +8212,13 @@
       "total_injuries": 10,
       "has_recent_injuries": true,
       "url_used": "wandale-robinson-player-injuries",
-      "scraped_at": "2025-06-19T03:11:10.035Z"
+      "scraped_at": "2025-06-19T15:26:33.508Z"
     },
     "braelon_allen": {
       "name": "Braelon Allen",
       "position": "RB",
       "team": "NYJ",
-      "adp": 169,
+      "adp": 169.5,
       "injuries": [
         {
           "season": "2024",
@@ -8230,7 +8230,7 @@
       "total_injuries": 1,
       "has_recent_injuries": true,
       "url_used": "braelon-allen-player-injuries",
-      "scraped_at": "2025-06-19T03:11:10.237Z"
+      "scraped_at": "2025-06-19T15:26:32.614Z"
     },
     "hunter_henry": {
       "name": "Hunter Henry",
@@ -8314,7 +8314,43 @@
       "total_injuries": 12,
       "has_recent_injuries": true,
       "url_used": "hunter-henry-player-injuries",
-      "scraped_at": "2025-06-19T03:11:10.636Z"
+      "scraped_at": "2025-06-19T15:26:33.918Z"
+    },
+    "brenton_strange": {
+      "name": "Brenton Strange",
+      "position": "TE",
+      "team": "JAC",
+      "adp": 171,
+      "injuries": [
+        {
+          "season": "2023",
+          "week": "16",
+          "injury": "Foot",
+          "status": "Questionable"
+        },
+        {
+          "season": "2023",
+          "week": "15",
+          "injury": "Foot",
+          "status": "Questionable"
+        },
+        {
+          "season": "2023",
+          "week": "14",
+          "injury": "Foot",
+          "status": "Out"
+        },
+        {
+          "season": "2023",
+          "week": "13",
+          "injury": "Foot",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 4,
+      "has_recent_injuries": true,
+      "url_used": "brenton-strange-player-injuries",
+      "scraped_at": "2025-06-19T15:26:33.937Z"
     },
     "xavier_legette": {
       "name": "Xavier Legette",
@@ -8350,84 +8386,18 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "xavier-legette-player-injuries",
-      "scraped_at": "2025-06-19T03:11:10.525Z"
-    },
-    "brenton_strange": {
-      "name": "Brenton Strange",
-      "position": "TE",
-      "team": "JAC",
-      "adp": 171.5,
-      "injuries": [
-        {
-          "season": "2023",
-          "week": "16",
-          "injury": "Foot",
-          "status": "Questionable"
-        },
-        {
-          "season": "2023",
-          "week": "15",
-          "injury": "Foot",
-          "status": "Questionable"
-        },
-        {
-          "season": "2023",
-          "week": "14",
-          "injury": "Foot",
-          "status": "Out"
-        },
-        {
-          "season": "2023",
-          "week": "13",
-          "injury": "Foot",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 4,
-      "has_recent_injuries": true,
-      "url_used": "brenton-strange-player-injuries",
-      "scraped_at": "2025-06-19T03:11:14.962Z"
+      "scraped_at": "2025-06-19T15:26:37.062Z"
     },
     "joshua_palmer": {
       "name": "Joshua Palmer",
       "position": "WR",
       "team": "BUF",
-      "adp": 173.5,
+      "adp": 173,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "joshua-palmer-player-injuries",
-      "scraped_at": "2025-06-19T03:11:13.213Z"
-    },
-    "mike_gesicki": {
-      "name": "Mike Gesicki",
-      "position": "TE",
-      "team": "CIN",
-      "adp": 174,
-      "injuries": [
-        {
-          "season": "2020",
-          "week": "16",
-          "injury": "Shoulder",
-          "status": "Questionable"
-        },
-        {
-          "season": "2020",
-          "week": "15",
-          "injury": "Shoulder",
-          "status": "Questionable"
-        },
-        {
-          "season": "2018",
-          "week": "8",
-          "injury": "Shoulder",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 3,
-      "has_recent_injuries": false,
-      "url_used": "mike-gesicki-player-injuries",
-      "scraped_at": "2025-06-19T03:11:13.655Z"
+      "scraped_at": "2025-06-19T15:26:36.468Z"
     },
     "roschon_johnson": {
       "name": "Roschon Johnson",
@@ -8463,7 +8433,37 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "roschon-johnson-player-injuries",
-      "scraped_at": "2025-06-19T03:11:13.550Z"
+      "scraped_at": "2025-06-19T15:26:38.066Z"
+    },
+    "mike_gesicki": {
+      "name": "Mike Gesicki",
+      "position": "TE",
+      "team": "CIN",
+      "adp": 175,
+      "injuries": [
+        {
+          "season": "2020",
+          "week": "16",
+          "injury": "Shoulder",
+          "status": "Questionable"
+        },
+        {
+          "season": "2020",
+          "week": "15",
+          "injury": "Shoulder",
+          "status": "Questionable"
+        },
+        {
+          "season": "2018",
+          "week": "8",
+          "injury": "Shoulder",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 3,
+      "has_recent_injuries": false,
+      "url_used": "mike-gesicki-player-injuries",
+      "scraped_at": "2025-06-19T15:26:36.873Z"
     },
     "aaron_rodgers": {
       "name": "Aaron Rodgers",
@@ -8577,7 +8577,7 @@
       "total_injuries": 17,
       "has_recent_injuries": true,
       "url_used": "aaron-rodgers-player-injuries",
-      "scraped_at": "2025-06-19T03:11:13.992Z"
+      "scraped_at": "2025-06-19T15:26:36.885Z"
     },
     "demario_douglas": {
       "name": "DeMario Douglas",
@@ -8625,66 +8625,24 @@
       "total_injuries": 6,
       "has_recent_injuries": true,
       "url_used": "demario-douglas-player-injuries",
-      "scraped_at": "2025-06-19T03:11:18.079Z"
+      "scraped_at": "2025-06-19T15:26:42.185Z"
     },
     "dylan_sampson": {
       "name": "Dylan Sampson",
       "position": "RB",
       "team": "CLE",
-      "adp": 181,
+      "adp": 180,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "dylan-sampson-player-injuries",
-      "scraped_at": "2025-06-19T03:11:18.312Z"
-    },
-    "cade_otton": {
-      "name": "Cade Otton",
-      "position": "TE",
-      "team": "TB",
-      "adp": 182.5,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "WC",
-          "injury": "Knee",
-          "status": "Questionable"
-        },
-        {
-          "season": "2024",
-          "week": "18",
-          "injury": "Knee",
-          "status": "Doubtful"
-        },
-        {
-          "season": "2024",
-          "week": "17",
-          "injury": "Knee",
-          "status": "Out"
-        },
-        {
-          "season": "2024",
-          "week": "16",
-          "injury": "Knee",
-          "status": "Questionable"
-        },
-        {
-          "season": "2022",
-          "week": "3",
-          "injury": "Personal",
-          "status": "Doubtful"
-        }
-      ],
-      "total_injuries": 5,
-      "has_recent_injuries": true,
-      "url_used": "cade-otton-player-injuries",
-      "scraped_at": "2025-06-19T03:11:18.103Z"
+      "scraped_at": "2025-06-19T15:26:42.204Z"
     },
     "alec_pierce": {
       "name": "Alec Pierce",
       "position": "WR",
       "team": "IND",
-      "adp": 183,
+      "adp": 182.5,
       "injuries": [
         {
           "season": "2024",
@@ -8726,7 +8684,49 @@
       "total_injuries": 6,
       "has_recent_injuries": true,
       "url_used": "alec-pierce-player-injuries",
-      "scraped_at": "2025-06-19T03:11:19.310Z"
+      "scraped_at": "2025-06-19T15:26:41.602Z"
+    },
+    "cade_otton": {
+      "name": "Cade Otton",
+      "position": "TE",
+      "team": "TB",
+      "adp": 182.5,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "WC",
+          "injury": "Knee",
+          "status": "Questionable"
+        },
+        {
+          "season": "2024",
+          "week": "18",
+          "injury": "Knee",
+          "status": "Doubtful"
+        },
+        {
+          "season": "2024",
+          "week": "17",
+          "injury": "Knee",
+          "status": "Out"
+        },
+        {
+          "season": "2024",
+          "week": "16",
+          "injury": "Knee",
+          "status": "Questionable"
+        },
+        {
+          "season": "2022",
+          "week": "3",
+          "injury": "Personal",
+          "status": "Doubtful"
+        }
+      ],
+      "total_injuries": 5,
+      "has_recent_injuries": true,
+      "url_used": "cade-otton-player-injuries",
+      "scraped_at": "2025-06-19T15:26:42.600Z"
     },
     "justice_hill": {
       "name": "Justice Hill",
@@ -8798,35 +8798,35 @@
       "total_injuries": 10,
       "has_recent_injuries": true,
       "url_used": "justice-hill-player-injuries",
-      "scraped_at": "2025-06-19T03:11:18.115Z"
+      "scraped_at": "2025-06-19T15:26:41.634Z"
     },
     "pat_bryant": {
       "name": "Pat Bryant",
       "position": "WR",
       "team": "DEN",
-      "adp": 184.5,
+      "adp": 185.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "pat-bryant-player-injuries",
-      "scraped_at": "2025-06-19T03:11:22.425Z"
+      "scraped_at": "2025-06-19T15:26:46.517Z"
     },
     "anthony_richardson_sr_": {
       "name": "Anthony Richardson Sr.",
       "position": "QB",
       "team": "IND",
-      "adp": 186,
+      "adp": 187.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "anthony-richardson-sr-player-injuries",
-      "scraped_at": "2025-06-19T03:11:21.858Z"
+      "scraped_at": "2025-06-19T15:26:45.467Z"
     },
     "nick_chubb": {
       "name": "Nick Chubb",
       "position": "RB",
       "team": "HOU",
-      "adp": 188,
+      "adp": 187.5,
       "injuries": [
         {
           "season": "2024",
@@ -8862,7 +8862,7 @@
       "total_injuries": 5,
       "has_recent_injuries": true,
       "url_used": "nick-chubb-player-injuries",
-      "scraped_at": "2025-06-19T03:11:22.134Z"
+      "scraped_at": "2025-06-19T15:26:45.479Z"
     },
     "jerome_ford": {
       "name": "Jerome Ford",
@@ -8898,7 +8898,29 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "jerome-ford-player-injuries",
-      "scraped_at": "2025-06-19T03:11:22.445Z"
+      "scraped_at": "2025-06-19T15:26:45.497Z"
+    },
+    "chig_okonkwo": {
+      "name": "Chig Okonkwo",
+      "position": "TE",
+      "team": "TEN",
+      "adp": 193,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "chig-okonkwo-player-injuries",
+      "scraped_at": "2025-06-19T15:26:45.217Z"
+    },
+    "jaylin_noel": {
+      "name": "Jaylin Noel",
+      "position": "WR",
+      "team": "HOU",
+      "adp": 193.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "jaylin-noel-player-injuries",
+      "scraped_at": "2025-06-19T15:26:49.646Z"
     },
     "marshawn_lloyd": {
       "name": "MarShawn Lloyd",
@@ -8928,18 +8950,7 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "marshawn-lloyd-player-injuries",
-      "scraped_at": "2025-06-19T03:11:22.863Z"
-    },
-    "jaylin_noel": {
-      "name": "Jaylin Noel",
-      "position": "WR",
-      "team": "HOU",
-      "adp": 194,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "jaylin-noel-player-injuries",
-      "scraped_at": "2025-06-19T03:11:26.405Z"
+      "scraped_at": "2025-06-19T15:26:50.451Z"
     },
     "deandre_hopkins": {
       "name": "DeAndre Hopkins",
@@ -9119,18 +9130,7 @@
       "total_injuries": 28,
       "has_recent_injuries": true,
       "url_used": "deandre-hopkins-player-injuries",
-      "scraped_at": "2025-06-19T03:11:26.011Z"
-    },
-    "chig_okonkwo": {
-      "name": "Chig Okonkwo",
-      "position": "TE",
-      "team": "TEN",
-      "adp": 194,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "chig-okonkwo-player-injuries",
-      "scraped_at": "2025-06-19T03:11:25.367Z"
+      "scraped_at": "2025-06-19T15:26:50.062Z"
     },
     "daniel_jones": {
       "name": "Daniel Jones",
@@ -9214,13 +9214,13 @@
       "total_injuries": 12,
       "has_recent_injuries": true,
       "url_used": "daniel-jones-player-injuries",
-      "scraped_at": "2025-06-19T03:11:25.985Z"
+      "scraped_at": "2025-06-19T15:26:50.038Z"
     },
     "will_shipley": {
       "name": "Will Shipley",
       "position": "RB",
       "team": "PHI",
-      "adp": 196.5,
+      "adp": 195,
       "injuries": [
         {
           "season": "2024",
@@ -9238,24 +9238,24 @@
       "total_injuries": 2,
       "has_recent_injuries": true,
       "url_used": "will-shipley-player-injuries",
-      "scraped_at": "2025-06-19T03:11:26.190Z"
+      "scraped_at": "2025-06-19T15:26:49.339Z"
     },
     "mason_taylor": {
       "name": "Mason Taylor",
       "position": "TE",
       "team": "NYJ",
-      "adp": 196.5,
+      "adp": 195.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "mason-taylor-player-injuries",
-      "scraped_at": "2025-06-19T03:11:29.323Z"
+      "scraped_at": "2025-06-19T15:26:53.775Z"
     },
     "michael_wilson": {
       "name": "Michael Wilson",
       "position": "WR",
       "team": "ARI",
-      "adp": 201,
+      "adp": 200.5,
       "injuries": [
         {
           "season": "2024",
@@ -9303,13 +9303,13 @@
       "total_injuries": 7,
       "has_recent_injuries": true,
       "url_used": "michael-wilson-player-injuries",
-      "scraped_at": "2025-06-19T03:11:29.429Z"
+      "scraped_at": "2025-06-19T15:26:54.176Z"
     },
     "kareem_hunt": {
       "name": "Kareem Hunt",
       "position": "RB",
       "team": "KC",
-      "adp": 201,
+      "adp": 202.5,
       "injuries": [
         {
           "season": "2024",
@@ -9363,13 +9363,13 @@
       "total_injuries": 8,
       "has_recent_injuries": true,
       "url_used": "kareem-hunt-player-injuries",
-      "scraped_at": "2025-06-19T03:11:29.542Z"
+      "scraped_at": "2025-06-19T15:26:53.280Z"
     },
     "dyami_brown": {
       "name": "Dyami Brown",
       "position": "WR",
       "team": "JAC",
-      "adp": 203.5,
+      "adp": 203,
       "injuries": [
         {
           "season": "2024",
@@ -9423,29 +9423,7 @@
       "total_injuries": 8,
       "has_recent_injuries": true,
       "url_used": "dyami-brown-player-injuries",
-      "scraped_at": "2025-06-19T03:11:30.150Z"
-    },
-    "devin_neal": {
-      "name": "Devin Neal",
-      "position": "RB",
-      "team": "NO",
-      "adp": 204,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "devin-neal-player-injuries",
-      "scraped_at": "2025-06-19T03:11:30.531Z"
-    },
-    "jarquez_hunter": {
-      "name": "Jarquez Hunter",
-      "position": "RB",
-      "team": "LAR",
-      "adp": 204,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "jarquez-hunter-player-injuries",
-      "scraped_at": "2025-06-19T03:11:33.867Z"
+      "scraped_at": "2025-06-19T15:26:53.460Z"
     },
     "juwan_johnson": {
       "name": "Juwan Johnson",
@@ -9517,13 +9495,13 @@
       "total_injuries": 10,
       "has_recent_injuries": true,
       "url_used": "juwan-johnson-player-injuries",
-      "scraped_at": "2025-06-19T03:11:34.459Z"
+      "scraped_at": "2025-06-19T15:26:54.791Z"
     },
     "jalen_coker": {
       "name": "Jalen Coker",
       "position": "WR",
       "team": "CAR",
-      "adp": 204,
+      "adp": 204.5,
       "injuries": [
         {
           "season": "2024",
@@ -9559,24 +9537,57 @@
       "total_injuries": 5,
       "has_recent_injuries": true,
       "url_used": "jalen-coker-player-injuries",
-      "scraped_at": "2025-06-19T03:11:33.849Z"
+      "scraped_at": "2025-06-19T15:26:58.320Z"
+    },
+    "devin_neal": {
+      "name": "Devin Neal",
+      "position": "RB",
+      "team": "NO",
+      "adp": 205,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "devin-neal-player-injuries",
+      "scraped_at": "2025-06-19T15:27:02.334Z"
+    },
+    "jarquez_hunter": {
+      "name": "Jarquez Hunter",
+      "position": "RB",
+      "team": "LAR",
+      "adp": 205,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "jarquez-hunter-player-injuries",
+      "scraped_at": "2025-06-19T15:26:58.536Z"
     },
     "dj_giddens": {
       "name": "DJ Giddens",
       "position": "RB",
       "team": "IND",
-      "adp": 205,
+      "adp": 206.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "dj-giddens-player-injuries",
-      "scraped_at": "2025-06-19T03:11:33.650Z"
+      "scraped_at": "2025-06-19T15:26:58.512Z"
+    },
+    "blake_corum": {
+      "name": "Blake Corum",
+      "position": "RB",
+      "team": "LAR",
+      "adp": 207,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "blake-corum-player-injuries",
+      "scraped_at": "2025-06-19T15:26:57.703Z"
     },
     "russell_wilson": {
       "name": "Russell Wilson",
       "position": "QB",
       "team": "NYG",
-      "adp": 205,
+      "adp": 207.5,
       "injuries": [
         {
           "season": "2024",
@@ -9636,35 +9647,13 @@
       "total_injuries": 9,
       "has_recent_injuries": true,
       "url_used": "russell-wilson-player-injuries",
-      "scraped_at": "2025-06-19T03:11:33.377Z"
-    },
-    "tyler_shough": {
-      "name": "Tyler Shough",
-      "position": "QB",
-      "team": "NO",
-      "adp": 207.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "tyler-shough-player-injuries",
-      "scraped_at": "2025-06-19T03:11:38.479Z"
-    },
-    "blake_corum": {
-      "name": "Blake Corum",
-      "position": "RB",
-      "team": "LAR",
-      "adp": 208,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "blake-corum-player-injuries",
-      "scraped_at": "2025-06-19T03:11:37.635Z"
+      "scraped_at": "2025-06-19T15:27:06.437Z"
     },
     "dalton_schultz": {
       "name": "Dalton Schultz",
       "position": "TE",
       "team": "HOU",
-      "adp": 210,
+      "adp": 209.5,
       "injuries": [
         {
           "season": "2023",
@@ -9700,7 +9689,18 @@
       "total_injuries": 5,
       "has_recent_injuries": true,
       "url_used": "dalton-schultz-player-injuries",
-      "scraped_at": "2025-06-19T03:11:37.568Z"
+      "scraped_at": "2025-06-19T15:27:05.339Z"
+    },
+    "tyler_shough": {
+      "name": "Tyler Shough",
+      "position": "QB",
+      "team": "NO",
+      "adp": 210,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "tyler-shough-player-injuries",
+      "scraped_at": "2025-06-19T15:27:06.352Z"
     },
     "darius_slayton": {
       "name": "Darius Slayton",
@@ -9784,13 +9784,37 @@
       "total_injuries": 12,
       "has_recent_injuries": true,
       "url_used": "darius-slayton-player-injuries",
-      "scraped_at": "2025-06-19T03:11:37.871Z"
+      "scraped_at": "2025-06-19T15:27:05.394Z"
+    },
+    "tutu_atwell": {
+      "name": "Tutu Atwell",
+      "position": "WR",
+      "team": "LAR",
+      "adp": 218,
+      "injuries": [
+        {
+          "season": "2023",
+          "week": "15",
+          "injury": "Concussion",
+          "status": "Questionable"
+        },
+        {
+          "season": "2021",
+          "week": "4",
+          "injury": "Illness",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 2,
+      "has_recent_injuries": true,
+      "url_used": "tutu-atwell-player-injuries",
+      "scraped_at": "2025-06-19T15:27:06.617Z"
     },
     "dontayvion_wicks": {
       "name": "Dontayvion Wicks",
       "position": "WR",
       "team": "GB",
-      "adp": 217.5,
+      "adp": 218,
       "injuries": [
         {
           "season": "2024",
@@ -9838,13 +9862,13 @@
       "total_injuries": 7,
       "has_recent_injuries": true,
       "url_used": "dontayvion-wicks-player-injuries",
-      "scraped_at": "2025-06-19T03:11:37.463Z"
+      "scraped_at": "2025-06-19T15:27:09.693Z"
     },
     "andrei_iosivas": {
       "name": "Andrei Iosivas",
       "position": "WR",
       "team": "CIN",
-      "adp": 218.5,
+      "adp": 219,
       "injuries": [
         {
           "season": "2023",
@@ -9856,31 +9880,18 @@
       "total_injuries": 1,
       "has_recent_injuries": true,
       "url_used": "andrei-iosivas-player-injuries",
-      "scraped_at": "2025-06-19T03:11:41.634Z"
+      "scraped_at": "2025-06-19T15:27:10.606Z"
     },
-    "tutu_atwell": {
-      "name": "Tutu Atwell",
-      "position": "WR",
-      "team": "LAR",
-      "adp": 218.5,
-      "injuries": [
-        {
-          "season": "2023",
-          "week": "15",
-          "injury": "Concussion",
-          "status": "Questionable"
-        },
-        {
-          "season": "2021",
-          "week": "4",
-          "injury": "Illness",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 2,
-      "has_recent_injuries": true,
-      "url_used": "tutu-atwell-player-injuries",
-      "scraped_at": "2025-06-19T03:11:41.498Z"
+    "brashard_smith": {
+      "name": "Brashard Smith",
+      "position": "RB",
+      "team": "KC",
+      "adp": 219.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "brashard-smith-player-injuries",
+      "scraped_at": "2025-06-19T15:27:09.754Z"
     },
     "theo_johnson": {
       "name": "Theo Johnson",
@@ -9891,46 +9902,24 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "theo-johnson-player-injuries",
-      "scraped_at": "2025-06-19T03:11:40.572Z"
-    },
-    "brashard_smith": {
-      "name": "Brashard Smith",
-      "position": "RB",
-      "team": "KC",
-      "adp": 221,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "brashard-smith-player-injuries",
-      "scraped_at": "2025-06-19T03:11:41.790Z"
-    },
-    "jaxson_dart": {
-      "name": "Jaxson Dart",
-      "position": "QB",
-      "team": "NYG",
-      "adp": 221.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "jaxson-dart-player-injuries",
-      "scraped_at": "2025-06-19T03:11:41.605Z"
+      "scraped_at": "2025-06-19T15:27:09.734Z"
     },
     "calvin_austin_iii": {
       "name": "Calvin Austin III",
       "position": "WR",
       "team": "PIT",
-      "adp": 223,
+      "adp": 222.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "calvin-austin-iii-player-injuries",
-      "scraped_at": "2025-06-19T03:11:44.713Z"
+      "scraped_at": "2025-06-19T15:27:10.643Z"
     },
     "miles_sanders": {
       "name": "Miles Sanders",
       "position": "RB",
       "team": "DAL",
-      "adp": 224,
+      "adp": 223.5,
       "injuries": [
         {
           "season": "2024",
@@ -9990,18 +9979,18 @@
       "total_injuries": 9,
       "has_recent_injuries": true,
       "url_used": "miles-sanders-player-injuries",
-      "scraped_at": "2025-06-19T03:11:44.829Z"
+      "scraped_at": "2025-06-19T15:27:13.823Z"
     },
-    "ollie_gordon_ii": {
-      "name": "Ollie Gordon II",
-      "position": "RB",
-      "team": "MIA",
-      "adp": 224,
+    "jaxson_dart": {
+      "name": "Jaxson Dart",
+      "position": "QB",
+      "team": "NYG",
+      "adp": 224.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
-      "url_used": "ollie-gordon-ii-player-injuries",
-      "scraped_at": "2025-06-19T03:11:44.806Z"
+      "url_used": "jaxson-dart-player-injuries",
+      "scraped_at": "2025-06-19T15:27:14.220Z"
     },
     "elic_ayomanor": {
       "name": "Elic Ayomanor",
@@ -10012,64 +10001,51 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "elic-ayomanor-player-injuries",
-      "scraped_at": "2025-06-19T03:11:44.856Z"
+      "scraped_at": "2025-06-19T15:27:14.433Z"
+    },
+    "ollie_gordon_ii": {
+      "name": "Ollie Gordon II",
+      "position": "RB",
+      "team": "MIA",
+      "adp": 229,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "ollie-gordon-ii-player-injuries",
+      "scraped_at": "2025-06-19T15:27:15.262Z"
     },
     "adonai_mitchell": {
       "name": "Adonai Mitchell",
       "position": "WR",
       "team": "IND",
-      "adp": 227.5,
+      "adp": 229,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "adonai-mitchell-player-injuries",
-      "scraped_at": "2025-06-19T03:11:44.611Z"
-    },
-    "jalen_tolbert": {
-      "name": "Jalen Tolbert",
-      "position": "WR",
-      "team": "DAL",
-      "adp": 232,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "17",
-          "injury": "Finger",
-          "status": "Questionable"
-        },
-        {
-          "season": "2023",
-          "week": "15",
-          "injury": "Illness",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 2,
-      "has_recent_injuries": true,
-      "url_used": "jalen-tolbert-player-injuries",
-      "scraped_at": "2025-06-19T03:11:47.786Z"
+      "scraped_at": "2025-06-19T15:27:15.238Z"
     },
     "noah_gray": {
       "name": "Noah Gray",
       "position": "TE",
       "team": "KC",
-      "adp": 233,
+      "adp": 232.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "noah-gray-player-injuries",
-      "scraped_at": "2025-06-19T03:11:48.023Z"
+      "scraped_at": "2025-06-19T15:27:20.436Z"
     },
     "jalen_royals": {
       "name": "Jalen Royals",
       "position": "WR",
       "team": "KC",
-      "adp": 233.5,
+      "adp": 233,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "jalen-royals-player-injuries",
-      "scraped_at": "2025-06-19T03:11:47.873Z"
+      "scraped_at": "2025-06-19T15:27:18.466Z"
     },
     "tyler_lockett": {
       "name": "Tyler Lockett",
@@ -10141,13 +10117,85 @@
       "total_injuries": 10,
       "has_recent_injuries": true,
       "url_used": "tyler-lockett-player-injuries",
-      "scraped_at": "2025-06-19T03:11:47.767Z"
+      "scraped_at": "2025-06-19T15:27:18.444Z"
+    },
+    "jalen_tolbert": {
+      "name": "Jalen Tolbert",
+      "position": "WR",
+      "team": "DAL",
+      "adp": 234,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "17",
+          "injury": "Finger",
+          "status": "Questionable"
+        },
+        {
+          "season": "2023",
+          "week": "15",
+          "injury": "Illness",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 2,
+      "has_recent_injuries": true,
+      "url_used": "jalen-tolbert-player-injuries",
+      "scraped_at": "2025-06-19T15:27:21.008Z"
+    },
+    "cole_kmet": {
+      "name": "Cole Kmet",
+      "position": "TE",
+      "team": "CHI",
+      "adp": 234.5,
+      "injuries": [
+        {
+          "season": "2023",
+          "week": "18",
+          "injury": "Knee",
+          "status": "Questionable"
+        },
+        {
+          "season": "2023",
+          "week": "17",
+          "injury": "Knee",
+          "status": "Questionable"
+        },
+        {
+          "season": "2023",
+          "week": "16",
+          "injury": "Quad",
+          "status": "Questionable"
+        },
+        {
+          "season": "2020",
+          "week": "17",
+          "injury": "Shoulder",
+          "status": "Questionable"
+        },
+        {
+          "season": "2020",
+          "week": "10",
+          "injury": "Groin",
+          "status": "Questionable"
+        },
+        {
+          "season": "2020",
+          "week": "9",
+          "injury": "Groin",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 6,
+      "has_recent_injuries": true,
+      "url_used": "cole-kmet-player-injuries",
+      "scraped_at": "2025-06-19T15:27:18.138Z"
     },
     "ja_tavion_sanders": {
       "name": "Ja'Tavion Sanders",
       "position": "TE",
       "team": "CAR",
-      "adp": 236,
+      "adp": 234.5,
       "injuries": [
         {
           "season": "2024",
@@ -10165,24 +10213,24 @@
       "total_injuries": 2,
       "has_recent_injuries": true,
       "url_used": "jatavion-sanders-player-injuries",
-      "scraped_at": "2025-06-19T03:11:48.789Z"
+      "scraped_at": "2025-06-19T15:27:23.923Z"
     },
     "elijah_arroyo": {
       "name": "Elijah Arroyo",
       "position": "TE",
       "team": "SEA",
-      "adp": 236,
+      "adp": 235.5,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "elijah-arroyo-player-injuries",
-      "scraped_at": "2025-06-19T03:11:52.117Z"
+      "scraped_at": "2025-06-19T15:27:24.127Z"
     },
     "joe_flacco": {
       "name": "Joe Flacco",
       "position": "QB",
       "team": "CLE",
-      "adp": 237.5,
+      "adp": 236.5,
       "injuries": [
         {
           "season": "2020",
@@ -10230,55 +10278,7 @@
       "total_injuries": 7,
       "has_recent_injuries": false,
       "url_used": "joe-flacco-player-injuries",
-      "scraped_at": "2025-06-19T03:11:51.920Z"
-    },
-    "cole_kmet": {
-      "name": "Cole Kmet",
-      "position": "TE",
-      "team": "CHI",
-      "adp": 238,
-      "injuries": [
-        {
-          "season": "2023",
-          "week": "18",
-          "injury": "Knee",
-          "status": "Questionable"
-        },
-        {
-          "season": "2023",
-          "week": "17",
-          "injury": "Knee",
-          "status": "Questionable"
-        },
-        {
-          "season": "2023",
-          "week": "16",
-          "injury": "Quad",
-          "status": "Questionable"
-        },
-        {
-          "season": "2020",
-          "week": "17",
-          "injury": "Shoulder",
-          "status": "Questionable"
-        },
-        {
-          "season": "2020",
-          "week": "10",
-          "injury": "Groin",
-          "status": "Questionable"
-        },
-        {
-          "season": "2020",
-          "week": "9",
-          "injury": "Groin",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 6,
-      "has_recent_injuries": true,
-      "url_used": "cole-kmet-player-injuries",
-      "scraped_at": "2025-06-19T03:11:51.703Z"
+      "scraped_at": "2025-06-19T15:27:23.731Z"
     },
     "roman_wilson": {
       "name": "Roman Wilson",
@@ -10326,18 +10326,7 @@
       "total_injuries": 6,
       "has_recent_injuries": true,
       "url_used": "roman-wilson-player-injuries",
-      "scraped_at": "2025-06-19T03:11:52.150Z"
-    },
-    "woody_marks": {
-      "name": "Woody Marks",
-      "position": "RB",
-      "team": "HOU",
-      "adp": 240.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "woody-marks-player-injuries",
-      "scraped_at": "2025-06-19T03:11:52.140Z"
+      "scraped_at": "2025-06-19T15:27:24.068Z"
     },
     "shedeur_sanders": {
       "name": "Shedeur Sanders",
@@ -10348,7 +10337,7 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "shedeur-sanders-player-injuries",
-      "scraped_at": "2025-06-19T03:11:55.080Z"
+      "scraped_at": "2025-06-19T15:27:24.950Z"
     },
     "tyler_higbee": {
       "name": "Tyler Higbee",
@@ -10450,7 +10439,25 @@
       "total_injuries": 15,
       "has_recent_injuries": true,
       "url_used": "tyler-higbee-player-injuries",
-      "scraped_at": "2025-06-19T03:11:55.479Z"
+      "scraped_at": "2025-06-19T15:27:28.061Z"
+    },
+    "audric_estime": {
+      "name": "Audric Estime",
+      "position": "RB",
+      "team": "DEN",
+      "adp": 241.5,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "6",
+          "injury": "Ankle",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 1,
+      "has_recent_injuries": true,
+      "url_used": "audric-estime-player-injuries",
+      "scraped_at": "2025-06-19T15:27:28.683Z"
     },
     "elijah_moore": {
       "name": "Elijah Moore",
@@ -10480,64 +10487,24 @@
       "total_injuries": 3,
       "has_recent_injuries": true,
       "url_used": "elijah-moore-player-injuries",
-      "scraped_at": "2025-06-19T03:11:55.173Z"
-    },
-    "audric_estime": {
-      "name": "Audric Estime",
-      "position": "RB",
-      "team": "DEN",
-      "adp": 243,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "6",
-          "injury": "Ankle",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 1,
-      "has_recent_injuries": true,
-      "url_used": "audric-estime-player-injuries",
-      "scraped_at": "2025-06-19T03:11:55.105Z"
+      "scraped_at": "2025-06-19T15:27:28.072Z"
     },
     "terrance_ferguson": {
       "name": "Terrance Ferguson",
       "position": "TE",
       "team": "LAR",
-      "adp": 244,
+      "adp": 243,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "terrance-ferguson-player-injuries",
-      "scraped_at": "2025-06-19T03:11:55.192Z"
-    },
-    "jordan_james": {
-      "name": "Jordan James",
-      "position": "RB",
-      "team": "SF",
-      "adp": 245.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "jordan-james-player-injuries",
-      "scraped_at": "2025-06-19T03:11:57.579Z"
-    },
-    "ray_ray_mccloud_iii": {
-      "name": "Ray-Ray McCloud III",
-      "position": "WR",
-      "team": "ATL",
-      "adp": 247.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "rayray-mccloud-iii-player-injuries",
-      "scraped_at": "2025-06-19T03:11:58.114Z"
+      "scraped_at": "2025-06-19T15:27:27.876Z"
     },
     "keaton_mitchell": {
       "name": "Keaton Mitchell",
       "position": "RB",
       "team": "BAL",
-      "adp": 253.5,
+      "adp": 244.5,
       "injuries": [
         {
           "season": "2024",
@@ -10585,13 +10552,107 @@
       "total_injuries": 7,
       "has_recent_injuries": true,
       "url_used": "keaton-mitchell-player-injuries",
-      "scraped_at": "2025-06-19T03:11:57.507Z"
+      "scraped_at": "2025-06-19T15:27:28.875Z"
+    },
+    "woody_marks": {
+      "name": "Woody Marks",
+      "position": "RB",
+      "team": "HOU",
+      "adp": 244.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "woody-marks-player-injuries",
+      "scraped_at": "2025-06-19T15:27:32.221Z"
+    },
+    "ray_ray_mccloud_iii": {
+      "name": "Ray-Ray McCloud III",
+      "position": "WR",
+      "team": "ATL",
+      "adp": 248,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "rayray-mccloud-iii-player-injuries",
+      "scraped_at": "2025-06-19T15:27:31.599Z"
+    },
+    "diontae_johnson": {
+      "name": "Diontae Johnson",
+      "position": "WR",
+      "team": "CLE",
+      "adp": 248,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "16",
+          "injury": "NIR - Personal",
+          "status": "Out"
+        },
+        {
+          "season": "2024",
+          "week": "8",
+          "injury": "Rib",
+          "status": "Out"
+        },
+        {
+          "season": "2024",
+          "week": "7",
+          "injury": "Ankle",
+          "status": "Questionable"
+        },
+        {
+          "season": "2024",
+          "week": "6",
+          "injury": "Ankle",
+          "status": "Questionable"
+        },
+        {
+          "season": "2024",
+          "week": "4",
+          "injury": "Groin",
+          "status": "Questionable"
+        },
+        {
+          "season": "2023",
+          "week": "2",
+          "injury": "Hamstring",
+          "status": "Out"
+        },
+        {
+          "season": "2022",
+          "week": "16",
+          "injury": "Toe",
+          "status": "Questionable"
+        },
+        {
+          "season": "2022",
+          "week": "14",
+          "injury": "Hip",
+          "status": "Questionable"
+        },
+        {
+          "season": "2021",
+          "week": "3",
+          "injury": "Knee",
+          "status": "Out"
+        },
+        {
+          "season": "2020",
+          "week": "6",
+          "injury": "Back",
+          "status": "Out"
+        }
+      ],
+      "total_injuries": 10,
+      "has_recent_injuries": true,
+      "url_used": "diontae-johnson-player-injuries",
+      "scraped_at": "2025-06-19T15:27:32.806Z"
     },
     "raheem_mostert": {
       "name": "Raheem Mostert",
       "position": "RB",
       "team": "LV",
-      "adp": 250,
+      "adp": 249,
       "injuries": [
         {
           "season": "2024",
@@ -10735,40 +10796,51 @@
       "total_injuries": 23,
       "has_recent_injuries": true,
       "url_used": "raheem-mostert-player-injuries",
-      "scraped_at": "2025-06-19T03:11:57.536Z"
-    },
-    "dont_e_thornton_jr_": {
-      "name": "Dont'e Thornton Jr.",
-      "position": "WR",
-      "team": "LV",
-      "adp": 215,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "donte-thornton-jr-player-injuries",
-      "scraped_at": "2025-06-19T03:11:57.558Z"
-    },
-    "kirk_cousins": {
-      "name": "Kirk Cousins",
-      "position": "QB",
-      "team": "ATL",
-      "adp": 251,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "kirk-cousins-player-injuries",
-      "scraped_at": "2025-06-19T03:12:00.139Z"
+      "scraped_at": "2025-06-19T15:27:32.211Z"
     },
     "mike_williams": {
       "name": "Mike Williams",
       "position": "WR",
       "team": "LAC",
-      "adp": 251.5,
+      "adp": 249,
       "injuries": [],
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "mike-williams-player-injuries",
-      "scraped_at": "2025-06-19T03:12:00.590Z"
+      "scraped_at": "2025-06-19T15:27:31.380Z"
+    },
+    "dont_e_thornton_jr_": {
+      "name": "Dont'e Thornton Jr.",
+      "position": "WR",
+      "team": "LV",
+      "adp": 263.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "donte-thornton-jr-player-injuries",
+      "scraped_at": "2025-06-19T15:27:35.919Z"
+    },
+    "jordan_james": {
+      "name": "Jordan James",
+      "position": "RB",
+      "team": "SF",
+      "adp": 250,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "jordan-james-player-injuries",
+      "scraped_at": "2025-06-19T15:27:36.924Z"
+    },
+    "tahj_brooks": {
+      "name": "Tahj Brooks",
+      "position": "RB",
+      "team": "CIN",
+      "adp": 251,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "tahj-brooks-player-injuries",
+      "scraped_at": "2025-06-19T15:27:37.142Z"
     },
     "kyle_monangai": {
       "name": "Kyle Monangai",
@@ -10779,147 +10851,13 @@
       "total_injuries": 0,
       "has_recent_injuries": false,
       "url_used": "kyle-monangai-player-injuries",
-      "scraped_at": "2025-06-19T03:12:00.175Z"
-    },
-    "sean_tucker": {
-      "name": "Sean Tucker",
-      "position": "RB",
-      "team": "TB",
-      "adp": 253,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "sean-tucker-player-injuries",
-      "scraped_at": "2025-06-19T03:12:00.148Z"
-    },
-    "diontae_johnson": {
-      "name": "Diontae Johnson",
-      "position": "WR",
-      "team": "CLE",
-      "adp": 253,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "16",
-          "injury": "NIR - Personal",
-          "status": "Out"
-        },
-        {
-          "season": "2024",
-          "week": "8",
-          "injury": "Rib",
-          "status": "Out"
-        },
-        {
-          "season": "2024",
-          "week": "7",
-          "injury": "Ankle",
-          "status": "Questionable"
-        },
-        {
-          "season": "2024",
-          "week": "6",
-          "injury": "Ankle",
-          "status": "Questionable"
-        },
-        {
-          "season": "2024",
-          "week": "4",
-          "injury": "Groin",
-          "status": "Questionable"
-        },
-        {
-          "season": "2023",
-          "week": "2",
-          "injury": "Hamstring",
-          "status": "Out"
-        },
-        {
-          "season": "2022",
-          "week": "16",
-          "injury": "Toe",
-          "status": "Questionable"
-        },
-        {
-          "season": "2022",
-          "week": "14",
-          "injury": "Hip",
-          "status": "Questionable"
-        },
-        {
-          "season": "2021",
-          "week": "3",
-          "injury": "Knee",
-          "status": "Out"
-        },
-        {
-          "season": "2020",
-          "week": "6",
-          "injury": "Back",
-          "status": "Out"
-        }
-      ],
-      "total_injuries": 10,
-      "has_recent_injuries": true,
-      "url_used": "diontae-johnson-player-injuries",
-      "scraped_at": "2025-06-19T03:12:00.186Z"
-    },
-    "isaac_teslaa": {
-      "name": "Isaac TeSlaa",
-      "position": "WR",
-      "team": "DET",
-      "adp": 253.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "isaac-teslaa-player-injuries",
-      "scraped_at": "2025-06-19T03:12:02.658Z"
-    },
-    "elijah_mitchell": {
-      "name": "Elijah Mitchell",
-      "position": "RB",
-      "team": "KC",
-      "adp": 254.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "elijah-mitchell-player-injuries",
-      "scraped_at": "2025-06-19T03:12:02.667Z"
-    },
-    "tahj_brooks": {
-      "name": "Tahj Brooks",
-      "position": "RB",
-      "team": "CIN",
-      "adp": 255.5,
-      "injuries": [],
-      "total_injuries": 0,
-      "has_recent_injuries": false,
-      "url_used": "tahj-brooks-player-injuries",
-      "scraped_at": "2025-06-19T03:12:02.639Z"
-    },
-    "devaughn_vele": {
-      "name": "Devaughn Vele",
-      "position": "WR",
-      "team": "DEN",
-      "adp": 258.5,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "2",
-          "injury": "Ribs",
-          "status": "Out"
-        }
-      ],
-      "total_injuries": 1,
-      "has_recent_injuries": true,
-      "url_used": "devaughn-vele-player-injuries",
-      "scraped_at": "2025-06-19T03:12:02.617Z"
+      "scraped_at": "2025-06-19T15:27:36.537Z"
     },
     "kendre_miller": {
       "name": "Kendre Miller",
       "position": "RB",
       "team": "NO",
-      "adp": 259,
+      "adp": 254.5,
       "injuries": [
         {
           "season": "2024",
@@ -11015,13 +10953,71 @@
       "total_injuries": 15,
       "has_recent_injuries": true,
       "url_used": "kendre-miller-player-injuries",
-      "scraped_at": "2025-06-19T03:12:02.689Z"
+      "scraped_at": "2025-06-19T15:27:36.736Z"
+    },
+    "isaac_teslaa": {
+      "name": "Isaac TeSlaa",
+      "position": "WR",
+      "team": "DET",
+      "adp": 255,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "isaac-teslaa-player-injuries",
+      "scraped_at": "2025-06-19T15:27:41.361Z"
+    },
+    "sean_tucker": {
+      "name": "Sean Tucker",
+      "position": "RB",
+      "team": "TB",
+      "adp": 255.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "sean-tucker-player-injuries",
+      "scraped_at": "2025-06-19T15:27:40.737Z"
+    },
+    "ty_johnson": {
+      "name": "Ty Johnson",
+      "position": "RB",
+      "team": "BUF",
+      "adp": 258.5,
+      "injuries": [
+        {
+          "season": "2023",
+          "week": "16",
+          "injury": "Shoulder",
+          "status": "Questionable"
+        }
+      ],
+      "total_injuries": 1,
+      "has_recent_injuries": true,
+      "url_used": "ty-johnson-player-injuries",
+      "scraped_at": "2025-06-19T15:27:41.113Z"
+    },
+    "devaughn_vele": {
+      "name": "Devaughn Vele",
+      "position": "WR",
+      "team": "DEN",
+      "adp": 259,
+      "injuries": [
+        {
+          "season": "2024",
+          "week": "2",
+          "injury": "Ribs",
+          "status": "Out"
+        }
+      ],
+      "total_injuries": 1,
+      "has_recent_injuries": true,
+      "url_used": "devaughn-vele-player-injuries",
+      "scraped_at": "2025-06-19T15:27:41.352Z"
     },
     "tyler_conklin": {
       "name": "Tyler Conklin",
       "position": "TE",
       "team": "LAC",
-      "adp": 260,
+      "adp": 259.5,
       "injuries": [
         {
           "season": "2024",
@@ -11063,91 +11059,24 @@
       "total_injuries": 6,
       "has_recent_injuries": true,
       "url_used": "tyler-conklin-player-injuries",
-      "scraped_at": "2025-06-19T03:12:04.727Z"
+      "scraped_at": "2025-06-19T15:27:41.401Z"
     },
-    "cam_akers": {
-      "name": "Cam Akers",
+    "elijah_mitchell": {
+      "name": "Elijah Mitchell",
       "position": "RB",
-      "team": "NO",
-      "adp": 274,
-      "injuries": [
-        {
-          "season": "2024",
-          "week": "WC",
-          "injury": "Illness",
-          "status": "Questionable"
-        },
-        {
-          "season": "2022",
-          "week": "8",
-          "injury": "NIR-Personal",
-          "status": "Out"
-        },
-        {
-          "season": "2022",
-          "week": "6",
-          "injury": "NIR-Personal",
-          "status": "Out"
-        },
-        {
-          "season": "2021",
-          "week": "17",
-          "injury": "Achilles",
-          "status": "Questionable"
-        },
-        {
-          "season": "2020",
-          "week": "17",
-          "injury": "Ankle",
-          "status": "Questionable"
-        },
-        {
-          "season": "2020",
-          "week": "16",
-          "injury": "Ankle",
-          "status": "Out"
-        },
-        {
-          "season": "2020",
-          "week": "4",
-          "injury": "Ribs",
-          "status": "Out"
-        },
-        {
-          "season": "2020",
-          "week": "3",
-          "injury": "Ribs",
-          "status": "Out"
-        }
-      ],
-      "total_injuries": 8,
-      "has_recent_injuries": true,
-      "url_used": "cam-akers-player-injuries",
-      "scraped_at": "2025-06-19T03:12:04.777Z"
-    },
-    "ty_johnson": {
-      "name": "Ty Johnson",
-      "position": "RB",
-      "team": "BUF",
-      "adp": 261.5,
-      "injuries": [
-        {
-          "season": "2023",
-          "week": "16",
-          "injury": "Shoulder",
-          "status": "Questionable"
-        }
-      ],
-      "total_injuries": 1,
-      "has_recent_injuries": true,
-      "url_used": "ty-johnson-player-injuries",
-      "scraped_at": "2025-06-19T03:12:04.748Z"
+      "team": "KC",
+      "adp": 259.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "elijah-mitchell-player-injuries",
+      "scraped_at": "2025-06-19T15:27:45.213Z"
     },
     "kayshon_boutte": {
       "name": "Kayshon Boutte",
       "position": "WR",
       "team": "NE",
-      "adp": 263,
+      "adp": 260,
       "injuries": [
         {
           "season": "2023",
@@ -11177,79 +11106,119 @@
       "total_injuries": 4,
       "has_recent_injuries": true,
       "url_used": "kayshon-boutte-player-injuries",
-      "scraped_at": "2025-06-19T03:12:04.757Z"
+      "scraped_at": "2025-06-19T15:27:45.552Z"
     },
-    "noah_brown": {
-      "name": "Noah Brown",
-      "position": "WR",
-      "team": "WAS",
-      "adp": 265.5,
+    "kirk_cousins": {
+      "name": "Kirk Cousins",
+      "position": "QB",
+      "team": "ATL",
+      "adp": 260.5,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "kirk-cousins-player-injuries",
+      "scraped_at": "2025-06-19T15:27:44.283Z"
+    },
+    "taysom_hill": {
+      "name": "Taysom Hill",
+      "position": "TE",
+      "team": "NO",
+      "adp": 276,
       "injuries": [
         {
           "season": "2024",
-          "week": "15",
-          "injury": "Kidney",
+          "week": "14",
+          "injury": "Knee",
+          "status": "Out"
+        },
+        {
+          "season": "2024",
+          "week": "7",
+          "injury": "Rib",
+          "status": "Doubtful"
+        },
+        {
+          "season": "2024",
+          "week": "6",
+          "injury": "Rib",
           "status": "Out"
         },
         {
           "season": "2024",
           "week": "5",
-          "injury": "Groin",
+          "injury": "Rib",
           "status": "Out"
         },
         {
-          "season": "2023",
-          "week": "WC",
-          "injury": "Back",
-          "status": "Questionable"
-        },
-        {
-          "season": "2023",
-          "week": "18",
-          "injury": "Back",
-          "status": "Out"
-        },
-        {
-          "season": "2023",
-          "week": "15",
-          "injury": "Knee",
+          "season": "2024",
+          "week": "3",
+          "injury": "Chest",
           "status": "Questionable"
         },
         {
           "season": "2023",
           "week": "14",
-          "injury": "Knee",
+          "injury": "Foot",
           "status": "Questionable"
         },
         {
           "season": "2023",
-          "week": "13",
-          "injury": "Knee",
-          "status": "Questionable"
-        },
-        {
-          "season": "2023",
-          "week": "12",
-          "injury": "Knee",
-          "status": "Out"
-        },
-        {
-          "season": "2023",
-          "week": "11",
-          "injury": "Knee",
+          "week": "8",
+          "injury": "Chest",
           "status": "Questionable"
         },
         {
           "season": "2022",
-          "week": "8",
+          "week": "18",
+          "injury": "Back",
+          "status": "Questionable"
+        },
+        {
+          "season": "2022",
+          "week": "3",
+          "injury": "Rib",
+          "status": "Questionable"
+        },
+        {
+          "season": "2021",
+          "week": "11",
           "injury": "Foot",
+          "status": "Questionable"
+        },
+        {
+          "season": "2021",
+          "week": "8",
+          "injury": "Concussion",
+          "status": "Out"
+        },
+        {
+          "season": "2021",
+          "week": "7",
+          "injury": "Concussion",
+          "status": "Out"
+        },
+        {
+          "season": "2020",
+          "week": "DC",
+          "injury": "Knee",
           "status": "Questionable"
         }
       ],
-      "total_injuries": 10,
+      "total_injuries": 13,
       "has_recent_injuries": true,
-      "url_used": "noah-brown-player-injuries",
-      "scraped_at": "2025-06-19T03:12:04.797Z"
+      "url_used": "taysom-hill-player-injuries",
+      "scraped_at": "2025-06-19T15:27:44.441Z"
+    },
+    "jalen_milroe": {
+      "name": "Jalen Milroe",
+      "position": "QB",
+      "team": "SEA",
+      "adp": 264,
+      "injuries": [],
+      "total_injuries": 0,
+      "has_recent_injuries": false,
+      "url_used": "jalen-milroe-player-injuries",
+      "scraped_at": "2025-06-19T15:27:44.461Z"
     }
   }
 }
