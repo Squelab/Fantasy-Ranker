@@ -52,3 +52,10 @@
 **Total Injuries:** 1382
 **File:** `Player-Context/Injury/injury-history.json`
 
+
+## 📊 Latest Player Data
+**Last Updated:** 2025-06-19 23:29:59 UTC
+**Players:** 250
+**Season:** 2024
+**File:** `Player-Context/Stats/player-stats.json`
+
