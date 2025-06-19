@@ -409,111 +409,138 @@
                 on(item, 'touchstart', handleTouchStart, { passive: true });
                 on(item, 'touchmove', handleTouchMove, { passive: false });
                 on(item, 'touchend', handleTouchEnd, { passive: true });
+                on(item, 'touchcancel', handleTouchEnd, { passive: true }); // Add this!
                 on(item, 'mousedown', handleMouseDown);
             });
         }
 
         function initDrag(element, clientX, clientY) {
+            // Guard against multiple drags
+            if (state.dragState.isDragging || state.dragState.placeholder) {
+                return false;
+            }
+    
             const rect = element.getBoundingClientRect();
+    
+            // Create placeholder
+            const placeholder = element.cloneNode(true);
+            placeholder.classList.add('drag-placeholder');
+            placeholder.style.opacity = '0.5'; // Make it visible for debugging
+            element.parentNode.insertBefore(placeholder, element);
+    
             Object.assign(state.dragState, {
                 element,
+                placeholder, // Set immediately
                 index: parseInt(element.dataset.index),
                 isDragging: true,
                 startX: clientX,
                 startY: clientY,
                 originalRect: { left: rect.left, top: rect.top }
             });
-            
-            state.dragState.placeholder = element.cloneNode(true);
-            state.dragState.placeholder.classList.add('drag-placeholder');
-            element.parentNode.insertBefore(state.dragState.placeholder, element);
-            
+    
             element.classList.add('drag-active');
             Object.assign(element.style, {
                 width: rect.width + 'px',
                 height: rect.height + 'px',
                 left: rect.left + 'px',
-                top: rect.top + 'px'
+                top: rect.top + 'px',
+                position: 'fixed',
+                zIndex: '9999'
             });
-        }
-
-        function moveDrag(clientX, clientY) {
-            if (!state.dragState.isDragging || !state.dragState.element) return;
-            
-            const { element, startX, startY, originalRect, placeholder } = state.dragState;
-            element.style.left = (originalRect.left + clientX - startX) + 'px';
-            element.style.top = (originalRect.top + clientY - startY) + 'px';
-            
-            element.style.pointerEvents = 'none';
-            const elementBelow = document.elementFromPoint(clientX, clientY);
-            element.style.pointerEvents = 'auto';
-            
-            const targetItem = elementBelow?.closest('.player-item:not(.drag-active)');
-            if (targetItem && placeholder) {
-                const targetRect = targetItem.getBoundingClientRect();
-                const before = clientY < targetRect.top + targetRect.height / 2;
-                targetItem.parentNode.insertBefore(placeholder, before ? targetItem : targetItem.nextSibling);
-            }
+    
+            return true;
         }
 
         function endDrag() {
-            if (!state.dragState.isDragging) return;
-            
-            const { element, placeholder } = state.dragState;
-            if (element && placeholder) {
-                placeholder.parentNode.replaceChild(element, placeholder);
+            const { element, placeholder, isDragging } = state.dragState;
+    
+            // Clean up regardless of state
+            if (placeholder && placeholder.parentNode) {
+                if (element && element.parentNode) {
+                    placeholder.parentNode.replaceChild(element, placeholder);
+                } else {
+                    placeholder.remove();
+                }
+            }
+    
+            if (element) {
                 element.classList.remove('drag-active');
-                ['width', 'height', 'left', 'top'].forEach(prop => element.style[prop] = '');
+                element.style.cssText = ''; // Clear all inline styles
+            }
+    
+            // Only update order if we actually completed a drag
+            if (isDragging && element && placeholder) {
                 updatePlayerOrder();
             }
-            
-            Object.assign(state.dragState, { element: null, placeholder: null, isDragging: false });
+    
+            // Reset ALL state
+            Object.assign(state.dragState, {
+                element: null,
+                placeholder: null,
+                isDragging: false,
+                pendingDrag: false,
+                startX: 0,
+                startY: 0,
+                originalRect: null
+            });
+    
+            // Clear any pending timers
+            if (state.dragState.timers.touch) {
+                clearTimeout(state.dragState.timers.touch);
+                state.dragState.timers.touch = null;
+            }
         }
 
-        function cancelDragOperation() {
-            clearTimeout(state.dragState.timers.touch);
-            endDrag();
-        }
-
-        // Touch handlers - Final clean version
+        // Touch handlers - Fixed version
         function handleTouchStart(e) {
-            // Prevent multiple drags
-            if (state.dragState.isDragging || state.dragState.timers.touch) return;
-            
+            // Clean up any previous state first
+            if (state.dragState.isDragging || state.dragState.pendingDrag) {
+                endDrag();
+                return;
+            }
+    
             const touch = e.touches[0];
             const playerItem = e.target.closest('.player-item');
             if (!playerItem) return;
-            
-            // Initialize drag attempt
+    
+            // Store the element we might drag
+            state.dragState.potentialElement = playerItem;
             state.dragState.startX = touch.clientX;
             state.dragState.startY = touch.clientY;
             state.dragState.pendingDrag = true;
-            
-            // 150ms delay for intentional drags
+    
+            // Clear any existing timer
+            if (state.dragState.timers.touch) {
+                clearTimeout(state.dragState.timers.touch);
+            }
+    
+            // Set up delayed drag
             state.dragState.timers.touch = setTimeout(() => {
-                if (state.dragState.pendingDrag) {
-                    initDrag(playerItem, touch.clientX, touch.clientY);
-                    if (navigator.vibrate) navigator.vibrate(50);
+                if (state.dragState.pendingDrag && state.dragState.potentialElement) {
+                    const success = initDrag(state.dragState.potentialElement, touch.clientX, touch.clientY);
+                    if (success && navigator.vibrate) navigator.vibrate(50);
                 }
+                state.dragState.pendingDrag = false;
+                state.dragState.potentialElement = null;
             }, 150);
         }
 
         function handleTouchMove(e) {
             const touch = e.touches[0];
-            
+    
             // During delay period - check for scroll intent
             if (state.dragState.pendingDrag && !state.dragState.isDragging) {
                 const moveX = Math.abs(touch.clientX - state.dragState.startX);
                 const moveY = Math.abs(touch.clientY - state.dragState.startY);
-                
-                if (moveX > 15 || moveY > 15) {
+        
+                if (moveX > 10 || moveY > 10) {
                     cancelPendingDrag();
+                    return;
                 }
-                return; // Allow scrolling
             }
-            
+    
             // Active drag - move element
-            if (state.dragState.isDragging) {
+            if (state.dragState.isDragging && state.dragState.element) {
                 e.preventDefault();
                 moveDrag(touch.clientX, touch.clientY);
             }
@@ -521,35 +548,41 @@
 
         function handleTouchEnd() {
             cancelPendingDrag();
-            endDrag();
+            if (state.dragState.isDragging) {
+                endDrag();
+            }
         }
 
         function cancelPendingDrag() {
             state.dragState.pendingDrag = false;
+            state.dragState.potentialElement = null;
             if (state.dragState.timers.touch) {
                 clearTimeout(state.dragState.timers.touch);
                 state.dragState.timers.touch = null;
             }
         }
 
-        // Mouse handlers
-        function handleMouseDown(e) {
-            e.preventDefault();
-            initDrag(e.target.closest('.player-item'), e.clientX, e.clientY);
-            on(document, 'mousemove', handleMouseMove);
-            on(document, 'mouseup', handleMouseUp);
-        }
-
-        function handleMouseMove(e) {
-            if (!state.dragState.isDragging) return;
-            e.preventDefault();
-            moveDrag(e.clientX, e.clientY);
-        }
-
-        function handleMouseUp() {
-            document.removeEventListener('mousemove', handleMouseMove);
-            document.removeEventListener('mouseup', handleMouseUp);
-            endDrag();
+        // Also update the updatePlayerOrder function to be more defensive
+        function updatePlayerOrder() {
+            // Remove any orphaned placeholders first
+            document.querySelectorAll('.drag-placeholder').forEach(el => el.remove());
+    
+            // Now get the real player items
+            const playerElements = Array.from(document.querySelectorAll('.player-item:not(.drag-placeholder)'));
+            const newOrder = playerElements
+                .map(el => state.players.find(p => p.id === el.dataset.playerId))
+                .filter(Boolean); // Remove any undefined entries
+    
+            // Verify we didn't lose any players
+            if (newOrder.length === state.players.length) {
+                state.players = newOrder;
+                recalculateRanks();
+                filterPlayers();
+            } else {
+                console.error('Player count mismatch:', newOrder.length, 'vs', state.players.length);
+                // Refresh the display without changing order
+                filterPlayers();
+            }
         }
 
         // Player actions
