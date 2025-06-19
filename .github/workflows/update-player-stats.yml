@@ -45,7 +45,7 @@ jobs:
         BATCH_SIZE: ${{ github.event.inputs.batch_size || '5' }}
       run: |
         echo "🚀 Starting FantasyPros scraper with batch size ${BATCH_SIZE}..."
-        node stats-scraper.js
+        node Scrapers/stats-scraper.js
         echo "📊 Scraping completed!"
         
     - name: Verify output file
