@@ -10,11 +10,6 @@ on:
   
   # Allow manual triggering
   workflow_dispatch:
-    inputs:
-      batch_size:
-        description: 'Batch size for scraping (3=slower but safer, 5=faster)'
-        required: false
-        default: '5'
 
 jobs:
   scrape-and-deploy:
