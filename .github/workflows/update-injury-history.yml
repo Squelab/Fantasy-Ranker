@@ -1,4 +1,4 @@
-name: Update Player Injury Data
+name: Scrape NFL Player Injury Data
 
 on:
   schedule:
@@ -52,7 +52,7 @@ jobs:
         BATCH_SIZE: ${{ github.event.inputs.batch_size || '5' }}
       run: |
         echo "🚀 Starting Fox Sports injury scraper with batch size ${BATCH_SIZE}..."
-        node fox-sports-injury-scraper.js
+        node injury-history-scraper.js
         echo "📊 Injury scraping completed!"
         
     - name: Verify output file
