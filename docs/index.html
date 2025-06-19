@@ -275,11 +275,15 @@
             updateTitle();
             const previousFormat = state.currentFormat;
             const newFormat = $('scoringFormat').value;
-            state.currentFormat = newFormat;
             
+            // Check if current rankings match consensus for the previous format
             if (isUnedited(previousFormat)) {
+                // Rankings haven't been customized, load new consensus
+                state.currentFormat = newFormat;
                 loadPlayersFromConsensus(newFormat);
             } else {
+                // Rankings have been customized, just update ADP values
+                state.currentFormat = newFormat;
                 updateADPValues(newFormat);
             }
         }
@@ -290,9 +294,17 @@
             
             if (!original || state.players.length !== original.length) return false;
             
+            // Check if the current player order and all properties match the consensus
             return state.players.every((p, i) => {
                 const orig = original[i];
-                return Object.keys(p).every(key => p[key] === orig[key]);
+                // Check all important properties
+                return p.id === orig.id &&
+                       p.name === orig.name &&
+                       p.position === orig.position &&
+                       p.team === orig.team &&
+                       p.risk === orig.risk &&
+                       p.notes === orig.notes &&
+                       p.overallRank === orig.overallRank;
             });
         }
 
