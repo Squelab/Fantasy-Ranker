@@ -51,12 +51,12 @@ jobs:
         
     - name: Verify output file
       run: |
-        if [ -f "for-ai/injury/injury-history.json" ]; then
+        if [ -f "For-AI/Injury/injury-history.json" ]; then
           echo "✅ injury-history.json created successfully"
-          echo "📁 File size: $(du -h for-ai/injury/injury-history.json | cut -f1)"
-          echo "🔢 Player count: $(jq '.total_players' for-ai/injury/injury-history.json)"
-          echo "📅 Generated: $(jq -r '.timestamp' for-ai/injury/injury-history.json)"
-          echo "🏥 Total injuries: $(jq '[.data[] | .injuries | length] | add' for-ai/injury/injury-history.json)"
+          echo "📁 File size: $(du -h For-AI/Injury/injury-history.json | cut -f1)"
+          echo "🔢 Player count: $(jq '.total_players' For-AI/Injury/injury-history.json)"
+          echo "📅 Generated: $(jq -r '.timestamp' For-AI/Injury/injury-history.json)"
+          echo "🏥 Total injuries: $(jq '[.data[] | .injuries | length] | add' For-AI/Injury/injury-history.json)"
         else
           echo "❌ injury-history.json not found!"
           exit 1
@@ -70,7 +70,7 @@ jobs:
         git config --global user.email 'bot@injurydatabot.com'
         
         # Add the new data file
-        git add for-ai/injury/injury-history.json
+        git add For-AI/Injury/injury-history.json
         
         # Create/update README with injury data info
         if [ ! -f "README.md" ]; then
@@ -81,10 +81,10 @@ jobs:
         echo "" >> README.md
         echo "## 🏥 Latest NFL Injury Data" >> README.md
         echo "**Last Updated:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> README.md
-        echo "**Players:** $(jq '.total_players' for-ai/injury/injury-history.json)" >> README.md
-        echo "**Season:** $(jq '.current_nfl_season' for-ai/injury/injury-history.json)" >> README.md
-        echo "**Total Injuries:** $(jq '[.data[] | .injuries | length] | add' for-ai/injury/injury-history.json)" >> README.md
-        echo "**File:** \`for-ai/injury/injury-history.json\`" >> README.md
+        echo "**Players:** $(jq '.total_players' For-AI/Injury/injury-history.json)" >> README.md
+        echo "**Season:** $(jq '.current_nfl_season' For-AI/Injury/injury-history.json)" >> README.md
+        echo "**Total Injuries:** $(jq '[.data[] | .injuries | length] | add' For-AI/Injury/injury-history.json)" >> README.md
+        echo "**File:** \`For-AI/Injury/injury-history.json\`" >> README.md
         echo "" >> README.md
         
         # Check if anything changed
