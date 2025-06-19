@@ -68,20 +68,20 @@ jobs:
         git config --global user.email 'bot@fantasydatabot.com'
         
         # Add the new data file
-        git add player-stats.json
+        git add For-AI/Stats/player-stats.json
         
         # Create/update README with data info
         if [ ! -f "README.md" ]; then
-          echo "# Fantasy AI with Player Data" > README.md
+          echo "# Fantasy AI with Player Stats" > README.md
         fi
         
         # Add data section to README
         echo "" >> README.md
         echo "## 📊 Latest Player Data" >> README.md
         echo "**Last Updated:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> README.md
-        echo "**Players:** $(jq '.total_players' player-stats.json)" >> README.md
-        echo "**Season:** $(jq '.current_nfl_season' player-stats.json)" >> README.md
-        echo "**File:** \`player-stats.json\`" >> README.md
+        echo "**Players:** $(jq '.total_players' For-AI/Stats/player-stats.json)" >> README.md
+        echo "**Season:** $(jq '.current_nfl_season' For-AI/Stats/player-stats.json)" >> README.md
+        echo "**File:** \`For-AI/Stats/player-stats.json\`" >> README.md
         echo "" >> README.md
         
         # Check if anything changed
@@ -99,11 +99,11 @@ jobs:
       if: always()
       run: |
         echo "🎯 **Scraping Summary**"
-        if [ -f "player-stats.json" ]; then
-          echo "✅ **Success:** $(jq '.stats.successful' player-stats.json) players"
-          echo "❌ **Failed:** $(jq '.stats.failed' player-stats.json) players" 
-          echo "🚫 **Invalid:** $(jq '.stats.wrong_player' player-stats.json) players"
-          echo "📊 **Total:** $(jq '.total_players' player-stats.json) players in database"
+        if [ -f "For-AI/Stats/player-stats.json" ]; then
+          echo "✅ **Success:** $(jq '.stats.successful' For-AI/Stats/player-stats.json) players"
+          echo "❌ **Failed:** $(jq '.stats.failed' For-AI/Stats/player-stats.json) players" 
+          echo "🚫 **Invalid:** $(jq '.stats.wrong_player' For-AI/Stats/player-stats.json) players"
+          echo "📊 **Total:** $(jq '.total_players' For-AI/Stats/player-stats.json) players in database"
         else
           echo "❌ **Failed:** No data file generated"
         fi
