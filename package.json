@@ -1,5 +1,5 @@
 {
-  "name": "Fantasy-Ranker",
+  "name": "Fantasy-Ranker-AI",
   "version": "1.0.0",
   "description": "Fantasy football ranking tool with AI and scrapers for stats and injury data",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/squelab/Fantasy-Ranker.git"
+    "url": "https://github.com/squelab/Fantasy-Ranker-AI.git"
   },
   "keywords": [
     "fantasy-football",
@@ -31,5 +31,5 @@
   ],
   "author": "Squelab",
   "license": "MIT",
-  "homepage": "https://github.com/squelab/Fantasy-Ranker#readme"
+  "homepage": "https://github.com/squelab/Fantasy-Ranker-AI#readme"
 }
