@@ -1,0 +1,120 @@
+name: Scrape NFL Player Injury Data
+
+on:
+  schedule:
+    # Weekly during NFL season (Sep-Feb): Every Wednesday 7:00 AM UTC
+    - cron: '0 7 * 9,10,11,12,1,2 3'  
+    
+    # Monthly during offseason (Mar-Aug): First Wednesday 7:00 AM UTC  
+    - cron: '0 7 1-7 3,4,5,6,7,8 3' 
+  
+  # Allow manual triggering
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: 'Batch size for scraping (3=slower but safer, 5=faster)'
+        required: false
+        default: '5'
+
+jobs:
+  scrape-injury-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120  # 2 hours max (250 players * ~30s each)
+    
+    steps:
+    - name: Checkout injury scraper repo
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        # Create package.json if it doesn't exist
+        if [ ! -f "package.json" ]; then
+          echo "📦 Creating package.json..."
+          npm init -y
+        fi
+        
+        echo "📦 Installing dependencies..."
+        npm install axios cheerio
+        
+    - name: Create output directory
+      run: |
+        echo "📁 Creating output directory..."
+        mkdir -p for-ai/injury
+        
+    - name: Run Fox Sports injury scraper
+      env:
+        NODE_ENV: production
+        BATCH_SIZE: ${{ github.event.inputs.batch_size || '5' }}
+      run: |
+        echo "🚀 Starting Fox Sports injury scraper with batch size ${BATCH_SIZE}..."
+        node fox-sports-injury-scraper.js
+        echo "📊 Injury scraping completed!"
+        
+    - name: Verify output file
+      run: |
+        if [ -f "for-ai/injury/injury-history.json" ]; then
+          echo "✅ injury-history.json created successfully"
+          echo "📁 File size: $(du -h for-ai/injury/injury-history.json | cut -f1)"
+          echo "🔢 Player count: $(jq '.total_players' for-ai/injury/injury-history.json)"
+          echo "📅 Generated: $(jq -r '.timestamp' for-ai/injury/injury-history.json)"
+          echo "🏥 Total injuries: $(jq '[.data[] | .injuries | length] | add' for-ai/injury/injury-history.json)"
+        else
+          echo "❌ injury-history.json not found!"
+          exit 1
+        fi
+        
+    - name: Commit updated injury data to repository
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --global user.name 'NFL Injury Data Bot'
+        git config --global user.email 'bot@injurydatabot.com'
+        
+        # Add the new data file
+        git add for-ai/injury/injury-history.json
+        
+        # Create/update README with injury data info
+        if [ ! -f "README.md" ]; then
+          echo "# Fantasy AI with NFL Player Injury Data" > README.md
+        fi
+        
+        # Add injury data section to README
+        echo "" >> README.md
+        echo "## 🏥 Latest NFL Injury Data" >> README.md
+        echo "**Last Updated:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> README.md
+        echo "**Players:** $(jq '.total_players' for-ai/injury/injury-history.json)" >> README.md
+        echo "**Season:** $(jq '.current_nfl_season' for-ai/injury/injury-history.json)" >> README.md
+        echo "**Total Injuries:** $(jq '[.data[] | .injuries | length] | add' for-ai/injury/injury-history.json)" >> README.md
+        echo "**File:** \`for-ai/injury/injury-history.json\`" >> README.md
+        echo "" >> README.md
+        
+        # Check if anything changed
+        if git diff --cached --quiet; then
+          echo "📭 No changes detected - injury data unchanged"
+        else
+          echo "📝 Changes detected - committing injury data update"
+          git add README.md
+          git commit -m "🏥 Update NFL player injury data - $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:main
+          echo "✅ Successfully updated injury data in repository"
+        fi
+        
+    - name: Summary
+      if: always()
+      run: |
+        echo "🎯 **Injury Scraping Summary**"
+        if [ -f "for-ai/injury/injury-history.json" ]; then
+          echo "✅ **Success:** $(jq '.stats.successful' for-ai/injury/injury-history.json) players"
+          echo "❌ **Failed:** $(jq '.stats.failed' for-ai/injury/injury-history.json) players" 
+          echo "🚫 **Invalid:** $(jq '.stats.wrong_player' for-ai/injury/injury-history.json) players"
+          echo "📊 **Total:** $(jq '.total_players' for-ai/injury/injury-history.json) players in database"
+          echo "🏥 **Injuries:** $(jq '[.data[] | .injuries | length] | add' for-ai/injury/injury-history.json) total injury records"
+          echo "🆕 **Rookies:** $(jq '[.data[] | select(.is_likely_rookie == true)] | length' for-ai/injury/injury-history.json) likely rookies found"
+        else
+          echo "❌ **Failed:** No injury data file generated"
+        fi
