@@ -59,8 +59,8 @@
                     <input type="file" id="loadFileInput" accept=".json" class="hidden">
                 </label>
                 <button id="saveBtn" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors h-10">Save Rankings</button>
-                <button id="refreshBtn" class="bg-slate-600 text-white w-10 h-10 rounded-full hover:bg-slate-500 transition-colors flex items-center justify-center" title="Refresh to Expert Consensus">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button id="refreshBtn" class="relative bg-red-600 text-white w-8 h-8 hover:bg-red-500 transition-colors flex items-center justify-center" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)" title="Refresh to Expert Consensus">
+                    <svg class="w-3 h-3 absolute top-1" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                     </svg>
                 </button>
@@ -105,6 +105,7 @@
             isDraftMode: false,
             originalConsensus: {}, // Store original data for each format
             consensusData: {}, // Store all scoring format data
+            currentFormat: 'PPR', // Track current format
             dragState: {
                 element: null,
                 index: -1,
@@ -203,6 +204,7 @@
                 
                 // Initialize with current format
                 const currentFormat = $('scoringFormat').value || 'PPR';
+                state.currentFormat = currentFormat;
                 loadPlayersFromConsensus(currentFormat);
             } catch (error) {
                 console.error('Error loading scoring formats:', error);
@@ -253,9 +255,11 @@
 
         function handleScoringFormatChange() {
             updateTitle();
+            const previousFormat = state.currentFormat;
             const newFormat = $('scoringFormat').value;
+            state.currentFormat = newFormat;
             
-            if (isUnedited()) {
+            if (isUnedited(previousFormat)) {
                 // Rankings haven't been customized, refresh to new consensus
                 loadPlayersFromConsensus(newFormat);
             } else {
@@ -264,9 +268,9 @@
             }
         }
 
-        function isUnedited() {
-            const currentFormat = $('scoringFormat').value || 'PPR';
-            const original = state.originalConsensus[currentFormat];
+        function isUnedited(formatToCheck = null) {
+            const checkFormat = formatToCheck || state.currentFormat;
+            const original = state.originalConsensus[checkFormat];
             
             if (!original || state.players.length !== original.length) {
                 return false;
@@ -308,8 +312,10 @@
         }
 
         function refreshToConsensus() {
-            const currentFormat = $('scoringFormat').value || 'PPR';
-            loadPlayersFromConsensus(currentFormat);
+            if (confirm('Are you sure you want to refresh these rankings to the expert consensus?\n\nYou will lose all your edits & additions.')) {
+                const currentFormat = $('scoringFormat').value || 'PPR';
+                loadPlayersFromConsensus(currentFormat);
+            }
         }
 
         // Player management
