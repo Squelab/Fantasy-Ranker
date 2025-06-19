@@ -1,4 +1,4 @@
-name: Scrape NFL Player Injury Data
+name: Update Player Injury Data
 
 on:
   schedule:
