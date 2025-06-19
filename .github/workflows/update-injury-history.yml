@@ -35,7 +35,7 @@ jobs:
     - name: Create output directory
       run: |
         echo "📁 Creating output directory..."
-        mkdir -p For-AI/Injury
+        mkdir -p Player-Context/Injury
         
     - name: Run Fox Sports injury scraper
       env:
@@ -48,12 +48,12 @@ jobs:
         
     - name: Verify output file
       run: |
-        if [ -f "For-AI/Injury/injury-history.json" ]; then
+        if [ -f "Player-Context/Injury/injury-history.json" ]; then
           echo "✅ injury-history.json created successfully"
-          echo "📁 File size: $(du -h For-AI/Injury/injury-history.json | cut -f1)"
-          echo "🔢 Player count: $(jq '.total_players' For-AI/Injury/injury-history.json)"
-          echo "📅 Generated: $(jq -r '.timestamp' For-AI/Injury/injury-history.json)"
-          echo "🏥 Total injuries: $(jq '[.data[] | .injuries | length] | add' For-AI/Injury/injury-history.json)"
+          echo "📁 File size: $(du -h Player-Context/Injury/injury-history.json | cut -f1)"
+          echo "🔢 Player count: $(jq '.total_players' Player-Context/Injury/injury-history.json)"
+          echo "📅 Generated: $(jq -r '.timestamp' Player-Context/Injury/injury-history.json)"
+          echo "🏥 Total injuries: $(jq '[.data[] | .injuries | length] | add' Player-Context/Injury/injury-history.json)"
         else
           echo "❌ injury-history.json not found!"
           exit 1
@@ -67,7 +67,7 @@ jobs:
         git config --global user.email 'bot@injurydatabot.com'
         
         # Add the new data file
-        git add For-AI/Injury/injury-history.json
+        git add Player-Context/Injury/injury-history.json
         
         # Create/update README with injury data info
         if [ ! -f "README.md" ]; then
@@ -78,10 +78,10 @@ jobs:
         echo "" >> README.md
         echo "## 🏥 Latest NFL Injury Data" >> README.md
         echo "**Last Updated:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> README.md
-        echo "**Players:** $(jq '.total_players' For-AI/Injury/injury-history.json)" >> README.md
-        echo "**Season:** $(jq '.current_nfl_season' For-AI/Injury/injury-history.json)" >> README.md
-        echo "**Total Injuries:** $(jq '[.data[] | .injuries | length] | add' For-AI/Injury/injury-history.json)" >> README.md
-        echo "**File:** \`For-AI/Injury/injury-history.json\`" >> README.md
+        echo "**Players:** $(jq '.total_players' Player-Context/Injury/injury-history.json)" >> README.md
+        echo "**Season:** $(jq '.current_nfl_season' Player-Context/Injury/injury-history.json)" >> README.md
+        echo "**Total Injuries:** $(jq '[.data[] | .injuries | length] | add' Player-Context/Injury/injury-history.json)" >> README.md
+        echo "**File:** \`Player-Context/Injury/injury-history.json\`" >> README.md
         echo "" >> README.md
         
         # Check if anything changed
@@ -99,13 +99,13 @@ jobs:
       if: always()
       run: |
         echo "🎯 **Injury Scraping Summary**"
-        if [ -f "For-AI/Injury/injury-history.json" ]; then
-          echo "✅ **Success:** $(jq '.stats.successful' For-AI/Injury/injury-history.json) players"
-          echo "❌ **Failed:** $(jq '.stats.failed' For-AI/Injury/injury-history.json) players" 
-          echo "🚫 **Invalid:** $(jq '.stats.wrong_player' For-AI/Injury/injury-history.json) players"
-          echo "📊 **Total:** $(jq '.total_players' For-AI/Injury/injury-history.json) players in database"
-          echo "🏥 **Injuries:** $(jq '[.data[] | .injuries | length] | add' For-AI/Injury/injury-history.json) total injury records"
-          echo "🆕 **Rookies:** $(jq '[.data[] | select(.is_likely_rookie == true)] | length' For-AI/Injury/injury-history.json) likely rookies found"
+        if [ -f "Player-Context/Injury/injury-history.json" ]; then
+          echo "✅ **Success:** $(jq '.stats.successful' Player-Context/Injury/injury-history.json) players"
+          echo "❌ **Failed:** $(jq '.stats.failed' Player-Context/Injury/injury-history.json) players" 
+          echo "🚫 **Invalid:** $(jq '.stats.wrong_player' Player-Context/Injury/injury-history.json) players"
+          echo "📊 **Total:** $(jq '.total_players' Player-Context/Injury/injury-history.json) players in database"
+          echo "🏥 **Injuries:** $(jq '[.data[] | .injuries | length] | add' Player-Context/Injury/injury-history.json) total injury records"
+          echo "🆕 **Rookies:** $(jq '[.data[] | select(.is_likely_rookie == true)] | length' Player-Context/Injury/injury-history.json) likely rookies found"
         else
           echo "❌ **Failed:** No injury data file generated"
         fi
