@@ -7,6 +7,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Prevent text selection and interaction on drag areas */
+        .drag-area, .drag-area * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Keep notes and buttons interactive */
+        .notes-section, .notes-section *, 
+        button, button * {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            touch-action: auto;
+        }
+        
+        /* Specifically for textareas */
+        textarea {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
+            touch-action: auto !important;
+        }
+    </style>
 </head>
 <body class="bg-slate-900 min-h-screen text-gray-100">
     <div class="container mx-auto p-4 max-w-6xl">
@@ -136,7 +166,7 @@
             const fileMap = { 'PPR': 'PPR.json', 'Half PPR': 'HPPR.json', 'Standard': 'STD.json' };
             const filename = fileMap[format] || 'PPR.json';
             
-            fetch(`./ADPdata/${filename}`)
+            fetch(`./data/${filename}`)
                 .then(r => r.ok ? r.json() : Promise.reject())
                 .then(d => {
                     const allPlayers = d.players || d;
