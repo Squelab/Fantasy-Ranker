@@ -21,3 +21,11 @@
 **Total Injuries:** 1387
 **File:** `for-ai/injury/injury-history.json`
 
+
+## 🏥 Latest NFL Injury Data
+**Last Updated:** 2025-06-19 03:12:04 UTC
+**Players:** 250
+**Season:** 2024
+**Total Injuries:** 1387
+**File:** `For-AI/Injury/injury-history.json`
+
