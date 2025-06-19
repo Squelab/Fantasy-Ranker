@@ -44,27 +44,32 @@
         <div class="bg-slate-800 rounded-lg shadow-xl p-6 mb-6 border border-slate-700">
             <div class="flex flex-col gap-4 mb-4">
                 <!-- Controls Grid -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                     <input type="text" id="rankerName" placeholder="Your Name" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none h-10">
-                    <div class="flex items-center gap-2 md:contents">
-                        <select id="scoringFormat" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 focus:border-blue-500 focus:outline-none h-10 flex-grow">
+    
+                    <!-- Mobile: Scoring + Refresh in same cell -->
+                    <div class="flex items-center gap-2 lg:contents">
+                        <select id="scoringFormat" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 focus:border-blue-500 focus:outline-none h-10 flex-grow lg:flex-grow-0">
                             <option value="PPR">PPR</option>
                             <option value="Half PPR">Half PPR</option>
                             <option value="Standard">Standard</option>
                         </select>
-                        <button id="refreshBtn" class="md:hidden relative bg-red-600 text-white w-8 h-8 hover:bg-red-500 transition-colors flex items-center justify-center flex-shrink-0" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)" title="Refresh to Expert Consensus">
+                        <button id="refreshBtnMobile" class="lg:hidden relative bg-red-600 text-white w-8 h-8 hover:bg-red-500 transition-colors flex items-center justify-center flex-shrink-0" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)" title="Refresh to Expert Consensus">
                             <svg class="w-4 h-4 absolute inset-0 m-auto" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                             </svg>
                         </button>
                     </div>
+    
                     <label class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 cursor-pointer transition-colors flex items-center justify-center text-center h-10">
-                        Load Rankings
+        Load Rankings
                         <input type="file" id="loadFileInput" accept=".json" class="hidden">
                     </label>
-                    <div class="flex items-center gap-2 md:contents">
+    
+                    <!-- Desktop: Save + Refresh in same cell -->
+                    <div class="flex items-center gap-2">
                         <button id="saveBtn" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors h-10 flex-grow">Save Rankings</button>
-                        <button class="hidden md:flex relative bg-red-600 text-white w-8 h-8 hover:bg-red-500 transition-colors items-center justify-center flex-shrink-0" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)" title="Refresh to Expert Consensus" onclick="refreshToConsensus()">
+                        <button id="refreshBtnDesktop" class="hidden lg:flex relative bg-red-600 text-white w-8 h-8 hover:bg-red-500 transition-colors items-center justify-center flex-shrink-0" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)" title="Refresh to Expert Consensus">
                             <svg class="w-4 h-4 absolute inset-0 m-auto" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                             </svg>
@@ -110,9 +115,9 @@
             filteredPlayers: [],
             draftedPlayers: [],
             isDraftMode: false,
-            originalConsensus: {}, // Store original data for each format
-            consensusData: {}, // Store all scoring format data
-            currentFormat: 'PPR', // Track current format
+            originalConsensus: {},
+            consensusData: {},
+            currentFormat: 'PPR',
             dragState: {
                 element: null,
                 dragElement: null,
@@ -131,22 +136,31 @@
         const cfg = {
             year: new Date().getFullYear(),
             risks: ['Low', 'Medium', 'High'],
-            riskBtnColors: { High: 'bg-red-600', Medium: 'bg-yellow-600', Low: 'bg-green-600' },
-            posColors: { 
-                QB: 'bg-purple-900/50 border-l-4 border-purple-600', 
-                RB: 'bg-blue-900/50 border-l-4 border-blue-600', 
-                WR: 'bg-green-900/50 border-l-4 border-green-600', 
-                TE: 'bg-orange-900/50 border-l-4 border-orange-600', 
-                K: 'bg-pink-900/50 border-l-4 border-pink-600', 
-                DST: 'bg-gray-700/50 border-l-4 border-gray-600' 
-            },
-            positionColors: { 
-                QB: 'text-purple-300 bg-purple-900/50', 
-                RB: 'text-blue-300 bg-blue-900/50', 
-                WR: 'text-green-300 bg-green-900/50', 
-                TE: 'text-orange-300 bg-orange-900/50', 
-                K: 'text-pink-300 bg-pink-900/50', 
-                DST: 'text-gray-300 bg-gray-700/50' 
+            formats: ['PPR', 'Half PPR', 'Standard'],
+            fileMap: { 'PPR': 'PPR.json', 'Half PPR': 'HPPR.json', 'Standard': 'STD.json' },
+            skillPositions: ['QB', 'RB', 'WR', 'TE'],
+            maxPlayers: 200,
+            recentDraftedCount: 3,
+            dragThreshold: 15,
+            dragDelay: 120,
+            styles: {
+                riskBtn: { High: 'bg-red-600', Medium: 'bg-yellow-600', Low: 'bg-green-600' },
+                posColors: { 
+                    QB: 'bg-purple-900/50 border-l-4 border-purple-600', 
+                    RB: 'bg-blue-900/50 border-l-4 border-blue-600', 
+                    WR: 'bg-green-900/50 border-l-4 border-green-600', 
+                    TE: 'bg-orange-900/50 border-l-4 border-orange-600', 
+                    K: 'bg-pink-900/50 border-l-4 border-pink-600', 
+                    DST: 'bg-gray-700/50 border-l-4 border-gray-600' 
+                },
+                positionBadge: { 
+                    QB: 'text-purple-300 bg-purple-900/50', 
+                    RB: 'text-blue-300 bg-blue-900/50', 
+                    WR: 'text-green-300 bg-green-900/50', 
+                    TE: 'text-orange-300 bg-orange-900/50', 
+                    K: 'text-pink-300 bg-pink-900/50', 
+                    DST: 'text-gray-300 bg-gray-700/50' 
+                }
             }
         };
 
@@ -154,24 +168,33 @@
         const $ = id => document.getElementById(id);
         const on = (el, evt, fn, opts) => el.addEventListener(evt, fn, opts);
         const debounce = (fn, ms) => { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }};
+        const deepCopy = obj => JSON.parse(JSON.stringify(obj));
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            on($('rankerName'), 'input', updateTitle);
-            on($('scoringFormat'), 'change', handleScoringFormatChange);
-            on($('searchInput'), 'input', debounce(filterPlayers, 150));
-            on($('loadFileInput'), 'change', loadRankings);
-            on($('saveBtn'), 'click', saveRankings);
-            on($('printBtn'), 'click', downloadPrintable);
-            on($('draftBtn'), 'click', toggleDraftMode);
-            on($('refreshBtn'), 'click', refreshToConsensus);
-            
+            // Set up event listeners using map for cleaner code
+            const eventMap = {
+                rankerName: ['input', updateTitle],
+                scoringFormat: ['change', handleScoringFormatChange],
+                searchInput: ['input', debounce(filterPlayers, 150)],
+                loadFileInput: ['change', loadRankings],
+                saveBtn: ['click', saveRankings],
+                printBtn: ['click', downloadPrintable],
+                draftBtn: ['click', toggleDraftMode],
+                refreshBtnMobile: ['click', refreshToConsensus],
+                refreshBtnDesktop: ['click', refreshToConsensus]
+            };
+
+            Object.entries(eventMap).forEach(([id, [event, handler]]) => {
+                on($(id), event, handler);
+            });
+
             on(window, 'resize', () => {
                 cancelDragOperation();
                 clearTimeout(state.dragState.timers.resize);
                 state.dragState.timers.resize = setTimeout(filterPlayers, 250);
             });
-            
+
             updateTitle();
             loadAllScoringFormats();
         });
@@ -185,21 +208,15 @@
 
         // Data loading
         async function loadAllScoringFormats() {
-            const formats = ['PPR', 'Half PPR', 'Standard'];
-            const fileMap = { 'PPR': 'PPR.json', 'Half PPR': 'HPPR.json', 'Standard': 'STD.json' };
-            
             try {
-                // Load all formats
-                for (const format of formats) {
-                    const filename = fileMap[format];
-                    const response = await fetch(`./data/${filename}`);
+                await Promise.all(cfg.formats.map(async format => {
+                    const response = await fetch(`./data/${cfg.fileMap[format]}`);
                     if (response.ok) {
                         const data = await response.json();
                         const allPlayers = data.players || data;
-                        // Filter to only skill positions (QB, RB, WR, TE) and limit to top 200
                         const skillPlayers = allPlayers
-                            .filter(p => ['QB', 'RB', 'WR', 'TE'].includes(p.position))
-                            .slice(0, 200);
+                            .filter(p => cfg.skillPositions.includes(p.position))
+                            .slice(0, cfg.maxPlayers);
                         
                         state.consensusData[format] = skillPlayers.map((p, i) => ({
                             ...p, 
@@ -209,41 +226,36 @@
                             overallRank: i + 1
                         }));
                     }
-                }
+                }));
                 
-                // Initialize with current format
-                const currentFormat = $('scoringFormat').value || 'PPR';
-                state.currentFormat = currentFormat;
-                loadPlayersFromConsensus(currentFormat);
+                state.currentFormat = $('scoringFormat').value || 'PPR';
+                loadPlayersFromConsensus(state.currentFormat);
             } catch (error) {
                 console.error('Error loading scoring formats:', error);
-                // Fallback to single format loading
                 loadPlayersFromFile();
             }
         }
 
         function loadPlayersFromConsensus(format) {
-            if (state.consensusData[format]) {
-                state.players = JSON.parse(JSON.stringify(state.consensusData[format])); // Deep copy
-                state.originalConsensus[format] = JSON.parse(JSON.stringify(state.consensusData[format])); // Store original
-                recalculateRanks();
-                filterPlayers();
-            }
+            if (!state.consensusData[format]) return;
+            
+            state.players = deepCopy(state.consensusData[format]);
+            state.originalConsensus[format] = deepCopy(state.consensusData[format]);
+            recalculateRanks();
+            filterPlayers();
         }
 
         function loadPlayersFromFile() {
             const format = $('scoringFormat').value || 'PPR';
-            const fileMap = { 'PPR': 'PPR.json', 'Half PPR': 'HPPR.json', 'Standard': 'STD.json' };
-            const filename = fileMap[format] || 'PPR.json';
+            const filename = cfg.fileMap[format] || 'PPR.json';
             
             fetch(`./data/${filename}`)
                 .then(r => r.ok ? r.json() : Promise.reject())
                 .then(d => {
                     const allPlayers = d.players || d;
-                    // Filter to only skill positions (QB, RB, WR, TE) and limit to top 200
                     const skillPlayers = allPlayers
-                        .filter(p => ['QB', 'RB', 'WR', 'TE'].includes(p.position))
-                        .slice(0, 200);
+                        .filter(p => cfg.skillPositions.includes(p.position))
+                        .slice(0, cfg.maxPlayers);
                     
                     state.players = skillPlayers.map((p, i) => ({
                         ...p, 
@@ -253,10 +265,7 @@
                         overallRank: i + 1
                     }));
                     
-                    // Store as original consensus for this format
-                    const format = $('scoringFormat').value || 'PPR';
-                    state.originalConsensus[format] = JSON.parse(JSON.stringify(state.players));
-                    
+                    state.originalConsensus[format] = deepCopy(state.players);
                     recalculateRanks();
                     filterPlayers();
                 });
@@ -269,10 +278,8 @@
             state.currentFormat = newFormat;
             
             if (isUnedited(previousFormat)) {
-                // Rankings haven't been customized, refresh to new consensus
                 loadPlayersFromConsensus(newFormat);
             } else {
-                // Rankings have been customized, just update ADP values
                 updateADPValues(newFormat);
             }
         }
@@ -281,40 +288,24 @@
             const checkFormat = formatToCheck || state.currentFormat;
             const original = state.originalConsensus[checkFormat];
             
-            if (!original || state.players.length !== original.length) {
-                return false;
-            }
+            if (!original || state.players.length !== original.length) return false;
             
-            // Check if every aspect matches exactly
-            for (let i = 0; i < state.players.length; i++) {
-                const current = state.players[i];
+            return state.players.every((p, i) => {
                 const orig = original[i];
-                
-                if (current.id !== orig.id ||
-                    current.name !== orig.name ||
-                    current.position !== orig.position ||
-                    current.team !== orig.team ||
-                    current.risk !== orig.risk ||
-                    current.notes !== orig.notes ||
-                    current.overallRank !== orig.overallRank) {
-                    return false;
-                }
-            }
-            
-            return true;
+                return Object.keys(p).every(key => p[key] === orig[key]);
+            });
         }
 
         function updateADPValues(format) {
             if (!state.consensusData[format]) return;
             
-            const formatData = state.consensusData[format];
+            const adpMap = new Map(
+                state.consensusData[format].map(p => [`${p.name}-${p.team}`, p.adp])
+            );
             
-            // Update ADP values for existing players
             state.players.forEach(player => {
-                const consensusPlayer = formatData.find(p => p.name === player.name && p.team === player.team);
-                if (consensusPlayer) {
-                    player.adp = consensusPlayer.adp;
-                }
+                const adp = adpMap.get(`${player.name}-${player.team}`);
+                if (adp !== undefined) player.adp = adp;
             });
             
             filterPlayers();
@@ -322,8 +313,7 @@
 
         function refreshToConsensus() {
             if (confirm('Are you sure you want to refresh these rankings to the expert consensus?\n\nYou will lose all your edits/additions.')) {
-                const currentFormat = $('scoringFormat').value || 'PPR';
-                loadPlayersFromConsensus(currentFormat);
+                loadPlayersFromConsensus(state.currentFormat);
             }
         }
 
@@ -346,44 +336,47 @@
         }
 
         function updatePlayerOrder() {
-            // Remove any orphaned placeholders first
             document.querySelectorAll('.drag-placeholder').forEach(el => el.remove());
             
-            // Now get the real player items only
             const playerElements = Array.from(document.querySelectorAll('.player-item:not(.drag-placeholder)'));
             const newOrder = playerElements
                 .map(el => state.players.find(p => p.id === el.dataset.playerId))
-                .filter(Boolean); // Remove any undefined entries
+                .filter(Boolean);
             
-            // Verify we didn't lose any players
             if (newOrder.length === state.players.length) {
                 state.players = newOrder;
                 recalculateRanks();
                 filterPlayers();
             } else {
                 console.error('Player count mismatch:', newOrder.length, 'vs', state.players.length);
-                // Refresh the display without changing order
                 filterPlayers();
             }
         }
 
+        // Rendering helpers
+        const createButton = (action, player, isDraft) => {
+            if (isDraft) {
+                return `<button onclick="draftPlayer('${player.id}')" class="bg-red-600 w-8 h-8 rounded text-xs font-bold text-white hover:bg-red-700 transition-colors">D</button>`;
+            }
+            return `<button onclick="cycleRisk('${player.id}')" class="${cfg.styles.riskBtn[player.risk]} w-8 h-8 rounded text-xs font-bold text-white hover:opacity-80 transition-opacity">${player.risk[0]}</button>`;
+        };
+
+        const createNotes = (player, isDraft) => {
+            if (isDraft) {
+                return `<div class="w-full border border-slate-600 rounded px-2 py-1 text-sm h-12 bg-slate-700 text-gray-300">${player.notes || ''}</div>`;
+            }
+            return `<textarea placeholder="Add notes..." onchange="updateNotes('${player.id}', this.value)" maxlength="165" class="w-full bg-slate-700 border border-slate-600 rounded px-2 py-1 text-sm resize-none h-12 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">${player.notes}</textarea>`;
+        };
+
         // Rendering
         function renderPlayers() {
             const container = $('playersList');
-            container.innerHTML = state.filteredPlayers.map((p, i) => {
-                const actionBtn = state.isDraftMode ? 
-                    `<button onclick="draftPlayer('${p.id}')" class="bg-red-600 w-8 h-8 rounded text-xs font-bold text-white hover:bg-red-700 transition-colors">D</button>` :
-                    `<button onclick="cycleRisk('${p.id}')" class="${cfg.riskBtnColors[p.risk]} w-8 h-8 rounded text-xs font-bold text-white hover:opacity-80 transition-opacity">${p.risk[0]}</button>`;
-
-                const notes = state.isDraftMode ? 
-                    `<div class="w-full border border-slate-600 rounded px-2 py-1 text-sm h-12 bg-slate-700 text-gray-300">${p.notes || ''}</div>` :
-                    `<textarea placeholder="Add notes..." onchange="updateNotes('${p.id}', this.value)" maxlength="165" class="w-full bg-slate-700 border border-slate-600 rounded px-2 py-1 text-sm resize-none h-12 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">${p.notes}</textarea>`;
-
-                return `<div class="player-item ${cfg.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
+            container.innerHTML = state.filteredPlayers.map((p, i) => `
+                <div class="player-item ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
                     <div class="p-2 flex items-stretch gap-1">
                         <div class="drag-area flex items-center gap-1 flex-grow ${!state.isDraftMode ? 'cursor-move' : ''}">
                             <div class="w-12 text-center font-bold text-2xl text-gray-100">${p.overallRank}</div>
-                            <span class="${cfg.positionColors[p.position]} px-2 py-1 rounded text-sm font-medium">${p.position}${p.positionRank}</span>
+                            <span class="${cfg.styles.positionBadge[p.position]} px-2 py-1 rounded text-sm font-medium">${p.position}${p.positionRank}</span>
                             <div class="px-2 flex-grow">
                                 <div class="font-semibold text-gray-100">${p.name}</div>
                                 <div class="text-xs text-gray-400 flex justify-between items-center">
@@ -392,31 +385,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="notes-section px-2 flex items-center overflow-hidden">${notes}</div>
-                        <div class="w-10 flex items-center">${actionBtn}</div>
+                        <div class="notes-section px-2 flex items-center overflow-hidden">${createNotes(p, state.isDraftMode)}</div>
+                        <div class="w-10 flex items-center">${createButton('action', p, state.isDraftMode)}</div>
                     </div>
-                </div>`;
-            }).join('');
+                </div>
+            `).join('');
             
             if (!state.isDraftMode) setupDragHandlers();
         }
 
         function renderRecentlyDrafted() {
-            $('recentlyDraftedList').innerHTML = state.draftedPlayers.slice(0, 3).map(p => 
-                `<div class="bg-slate-900 border border-slate-700 rounded-lg p-2 cursor-pointer hover:bg-slate-800 transition-colors">
+            $('recentlyDraftedList').innerHTML = state.draftedPlayers.slice(0, cfg.recentDraftedCount).map(p => `
+                <div class="bg-slate-900 border border-slate-700 rounded-lg p-2 cursor-pointer hover:bg-slate-800 transition-colors">
                     <div class="flex items-center gap-2">
-                        <span class="${cfg.positionColors[p.position]} px-2 py-1 rounded text-xs font-medium">${p.position}</span>
+                        <span class="${cfg.styles.positionBadge[p.position]} px-2 py-1 rounded text-xs font-medium">${p.position}</span>
                         <div class="flex-grow">
                             <span class="font-semibold text-gray-100">${p.name}</span>
                             <span class="text-xs text-gray-400 ml-2">${p.team}</span>
                         </div>
                         <button onclick="undraftPlayer('${p.id}')" class="bg-blue-600 text-white px-2 py-1 rounded text-xs hover:bg-blue-700 transition-colors">UNDO</button>
                     </div>
-                </div>`
-            ).join('');
+                </div>
+            `).join('');
         }
 
-        // Drag and drop handling
+        // Drag and drop handling - NOT TOUCHING THIS SECTION
         function setupDragHandlers() {
             document.querySelectorAll('.drag-area').forEach(item => {
                 on(item, 'touchstart', handleTouchStart, { passive: true });
@@ -488,44 +481,38 @@
             endDrag();
         }
 
-        // Touch handlers - Final clean version
         function handleTouchStart(e) {
-            // Prevent multiple drags
             if (state.dragState.isDragging || state.dragState.timers.touch) return;
             
             const touch = e.touches[0];
             const playerItem = e.target.closest('.player-item');
             if (!playerItem) return;
             
-            // Initialize drag attempt
             state.dragState.startX = touch.clientX;
             state.dragState.startY = touch.clientY;
             state.dragState.pendingDrag = true;
             
-            // 150ms delay for intentional drags
             state.dragState.timers.touch = setTimeout(() => {
                 if (state.dragState.pendingDrag) {
                     initDrag(playerItem, touch.clientX, touch.clientY);
                     if (navigator.vibrate) navigator.vibrate(50);
                 }
-            }, 150);
+            }, cfg.dragDelay);
         }
 
         function handleTouchMove(e) {
             const touch = e.touches[0];
             
-            // During delay period - check for scroll intent
             if (state.dragState.pendingDrag && !state.dragState.isDragging) {
                 const moveX = Math.abs(touch.clientX - state.dragState.startX);
                 const moveY = Math.abs(touch.clientY - state.dragState.startY);
                 
-                if (moveX > 15 || moveY > 15) {
+                if (moveX > cfg.dragThreshold || moveY > cfg.dragThreshold) {
                     cancelPendingDrag();
                 }
-                return; // Allow scrolling
+                return;
             }
             
-            // Active drag - move element
             if (state.dragState.isDragging) {
                 e.preventDefault();
                 moveDrag(touch.clientX, touch.clientY);
@@ -545,7 +532,6 @@
             }
         }
 
-        // Mouse handlers
         function handleMouseDown(e) {
             e.preventDefault();
             initDrag(e.target.closest('.player-item'), e.clientX, e.clientY);
@@ -570,7 +556,7 @@
             const p = state.players.find(x => x.id === id);
             if (p) {
                 const i = cfg.risks.indexOf(p.risk);
-                p.risk = cfg.risks[(i + 1) % 3];
+                p.risk = cfg.risks[(i + 1) % cfg.risks.length];
                 filterPlayers();
             }
         };
@@ -604,8 +590,12 @@
         function toggleDraftMode() {
             state.isDraftMode = !state.isDraftMode;
             const btn = $('draftBtn');
+            const btnClasses = state.isDraftMode ? 
+                'bg-red-600 hover:bg-red-700' : 
+                'bg-orange-600 hover:bg-orange-700';
+            
             btn.textContent = state.isDraftMode ? 'Exit Draft' : 'Draft Day';
-            btn.className = `${state.isDraftMode ? 'bg-red-600' : 'bg-orange-600'} text-white px-4 py-2 rounded-md hover:${state.isDraftMode ? 'bg-red-700' : 'bg-orange-700'} transition-colors h-10`;
+            btn.className = `${btnClasses} text-white px-4 py-2 rounded-md transition-colors h-10`;
             $('recentlyDraftedSection').classList.toggle('hidden');
             renderPlayers();
             if (state.isDraftMode) renderRecentlyDrafted();
@@ -620,18 +610,25 @@
             reader.onload = e => {
                 try {
                     const data = JSON.parse(e.target.result);
+                    
                     if (data.players && !data.rankerName) {
                         state.players = data.players.map((p, i) => ({
-                            ...p, id: p.id || `p${i}`, risk: p.risk || 'Medium',
-                            notes: p.notes || '', overallRank: i + 1
+                            ...p, 
+                            id: p.id || `p${i}`, 
+                            risk: p.risk || 'Medium',
+                            notes: p.notes || '', 
+                            overallRank: i + 1
                         }));
                         recalculateRanks();
                     } else {
+                        Object.assign(state, {
+                            players: data.players || [],
+                            draftedPlayers: data.draftedPlayers || []
+                        });
                         $('rankerName').value = data.rankerName || '';
                         $('scoringFormat').value = data.scoringFormat || 'PPR';
-                        state.players = data.players || [];
-                        state.draftedPlayers = data.draftedPlayers || [];
                     }
+                    
                     updateTitle();
                     filterPlayers();
                     if (state.isDraftMode) renderRecentlyDrafted();
@@ -669,14 +666,14 @@
             URL.revokeObjectURL(a.href);
         }
 
+        // Printable generation
         function generatePrintableHTML() {
             const title = $('rankingsTitle').textContent;
             const perCol = 25, perPage = 50;
             
-            const genColumn = players => players.map(p => {
+            const genPlayer = p => {
                 const [first, ...last] = p.name.split(/\s+/);
                 const riskClass = p.risk ? `risk-${p.risk.toLowerCase()}` : '';
-                const adpText = p.adp ? `ADP: ${p.adp}` : '';
                 return `<div class="player ${riskClass}">
                     <div class="rank">${p.overallRank}</div>
                     <div class="position ${p.position}">${p.position}${p.positionRank}</div>
@@ -684,13 +681,15 @@
                         <div class="name"><div class="first-name">${first}</div><div class="last-name">${last.join(' ')}</div></div>
                         <div class="team-adp">
                             <span class="team">${p.team}</span>
-                            ${adpText ? `<span class="adp">${adpText}</span>` : ''}
+                            ${p.adp ? `<span class="adp">ADP: ${p.adp}</span>` : ''}
                         </div>
                     </div>
                     <div class="notes">${p.notes || ''}</div>
                 </div>`;
-            }).join('');
-
+            };
+            
+            const genColumn = players => players.map(genPlayer).join('');
+            
             const pages = [];
             for (let i = 0; i < state.players.length; i += perPage) {
                 const pageNum = Math.floor(i / perPage) + 1;
@@ -710,7 +709,7 @@
                 </div>`);
             }
 
-            return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${title}</title><style>
+            const styles = `
 *{margin:0;padding:0;box-sizing:border-box}body{font:10px/1.1 Arial,sans-serif;color:#333;background:#fff}
 .page{width:8.5in;height:11in;margin:0 auto;padding:.2in;page-break-after:always;position:relative;display:flex;flex-direction:column}
 .page:last-child{page-break-after:avoid}.header{text-align:center;margin-bottom:.1in;padding-bottom:3px;display:flex;justify-content:space-between;align-items:center}
@@ -729,8 +728,9 @@
 .notes{position:absolute;left:144px;top:2px;width:2.25in;height:24px;background:#fff;border:1px solid #d1d5db;
 border-radius:2px;padding:2px 3px;font-size:6px;color:#374151;word-wrap:break-word;overflow:hidden;line-height:7px}
 .page-footer{position:absolute;bottom:.1in;left:.2in;right:.2in;display:flex;justify-content:space-between;font-size:9px;color:#666}
-@media print{body{margin:0}.page{margin:0;page-break-after:always}.page:last-child{page-break-after:avoid}}
-</style></head><body>${pages.join('')}</body></html>`;
+@media print{body{margin:0}.page{margin:0;page-break-after:always}.page:last-child{page-break-after:avoid}}`;
+
+            return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${title}</title><style>${styles}</style></head><body>${pages.join('')}</body></html>`;
         }
     </script>
 </body>
