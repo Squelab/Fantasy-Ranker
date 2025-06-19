@@ -42,18 +42,35 @@
     <div class="container mx-auto p-4 max-w-6xl">
         <!-- Header Controls -->
         <div class="bg-slate-800 rounded-lg shadow-xl p-6 mb-6 border border-slate-700">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                <input type="text" id="rankerName" placeholder="Your Name" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none h-10">
-                <select id="scoringFormat" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 focus:border-blue-500 focus:outline-none h-10">
-                    <option value="PPR">PPR</option>
-                    <option value="Half PPR">Half PPR</option>
-                    <option value="Standard">Standard</option>
-                </select>
-                <label class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 cursor-pointer transition-colors flex items-center justify-center text-center h-10">
-                    Load Rankings
-                    <input type="file" id="loadFileInput" accept=".json" class="hidden">
-                </label>
-                <button id="saveBtn" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors h-10">Save Rankings</button>
+            <div class="flex flex-col gap-4 mb-4">
+                <!-- Controls Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <input type="text" id="rankerName" placeholder="Your Name" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none h-10">
+                    <div class="flex items-center gap-2 md:contents">
+                        <select id="scoringFormat" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 focus:border-blue-500 focus:outline-none h-10 flex-grow">
+                            <option value="PPR">PPR</option>
+                            <option value="Half PPR">Half PPR</option>
+                            <option value="Standard">Standard</option>
+                        </select>
+                        <button id="refreshBtn" class="md:hidden relative bg-red-600 text-white w-8 h-8 hover:bg-red-500 transition-colors flex items-center justify-center flex-shrink-0" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)" title="Refresh to Expert Consensus">
+                            <svg class="w-4 h-4 absolute inset-0 m-auto" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <label class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 cursor-pointer transition-colors flex items-center justify-center text-center h-10">
+                        Load Rankings
+                        <input type="file" id="loadFileInput" accept=".json" class="hidden">
+                    </label>
+                    <div class="flex items-center gap-2 md:contents">
+                        <button id="saveBtn" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors h-10 flex-grow">Save Rankings</button>
+                        <button class="hidden md:flex relative bg-red-600 text-white w-8 h-8 hover:bg-red-500 transition-colors items-center justify-center flex-shrink-0" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)" title="Refresh to Expert Consensus" onclick="refreshToConsensus()">
+                            <svg class="w-4 h-4 absolute inset-0 m-auto" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <h1 id="rankingsTitle" class="text-2xl font-bold text-center text-gray-100 mt-4">
@@ -93,11 +110,16 @@
             filteredPlayers: [],
             draftedPlayers: [],
             isDraftMode: false,
+            originalConsensus: {}, // Store original data for each format
+            consensusData: {}, // Store all scoring format data
+            currentFormat: 'PPR', // Track current format
             dragState: {
                 element: null,
+                dragElement: null,
                 index: -1,
                 placeholder: null,
                 isDragging: false,
+                pendingDrag: false,
                 startX: 0,
                 startY: 0,
                 originalRect: null,
@@ -136,12 +158,13 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             on($('rankerName'), 'input', updateTitle);
-            on($('scoringFormat'), 'change', () => { updateTitle(); loadPlayersFromFile(); });
+            on($('scoringFormat'), 'change', handleScoringFormatChange);
             on($('searchInput'), 'input', debounce(filterPlayers, 150));
             on($('loadFileInput'), 'change', loadRankings);
             on($('saveBtn'), 'click', saveRankings);
             on($('printBtn'), 'click', downloadPrintable);
             on($('draftBtn'), 'click', toggleDraftMode);
+            on($('refreshBtn'), 'click', refreshToConsensus);
             
             on(window, 'resize', () => {
                 cancelDragOperation();
@@ -150,7 +173,7 @@
             });
             
             updateTitle();
-            loadPlayersFromFile();
+            loadAllScoringFormats();
         });
 
         // Title management
@@ -161,6 +184,53 @@
         }
 
         // Data loading
+        async function loadAllScoringFormats() {
+            const formats = ['PPR', 'Half PPR', 'Standard'];
+            const fileMap = { 'PPR': 'PPR.json', 'Half PPR': 'HPPR.json', 'Standard': 'STD.json' };
+            
+            try {
+                // Load all formats
+                for (const format of formats) {
+                    const filename = fileMap[format];
+                    const response = await fetch(`./data/${filename}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        const allPlayers = data.players || data;
+                        // Filter to only skill positions (QB, RB, WR, TE) and limit to top 200
+                        const skillPlayers = allPlayers
+                            .filter(p => ['QB', 'RB', 'WR', 'TE'].includes(p.position))
+                            .slice(0, 200);
+                        
+                        state.consensusData[format] = skillPlayers.map((p, i) => ({
+                            ...p, 
+                            id: p.id || `p${i}`, 
+                            risk: p.risk || 'Medium', 
+                            notes: p.notes || '', 
+                            overallRank: i + 1
+                        }));
+                    }
+                }
+                
+                // Initialize with current format
+                const currentFormat = $('scoringFormat').value || 'PPR';
+                state.currentFormat = currentFormat;
+                loadPlayersFromConsensus(currentFormat);
+            } catch (error) {
+                console.error('Error loading scoring formats:', error);
+                // Fallback to single format loading
+                loadPlayersFromFile();
+            }
+        }
+
+        function loadPlayersFromConsensus(format) {
+            if (state.consensusData[format]) {
+                state.players = JSON.parse(JSON.stringify(state.consensusData[format])); // Deep copy
+                state.originalConsensus[format] = JSON.parse(JSON.stringify(state.consensusData[format])); // Store original
+                recalculateRanks();
+                filterPlayers();
+            }
+        }
+
         function loadPlayersFromFile() {
             const format = $('scoringFormat').value || 'PPR';
             const fileMap = { 'PPR': 'PPR.json', 'Half PPR': 'HPPR.json', 'Standard': 'STD.json' };
@@ -182,9 +252,79 @@
                         notes: p.notes || '', 
                         overallRank: i + 1
                     }));
+                    
+                    // Store as original consensus for this format
+                    const format = $('scoringFormat').value || 'PPR';
+                    state.originalConsensus[format] = JSON.parse(JSON.stringify(state.players));
+                    
                     recalculateRanks();
                     filterPlayers();
                 });
+        }
+
+        function handleScoringFormatChange() {
+            updateTitle();
+            const previousFormat = state.currentFormat;
+            const newFormat = $('scoringFormat').value;
+            state.currentFormat = newFormat;
+            
+            if (isUnedited(previousFormat)) {
+                // Rankings haven't been customized, refresh to new consensus
+                loadPlayersFromConsensus(newFormat);
+            } else {
+                // Rankings have been customized, just update ADP values
+                updateADPValues(newFormat);
+            }
+        }
+
+        function isUnedited(formatToCheck = null) {
+            const checkFormat = formatToCheck || state.currentFormat;
+            const original = state.originalConsensus[checkFormat];
+            
+            if (!original || state.players.length !== original.length) {
+                return false;
+            }
+            
+            // Check if every aspect matches exactly
+            for (let i = 0; i < state.players.length; i++) {
+                const current = state.players[i];
+                const orig = original[i];
+                
+                if (current.id !== orig.id ||
+                    current.name !== orig.name ||
+                    current.position !== orig.position ||
+                    current.team !== orig.team ||
+                    current.risk !== orig.risk ||
+                    current.notes !== orig.notes ||
+                    current.overallRank !== orig.overallRank) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        function updateADPValues(format) {
+            if (!state.consensusData[format]) return;
+            
+            const formatData = state.consensusData[format];
+            
+            // Update ADP values for existing players
+            state.players.forEach(player => {
+                const consensusPlayer = formatData.find(p => p.name === player.name && p.team === player.team);
+                if (consensusPlayer) {
+                    player.adp = consensusPlayer.adp;
+                }
+            });
+            
+            filterPlayers();
+        }
+
+        function refreshToConsensus() {
+            if (confirm('Are you sure you want to refresh these rankings to the expert consensus?\n\nYou will lose all your edits/additions.')) {
+                const currentFormat = $('scoringFormat').value || 'PPR';
+                loadPlayersFromConsensus(currentFormat);
+            }
         }
 
         // Player management
@@ -206,25 +346,12 @@
         }
 
         function updatePlayerOrder() {
-            // Remove any orphaned placeholders first
-            document.querySelectorAll('.drag-placeholder').forEach(el => el.remove());
-            
-            // Now get the real player items only
-            const playerElements = Array.from(document.querySelectorAll('.player-item:not(.drag-placeholder)'));
-            const newOrder = playerElements
-                .map(el => state.players.find(p => p.id === el.dataset.playerId))
-                .filter(Boolean); // Remove any undefined entries
-            
-            // Verify we didn't lose any players
-            if (newOrder.length === state.players.length) {
-                state.players = newOrder;
-                recalculateRanks();
-                filterPlayers();
-            } else {
-                console.error('Player count mismatch:', newOrder.length, 'vs', state.players.length);
-                // Refresh the display without changing order
-                filterPlayers();
-            }
+            const newOrder = Array.from(document.querySelectorAll('.player-item')).map(el => 
+                state.players.find(p => p.id === el.dataset.playerId)
+            ).filter(Boolean);
+            state.players = newOrder;
+            recalculateRanks();
+            filterPlayers();
         }
 
         // Rendering
@@ -279,9 +406,9 @@
         // Drag and drop handling
         function setupDragHandlers() {
             document.querySelectorAll('.drag-area').forEach(item => {
-                on(item, 'touchstart', handleTouchStart, { passive: false });
+                on(item, 'touchstart', handleTouchStart, { passive: true });
                 on(item, 'touchmove', handleTouchMove, { passive: false });
-                on(item, 'touchend', handleTouchEnd, { passive: false });
+                on(item, 'touchend', handleTouchEnd, { passive: true });
                 on(item, 'mousedown', handleMouseDown);
             });
         }
@@ -348,31 +475,61 @@
             endDrag();
         }
 
-        // Touch handlers
+        // Touch handlers - Final clean version
         function handleTouchStart(e) {
+            // Prevent multiple drags
+            if (state.dragState.isDragging || state.dragState.timers.touch) return;
+            
             const touch = e.touches[0];
             const playerItem = e.target.closest('.player-item');
+            if (!playerItem) return;
+            
+            // Initialize drag attempt
+            state.dragState.startX = touch.clientX;
+            state.dragState.startY = touch.clientY;
+            state.dragState.pendingDrag = true;
+            
+            // 150ms delay for intentional drags
             state.dragState.timers.touch = setTimeout(() => {
-                initDrag(playerItem, touch.clientX, touch.clientY);
-                if (navigator.vibrate) navigator.vibrate(50);
-            }, 200);
+                if (state.dragState.pendingDrag) {
+                    initDrag(playerItem, touch.clientX, touch.clientY);
+                    if (navigator.vibrate) navigator.vibrate(50);
+                }
+            }, 150);
         }
 
         function handleTouchMove(e) {
-            if (!state.dragState.isDragging) {
-                const touch = e.touches[0];
+            const touch = e.touches[0];
+            
+            // During delay period - check for scroll intent
+            if (state.dragState.pendingDrag && !state.dragState.isDragging) {
                 const moveX = Math.abs(touch.clientX - state.dragState.startX);
                 const moveY = Math.abs(touch.clientY - state.dragState.startY);
-                if (moveX > 10 || moveY > 10) clearTimeout(state.dragState.timers.touch);
-                return;
+                
+                if (moveX > 15 || moveY > 15) {
+                    cancelPendingDrag();
+                }
+                return; // Allow scrolling
             }
-            e.preventDefault();
-            moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+            
+            // Active drag - move element
+            if (state.dragState.isDragging) {
+                e.preventDefault();
+                moveDrag(touch.clientX, touch.clientY);
+            }
         }
 
         function handleTouchEnd() {
-            clearTimeout(state.dragState.timers.touch);
+            cancelPendingDrag();
             endDrag();
+        }
+
+        function cancelPendingDrag() {
+            state.dragState.pendingDrag = false;
+            if (state.dragState.timers.touch) {
+                clearTimeout(state.dragState.timers.touch);
+                state.dragState.timers.touch = null;
+            }
         }
 
         // Mouse handlers
@@ -428,6 +585,8 @@
                 renderRecentlyDrafted();
             }
         };
+
+        window.refreshToConsensus = refreshToConsensus;
 
         function toggleDraftMode() {
             state.isDraftMode = !state.isDraftMode;
