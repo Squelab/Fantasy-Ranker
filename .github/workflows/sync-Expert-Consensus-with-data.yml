@@ -1,0 +1,27 @@
+name: Sync Docs Data
+
+on:
+  push:
+    paths:
+      - 'Player-Context/Expert-Consensus/**'
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  sync-Expert-Consensus-with-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Copy JSON files to docs/data
+        run: |
+          mkdir -p docs/data
+          cp Player-Context/Expert-Consensus/*.json docs/data/
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs/data/
+          git diff --staged --quiet || git commit -m "Auto-sync: Update data files from Player-Context"
+          git push
