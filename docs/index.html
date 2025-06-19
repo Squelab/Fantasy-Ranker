@@ -346,12 +346,25 @@
         }
 
         function updatePlayerOrder() {
-            const newOrder = Array.from(document.querySelectorAll('.player-item')).map(el => 
-                state.players.find(p => p.id === el.dataset.playerId)
-            ).filter(Boolean);
-            state.players = newOrder;
-            recalculateRanks();
-            filterPlayers();
+            // Remove any orphaned placeholders first
+            document.querySelectorAll('.drag-placeholder').forEach(el => el.remove());
+            
+            // Now get the real player items only
+            const playerElements = Array.from(document.querySelectorAll('.player-item:not(.drag-placeholder)'));
+            const newOrder = playerElements
+                .map(el => state.players.find(p => p.id === el.dataset.playerId))
+                .filter(Boolean); // Remove any undefined entries
+            
+            // Verify we didn't lose any players
+            if (newOrder.length === state.players.length) {
+                state.players = newOrder;
+                recalculateRanks();
+                filterPlayers();
+            } else {
+                console.error('Player count mismatch:', newOrder.length, 'vs', state.players.length);
+                // Refresh the display without changing order
+                filterPlayers();
+            }
         }
 
         // Rendering
