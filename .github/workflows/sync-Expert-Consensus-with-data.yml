@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'Player-Context/Expert-Consensus/**'
+      - 'Player-Context/Expert-Consensus/*'
   workflow_dispatch: # Allows manual trigger
 
 jobs:
