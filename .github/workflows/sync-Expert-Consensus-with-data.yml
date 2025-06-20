@@ -1,13 +1,10 @@
 name: Sync Docs Data
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'Player-Context/Expert-Consensus/**'
-      - 'Player-Context/Expert-Consensus/*'
-      - 'Player-Context/**'
-  workflow_dispatch: # Allows manual trigger
+  schedule:
+    # Run every 6 hours (at 1:00, 7:00, 13:00, 19:00 UTC)
+    - cron: '1 */6 * * *'
+  workflow_dispatch:
 
 jobs:
   sync-Expert-Consensus-with-data:
