@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable-no">
     <title>Fantasy Football Rankings Tool</title>
-    <link rel="icon" type="image/png" href="favicon.PNG">
-    <link rel="apple-touch-icon" href="favicon.PNG">
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
@@ -18,7 +18,9 @@
             user-select: none;
             -webkit-touch-callout: none;
             -webkit-tap-highlight-color: transparent;
-        }
+    </script>
+</body>
+</html>
         
         /* Keep notes and buttons interactive */
         .notes-section, .notes-section *, 
@@ -133,7 +135,7 @@
     <div class="container mx-auto p-4 max-w-6xl min-1-96">
         <!-- Header Controls -->
         <div class="bg-slate-800 rounded-lg shadow-xl p-4 mb-2 border border-slate-700">
-            <div class="flex flex-col gap-4 mb-4">
+            <div class="flex flex-col gap-4">
                 <!-- Controls Grid - Mobile: 2x3, Desktop: 1x6 -->
                 <div class="grid grid-cols-2 lg:grid-cols-6 gap-3">
                     <input type="text" id="rankerName" placeholder="Your Name" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none h-10">
@@ -172,10 +174,6 @@
                     </div>
                 </div>
             </div>
-
-            <h1 id="rankingsTitle" class="text-2xl font-bold text-center text-gray-100 mt-4">
-                Your 2025 PPR Fantasy Football Rankings
-            </h1>
         </div>
 
         <!-- Recently Drafted Section -->
@@ -257,7 +255,7 @@
             maxPlayers: 200,
             recentDraftedCount: 3,
             dragThreshold: 15,
-            dragDelay: 120,
+            dragDelay: 100,
             styles: {
                 riskBtn: { High: 'bg-red-600', Medium: 'bg-yellow-600', Low: 'bg-green-600' },
                 riskBorder: { High: 'border-red-500', Medium: 'border-yellow-500', Low: 'border-green-500' },
@@ -622,8 +620,10 @@
                 <div class="player-item ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
                     <div class="p-2 flex items-stretch gap-2">
                         <div class="drag-area flex items-center gap-1 flex-grow ${!state.isDraftMode ? 'cursor-move' : ''}">
-                            <div class="w-12 text-center font-bold text-2xl text-gray-100">${p.overallRank}</div>
-                            <span class="${cfg.styles.positionBadge[p.position]} px-2 py-1 rounded text-sm font-medium">${p.position}${p.positionRank}</span>
+                            <div class="w-12 text-center flex flex-col items-center justify-center">
+                                <div class="font-bold text-2xl text-gray-100 leading-none">${p.overallRank}</div>
+                                <span class="${cfg.styles.positionBadge[p.position]} px-1 py-0.5 rounded text-xs font-medium">${p.position}${p.positionRank}</span>
+                            </div>
                             <div class="px-2 flex-grow">
                                 <div class="font-semibold text-gray-100">${p.name}</div>
                                 <div class="text-xs text-gray-400 flex justify-between items-center">
