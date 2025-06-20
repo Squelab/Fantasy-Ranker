@@ -36,6 +36,16 @@
             user-select: text !important;
             touch-action: auto !important;
         }
+        
+        /* Available player styling */
+        .available-player {
+            opacity: 0.6;
+            background: rgba(71, 85, 105, 0.3) !important;
+        }
+        
+        .available-player:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body class="bg-slate-900 min-h-screen text-gray-100">
@@ -54,23 +64,23 @@
                             <option value="Half PPR">Half PPR</option>
                             <option value="Standard">Standard</option>
                         </select>
-                        <button id="refreshBtnMobile" class="lg:hidden relative bg-red-600 text-white w-8 h-8 hover:bg-red-500 transition-colors flex items-center justify-center flex-shrink-0" style="clip-path: polygon(50% 5%, 5% 95%, 95% 95%); border-radius: 2px;" title="Refresh to Expert Consensus">
-                            <svg class="w-4 h-4 absolute" style="top: 45%; left: 50%; transform: translate(-50%, -50%);" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <button id="refreshBtnMobile" class="lg:hidden bg-yellow-600 border-2 border-yellow-500 text-white w-8 h-8 hover:bg-yellow-700 transition-all duration-200 flex items-center justify-center flex-shrink-0 rounded-md" title="Refresh to Expert Consensus">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                             </svg>
                         </button>
                     </div>
     
-                    <label class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 cursor-pointer transition-colors flex items-center justify-center text-center h-10">
+                    <label class="bg-blue-600 border-2 border-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 cursor-pointer transition-all duration-200 flex items-center justify-center text-center h-10">
         Load Rankings
                         <input type="file" id="loadFileInput" accept=".json" class="hidden">
                     </label>
     
                     <!-- Desktop: Save + Refresh in same cell -->
                     <div class="flex items-center gap-2">
-                        <button id="saveBtn" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors h-10 flex-grow">Save Rankings</button>
-                        <button id="refreshBtnDesktop" class="hidden lg:flex relative bg-red-600 text-white w-8 h-8 hover:bg-red-500 transition-colors items-center justify-center flex-shrink-0" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)" title="Refresh to Expert Consensus">
-                            <svg class="w-4 h-4 absolute inset-0 m-auto" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <button id="saveBtn" class="bg-green-600 border-2 border-green-500 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-all duration-200 h-10 flex-grow">Save Rankings</button>
+                        <button id="refreshBtnDesktop" class="hidden lg:flex bg-yellow-600 border-2 border-yellow-500 text-white w-8 h-8 hover:bg-yellow-700 transition-all duration-200 items-center justify-center flex-shrink-0 rounded-md" title="Refresh to Expert Consensus">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                             </svg>
                         </button>
@@ -92,14 +102,21 @@
         <!-- Action Buttons -->
         <div class="bg-slate-800 rounded-lg shadow-xl p-4 mb-6 border border-slate-700">
             <div class="grid grid-cols-2 gap-4">
-                <button id="draftBtn" class="bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-700 transition-colors h-10">Draft Day</button>
-                <button id="printBtn" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors h-10">Printable</button>
+                <button id="draftBtn" class="bg-orange-600 border-2 border-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700 transition-all duration-200 h-10">Draft Day</button>
+                <button id="printBtn" class="bg-purple-600 border-2 border-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-all duration-200 h-10">Printable</button>
             </div>
         </div>
 
         <!-- Search Section -->
         <div class="bg-slate-800 rounded-lg shadow-xl p-4 mb-6 border border-slate-700">
-            <input type="text" id="searchInput" placeholder="Search players..." class="w-full bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">
+            <div class="flex gap-3">
+                <input type="text" id="searchInput" placeholder="Search players..." class="flex-grow bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">
+                <div id="deleteZone" class="w-12 h-10 bg-red-600 border-2 border-red-500 rounded-md flex items-center justify-center hover:bg-red-700 transition-all duration-200 cursor-pointer" title="Drop player here to delete">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </div>
+            </div>
         </div>
 
         <!-- Rankings List -->
@@ -113,10 +130,12 @@
         const state = {
             players: [],
             filteredPlayers: [],
+            availablePlayers: [],
             draftedPlayers: [],
             isDraftMode: false,
             originalConsensus: {},
             consensusData: {},
+            allConsensusData: {}, // New: stores ALL players from consensus
             currentFormat: 'PPR',
             dragState: {
                 element: null,
@@ -128,7 +147,8 @@
                 startX: 0,
                 startY: 0,
                 originalRect: null,
-                timers: { touch: null, resize: null }
+                timers: { touch: null, resize: null, scroll: null },
+                isScrolling: false
             }
         };
 
@@ -145,6 +165,7 @@
             dragDelay: 120,
             styles: {
                 riskBtn: { High: 'bg-red-600', Medium: 'bg-yellow-600', Low: 'bg-green-600' },
+                riskBorder: { High: 'border-red-500', Medium: 'border-yellow-500', Low: 'border-green-500' },
                 posColors: { 
                     QB: 'bg-purple-900/50 border-l-4 border-purple-600', 
                     RB: 'bg-blue-900/50 border-l-4 border-blue-600', 
@@ -195,6 +216,13 @@
                 state.dragState.timers.resize = setTimeout(filterPlayers, 250);
             });
 
+            // Warn before page refresh/close
+            on(window, 'beforeunload', (e) => {
+                e.preventDefault();
+                e.returnValue = 'Are you sure you want to leave? You will lose your unsaved rankings progress.';
+                return 'Are you sure you want to leave? You will lose your unsaved rankings progress.';
+            });
+
             updateTitle();
             loadAllScoringFormats();
         });
@@ -214,6 +242,17 @@
                     if (response.ok) {
                         const data = await response.json();
                         const allPlayers = data.players || data;
+                        
+                        // Store ALL players for search functionality
+                        state.allConsensusData[format] = allPlayers.map((p, i) => ({
+                            ...p, 
+                            id: p.id || `p${i}`, 
+                            risk: p.risk || 'Medium', 
+                            notes: p.notes || '', 
+                            originalRank: i + 1
+                        }));
+                        
+                        // Store filtered skill players for initial load
                         const skillPlayers = allPlayers
                             .filter(p => cfg.skillPositions.includes(p.position))
                             .slice(0, cfg.maxPlayers);
@@ -253,6 +292,16 @@
                 .then(r => r.ok ? r.json() : Promise.reject())
                 .then(d => {
                     const allPlayers = d.players || d;
+                    
+                    // Store ALL players
+                    state.allConsensusData[format] = allPlayers.map((p, i) => ({
+                        ...p, 
+                        id: p.id || `p${i}`, 
+                        risk: p.risk || 'Medium', 
+                        notes: p.notes || '', 
+                        originalRank: i + 1
+                    }));
+                    
                     const skillPlayers = allPlayers
                         .filter(p => cfg.skillPositions.includes(p.position))
                         .slice(0, cfg.maxPlayers);
@@ -275,15 +324,11 @@
             updateTitle();
             const previousFormat = state.currentFormat;
             const newFormat = $('scoringFormat').value;
+            state.currentFormat = newFormat;
             
-            // Check if current rankings match consensus for the previous format
             if (isUnedited(previousFormat)) {
-                // Rankings haven't been customized, load new consensus
-                state.currentFormat = newFormat;
                 loadPlayersFromConsensus(newFormat);
             } else {
-                // Rankings have been customized, just update ADP values
-                state.currentFormat = newFormat;
                 updateADPValues(newFormat);
             }
         }
@@ -294,17 +339,9 @@
             
             if (!original || state.players.length !== original.length) return false;
             
-            // Check if the current player order and all properties match the consensus
             return state.players.every((p, i) => {
                 const orig = original[i];
-                // Check all important properties
-                return p.id === orig.id &&
-                       p.name === orig.name &&
-                       p.position === orig.position &&
-                       p.team === orig.team &&
-                       p.risk === orig.risk &&
-                       p.notes === orig.notes &&
-                       p.overallRank === orig.overallRank;
+                return Object.keys(p).every(key => p[key] === orig[key]);
             });
         }
 
@@ -341,16 +378,49 @@
 
         function filterPlayers() {
             const search = $('searchInput').value.toLowerCase();
+            
+            // Filter current players
             state.filteredPlayers = state.players.filter(p => 
                 p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search)
             );
+            
+            // Find available players to add (from all consensus data)
+            state.availablePlayers = [];
+            if (search.length >= 2 && state.allConsensusData[state.currentFormat]) {
+                const currentPlayerIds = new Set(state.players.map(p => p.id));
+                
+                state.availablePlayers = state.allConsensusData[state.currentFormat]
+                    .filter(p => 
+                        !currentPlayerIds.has(p.id) &&
+                        (p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search))
+                    )
+                    .slice(0, 10); // Limit to 10 available players for performance
+            }
+            
             renderPlayers();
+        }
+
+        function addPlayer(playerId) {
+            const playerToAdd = state.allConsensusData[state.currentFormat]?.find(p => p.id === playerId);
+            if (!playerToAdd) return;
+            
+            // Create new player object with current rankings properties
+            const newPlayer = {
+                ...playerToAdd,
+                overallRank: state.players.length + 1,
+                positionRank: 1 // Will be recalculated
+            };
+            
+            // Add to the end of rankings
+            state.players.push(newPlayer);
+            recalculateRanks();
+            filterPlayers();
         }
 
         function updatePlayerOrder() {
             document.querySelectorAll('.drag-placeholder').forEach(el => el.remove());
             
-            const playerElements = Array.from(document.querySelectorAll('.player-item:not(.drag-placeholder)'));
+            const playerElements = Array.from(document.querySelectorAll('.player-item:not(.drag-placeholder):not(.available-player)'));
             const newOrder = playerElements
                 .map(el => state.players.find(p => p.id === el.dataset.playerId))
                 .filter(Boolean);
@@ -368,9 +438,17 @@
         // Rendering helpers
         const createButton = (action, player, isDraft) => {
             if (isDraft) {
-                return `<button onclick="draftPlayer('${player.id}')" class="bg-red-600 w-8 h-8 rounded text-xs font-bold text-white hover:bg-red-700 transition-colors">D</button>`;
+                return `<button onclick="draftPlayer('${player.id}')" class="bg-red-600 border-2 border-red-500 w-8 h-8 rounded text-xs font-bold text-white hover:bg-red-700 transition-all duration-200">D</button>`;
             }
-            return `<button onclick="cycleRisk('${player.id}')" class="${cfg.styles.riskBtn[player.risk]} w-8 h-8 rounded text-xs font-bold text-white hover:opacity-80 transition-opacity">${player.risk[0]}</button>`;
+            return `<button onclick="cycleRisk('${player.id}')" class="${cfg.styles.riskBtn[player.risk]} border-2 ${cfg.styles.riskBorder[player.risk]} w-8 h-8 rounded text-xs font-bold text-white hover:opacity-80 transition-all duration-200">${player.risk[0]}</button>`;
+        };
+
+        const createAddButton = (player) => {
+            return `<button onclick="addPlayer('${player.id}')" class="bg-green-600 border-2 border-green-500 w-8 h-8 rounded text-white hover:bg-green-700 transition-all duration-200 flex items-center justify-center">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+                </svg>
+            </button>`;
         };
 
         const createNotes = (player, isDraft) => {
@@ -380,10 +458,16 @@
             return `<textarea placeholder="Add notes..." onchange="updateNotes('${player.id}', this.value)" maxlength="165" class="w-full bg-slate-700 border border-slate-600 rounded px-2 py-1 text-sm resize-none h-12 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">${player.notes}</textarea>`;
         };
 
+        const createReadOnlyNotes = (player) => {
+            return `<div class="w-full border border-slate-600 rounded px-2 py-1 text-sm h-12 bg-slate-700 text-gray-300 opacity-60">${player.notes || 'Available to add'}</div>`;
+        };
+
         // Rendering
         function renderPlayers() {
             const container = $('playersList');
-            container.innerHTML = state.filteredPlayers.map((p, i) => `
+            
+            // Render current players
+            const currentPlayersHTML = state.filteredPlayers.map((p, i) => `
                 <div class="player-item ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
                     <div class="p-2 flex items-stretch gap-1">
                         <div class="drag-area flex items-center gap-1 flex-grow ${!state.isDraftMode ? 'cursor-move' : ''}">
@@ -403,6 +487,29 @@
                 </div>
             `).join('');
             
+            // Render available players
+            const availablePlayersHTML = state.availablePlayers.map((p, i) => `
+                <div class="player-item available-player ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
+                    <div class="p-2 flex items-stretch gap-1">
+                        <div class="flex items-center gap-1 flex-grow">
+                            <div class="w-12 text-center font-bold text-lg text-gray-400">${p.originalRank}</div>
+                            <span class="${cfg.styles.positionBadge[p.position]} px-2 py-1 rounded text-sm font-medium opacity-60">${p.position}</span>
+                            <div class="px-2 flex-grow">
+                                <div class="font-semibold text-gray-300">${p.name}</div>
+                                <div class="text-xs text-gray-500 flex justify-between items-center">
+                                    <span>${p.team}</span>
+                                    ${p.adp ? `<span class="text-grey-500">ADP: ${p.adp}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notes-section px-2 flex items-center overflow-hidden">${createReadOnlyNotes(p)}</div>
+                        <div class="w-10 flex items-center">${createAddButton(p)}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = currentPlayersHTML + availablePlayersHTML;
+            
             if (!state.isDraftMode) setupDragHandlers();
         }
 
@@ -415,7 +522,7 @@
                             <span class="font-semibold text-gray-100">${p.name}</span>
                             <span class="text-xs text-gray-400 ml-2">${p.team}</span>
                         </div>
-                        <button onclick="undraftPlayer('${p.id}')" class="bg-blue-600 text-white px-2 py-1 rounded text-xs hover:bg-blue-700 transition-colors">UNDO</button>
+                        <button onclick="undraftPlayer('${p.id}')" class="bg-blue-600 border-2 border-blue-500 text-white px-2 py-1 rounded text-xs hover:bg-blue-700 transition-all duration-200">UNDO</button>
                     </div>
                 </div>
             `).join('');
@@ -462,11 +569,29 @@
             element.style.left = (originalRect.left + clientX - startX) + 'px';
             element.style.top = (originalRect.top + clientY - startY) + 'px';
             
+            // Auto-scroll logic
+            handleAutoScroll(clientY);
+            
+            // Check if over delete zone
+            const deleteZone = $('deleteZone');
+            const deleteRect = deleteZone.getBoundingClientRect();
+            const isOverDelete = clientX >= deleteRect.left && clientX <= deleteRect.right && 
+                                clientY >= deleteRect.top && clientY <= deleteRect.bottom;
+            
+            if (isOverDelete) {
+                deleteZone.classList.add('bg-red-800', 'scale-110');
+                deleteZone.classList.remove('bg-red-600');
+                return; // Don't do normal placeholder logic when over delete
+            } else {
+                deleteZone.classList.remove('bg-red-800', 'scale-110');
+                deleteZone.classList.add('bg-red-600');
+            }
+            
             element.style.pointerEvents = 'none';
             const elementBelow = document.elementFromPoint(clientX, clientY);
             element.style.pointerEvents = 'auto';
             
-            const targetItem = elementBelow?.closest('.player-item:not(.drag-active)');
+            const targetItem = elementBelow?.closest('.player-item:not(.drag-active):not(.available-player)');
             if (targetItem && placeholder) {
                 const targetRect = targetItem.getBoundingClientRect();
                 const before = clientY < targetRect.top + targetRect.height / 2;
@@ -474,22 +599,106 @@
             }
         }
 
+        function handleAutoScroll(clientY) {
+            const scrollZone = 80; // pixels from edge to start scrolling
+            const maxScroll = 8; // max scroll speed
+            const viewportHeight = window.innerHeight;
+            
+            let scrollSpeed = 0;
+            
+            if (clientY < scrollZone) {
+                // Near top - scroll up
+                scrollSpeed = -Math.max(1, Math.round((scrollZone - clientY) / scrollZone * maxScroll));
+            } else if (clientY > viewportHeight - scrollZone) {
+                // Near bottom - scroll down  
+                scrollSpeed = Math.max(1, Math.round((clientY - (viewportHeight - scrollZone)) / scrollZone * maxScroll));
+            }
+            
+            if (scrollSpeed !== 0 && !state.dragState.isScrolling) {
+                state.dragState.isScrolling = true;
+                smoothScroll(scrollSpeed);
+            } else if (scrollSpeed === 0) {
+                state.dragState.isScrolling = false;
+                cancelAnimationFrame(state.dragState.timers.scroll);
+            }
+        }
+
+        function smoothScroll(speed) {
+            if (!state.dragState.isDragging || !state.dragState.isScrolling) return;
+            
+            window.scrollBy(0, speed);
+            state.dragState.timers.scroll = requestAnimationFrame(() => smoothScroll(speed));
+        }
+
         function endDrag() {
             if (!state.dragState.isDragging) return;
             
             const { element, placeholder } = state.dragState;
+            
+            // Stop auto-scrolling
+            state.dragState.isScrolling = false;
+            if (state.dragState.timers.scroll) {
+                cancelAnimationFrame(state.dragState.timers.scroll);
+            }
+            
+            // Reset delete zone styling
+            const deleteZone = $('deleteZone');
+            deleteZone.classList.remove('bg-red-800', 'scale-110');
+            deleteZone.classList.add('bg-red-600');
+            
             if (element && placeholder) {
-                placeholder.parentNode.replaceChild(element, placeholder);
-                element.classList.remove('drag-active');
-                ['width', 'height', 'left', 'top'].forEach(prop => element.style[prop] = '');
-                updatePlayerOrder();
+                // Check if dropped on delete zone
+                const rect = element.getBoundingClientRect();
+                const deleteRect = deleteZone.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                const isOverDelete = centerX >= deleteRect.left && centerX <= deleteRect.right && 
+                                   centerY >= deleteRect.top && centerY <= deleteRect.bottom;
+                
+                if (isOverDelete) {
+                    // Delete the player
+                    const playerId = element.dataset.playerId;
+                    deletePlayer(playerId);
+                    
+                    // Remove elements
+                    element.remove();
+                    placeholder.remove();
+                } else {
+                    // Normal drop - replace placeholder with element
+                    placeholder.parentNode.replaceChild(element, placeholder);
+                    element.classList.remove('drag-active');
+                    ['width', 'height', 'left', 'top'].forEach(prop => element.style[prop] = '');
+                    updatePlayerOrder();
+                }
             }
             
             Object.assign(state.dragState, { element: null, placeholder: null, isDragging: false });
         }
 
+        function deletePlayer(playerId) {
+            const playerIndex = state.players.findIndex(p => p.id === playerId);
+            if (playerIndex !== -1) {
+                state.players.splice(playerIndex, 1);
+                recalculateRanks();
+                filterPlayers();
+            }
+        }
+
         function cancelDragOperation() {
             clearTimeout(state.dragState.timers.touch);
+            
+            // Stop auto-scrolling
+            state.dragState.isScrolling = false;
+            if (state.dragState.timers.scroll) {
+                cancelAnimationFrame(state.dragState.timers.scroll);
+            }
+            
+            // Reset delete zone styling
+            const deleteZone = $('deleteZone');
+            deleteZone.classList.remove('bg-red-800', 'scale-110');
+            deleteZone.classList.add('bg-red-600');
+            
             endDrag();
         }
 
@@ -498,7 +707,7 @@
             
             const touch = e.touches[0];
             const playerItem = e.target.closest('.player-item');
-            if (!playerItem) return;
+            if (!playerItem || playerItem.classList.contains('available-player')) return;
             
             state.dragState.startX = touch.clientX;
             state.dragState.startY = touch.clientY;
@@ -545,8 +754,11 @@
         }
 
         function handleMouseDown(e) {
+            const playerItem = e.target.closest('.player-item');
+            if (!playerItem || playerItem.classList.contains('available-player')) return;
+            
             e.preventDefault();
-            initDrag(e.target.closest('.player-item'), e.clientX, e.clientY);
+            initDrag(playerItem, e.clientX, e.clientY);
             on(document, 'mousemove', handleMouseMove);
             on(document, 'mouseup', handleMouseUp);
         }
@@ -578,6 +790,10 @@
             if (p) p.notes = notes;
         };
 
+        window.addPlayer = addPlayer;
+
+        window.deletePlayer = deletePlayer;
+
         window.draftPlayer = id => {
             const i = state.players.findIndex(p => p.id === id);
             if (i !== -1) {
@@ -603,11 +819,11 @@
             state.isDraftMode = !state.isDraftMode;
             const btn = $('draftBtn');
             const btnClasses = state.isDraftMode ? 
-                'bg-red-600 hover:bg-red-700' : 
-                'bg-orange-600 hover:bg-orange-700';
+                'bg-red-600 border-2 border-red-500 hover:bg-red-700' : 
+                'bg-orange-600 border-2 border-orange-500 hover:bg-orange-700';
             
             btn.textContent = state.isDraftMode ? 'Exit Draft' : 'Draft Day';
-            btn.className = `${btnClasses} text-white px-4 py-2 rounded-md transition-colors h-10`;
+            btn.className = `${btnClasses} text-white px-4 py-2 rounded-md transition-all duration-200 h-10`;
             $('recentlyDraftedSection').classList.toggle('hidden');
             renderPlayers();
             if (state.isDraftMode) renderRecentlyDrafted();
