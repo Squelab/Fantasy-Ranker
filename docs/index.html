@@ -48,6 +48,17 @@
         .available-player:hover {
             opacity: 0.8;
         }
+        
+        /* Notes expand under certain conditions */
+        @media (max-width: 768px) {
+            .notes-focus-expand:focus {
+                width: calc(100% - 80%)
+                z-index: 10;
+                position: absolute;
+                right: 0;
+                transition: all 0.2s ease;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-900 min-h-screen text-gray-100">
