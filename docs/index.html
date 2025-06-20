@@ -603,18 +603,34 @@
         }
 
         function handleAutoScroll(clientY) {
-            const scrollZone = 80; // pixels from edge to start scrolling
-            const maxScroll = 8; // max scroll speed
+            const isMobile = window.innerWidth < 768; // Mobile breakpoint
+            const scrollZone = isMobile ? 50 : 80; // Smaller zone on mobile
+            const maxScroll = 25; // Increased max speed
             const viewportHeight = window.innerHeight;
             
             let scrollSpeed = 0;
             
             if (clientY < scrollZone) {
-                // Near top - scroll up
-                scrollSpeed = -Math.max(1, Math.round((scrollZone - clientY) / scrollZone * maxScroll));
+                // Near top - scroll up with exponential curve
+                const distance = scrollZone - clientY;
+                const ratio = distance / scrollZone;
+                // Exponential curve: more aggressive the closer to edge
+                scrollSpeed = -Math.max(1, Math.round(Math.pow(ratio, 0.5) * maxScroll));
+                
+                // Lightning fast if trying to drag off screen
+                if (clientY < 10) {
+                    scrollSpeed = -maxScroll * 2;
+                }
             } else if (clientY > viewportHeight - scrollZone) {
-                // Near bottom - scroll down  
-                scrollSpeed = Math.max(1, Math.round((clientY - (viewportHeight - scrollZone)) / scrollZone * maxScroll));
+                // Near bottom - scroll down with exponential curve
+                const distance = clientY - (viewportHeight - scrollZone);
+                const ratio = distance / scrollZone;
+                scrollSpeed = Math.max(1, Math.round(Math.pow(ratio, 0.5) * maxScroll));
+                
+                // Lightning fast if trying to drag off screen
+                if (clientY > viewportHeight - 10) {
+                    scrollSpeed = maxScroll * 2;
+                }
             }
             
             if (scrollSpeed !== 0 && !state.dragState.isScrolling) {
