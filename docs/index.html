@@ -31,13 +31,6 @@
             touch-action: auto;
         }
         
-        /* Hide notes section on smaller screens - binary behavior only */
-        @media (max-width: 1024px) {
-            .notes-section {
-                display: none;
-            }
-        }
-        
         /* Available player styling */
         .available-player {
             opacity: 0.6;
@@ -46,6 +39,93 @@
         
         .available-player:hover {
             opacity: 0.8;
+        }
+
+        /* Notes modal styling */
+        .notes-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .notes-modal-content {
+            background: #1e293b;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notes-modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #475569;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notes-modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .notes-modal-close {
+            background: #dc2626;
+            border: 2px solid #b91c1c;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .notes-modal-close:hover {
+            background: #b91c1c;
+        }
+
+        .notes-modal-body {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .notes-modal-textarea {
+            width: 100%;
+            height: 200px;
+            background: #334155;
+            border: 1px solid #475569;
+            border-radius: 4px;
+            padding: 12px;
+            color: #f1f5f9;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .notes-modal-textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .notes-modal-textarea::placeholder {
+            color: #94a3b8;
         }
     </style>
 </head>
@@ -122,6 +202,19 @@
         </div>
     </div>
 
+    <!-- Notes Modal -->
+    <div id="notesModal" class="notes-modal hidden">
+        <div class="notes-modal-content">
+            <div class="notes-modal-header">
+                <div id="notesModalTitle" class="notes-modal-title">Player - Notes</div>
+                <button id="notesModalClose" class="notes-modal-close">×</button>
+            </div>
+            <div class="notes-modal-body">
+                <textarea id="notesModalTextarea" class="notes-modal-textarea" placeholder="Add your notes about this player..."></textarea>
+            </div>
+        </div>
+    </div>
+
     <script>
         // State management
         const state = {
@@ -134,6 +227,10 @@
             consensusData: {},
             allConsensusData: {}, // New: stores ALL players from consensus
             currentFormat: 'PPR',
+            notesModal: {
+                isOpen: false,
+                currentPlayerId: null
+            },
             dragState: {
                 element: null,
                 dragElement: null,
@@ -201,11 +298,26 @@
                 printBtn: ['click', downloadPrintable],
                 draftBtn: ['click', toggleDraftMode],
                 refreshBtnMobile: ['click', refreshToConsensus],
-                refreshBtnDesktop: ['click', refreshToConsensus]
+                refreshBtnDesktop: ['click', refreshToConsensus],
+                notesModalClose: ['click', closeNotesModal]
             };
 
             Object.entries(eventMap).forEach(([id, [event, handler]]) => {
                 on($(id), event, handler);
+            });
+
+            // Modal background click to close
+            on($('notesModal'), 'click', (e) => {
+                if (e.target === $('notesModal')) {
+                    closeNotesModal();
+                }
+            });
+
+            // Escape key to close modal
+            on(document, 'keydown', (e) => {
+                if (e.key === 'Escape' && state.notesModal.isOpen) {
+                    closeNotesModal();
+                }
             });
 
             on(window, 'resize', () => {
@@ -224,6 +336,38 @@
             updateTitle();
             loadAllScoringFormats();
         });
+
+        // Notes Modal Functions
+        function openNotesModal(playerId) {
+            const player = state.players.find(p => p.id === playerId);
+            if (!player) return;
+
+            state.notesModal.isOpen = true;
+            state.notesModal.currentPlayerId = playerId;
+
+            $('notesModalTitle').textContent = `${player.name} - Notes`;
+            $('notesModalTextarea').value = player.notes || '';
+            $('notesModal').classList.remove('hidden');
+            
+            // Focus the textarea
+            setTimeout(() => {
+                $('notesModalTextarea').focus();
+            }, 100);
+        }
+
+        function closeNotesModal() {
+            if (!state.notesModal.isOpen) return;
+
+            // Auto-save the notes
+            const notes = $('notesModalTextarea').value;
+            if (state.notesModal.currentPlayerId) {
+                updateNotes(state.notesModal.currentPlayerId, notes);
+            }
+
+            state.notesModal.isOpen = false;
+            state.notesModal.currentPlayerId = null;
+            $('notesModal').classList.add('hidden');
+        }
 
         // Title management
         function updateTitle() {
@@ -441,6 +585,15 @@
             return `<button onclick="cycleRisk('${player.id}')" class="${cfg.styles.riskBtn[player.risk]} border-2 ${cfg.styles.riskBorder[player.risk]} w-8 h-8 rounded text-xs font-bold text-white hover:opacity-80 transition-all duration-200 flex items-center justify-center">${player.risk[0]}</button>`;
         };
 
+        const createNotesIcon = (player, isDraft) => {
+            if (isDraft) return '';
+            return `<button onclick="openNotesModal('${player.id}')" class="bg-slate-600 border-2 border-slate-500 w-8 h-8 rounded text-white hover:bg-slate-700 transition-all duration-200 flex items-center justify-center" title="Edit notes">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                </svg>
+            </button>`;
+        };
+
         const createAddButton = (player) => {
             return `<button onclick="addPlayer('${player.id}')" class="bg-green-600 border-2 border-green-500 w-8 h-8 rounded text-white hover:bg-green-700 transition-all duration-200 flex items-center justify-center">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -460,30 +613,47 @@
             return `<div class="w-full border border-slate-600 rounded px-2 py-1 text-sm h-12 bg-slate-700 text-gray-300 opacity-60">${player.notes || 'Available to add'}</div>`;
         };
 
+        // Responsive layout detection
+        function shouldShowNotesTextarea() {
+            return window.innerWidth >= 768; // Show textarea on desktop/tablet, icon on mobile
+        }
+
         // Rendering
         function renderPlayers() {
             const container = $('playersList');
+            const showNotesTextarea = shouldShowNotesTextarea();
             
             // Render current players
-            const currentPlayersHTML = state.filteredPlayers.map((p, i) => `
-                <div class="player-item ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
-                    <div class="p-2 flex items-stretch gap-1">
-                        <div class="drag-area flex items-center gap-1 flex-grow ${!state.isDraftMode ? 'cursor-move' : ''}">
-                            <div class="w-12 text-center font-bold text-2xl text-gray-100">${p.overallRank}</div>
-                            <span class="${cfg.styles.positionBadge[p.position]} px-2 py-1 rounded text-sm font-medium">${p.position}${p.positionRank}</span>
-                            <div class="px-2 flex-grow">
-                                <div class="font-semibold text-gray-100">${p.name}</div>
-                                <div class="text-xs text-gray-400 flex justify-between items-center">
-                                    <span>${p.team}</span>
-                                    ${p.adp ? `<span class="text-grey-400">ADP: ${p.adp}</span>` : ''}
+            const currentPlayersHTML = state.filteredPlayers.map((p, i) => {
+                const notesSection = showNotesTextarea ? 
+                    `<div class="notes-section px-2 flex items-center overflow-hidden">${createNotes(p, state.isDraftMode)}</div>` :
+                    '';
+                
+                const notesIcon = !showNotesTextarea ? 
+                    `<div class="w-10 flex items-center">${createNotesIcon(p, state.isDraftMode)}</div>` : 
+                    '';
+                
+                return `
+                    <div class="player-item ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
+                        <div class="p-2 flex items-stretch gap-1">
+                            <div class="drag-area flex items-center gap-1 flex-grow ${!state.isDraftMode ? 'cursor-move' : ''}">
+                                <div class="w-12 text-center font-bold text-2xl text-gray-100">${p.overallRank}</div>
+                                <span class="${cfg.styles.positionBadge[p.position]} px-2 py-1 rounded text-sm font-medium">${p.position}${p.positionRank}</span>
+                                <div class="px-2 flex-grow">
+                                    <div class="font-semibold text-gray-100">${p.name}</div>
+                                    <div class="text-xs text-gray-400 flex justify-between items-center">
+                                        <span>${p.team}</span>
+                                        ${p.adp ? `<span class="text-grey-400">ADP: ${p.adp}</span>` : ''}
+                                    </div>
                                 </div>
                             </div>
+                            ${notesSection}
+                            ${notesIcon}
+                            <div class="w-10 flex items-center">${createButton('action', p, state.isDraftMode)}</div>
                         </div>
-                        <div class="notes-section px-2 flex items-center overflow-hidden">${createNotes(p, state.isDraftMode)}</div>
-                        <div class="w-10 flex items-center">${createButton('action', p, state.isDraftMode)}</div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
             
             // Render available players
             const availablePlayersHTML = state.availablePlayers.map((p, i) => `
@@ -814,6 +984,8 @@
         window.addPlayer = addPlayer;
 
         window.deletePlayer = deletePlayer;
+
+        window.openNotesModal = openNotesModal;
 
         window.draftPlayer = id => {
             const i = state.players.findIndex(p => p.id === id);
