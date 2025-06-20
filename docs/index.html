@@ -31,6 +31,13 @@
             touch-action: auto;
         }
         
+        /* Hide notes section on smaller screens - binary behavior only */
+        @media (max-width: 1024px) {
+            .notes-section {
+                display: none;
+            }
+        }
+        
         /* Available player styling */
         .available-player {
             opacity: 0.6;
