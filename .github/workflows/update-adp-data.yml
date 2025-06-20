@@ -32,7 +32,7 @@ jobs:
       - name: Fetch Standard data
         run: |
           echo "Fetching Standard data..."
-          curl -s "https://fantasyranker-adp-api.onrender.com/api/players/standard" | jq '.players' > Player-Context/Expert-Consensus/STD.json
+          curl -s "https://fantasyranker-adp-api.onrender.com/api/players/standard" | jq '.players' > Player-Context/Expert-Consensus/STAN.json
           
       - name: Check if files were created
         run: |
@@ -40,7 +40,7 @@ jobs:
           ls -la Player-Context/Expert-Consensus/*.json
           echo "PPR records: $(jq length Player-Context/Expert-Consensus/PPR.json)"
           echo "Half PPR records: $(jq length Player-Context/Expert-Consensus/HPPR.json)"
-          echo "Standard records: $(jq length Player-Context/Expert-Consensus/STD.json)"
+          echo "Standard records: $(jq length Player-Context/Expert-Consensus/STAN.json)"
           
       - name: Commit and push changes
         run: |
@@ -49,7 +49,7 @@ jobs:
           
           # Add timestamp to commit message
           TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
-          git add Player-Context/Expert-Consensus/PPR.json Player-Context/Expert-Consensus/HPPR.json Player-Context/Expert-Consensus/STD.json
+          git add Player-Context/Expert-Consensus/PPR.json Player-Context/Expert-Consensus/HPPR.json Player-Context/Expert-Consensus/STAN.json
           
           # Only commit if there are changes
           if git diff --staged --quiet; then
