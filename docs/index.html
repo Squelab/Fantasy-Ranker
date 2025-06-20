@@ -914,7 +914,7 @@
             };
 
             const name = data.rankerName || 'Your';
-            downloadFile(JSON.stringify(data, null, 2), `${name}${cfg.year}${data.scoringFormat || 'PPR'}Rankings.json`, 'application/json');
+            downloadFile(JSON.stringify(data, null, 2), `${name}${cfg.year}${cfg.fileMap[data.scoringFormat].replace('.json', '') || 'PPR'}Rankings.json`, 'application/json');
         }
 
         function downloadPrintable() {
