@@ -2,6 +2,7 @@ name: Sync Docs Data
 
 on:
   push:
+    branches: [main]
     paths:
       - 'Player-Context/Expert-Consensus/**'
   workflow_dispatch: # Allows manual trigger
