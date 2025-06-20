@@ -148,7 +148,8 @@
                 startY: 0,
                 originalRect: null,
                 timers: { touch: null, resize: null, scroll: null },
-                isScrolling: false
+                isScrolling: false,
+                wasOverDelete: false
             }
         };
 
@@ -581,10 +582,12 @@
             if (isOverDelete) {
                 deleteZone.classList.add('bg-red-800', 'scale-110');
                 deleteZone.classList.remove('bg-red-600');
+                state.dragState.wasOverDelete = true;
                 return; // Don't do normal placeholder logic when over delete
             } else {
                 deleteZone.classList.remove('bg-red-800', 'scale-110');
                 deleteZone.classList.add('bg-red-600');
+                state.dragState.wasOverDelete = false;
             }
             
             element.style.pointerEvents = 'none';
@@ -647,18 +650,15 @@
             deleteZone.classList.add('bg-red-600');
             
             if (element && placeholder) {
-                // Check if dropped on delete zone
-                const rect = element.getBoundingClientRect();
-                const deleteRect = deleteZone.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
+                // Use the last known drag position instead of element position
+                // Check if we were over delete zone during the last move
+                const wasOverDelete = deleteZone.classList.contains('bg-red-800') || 
+                                     state.dragState.wasOverDelete;
                 
-                const isOverDelete = centerX >= deleteRect.left && centerX <= deleteRect.right && 
-                                   centerY >= deleteRect.top && centerY <= deleteRect.bottom;
-                
-                if (isOverDelete) {
+                if (wasOverDelete) {
                     // Delete the player
                     const playerId = element.dataset.playerId;
+                    console.log('Deleting player:', playerId); // Debug log
                     deletePlayer(playerId);
                     
                     // Remove elements
@@ -673,7 +673,12 @@
                 }
             }
             
-            Object.assign(state.dragState, { element: null, placeholder: null, isDragging: false });
+            Object.assign(state.dragState, { 
+                element: null, 
+                placeholder: null, 
+                isDragging: false, 
+                wasOverDelete: false 
+            });
         }
 
         function deletePlayer(playerId) {
@@ -698,6 +703,9 @@
             const deleteZone = $('deleteZone');
             deleteZone.classList.remove('bg-red-800', 'scale-110');
             deleteZone.classList.add('bg-red-600');
+            
+            // Reset delete state
+            state.dragState.wasOverDelete = false;
             
             endDrag();
         }
