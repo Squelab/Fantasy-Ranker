@@ -286,7 +286,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Set up event listeners using map for cleaner code
             const eventMap = {
-                rankerName: ['input', updateTitle],
                 scoringFormat: ['change', handleScoringFormatChange],
                 searchInput: ['input', debounce(filterPlayers, 150)],
                 loadFileInput: ['change', loadRankings],
@@ -329,7 +328,6 @@
                 return 'Are you sure you want to leave? You will lose your unsaved rankings progress.';
             });
 
-            updateTitle();
             loadAllScoringFormats();
         });
 
@@ -363,13 +361,6 @@
             state.notesModal.isOpen = false;
             state.notesModal.currentPlayerId = null;
             $('notesModal').classList.add('hidden');
-        }
-
-        // Title management
-        function updateTitle() {
-            const name = $('rankerName').value.trim();
-            const format = $('scoringFormat').value || 'PPR';
-            $('rankingsTitle').textContent = `${name ? name + "'s" : 'Your'} ${cfg.year} ${format} Fantasy Football Rankings`;
         }
 
         // Data loading
@@ -459,7 +450,6 @@
         }
 
         function handleScoringFormatChange() {
-            updateTitle();
             const previousFormat = state.currentFormat;
             const newFormat = $('scoringFormat').value;
             state.currentFormat = newFormat;
@@ -1030,7 +1020,6 @@
                         $('scoringFormat').value = data.scoringFormat || 'PPR';
                     }
                     
-                    updateTitle();
                     filterPlayers();
                     if (state.isDraftMode) renderRecentlyDrafted();
                 } catch (err) {
