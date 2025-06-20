@@ -52,8 +52,8 @@
         /* Notes expand under certain conditions */
         @media (max-width: 768px) {
             .notes-focus-expand:focus {
-                width: 60%;
-                max-width: 300px;
+                width: calc(100% - 100px);
+                margin-left: -200px;
                 z-index: 10;
                 position: relative;
                 transition: width 0.2s ease;
