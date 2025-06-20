@@ -52,10 +52,10 @@
         /* Notes expand under certain conditions */
         @media (max-width: 768px) {
             .notes-focus-expand:focus {
-                width: calc(100% - 80%)
+                width: calc(100% - 140px)
                 z-index: 10;
                 position: absolute;
-                right: 0;
+                right: 20;
                 margin-left: 80px;
                 transition: all 0.2s ease;
             }
@@ -376,7 +376,7 @@
         }
 
         function refreshToConsensus() {
-            if (confirm('Are you sure you want to refresh these rankings to the expert consensus?\n\nYou will lose all your edits/additions.')) {
+            if (confirm('Are you sure you want to refresh these rankings to Fantasy Pros expert consensus?\n\nYou will lose all your unsaved changes.')) {
                 loadPlayersFromConsensus(state.currentFormat);
             }
         }
