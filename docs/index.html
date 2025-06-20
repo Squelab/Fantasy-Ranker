@@ -469,7 +469,7 @@
             if (isDraft) {
                 return `<div class="w-full border border-slate-600 rounded px-2 py-1 text-sm h-12 bg-slate-700 text-gray-300">${player.notes || ''}</div>`;
             }
-            return `<textarea placeholder="Add notes..." onchange="updateNotes('${player.id}', this.value)" maxlength="165" class="w-full bg-slate-700 border border-slate-600 rounded px-2 py-1 text-sm resize-none h-12 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">${player.notes}</textarea>`;
+            return `<textarea placeholder="Add notes..." onchange="updateNotes('${player.id}', this.value)" maxlength="165" class="w-full bg-slate-700 notes-focus-expand border border-slate-600 notes-focus-expand rounded px-2 py-1 text-sm resize-none h-12 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">${player.notes}</textarea>`;
         };
 
         const createReadOnlyNotes = (player) => {
