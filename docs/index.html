@@ -703,6 +703,16 @@
             `).join('');
         }
 
+        function triggerHaptic(type = 'light') {
+            if (navigator.vibrate) {
+                const patterns = {
+                    light: [15],    // Quick tick when picking up
+                    heavy: [50]     // Solid thud when dropping
+                };
+                navigator.vibrate(patterns[type] || patterns.light);
+            }
+        }
+        
         // Drag and drop handling - NOT TOUCHING THIS SECTION
         function setupDragHandlers() {
             document.querySelectorAll('.drag-area').forEach(item => {
@@ -739,6 +749,11 @@
 
         function moveDrag(clientX, clientY) {
             if (!state.dragState.isDragging || !state.dragState.element) return;
+
+            if (!state.dragState.hasTriggeredStartHaptic) {
+                triggerHaptic('light');
+                state.dragState.hasTriggeredStartHaptic = true;
+            }
             
             const { element, startX, startY, originalRect, placeholder } = state.dragState;
             element.style.left = (originalRect.left + clientX - startX) + 'px';
@@ -825,6 +840,8 @@
 
         function endDrag() {
             if (!state.dragState.isDragging) return;
+
+            triggerHaptic('heavy');
             
             const { element, placeholder } = state.dragState;
             
