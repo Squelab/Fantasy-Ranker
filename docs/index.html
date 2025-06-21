@@ -704,12 +704,32 @@
         }
 
         function triggerHaptic(type = 'light') {
-            if (navigator.vibrate) {
-                const patterns = {
-                    light: [15],    // Quick tick when picking up
-                    heavy: [50]     // Solid thud when dropping
-                };
-                navigator.vibrate(patterns[type] || patterns.light);
+            // Debug logging
+            console.log('Attempting haptic:', type);
+    
+            try {
+                // Method 1: Standard Vibration API
+                if ('vibrate' in navigator) {
+                    const patterns = {
+                        light: 15,     // Single short vibration
+                        heavy: 50      // Single longer vibration
+                    };
+                    const success = navigator.vibrate(patterns[type] || patterns.light);
+                    console.log('Vibrate API result:', success);
+                    return;
+                }
+        
+                // Method 2: iOS Web Haptics (requires user gesture)
+                if (window.DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function') {
+                    // This only works on iOS 13+ in Safari
+                    navigator.vibrate(type === 'heavy' ? 50 : 15);
+                    return;
+                }
+        
+                console.log('No haptic support detected');
+        
+            } catch (error) {
+                console.log('Haptic error:', error);
             }
         }
         
