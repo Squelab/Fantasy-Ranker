@@ -295,6 +295,11 @@
             }
         };
 
+        // Create delete overlay
+        const deleteOverlay = document.createElement('div');
+        deleteOverlay.className = 'delete-overlay';
+        document.body.appendChild(deleteOverlay);
+        
         // Configuration
         const cfg = {
             year: new Date().getFullYear(),
@@ -826,7 +831,7 @@
     
             if (isOverDelete) {
                 // Add red glow to entire page background
-                document.body.classList.add('delete-hover');
+                document.classList.add('active');
     
                 deleteZone.classList.add('bg-red-800', 'scale-110');
                 deleteZone.classList.remove('bg-red-600');
@@ -834,7 +839,7 @@
                 return;
             } else {
                 // Remove red glow from page background
-                document.body.classList.remove('delete-hover');
+                document.classList.remove('active');
     
                 deleteZone.classList.remove('bg-red-800', 'scale-110');
                 deleteZone.classList.add('bg-red-600');
@@ -912,7 +917,7 @@
             deleteZone.classList.add('bg-red-600');
     
             // Remove red pulse from background
-            document.body.classList.remove('delete-hover');
+            document.classList.remove('active');
     
             if (element && placeholder) {
                 const wasOverDelete = state.dragState.wasOverDelete;
@@ -961,7 +966,7 @@
             deleteZone.classList.add('bg-red-600');
 
             // Remove red pulse from backghround
-            document.body.classList.remove('delete-hover');
+            document.classList.remove('active');
             
             state.dragState.wasOverDelete = false;
             
