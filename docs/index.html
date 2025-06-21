@@ -59,17 +59,24 @@
             transition: opacity 0.2s ease;
         }
 
-        .drag-area.delete-hover::before {
-            opacity: 1;
-            animation: deletePulse 0.8s ease-in-out infinite alternate;
+        /* Pulse player area red */
+        .drag-area.delete-hover {
+            background: rgba(220, 38, 38, 0.1);
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            border-radius: 8px;
+            animation: deleteGlow 1s ease-in-out infinite alternate;
         }
 
-        @keyframes deletePulse {
+        @keyframes deleteGlow {
             0% {
-                background: radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, rgba(220, 38, 38, 0.05) 50%, transparent 70%);
+                background: rgba(220, 38, 38, 0.08);
+                border-color: rgba(220, 38, 38, 0.2);
+                box-shadow: 0 0 20px rgba(220, 38, 38, 0.1);
             }
             100% {
-        background: radial-gradient(circle, rgba(220, 38, 38, 0.25) 0%, rgba(220, 38, 38, 0.12) 50%, transparent 70%);
+                background: rgba(220, 38, 38, 0.15);
+                border-color: rgba(220, 38, 38, 0.4);
+                box-shadow: 0 0 30px rgba(220, 38, 38, 0.2);
             }
         }
         
