@@ -596,10 +596,6 @@
             return `<textarea placeholder="Add notes..." onchange="updateNotes('${player.id}', this.value)" maxlength="165" class="w-full bg-slate-700 border border-slate-600 rounded px-2 py-1 text-sm resize-none h-12 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">${player.notes}</textarea>`;
         };
 
-        const createReadOnlyNotes = (player) => {
-            return `<div class="w-full border border-slate-600 rounded px-2 py-1 text-sm h-12 bg-slate-700 text-gray-300 opacity-60">${player.notes || 'Available to add'}</div>`;
-        };
-
         // Rendering
         function renderPlayers() {
             const container = $('playersList');
@@ -645,7 +641,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="notes-section px-2 flex items-center overflow-hidden">${createReadOnlyNotes(p)}</div>
                         <div class="w-10 flex items-center">${createAddButton(p)}</div>
                     </div>
                 </div>
@@ -984,16 +979,27 @@
         window.refreshToConsensus = refreshToConsensus;
 
         function toggleDraftMode() {
+            // If exiting draft mode, restore drafted players to main list
+            if (state.isDraftMode && state.draftedPlayers.length > 0) {
+                // Move all drafted players back to main players array
+                state.players.push(...state.draftedPlayers);
+                state.draftedPlayers = [];
+        
+                // Sort by original rank to restore order
+                state.players.sort((a, b) => a.overallRank - b.overallRank);
+            }
+    
             state.isDraftMode = !state.isDraftMode;
             const btn = $('draftBtn');
             const btnClasses = state.isDraftMode ? 
                 'bg-red-600 border-2 border-red-500 hover:bg-red-700' : 
                 'bg-orange-600 border-2 border-orange-500 hover:bg-orange-700';
-            
+    
             btn.textContent = state.isDraftMode ? 'Exit Draft' : 'Draft Day';
             btn.className = `${btnClasses} text-white px-4 py-2 rounded-md transition-all duration-200 h-10 text-center font-medium`;
             $('recentlyDraftedSection').classList.toggle('hidden');
-            renderPlayers();
+    
+            filterPlayers();
             if (state.isDraftMode) renderRecentlyDrafted();
         }
 
