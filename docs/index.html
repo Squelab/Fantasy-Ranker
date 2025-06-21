@@ -647,7 +647,7 @@
 
         const createNotes = (player, isDraft) => {
             if (isDraft) {
-                return `<div class="w-full border border-slate-600 rounded px-2 py-1 text-sm h-12 bg-slate-700 text-gray-300">${player.notes || ''}</div>`;
+                return `<div class="w-full border border-slate-600 rounded px-2 py-1 text-sm h-10 bg-slate-700 text-gray-300">${player.notes || ''}</div>`;
             }
             return `<textarea placeholder="Add player notes..." onchange="updateNotes('${player.id}', this.value)" maxlength="165" class="w-full bg-slate-700 border border-slate-600 rounded px-2 py-1 text-xs resize-none h-10 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">${player.notes}</textarea>`;
         };
@@ -666,18 +666,18 @@
                 html.push(`
                     <div class="player-item ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
                         <div class="p-2 flex items-stretch gap-2">
-                            <div class="drag-area flex items-center gap-1 flex-grow ${!isDraft ? 'cursor-move' : ''} lg:gap-2 lg:items-stretch">
-                                <div class="w-12 lg:flex lg:flex-col lg:items-center lg:justify-center">
-                                    <div class="text-2xl lg:text-mega font-bold text-gray-100 text-center lg:text-left">${p.overallRank}</div>
-                                    <div class="text-mini ${cfg.styles.positionBadge[p.position].split(' ')[0]} hidden lg:block">${p.position}${p.positionRank}</div>
+                            <div class="drag-area flex items-stretch gap-2 flex-grow ${!isDraft ? 'cursor-move' : ''} lg:items-center lg:gap-1">
+                                <div class="w-12 flex flex-col items-center justify-center lg:text-center">
+                                    <div class="text-mega font-bold text-gray-100 lg:text-2xl">${p.overallRank}</div>
+                                    <div class="text-mini ${cfg.styles.positionBadge[p.position].split(' ')[0]} lg:hidden">${p.position}${p.positionRank}</div>
                                 </div>
-                                <span class="${cfg.styles.positionBadge[p.position]} px-2 py-1 rounded text-sm font-medium lg:hidden">${p.position}${p.positionRank}</span>
-                                <div class="px-2 flex-grow lg:flex lg:items-center">
+                                <span class="${cfg.styles.positionBadge[p.position]} px-2 py-1 rounded text-sm font-medium hidden lg:inline">${p.position}${p.positionRank}</span>
+                                <div class="px-2 flex-grow flex items-center">
                                     <div class="flex-grow">
                                         <div class="font-semibold text-mega text-gray-100">${p.name}</div>
-                                        <div class="text-mini text-gray-400 flex justify-between items-center lg:block">
+                                        <div class="text-mini text-gray-400 lg:flex lg:justify-between lg:items-center">
                                             <span>${p.team}</span>
-                                            ${p.adp ? `<span class="text-gray-400 lg:ml-4">ADP: ${p.adp}</span>` : ''}
+                                            ${p.adp ? `<span class="ml-4 lg:ml-0 text-gray-400">ADP: ${p.adp}</span>` : ''}
                                         </div>
                                     </div>
                                 </div>
