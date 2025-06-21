@@ -40,27 +40,8 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Red pulse overlay for delete hover */
-        .drag-area {
-            position: relative;
-        }
-
-        .drag-area::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.08) 50%, transparent 70%);
-            opacity: 0;
-            pointer-events: none;
-            z-index: 1;
-            transition: opacity 0.2s ease;
-        }
-
-        /* Pulse player area red */
-        .drag-area.delete-hover {
+        /* Red glow for entire player list container */
+        #draftedPlayers.delete-hover {
             background: rgba(220, 38, 38, 0.1);
             border: 2px solid rgba(220, 38, 38, 0.3);
             border-radius: 8px;
@@ -847,8 +828,8 @@
             }
     
             if (isOverDelete) {
-                // Add red pulse to drag area
-                document.querySelector('.drag-area').classList.add('delete-hover');
+                // Add red pulse to player container
+                document.getElementById('draftedPlayers').classList.add('delete-hover');
     
                 deleteZone.classList.add('bg-red-800', 'scale-110');
                 deleteZone.classList.remove('bg-red-600');
@@ -856,7 +837,7 @@
                 return;
             } else {
                 // Remove red pulse from drag area
-                document.querySelector('.drag-area').classList.remove('delete-hover');
+                document.querySelector('.draftedPlayers').classList.remove('delete-hover');
     
                 deleteZone.classList.remove('bg-red-800', 'scale-110');
                 deleteZone.classList.add('bg-red-600');
