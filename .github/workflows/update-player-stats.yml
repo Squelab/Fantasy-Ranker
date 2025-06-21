@@ -70,31 +70,6 @@ jobs:
         # Add the new data file
         git add Player-Context/Stats/player-stats.json
         
-        # Create/update README with data info
-        if [ ! -f "README.md" ]; then
-          echo "# Fantasy AI with Player Stats" > README.md
-        fi
-        
-        # Add data section to README
-        echo "" >> README.md
-        echo "## 📊 Latest Player Data" >> README.md
-        echo "**Last Updated:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> README.md
-        echo "**Players:** $(jq '.total_players' Player-Context/Stats/player-stats.json)" >> README.md
-        echo "**Season:** $(jq '.current_nfl_season' Player-Context/Stats/player-stats.json)" >> README.md
-        echo "**File:** \`Player-Context/Stats/player-stats.json\`" >> README.md
-        echo "" >> README.md
-        
-        # Check if anything changed
-        if git diff --cached --quiet; then
-          echo "📭 No changes detected - data unchanged"
-        else
-          echo "📝 Changes detected - committing update"
-          git add README.md
-          git commit -m "📊 Update fantasy player data - $(date -u '+%Y-%m-%d %H:%M UTC')"
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:main
-          echo "✅ Successfully updated player data in repository"
-        fi
-        
     - name: Summary
       if: always()
       run: |
