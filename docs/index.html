@@ -40,18 +40,36 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Page background pulse effect */
-        body.delete-hover {
-            background: radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, rgba(220, 38, 38, 0.05) 50%, transparent 100%);
+        /* Red pulse overlay for delete hover */
+        .drag-area {
+            position: relative;
+        }
+
+        .drag-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.08) 50%, transparent 70%);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1;
+            transition: opacity 0.2s ease;
+        }
+
+        .drag-area.delete-hover::before {
+            opacity: 1;
             animation: deletePulse 0.8s ease-in-out infinite alternate;
         }
 
         @keyframes deletePulse {
             0% {
-                background: radial-gradient(circle, rgba(220, 38, 38, 0.05) 0%, rgba(220, 38, 38, 0.02) 50%, transparent 100%);
+                background: radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, rgba(220, 38, 38, 0.05) 50%, transparent 70%);
             }
             100% {
-                background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.08) 50%, transparent 100%);
+        background: radial-gradient(circle, rgba(220, 38, 38, 0.25) 0%, rgba(220, 38, 38, 0.12) 50%, transparent 70%);
             }
         }
         
@@ -822,17 +840,17 @@
             }
     
             if (isOverDelete) {
-                // Add page background pulse
-                document.body.classList.add('delete-hover');
-        
+                // Add red pulse to drag area
+                document.querySelector('.drag-area').classList.add('delete-hover');
+    
                 deleteZone.classList.add('bg-red-800', 'scale-110');
                 deleteZone.classList.remove('bg-red-600');
                 state.dragState.wasOverDelete = true;
                 return;
             } else {
-                // Remove page background pulse
-                document.body.classList.remove('delete-hover');
-        
+                // Remove red pulse from drag area
+                document.querySelector('.drag-area').classList.remove('delete-hover');
+    
                 deleteZone.classList.remove('bg-red-800', 'scale-110');
                 deleteZone.classList.add('bg-red-600');
                 state.dragState.wasOverDelete = false;
@@ -894,27 +912,23 @@
 
         function endDrag() {
             if (!state.dragState.isDragging) return;
-            
+    
             const { element, placeholder } = state.dragState;
-            
+    
             // Stop auto-scrolling
             state.dragState.isScrolling = false;
             if (state.dragState.timers.scroll) {
                 cancelAnimationFrame(state.dragState.timers.scroll);
             }
-            
+    
             // Reset delete zone styling
             const deleteZone = $('deleteZone');
             deleteZone.classList.remove('bg-red-800', 'scale-110');
             deleteZone.classList.add('bg-red-600');
-
-            // Also reset placeholder delete button styling
-            const placeholderDeleteBtn = document.querySelector('.drag-placeholder .delete-button');
-            if (placeholderDeleteBtn) {
-                placeholderDeleteBtn.classList.remove('bg-red-800', 'scale-110');
-                placeholderDeleteBtn.classList.add('bg-red-600');
-            }
-
+    
+            // Remove red pulse from drag area
+            document.querySelector('.drag-area').classList.remove('delete-hover');
+    
             if (element && placeholder) {
                 const wasOverDelete = state.dragState.wasOverDelete;
     
@@ -960,6 +974,9 @@
             const deleteZone = $('deleteZone');
             deleteZone.classList.remove('bg-red-800', 'scale-110');
             deleteZone.classList.add('bg-red-600');
+
+            // Remove red pulse from drag area
+            document.querySelector('.drag-area').classList.remove('delete-hover');
             
             state.dragState.wasOverDelete = false;
             
