@@ -40,14 +40,8 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Red glow for entire player list container */
-        body.delete-hover {
-            background: radial-gradient(circle at center, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.08) 40%, transparent 70%);
-            transition: background 0.3s ease;
-        }
-
-        body::before {
-            content: '';
+        /* Dedicated red overlay element */
+        .delete-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -60,7 +54,7 @@
             transition: opacity 0.3s ease;
         }
 
-        body.delete-hover::before {
+        .delete-overlay.active {
             opacity: 1;
         }
         
