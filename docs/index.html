@@ -63,7 +63,7 @@
 
         /* No more responsive expansion */
         .notes-section {
-            width: 200px;
+            width: 600px;
             flex-shrink: 0;
         }
         
@@ -675,9 +675,9 @@
                                 <div class="px-2 flex-grow flex items-center">
                                     <div class="flex-grow">
                                         <div class="font-semibold text-mega text-gray-100">${p.name}</div>
-                                        <div class="text-mini text-gray-400 lg:flex lg:justify-between lg:items-center">
+                                        <div class="text-mini text-gray-400">
                                             <span>${p.team}</span>
-                                            ${p.adp ? `<span class="ml-4 lg:ml-0 text-gray-400">ADP: ${p.adp}</span>` : ''}
+                                            ${p.adp ? `<span class="ml-4 text-gray-400">ADP: ${p.adp}</span>` : ''}
                                         </div>
                                     </div>
                                 </div>
@@ -703,8 +703,8 @@
                                 <div class="px-2 flex-grow">
                                     <div class="font-semibold text-gray-100 text-mega">${p.name}</div>
                                     <div class="text-mini text-gray-400">
-                                        <span>${p.team}</span>
-                                        ${p.adp ? `<span class="ml-4">ADP: ${p.adp}</span>` : ''}
+                                         <span>${p.team}</span>
+                                         ${p.adp ? `<span class="ml-4 text-gray-400">ADP: ${p.adp}</span>` : ''}
                                     </div>
                                 </div>
                             </div>
