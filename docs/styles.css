@@ -1,6 +1,22 @@
 /* Fantasy Football Rankings Styles */
 
-body { 
+body {
+    	font-size: 1rem;
+	font-family: system-ui, sans-serif;
+}
+
+p {
+	font-size: 85%;
+}
+
+h1 {
+	font-size: 1.5rem;
+}
+
+small {
+	font-size: 0.75rem;
+}
+    
     background-color: #0f172a; 
 }
 
