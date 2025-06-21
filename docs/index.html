@@ -61,6 +61,12 @@
             opacity: 0.8;
         }
 
+        /* No more responsive expansion */
+        .notes-section {
+            width: 200px;
+            flex-shrink: 0;
+        }
+        
         /* Notes modal styling */
         .notes-modal {
             position: fixed;
@@ -615,7 +621,7 @@
         }
 
         // Rendering helpers
-        const createButton = (action, player, isDraft) => {
+        const createRiskDraftButton = (action, player, isDraft) => {
             if (isDraft) {
                 return `<button onclick="draftPlayer('${player.id}')" class="bg-red-600 border-2 border-red-500 w-8 h-8 rounded text-mini font-bold text-white hover:bg-red-700 transition-all duration-200 flex items-center justify-center">D</button>`;
             }
@@ -643,7 +649,7 @@
             if (isDraft) {
                 return `<div class="w-full border border-slate-600 rounded px-2 py-1 text-sm h-12 bg-slate-700 text-gray-300">${player.notes || ''}</div>`;
             }
-            return `<textarea placeholder="Add notes..." onchange="updateNotes('${player.id}', this.value)" maxlength="165" class="w-full bg-slate-700 border border-slate-600 rounded px-2 py-1 text-sm resize-none h-12 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">${player.notes}</textarea>`;
+            return `<textarea placeholder="Add player notes..." onchange="updateNotes('${player.id}', this.value)" maxlength="165" class="w-full bg-slate-700 border border-slate-600 rounded px-2 py-1 text-xs resize-none h-10 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">${player.notes}</textarea>`;
         };
 
         // Rendering
@@ -660,24 +666,25 @@
                 html.push(`
                     <div class="player-item ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
                         <div class="p-2 flex items-stretch gap-2">
-                            <div class="drag-area flex items-stretch gap-2 flex-grow ${!isDraft ? 'cursor-move' : ''}">
-                                <div class="w-12 flex flex-col items-center justify-center">
-                                    <div class="text-mega font-bold text-gray-100">${p.overallRank}</div>
-                                    <div class="text-mini ${cfg.styles.positionBadge[p.position].split(' ')[0]}">${p.position}${p.positionRank}</div>
+                            <div class="drag-area flex items-center gap-1 flex-grow ${!isDraft ? 'cursor-move' : ''} lg:gap-2 lg:items-stretch">
+                                <div class="w-12 lg:flex lg:flex-col lg:items-center lg:justify-center">
+                                    <div class="text-2xl lg:text-mega font-bold text-gray-100 text-center lg:text-left">${p.overallRank}</div>
+                                    <div class="text-mini ${cfg.styles.positionBadge[p.position].split(' ')[0]} hidden lg:block">${p.position}${p.positionRank}</div>
                                 </div>
-                                <div class="px-2 flex-grow flex items-center">
+                                <span class="${cfg.styles.positionBadge[p.position]} px-2 py-1 rounded text-sm font-medium lg:hidden">${p.position}${p.positionRank}</span>
+                                <div class="px-2 flex-grow lg:flex lg:items-center">
                                     <div class="flex-grow">
-                                        <div class="font-semibold text-gray-100 text-mega">${p.name}</div>
-                                        <div class="text-mini text-gray-400">
+                                        <div class="font-semibold text-mega text-gray-100">${p.name}</div>
+                                        <div class="text-mini text-gray-400 flex justify-between items-center lg:block">
                                             <span>${p.team}</span>
-                                            ${p.adp ? `<span class="ml-4">ADP: ${p.adp}</span>` : ''}
+                                            ${p.adp ? `<span class="text-gray-400 lg:ml-4">ADP: ${p.adp}</span>` : ''}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="notes-section px-2 items-center overflow-hidden hidden lg:flex">${createNotes(p, isDraft)}</div>
+                            <div class="notes-section px-2 flex-shrink items-center overflow-hidden hidden lg:flex">${createNotes(p, isDraft)}</div>
                             <div class="w-10 flex items-center lg:hidden">${createNotesIcon(p, isDraft)}</div>
-                            <div class="w-10 flex items-center">${createButton('action', p, isDraft)}</div>
+                            <div class="w-10 flex items-center">${createRiskDraftButton('action', p, isDraft)}</div>
                         </div>
                     </div>
                 `);
