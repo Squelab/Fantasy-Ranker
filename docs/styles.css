@@ -1,50 +1,36 @@
 /* Fantasy Football Rankings Styles */
+
+/* Base Styles */
 body {
-	font-family: system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
     background-color: #0f172a;
 }
 
-.player-item { 
-    transition: transform 0.2s, opacity 0.2s; 
-    margin: 0 0 4px 0; 
-    border-radius: 0.5rem; 
+#playersList {
+    padding: 0;
 }
 
-.drag-area { 
-    cursor: move; 
+/* Player Item Styles */
+.player-item {
+    transition: transform 0.2s, opacity 0.2s;
+    margin: 0 0 4px 0;
+    border-radius: 0.5rem;
+    position: relative;
+    z-index: 2;
 }
 
-#playersList { 
-    padding: 0; 
+/* Drag & Drop Styles */
+.drag-area {
+    cursor: move;
 }
 
-.notes-section { 
-    width: 80px;
-    min-width: 80px;
-}
-
-@media (min-width: 768px) {
-    .notes-section { 
-        width: 24rem; 
-    }
-}
-
-@media (min-width: 1024px) {
-    .notes-section { 
-        width: 30rem; 
-    }
-}
-
-@media (min-width: 1280px) {
-    .notes-section { 
-        width: 37.5rem; 
-    }
-}
-
-@media (max-width: 640px) {
-    .notes-section { 
-        display: none !important; 
-    }
+.drag-area, .drag-area * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .drag-active {
@@ -54,10 +40,175 @@ body {
     transition: none !important;
     opacity: 0.8 !important;
     transform: scale(1.05) rotate(2deg) !important;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.7) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7) !important;
 }
 
 .drag-placeholder {
     opacity: 0.3;
     background: #1e293b;
+}
+
+/* Delete Overlay */
+.delete-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at center,
+        rgba(220, 38, 38, 0.3) 0%,
+        rgba(220, 38, 38, 0.18) 50%,
+        rgba(220, 38, 38, 0.08) 100%
+    );
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
+.delete-overlay.active {
+    opacity: 1;
+}
+
+/* Notes Section - Responsive */
+.notes-section {
+    width: 80px;
+    min-width: 80px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+    .notes-section {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .notes-section {
+        width: 24rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .notes-section {
+        width: 30rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .notes-section {
+        width: 37.5rem;
+    }
+}
+
+/* Interactive Elements */
+.notes-section,
+.notes-section *,
+button,
+button *,
+textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    touch-action: auto;
+}
+
+/* Available Players */
+.available-player {
+    opacity: 1;
+    background: rgba(71, 85, 105, 0.3) !important;
+}
+
+.available-player:hover {
+    opacity: 0.8;
+}
+
+/* Notes Modal */
+.notes-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.notes-modal-content {
+    background: #1e293b;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.notes-modal-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #475569;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notes-modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #f1f5f9;
+}
+
+.notes-modal-close {
+    background: #dc2626;
+    border: 2px solid #b91c1c;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
+    transition: all 0.2s;
+}
+
+.notes-modal-close:hover {
+    background: #b91c1c;
+}
+
+.notes-modal-body {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.notes-modal-textarea {
+    width: 100%;
+    height: 200px;
+    background: #334155;
+    border: 1px solid #475569;
+    border-radius: 4px;
+    padding: 12px;
+    color: #f1f5f9;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 150px;
+}
+
+.notes-modal-textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.notes-modal-textarea::placeholder {
+    color: #94a3b8;
 }
