@@ -1,4 +1,7 @@
 /* Fantasy Football Rankings Styles */
+html {
+    font-size: 90%;
+}
 
 body {
 	font-family: system-ui, sans-serif;
