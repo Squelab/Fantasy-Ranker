@@ -824,28 +824,46 @@
                 isOverDelete = clientX >= btnRect.left && clientX <= btnRect.right && 
                                clientY >= btnRect.top && clientY <= btnRect.bottom;
             }
+            
             if (isOverDelete) {
-                deleteZone.classList.add('bg-red-800', 'scale-110');
-                deleteZone.classList.remove('bg-red-600');
+                // Check which delete area we're over
+                const isOverMainDelete = clientX >= deleteRect.left && clientX <= deleteRect.right && 
+                                        clientY >= deleteRect.top && clientY <= deleteRect.bottom;
     
-                // Also highlight placeholder delete button if that's what we're over
+                let isOverPlaceholderBtn = false;
                 if (placeholderDeleteBtn) {
                     const btnRect = placeholderDeleteBtn.getBoundingClientRect();
-                    const isOverPlaceholderBtn = clientX >= btnRect.left && clientX <= btnRect.right && 
-                                                clientY >= btnRect.top && clientY <= btnRect.bottom;
+                    isOverPlaceholderBtn = clientX >= btnRect.left && clientX <= btnRect.right && 
+                                          clientY >= btnRect.top && clientY <= btnRect.bottom;
+                }
+    
+                // Style main delete zone
+                if (isOverMainDelete) {
+                    deleteZone.classList.add('bg-red-800', 'scale-110');
+                    deleteZone.classList.remove('bg-red-600');
+                } else {
+                    deleteZone.classList.remove('bg-red-800', 'scale-110');
+                    deleteZone.classList.add('bg-red-600');
+                }
+    
+                // Style placeholder button
+                if (placeholderDeleteBtn) {
                     if (isOverPlaceholderBtn) {
                         placeholderDeleteBtn.classList.add('bg-red-800', 'scale-110');
                         placeholderDeleteBtn.classList.remove('bg-red-600');
+                    } else {
+                        placeholderDeleteBtn.classList.remove('bg-red-800', 'scale-110');
+                        placeholderDeleteBtn.classList.add('bg-red-600');
                     }
                 }
-                
+    
                 state.dragState.wasOverDelete = true;
                 return;
             } else {
+                // Reset both when not over any delete area
                 deleteZone.classList.remove('bg-red-800', 'scale-110');
                 deleteZone.classList.add('bg-red-600');
     
-                // Reset placeholder delete button styling
                 if (placeholderDeleteBtn) {
                     placeholderDeleteBtn.classList.remove('bg-red-800', 'scale-110');
                     placeholderDeleteBtn.classList.add('bg-red-600');
@@ -923,15 +941,21 @@
             const deleteZone = $('deleteZone');
             deleteZone.classList.remove('bg-red-800', 'scale-110');
             deleteZone.classList.add('bg-red-600');
-            
+
+            // Also reset placeholder delete button styling
+            const placeholderDeleteBtn = document.querySelector('.drag-placeholder .delete-button');
+            if (placeholderDeleteBtn) {
+                placeholderDeleteBtn.classList.remove('bg-red-800', 'scale-110');
+                placeholderDeleteBtn.classList.add('bg-red-600');
+            }
+
             if (element && placeholder) {
-                const wasOverDelete = deleteZone.classList.contains('bg-red-800') || 
-                                     state.dragState.wasOverDelete;
-                
+                const wasOverDelete = state.dragState.wasOverDelete;
+    
                 if (wasOverDelete) {
                     const playerId = element.dataset.playerId;
                     deletePlayer(playerId);
-                    
+        
                     element.remove();
                     placeholder.remove();
                 } else {
