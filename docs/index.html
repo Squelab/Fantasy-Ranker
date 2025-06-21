@@ -831,7 +831,7 @@
     
             if (isOverDelete) {
                 // Add red glow to entire page background
-                document.classList.add('active');
+                deleteOverlay.classList.add('active');
     
                 deleteZone.classList.add('bg-red-800', 'scale-110');
                 deleteZone.classList.remove('bg-red-600');
@@ -839,7 +839,7 @@
                 return;
             } else {
                 // Remove red glow from page background
-                document.classList.remove('active');
+                deleteOverlay.classList.remove('active');
     
                 deleteZone.classList.remove('bg-red-800', 'scale-110');
                 deleteZone.classList.add('bg-red-600');
@@ -917,7 +917,7 @@
             deleteZone.classList.add('bg-red-600');
     
             // Remove red pulse from background
-            document.classList.remove('active');
+            deleteOverlay.classList.remove('active');
     
             if (element && placeholder) {
                 const wasOverDelete = state.dragState.wasOverDelete;
