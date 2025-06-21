@@ -41,24 +41,9 @@
         }
 
         /* Red glow for entire player list container */
-        .drag-area.delete-hover {
-            background: rgba(220, 38, 38, 0.1);
-            border: 2px solid rgba(220, 38, 38, 0.3);
-            border-radius: 8px;
-            animation: deleteGlow 1s ease-in-out infinite alternate;
-        }
-
-        @keyframes deleteGlow {
-            0% {
-                background: rgba(220, 38, 38, 0.08);
-                border-color: rgba(220, 38, 38, 0.2);
-                box-shadow: 0 0 20px rgba(220, 38, 38, 0.1);
-            }
-            100% {
-                background: rgba(220, 38, 38, 0.15);
-                border-color: rgba(220, 38, 38, 0.4);
-                box-shadow: 0 0 30px rgba(220, 38, 38, 0.2);
-            }
+        body.delete-hover {
+            background: radial-gradient(circle at center, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.08) 40%, transparent 70%);
+            transition: background 0.3s ease;
         }
         
         /* Keep notes and buttons interactive */
@@ -828,16 +813,16 @@
             }
     
             if (isOverDelete) {
-                // Add red pulse to player container
-                document.querySelector('.drag-area').classList.add('delete-hover');
+                // Add red glow to entire page background
+                document.body.classList.add('delete-hover');
     
                 deleteZone.classList.add('bg-red-800', 'scale-110');
                 deleteZone.classList.remove('bg-red-600');
                 state.dragState.wasOverDelete = true;
                 return;
             } else {
-                // Remove red pulse from drag area
-                document.querySelector('.drag-area').classList.remove('delete-hover');
+                // Remove red glow from page background
+                document.body.classList.remove('delete-hover');
     
                 deleteZone.classList.remove('bg-red-800', 'scale-110');
                 deleteZone.classList.add('bg-red-600');
@@ -914,8 +899,8 @@
             deleteZone.classList.remove('bg-red-800', 'scale-110');
             deleteZone.classList.add('bg-red-600');
     
-            // Remove red pulse from drag area
-            document.querySelector('.drag-area').classList.remove('delete-hover');
+            // Remove red pulse from background
+            document.body.classList.remove('delete-hover');
     
             if (element && placeholder) {
                 const wasOverDelete = state.dragState.wasOverDelete;
@@ -963,8 +948,8 @@
             deleteZone.classList.remove('bg-red-800', 'scale-110');
             deleteZone.classList.add('bg-red-600');
 
-            // Remove red pulse from drag area
-            document.querySelector('.drag-area').classList.remove('delete-hover');
+            // Remove red pulse from backghround
+            document.body.classList.remove('delete-hover');
             
             state.dragState.wasOverDelete = false;
             
