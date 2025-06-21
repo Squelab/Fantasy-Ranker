@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable-no">
     <title>Fantasy Football Rankings Tool</title>
     <link rel="icon" href="favicon.ico">
-    <link rel="apple-touch-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.PNG">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
@@ -130,7 +130,7 @@
     </style>
 </head>
 <body class="bg-slate-900 min-h-screen text-gray-100">
-    <div class="container mx-auto p-4 max-w-6xl min-1-96">
+    <div class="container mx-auto p-4 max-w-6xl">
         <!-- Header Controls -->
         <div class="bg-slate-800 rounded-lg shadow-xl p-4 mb-2 border border-slate-700">
             <div class="flex flex-col gap-4">
@@ -286,6 +286,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Set up event listeners using map for cleaner code
             const eventMap = {
+                rankerName: ['input', updateTitle],
                 scoringFormat: ['change', handleScoringFormatChange],
                 searchInput: ['input', debounce(filterPlayers, 150)],
                 loadFileInput: ['change', loadRankings],
@@ -328,6 +329,7 @@
                 return 'Are you sure you want to leave? You will lose your unsaved rankings progress.';
             });
 
+            updateTitle();
             loadAllScoringFormats();
         });
 
@@ -361,6 +363,13 @@
             state.notesModal.isOpen = false;
             state.notesModal.currentPlayerId = null;
             $('notesModal').classList.add('hidden');
+        }
+
+        // Title management
+        function updateTitle() {
+            const name = $('rankerName').value.trim();
+            const format = $('scoringFormat').value || 'PPR';
+            $('rankingsTitle').textContent = `${name ? name + "'s" : 'Your'} ${cfg.year} ${format} Fantasy Football Rankings`;
         }
 
         // Data loading
@@ -450,6 +459,7 @@
         }
 
         function handleScoringFormatChange() {
+            updateTitle();
             const previousFormat = state.currentFormat;
             const newFormat = $('scoringFormat').value;
             state.currentFormat = newFormat;
@@ -629,14 +639,16 @@
             const availablePlayersHTML = state.availablePlayers.map((p, i) => `
                 <div class="player-item available-player ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
                     <div class="p-2 flex items-stretch gap-2">
-                        <div class="flex items-center gap-1 flex-grow">
-                            <div class="w-12 text-center font-bold text-lg text-gray-400">${p.originalRank}</div>
-                            <span class="${cfg.styles.positionBadge[p.position]} px-2 py-1 rounded text-sm font-medium opacity-60">${p.position}</span>
+                        <div class="w-12 flex flex-col items-center justify-center">
+                            <div class="text-xl font-bold text-gray-100">${p.overallRank}</div>
+                            <div class="text-xs text-green-400">${p.position}${p.positionRank}</div>
+                        </div>
+                        <div class="drag-area flex items-center flex-grow ${!state.isDraftMode ? 'cursor-move' : ''}">
                             <div class="px-2 flex-grow">
-                                <div class="font-semibold text-gray-300">${p.name}</div>
-                                <div class="text-xs text-gray-500 flex justify-between items-center">
+                                <div class="font-semibold text-gray-100 text-lg">${p.name}</div>
+                                <div class="text-xs text-gray-400">
                                     <span>${p.team}</span>
-                                    ${p.adp ? `<span class="text-grey-500">ADP: ${p.adp}</span>` : ''}
+                                    ${p.adp ? `<span class="ml-4">ADP: ${p.adp}</span>` : ''}
                                 </div>
                             </div>
                         </div>
@@ -1020,6 +1032,7 @@
                         $('scoringFormat').value = data.scoringFormat || 'PPR';
                     }
                     
+                    updateTitle();
                     filterPlayers();
                     if (state.isDraftMode) renderRecentlyDrafted();
                 } catch (err) {
