@@ -46,6 +46,17 @@
             background: #dc2626 !important;
             border-color: #b91c1c !important;
             pointer-events: auto !important;
+            filter: none !important;
+            transform: none !important;
+        }
+
+        .drag-placeholder .delete-button:hover {
+            background: #b91c1c !important;
+        }
+
+        .drag-placeholder .delete-button svg {
+            opacity: 1 !important;
+            color: white !important;
         }
         
         /* Keep notes and buttons interactive */
@@ -800,20 +811,46 @@
             // Auto-scroll logic
             handleAutoScroll(clientY);
             
-            // Check if over delete zone
+            // Check if over delete zone OR placeholder delete button
             const deleteZone = $('deleteZone');
             const deleteRect = deleteZone.getBoundingClientRect();
-            const isOverDelete = clientX >= deleteRect.left && clientX <= deleteRect.right && 
-                                clientY >= deleteRect.top && clientY <= deleteRect.bottom;
-            
+            const placeholderDeleteBtn = document.querySelector('.drag-placeholder .delete-button');
+            let isOverDelete = clientX >= deleteRect.left && clientX <= deleteRect.right && 
+                   clientY >= deleteRect.top && clientY <= deleteRect.bottom;
+
+            // Also check placeholder delete button
+            if (!isOverDelete && placeholderDeleteBtn) {
+                const btnRect = placeholderDeleteBtn.getBoundingClientRect();
+                isOverDelete = clientX >= btnRect.left && clientX <= btnRect.right && 
+                               clientY >= btnRect.top && clientY <= btnRect.bottom;
+            }
             if (isOverDelete) {
                 deleteZone.classList.add('bg-red-800', 'scale-110');
                 deleteZone.classList.remove('bg-red-600');
+    
+                // Also highlight placeholder delete button if that's what we're over
+                if (placeholderDeleteBtn) {
+                    const btnRect = placeholderDeleteBtn.getBoundingClientRect();
+                    const isOverPlaceholderBtn = clientX >= btnRect.left && clientX <= btnRect.right && 
+                                                clientY >= btnRect.top && clientY <= btnRect.bottom;
+                    if (isOverPlaceholderBtn) {
+                        placeholderDeleteBtn.classList.add('bg-red-800', 'scale-110');
+                        placeholderDeleteBtn.classList.remove('bg-red-600');
+                    }
+                }
+                
                 state.dragState.wasOverDelete = true;
                 return;
             } else {
                 deleteZone.classList.remove('bg-red-800', 'scale-110');
                 deleteZone.classList.add('bg-red-600');
+    
+                // Reset placeholder delete button styling
+                if (placeholderDeleteBtn) {
+                    placeholderDeleteBtn.classList.remove('bg-red-800', 'scale-110');
+                    placeholderDeleteBtn.classList.add('bg-red-600');
+                }
+    
                 state.dragState.wasOverDelete = false;
             }
             
