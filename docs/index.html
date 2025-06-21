@@ -714,12 +714,6 @@
                 </div>
             `).join('');
         }
-
-        function triggerHaptic(type = 'light') {
-            if ('vibrate' in navigator) {
-                navigator.vibrate(type === 'heavy' ? 50 : 15);
-            }
-        }
         
         // Drag and drop handling
         function setupDragHandlers() {
@@ -740,7 +734,6 @@
                 startX: clientX,
                 startY: clientY,
                 originalRect: { left: rect.left, top: rect.top },
-                hasTriggeredStartHaptic: false
             });
             
             state.dragState.placeholder = element.cloneNode(true);
@@ -758,11 +751,6 @@
 
         function moveDrag(clientX, clientY) {
             if (!state.dragState.isDragging || !state.dragState.element) return;
-
-            if (!state.dragState.hasTriggeredStartHaptic) {
-                triggerHaptic('light');
-                state.dragState.hasTriggeredStartHaptic = true;
-            }
             
             const { element, startX, startY, originalRect, placeholder } = state.dragState;
             element.style.left = (originalRect.left + clientX - startX) + 'px';
@@ -844,8 +832,6 @@
 
         function endDrag() {
             if (!state.dragState.isDragging) return;
-
-            triggerHaptic('heavy');
             
             const { element, placeholder } = state.dragState;
             
