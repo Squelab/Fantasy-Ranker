@@ -40,7 +40,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Dedicated red overlay element - more intense red */
+        /* Dedicated red overlay element - ommits player bars */
         .delete-overlay {
             position: fixed;
             top: 0;
@@ -50,12 +50,18 @@
             background: radial-gradient(circle at center, rgba(220, 38, 38, 0.3) 0%, rgba(220, 38, 38, 0.18) 50%, rgba(220, 38, 38, 0.08) 100%);
             opacity: 0;
             pointer-events: none;
-            z-index: 0;  /* Put it behind player bars */
+            z-index: 1;
             transition: opacity 0.3s ease;
         }
         
         .delete-overlay.active {
             opacity: 1;
+        }
+        
+        /* Make sure player items sit above the overlay */
+        .player-item {
+            position: relative;
+            z-index: 2;
         }
         
         /* Keep notes and buttons interactive */
