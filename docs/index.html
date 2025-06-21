@@ -40,23 +40,19 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Keep delete button bright in drag placeholder */
-        .drag-placeholder .delete-button {
-            opacity: 1 !important;
-            background: #dc2626 !important;
-            border-color: #b91c1c !important;
-            pointer-events: auto !important;
-            filter: none !important;
-            transform: none !important;
+        /* Page background pulse effect */
+        body.delete-hover {
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, rgba(220, 38, 38, 0.05) 50%, transparent 100%);
+            animation: deletePulse 0.8s ease-in-out infinite alternate;
         }
 
-        .drag-placeholder .delete-button:hover {
-            background: #b91c1c !important;
-        }
-
-        .drag-placeholder .delete-button svg {
-            opacity: 1 !important;
-            color: white !important;
+        @keyframes deletePulse {
+            0% {
+                background: radial-gradient(circle, rgba(220, 38, 38, 0.05) 0%, rgba(220, 38, 38, 0.02) 50%, transparent 100%);
+            }
+            100% {
+                background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.08) 50%, transparent 100%);
+            }
         }
         
         /* Keep notes and buttons interactive */
@@ -776,20 +772,6 @@
             
             state.dragState.placeholder = element.cloneNode(true);
             state.dragState.placeholder.classList.add('drag-placeholder');
-
-            // Replace the risk button with delete button in placeholder
-            const placeholderRiskBtn = state.dragState.placeholder.querySelector('button[onclick*="cycleRisk"]');
-            if (placeholderRiskBtn) {
-                const playerId = element.dataset.playerId;
-                placeholderRiskBtn.outerHTML = `
-                    <button onclick="deletePlayer('${playerId}')" class="delete-button bg-red-600 border-2 border-red-500 w-10 h-10 rounded text-white hover:bg-red-700 transition-all duration-200 flex items-center justify-center">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                        </svg>
-                    </button>
-                `;
-            }
-
             element.parentNode.insertBefore(state.dragState.placeholder, element);
             
             element.classList.add('drag-active');
@@ -803,79 +785,41 @@
 
         function moveDrag(clientX, clientY) {
             if (!state.dragState.isDragging || !state.dragState.element) return;
-            
+    
             const { element, startX, startY, originalRect, placeholder } = state.dragState;
             element.style.left = (originalRect.left + clientX - startX) + 'px';
             element.style.top = (originalRect.top + clientY - startY) + 'px';
-            
+    
             // Auto-scroll logic
             handleAutoScroll(clientY);
-            
-            // Check if over delete zone OR placeholder delete button
+    
+            // Check if over delete zone
             const deleteZone = $('deleteZone');
             const deleteRect = deleteZone.getBoundingClientRect();
-            const placeholderDeleteBtn = document.querySelector('.drag-placeholder .delete-button');
-            let isOverDelete = clientX >= deleteRect.left && clientX <= deleteRect.right && 
-                   clientY >= deleteRect.top && clientY <= deleteRect.bottom;
-
-            // Also check placeholder delete button
-            if (!isOverDelete && placeholderDeleteBtn) {
-                const btnRect = placeholderDeleteBtn.getBoundingClientRect();
-                isOverDelete = clientX >= btnRect.left && clientX <= btnRect.right && 
-                               clientY >= btnRect.top && clientY <= btnRect.bottom;
-            }
-            
+            const isOverDelete = clientX >= deleteRect.left && clientX <= deleteRect.right && 
+                        clientY >= deleteRect.top && clientY <= deleteRect.bottom;
+    
             if (isOverDelete) {
-                // Check which delete area we're over
-                const isOverMainDelete = clientX >= deleteRect.left && clientX <= deleteRect.right && 
-                                        clientY >= deleteRect.top && clientY <= deleteRect.bottom;
-    
-                let isOverPlaceholderBtn = false;
-                if (placeholderDeleteBtn) {
-                    const btnRect = placeholderDeleteBtn.getBoundingClientRect();
-                    isOverPlaceholderBtn = clientX >= btnRect.left && clientX <= btnRect.right && 
-                                          clientY >= btnRect.top && clientY <= btnRect.bottom;
-                }
-    
-                // Style main delete zone
-                if (isOverMainDelete) {
-                    deleteZone.classList.add('bg-red-800', 'scale-110');
-                    deleteZone.classList.remove('bg-red-600');
-                } else {
-                    deleteZone.classList.remove('bg-red-800', 'scale-110');
-                    deleteZone.classList.add('bg-red-600');
-                }
-    
-                // Style placeholder button
-                if (placeholderDeleteBtn) {
-                    if (isOverPlaceholderBtn) {
-                        placeholderDeleteBtn.classList.add('bg-red-800', 'scale-110');
-                        placeholderDeleteBtn.classList.remove('bg-red-600');
-                    } else {
-                        placeholderDeleteBtn.classList.remove('bg-red-800', 'scale-110');
-                        placeholderDeleteBtn.classList.add('bg-red-600');
-                    }
-                }
-    
+                // Add page background pulse
+                document.body.classList.add('delete-hover');
+        
+                deleteZone.classList.add('bg-red-800', 'scale-110');
+                deleteZone.classList.remove('bg-red-600');
                 state.dragState.wasOverDelete = true;
                 return;
             } else {
-                // Reset both when not over any delete area
+                // Remove page background pulse
+                document.body.classList.remove('delete-hover');
+        
                 deleteZone.classList.remove('bg-red-800', 'scale-110');
                 deleteZone.classList.add('bg-red-600');
-    
-                if (placeholderDeleteBtn) {
-                    placeholderDeleteBtn.classList.remove('bg-red-800', 'scale-110');
-                    placeholderDeleteBtn.classList.add('bg-red-600');
-                }
-    
                 state.dragState.wasOverDelete = false;
             }
-            
+    
             element.style.pointerEvents = 'none';
             const elementBelow = document.elementFromPoint(clientX, clientY);
             element.style.pointerEvents = 'auto';
-            
+    
             const targetItem = elementBelow?.closest('.player-item:not(.drag-active):not(.available-player)');
             if (targetItem && placeholder) {
                 const targetRect = targetItem.getBoundingClientRect();
