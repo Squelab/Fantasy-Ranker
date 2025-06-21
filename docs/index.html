@@ -16,24 +16,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable-no">
-    <title>Draft Craft</title>
-    <meta name="description" content="Free fantasy football draft tool and rankings builder. Create custom cheat sheets, drag and drop players, and dominate your draft. Works on mobile and desktop.">
-    <meta name="keywords" content="fantasy football, draft tool, rankings builder, cheat sheet, fantasy draft, football rankings, draft helper">
-    <meta property="og:title" content="Draft Craft - Fantasy Football Draft Tool">
-    <meta property="og:description" content="Free fantasy football draft tool and rankings builder. Create custom cheat sheets and dominate your draft.">
-    <meta property="og:url" content="https://drftcrft.com">
-    <meta property="og:type" content="website">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" href="favicon.png">    
-    <link rel="apple-touch-icon" href="favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
     <style>
         /* Prevent text selection and interaction on drag areas */
         .drag-area, .drag-area * {
@@ -58,8 +40,12 @@
         
         /* Available player styling */
         .available-player {
-            opacity: 1;
+            opacity: 0.6;
             background: rgba(71, 85, 105, 0.3) !important;
+        }
+
+        .available-player button {
+            opacity: 1
         }
 
         .available-player:hover {
@@ -254,7 +240,7 @@
             isDraftMode: false,
             originalConsensus: {},
             consensusData: {},
-            allConsensusData: {}, // New: stores ALL players from consensus
+            allConsensusData: {},
             currentFormat: 'PPR',
             notesModal: {
                 isOpen: false,
@@ -464,8 +450,8 @@
             if (!state.consensusData[format]) return;
             
             state.players = deepCopy(state.consensusData[format]);
-            recalculateRanks(); // Recalculate ranks first
-            state.originalConsensus[format] = deepCopy(state.players); // Then save the recalculated version
+            recalculateRanks();
+            state.originalConsensus[format] = deepCopy(state.players);
             filterPlayers();
         }
         
@@ -499,8 +485,8 @@
                         overallRank: i + 1
                     }));
                     
-                    recalculateRanks(); // Recalculate ranks first
-                    state.originalConsensus[format] = deepCopy(state.players); // Then save the recalculated version
+                    recalculateRanks();
+                    state.originalConsensus[format] = deepCopy(state.players);
                     filterPlayers();
                 });
         }
@@ -578,7 +564,7 @@
                         !currentPlayerIds.has(p.id) &&
                         (p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search))
                     )
-                    .slice(0, 10); // Limit to 10 available players for performance
+                    .slice(0, 10);
             }
             
             renderPlayers();
@@ -592,7 +578,7 @@
             const newPlayer = {
                 ...playerToAdd,
                 overallRank: state.players.length + 1,
-                positionRank: 1 // Will be recalculated
+                positionRank: 1
             };
             
             // Add to the end of rankings
@@ -654,18 +640,51 @@
         // Rendering
         function renderPlayers() {
             const container = $('playersList');
-    
-            // Render current players
-            const currentPlayersHTML = state.filteredPlayers.map((p, i) => `
-                <div class="player-item ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
-                    <div class="p-2 flex items-stretch gap-2">
-                        <div class="drag-area flex items-stretch gap-2 flex-grow ${!state.isDraftMode ? 'cursor-move' : ''}">
+            const search = $('searchInput').value.toLowerCase();
+            const isDraft = state.isDraftMode;
+            
+            // Build HTML in one pass
+            const html = [];
+            
+            // Current players
+            state.filteredPlayers.forEach((p, i) => {
+                html.push(`
+                    <div class="player-item ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
+                        <div class="p-2 flex items-stretch gap-2">
+                            <div class="drag-area flex items-stretch gap-2 flex-grow ${!isDraft ? 'cursor-move' : ''}">
+                                <div class="w-12 flex flex-col items-center justify-center">
+                                    <div class="text-xl font-bold text-gray-100">${p.overallRank}</div>
+                                    <div class="text-xs ${cfg.styles.positionBadge[p.position].split(' ')[0]}">${p.position}${p.positionRank}</div>
+                                </div>
+                                <div class="px-2 flex-grow flex items-center">
+                                    <div class="flex-grow">
+                                        <div class="font-semibold text-gray-100 text-lg">${p.name}</div>
+                                        <div class="text-xs text-gray-400">
+                                            <span>${p.team}</span>
+                                            ${p.adp ? `<span class="ml-4">ADP: ${p.adp}</span>` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notes-section px-2 items-center overflow-hidden hidden lg:flex">${createNotes(p, isDraft)}</div>
+                            <div class="w-10 flex items-center lg:hidden">${createNotesIcon(p, isDraft)}</div>
+                            <div class="w-10 flex items-center">${createButton('action', p, isDraft)}</div>
+                        </div>
+                    </div>
+                `);
+            });
+            
+            // Available players
+            state.availablePlayers.forEach((p, i) => {
+                html.push(`
+                    <div class="player-item available-player ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
+                        <div class="p-2 flex items-stretch gap-2">
                             <div class="w-12 flex flex-col items-center justify-center">
                                 <div class="text-xl font-bold text-gray-100">${p.overallRank}</div>
-                                <div class="text-xs ${cfg.styles.positionBadge[p.position].split(' ')[0]}">${p.position}${p.positionRank}</div>
+                                <div class="text-xs text-green-400">${p.position}${p.positionRank}</div>
                             </div>
-                            <div class="px-2 flex-grow flex items-center">
-                                <div class="flex-grow">
+                            <div class="drag-area flex items-center flex-grow ${!isDraft ? 'cursor-move' : ''}">
+                                <div class="px-2 flex-grow">
                                     <div class="font-semibold text-gray-100 text-lg">${p.name}</div>
                                     <div class="text-xs text-gray-400">
                                         <span>${p.team}</span>
@@ -673,39 +692,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="w-10 flex items-center">${createAddButton(p)}</div>
                         </div>
-                        <div class="notes-section px-2 items-center overflow-hidden hidden lg:flex">${createNotes(p, state.isDraftMode)}</div>
-                        <div class="w-10 flex items-center lg:hidden">${createNotesIcon(p, state.isDraftMode)}</div>
-                        <div class="w-10 flex items-center">${createButton('action', p, state.isDraftMode)}</div>
                     </div>
-                </div>
-            `).join('');
-    
-            // Render available players
-            const availablePlayersHTML = state.availablePlayers.map((p, i) => `
-                <div class="player-item available-player ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
-                    <div class="p-2 flex items-stretch gap-2">
-                        <div class="w-12 flex flex-col items-center justify-center">
-                            <div class="text-xl font-bold text-gray-100">${p.overallRank}</div>
-                            <div class="text-xs ${cfg.styles.positionBadge[p.position].split(' ')[0]}">${p.position}${p.positionRank}</div>
-                        </div>
-                        <div class="drag-area flex items-center flex-grow ${!state.isDraftMode ? 'cursor-move' : ''}">
-                            <div class="px-2 flex-grow">
-                                <div class="font-semibold text-gray-100 text-lg">${p.name}</div>
-                                <div class="text-xs text-gray-400">
-                                    <span>${p.team}</span>
-                                    ${p.adp ? `<span class="ml-4">ADP: ${p.adp}</span>` : ''}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-10 flex items-center">${createAddButton(p)}</div>
-                    </div>
-                </div>
-            `).join('');
-    
-            container.innerHTML = currentPlayersHTML + availablePlayersHTML;
-    
-            if (!state.isDraftMode) setupDragHandlers();
+                `);
+            });
+            
+            container.innerHTML = html.join('');
+            
+            if (!isDraft) setupDragHandlers();
         }
 
         function renderRecentlyDrafted() {
@@ -724,36 +719,12 @@
         }
 
         function triggerHaptic(type = 'light') {
-            // Debug logging
-            console.log('Attempting haptic:', type);
-    
-            try {
-                // Method 1: Standard Vibration API
-                if ('vibrate' in navigator) {
-                    const patterns = {
-                        light: 15,     // Single short vibration
-                        heavy: 50      // Single longer vibration
-                    };
-                    const success = navigator.vibrate(patterns[type] || patterns.light);
-                    console.log('Vibrate API result:', success);
-                    return;
-                }
-        
-                // Method 2: iOS Web Haptics (requires user gesture)
-                if (window.DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function') {
-                    // This only works on iOS 13+ in Safari
-                    navigator.vibrate(type === 'heavy' ? 50 : 15);
-                    return;
-                }
-        
-                console.log('No haptic support detected');
-        
-            } catch (error) {
-                console.log('Haptic error:', error);
+            if ('vibrate' in navigator) {
+                navigator.vibrate(type === 'heavy' ? 50 : 15);
             }
         }
         
-        // Drag and drop handling - NOT TOUCHING THIS SECTION
+        // Drag and drop handling
         function setupDragHandlers() {
             document.querySelectorAll('.drag-area').forEach(item => {
                 on(item, 'touchstart', handleTouchStart, { passive: true });
@@ -771,7 +742,8 @@
                 isDragging: true,
                 startX: clientX,
                 startY: clientY,
-                originalRect: { left: rect.left, top: rect.top }
+                originalRect: { left: rect.left, top: rect.top },
+                hasTriggeredStartHaptic: false
             });
             
             state.dragState.placeholder = element.cloneNode(true);
@@ -812,7 +784,7 @@
                 deleteZone.classList.add('bg-red-800', 'scale-110');
                 deleteZone.classList.remove('bg-red-600');
                 state.dragState.wasOverDelete = true;
-                return; // Don't do normal placeholder logic when over delete
+                return;
             } else {
                 deleteZone.classList.remove('bg-red-800', 'scale-110');
                 deleteZone.classList.add('bg-red-600');
@@ -832,33 +804,28 @@
         }
 
         function handleAutoScroll(clientY) {
-            const isMobile = window.innerWidth < 768; // Mobile breakpoint
-            const scrollZone = isMobile ? 50 : 80; // Smaller zone on mobile
-            const maxScroll = 35; // Increased from 25 to 35
+            const isMobile = window.innerWidth < 768;
+            const scrollZone = isMobile ? 50 : 80;
+            const maxScroll = 35;
             const viewportHeight = window.innerHeight;
             
             let scrollSpeed = 0;
             
             if (clientY < scrollZone) {
-                // Near top - scroll up with exponential curve
                 const distance = scrollZone - clientY;
                 const ratio = distance / scrollZone;
-                // Exponential curve: more aggressive the closer to edge
                 scrollSpeed = -Math.max(1, Math.round(Math.pow(ratio, 0.5) * maxScroll));
                 
-                // Lightning fast if trying to drag off screen
                 if (clientY < 10) {
-                    scrollSpeed = -maxScroll * 2.5; // Increased from 2 to 2.5
+                    scrollSpeed = -maxScroll * 2.5;
                 }
             } else if (clientY > viewportHeight - scrollZone) {
-                // Near bottom - scroll down with exponential curve
                 const distance = clientY - (viewportHeight - scrollZone);
                 const ratio = distance / scrollZone;
                 scrollSpeed = Math.max(1, Math.round(Math.pow(ratio, 0.5) * maxScroll));
                 
-                // Lightning fast if trying to drag off screen
                 if (clientY > viewportHeight - 10) {
-                    scrollSpeed = maxScroll * 2.5; // Increased from 2 to 2.5
+                    scrollSpeed = maxScroll * 2.5;
                 }
             }
             
@@ -897,22 +864,16 @@
             deleteZone.classList.add('bg-red-600');
             
             if (element && placeholder) {
-                // Use the last known drag position instead of element position
-                // Check if we were over delete zone during the last move
                 const wasOverDelete = deleteZone.classList.contains('bg-red-800') || 
                                      state.dragState.wasOverDelete;
                 
                 if (wasOverDelete) {
-                    // Delete the player
                     const playerId = element.dataset.playerId;
-                    console.log('Deleting player:', playerId); // Debug log
                     deletePlayer(playerId);
                     
-                    // Remove elements
                     element.remove();
                     placeholder.remove();
                 } else {
-                    // Normal drop - replace placeholder with element
                     placeholder.parentNode.replaceChild(element, placeholder);
                     element.classList.remove('drag-active');
                     ['width', 'height', 'left', 'top'].forEach(prop => element.style[prop] = '');
@@ -940,18 +901,15 @@
         function cancelDragOperation() {
             clearTimeout(state.dragState.timers.touch);
             
-            // Stop auto-scrolling
             state.dragState.isScrolling = false;
             if (state.dragState.timers.scroll) {
                 cancelAnimationFrame(state.dragState.timers.scroll);
             }
             
-            // Reset delete zone styling
             const deleteZone = $('deleteZone');
             deleteZone.classList.remove('bg-red-800', 'scale-110');
             deleteZone.classList.add('bg-red-600');
             
-            // Reset delete state
             state.dragState.wasOverDelete = false;
             
             endDrag();
@@ -1073,13 +1031,9 @@
         window.refreshToConsensus = refreshToConsensus;
 
         function toggleDraftMode() {
-            // If exiting draft mode, restore drafted players to main list
             if (state.isDraftMode && state.draftedPlayers.length > 0) {
-                // Move all drafted players back to main players array
                 state.players.push(...state.draftedPlayers);
                 state.draftedPlayers = [];
-        
-                // Sort by original rank to restore order
                 state.players.sort((a, b) => a.overallRank - b.overallRank);
             }
     
@@ -1163,7 +1117,7 @@
 
         // Printable generation
         function generatePrintableHTML() {
-            const title = $('rankingsTitle').textContent;
+            const title = `${$('rankerName').value.trim() || 'Your'} ${cfg.year} ${$('scoringFormat').value} Rankings`;
             const perCol = 25, perPage = 50;
             
             const genPlayer = p => {
@@ -1191,14 +1145,14 @@
                 pages.push(`<div class="page">
                     <div class="header">
                         <div class="subtitle">${title} - Generated on ${new Date().toLocaleDateString()}</div>
-                        <div class="url-header">https://squelab.github.io/FantasyFootballRanker/</div>
+                        <div class="url-header">${window.location.origin}</div>
                     </div>
                     <div class="columns">
                         <div class="column">${genColumn(state.players.slice(i, i + perCol))}</div>
                         <div class="column">${genColumn(state.players.slice(i + perCol, i + perPage))}</div>
                     </div>
                     <div class="page-footer">
-                        <span>https://squelab.github.io/FantasyRanker/</span>
+                        <span>${window.location.hostname}</span>
                         <span>Page ${pageNum} of ${Math.ceil(state.players.length / perPage)}</span>
                     </div>
                 </div>`);
