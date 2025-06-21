@@ -39,6 +39,14 @@
             -webkit-touch-callout: none;
             -webkit-tap-highlight-color: transparent;
         }
+
+        /* Keep delete button bright in drag placeholder */
+        .drag-placeholder .delete-button {
+            opacity: 1 !important;
+            background: #dc2626 !important;
+            border-color: #b91c1c !important;
+            pointer-events: auto !important;
+        }
         
         /* Keep notes and buttons interactive */
         .notes-section, .notes-section *, 
@@ -757,6 +765,20 @@
             
             state.dragState.placeholder = element.cloneNode(true);
             state.dragState.placeholder.classList.add('drag-placeholder');
+
+            // Replace the risk button with delete button in placeholder
+            const placeholderRiskBtn = state.dragState.placeholder.querySelector('button[onclick*="cycleRisk"]');
+            if (placeholderRiskBtn) {
+                const playerId = element.dataset.playerId;
+                placeholderRiskBtn.outerHTML = `
+                    <button onclick="deletePlayer('${playerId}')" class="delete-button bg-red-600 border-2 border-red-500 w-10 h-10 rounded text-white hover:bg-red-700 transition-all duration-200 flex items-center justify-center">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                    </button>
+                `;
+            }
+
             element.parentNode.insertBefore(state.dragState.placeholder, element);
             
             element.classList.add('drag-active');
