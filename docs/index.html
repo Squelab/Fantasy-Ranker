@@ -16,6 +16,18 @@
     <link rel="apple-touch-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontSize: {
+              'xxs': '0.675rem',    // 90% of xs
+              'lgish': '1.0125rem', // 90% of lg
+            }
+          }
+        }
+      }
+    </script>
     <link rel="stylesheet" href="styles.css">
     <style>
         /* Prevent text selection and interaction on drag areas */
@@ -185,7 +197,7 @@
 
         <!-- Recently Drafted Section -->
         <div id="recentlyDraftedSection" class="bg-red-950 rounded-lg shadow-xl p-4 mb-2 hidden border border-red-900">
-            <h3 class="text-lg font-semibold text-red-400 mb-3">Recently Drafted</h3>
+            <h3 class="text-lgish font-semibold text-red-400 mb-3">Recently Drafted</h3>
             <div id="recentlyDraftedList" class="space-y-2"></div>
         </div>
 
@@ -605,9 +617,9 @@
         // Rendering helpers
         const createButton = (action, player, isDraft) => {
             if (isDraft) {
-                return `<button onclick="draftPlayer('${player.id}')" class="bg-red-600 border-2 border-red-500 w-8 h-8 rounded text-xs font-bold text-white hover:bg-red-700 transition-all duration-200 flex items-center justify-center">D</button>`;
+                return `<button onclick="draftPlayer('${player.id}')" class="bg-red-600 border-2 border-red-500 w-8 h-8 rounded text-xxs font-bold text-white hover:bg-red-700 transition-all duration-200 flex items-center justify-center">D</button>`;
             }
-            return `<button onclick="cycleRisk('${player.id}')" class="${cfg.styles.riskBtn[player.risk]} border-2 ${cfg.styles.riskBorder[player.risk]} w-10 h-10 rounded text-xs font-bold text-white hover:opacity-80 transition-all duration-200 flex items-center justify-center">${player.risk[0]}</button>`;
+            return `<button onclick="cycleRisk('${player.id}')" class="${cfg.styles.riskBtn[player.risk]} border-2 ${cfg.styles.riskBorder[player.risk]} w-10 h-10 rounded text-xxs font-bold text-white hover:opacity-80 transition-all duration-200 flex items-center justify-center">${player.risk[0]}</button>`;
         };
 
         const createNotesIcon = (player, isDraft) => {
@@ -651,12 +663,12 @@
                             <div class="drag-area flex items-stretch gap-2 flex-grow ${!isDraft ? 'cursor-move' : ''}">
                                 <div class="w-12 flex flex-col items-center justify-center">
                                     <div class="text-xl font-bold text-gray-100">${p.overallRank}</div>
-                                    <div class="text-xs ${cfg.styles.positionBadge[p.position].split(' ')[0]}">${p.position}${p.positionRank}</div>
+                                    <div class="text-xxs ${cfg.styles.positionBadge[p.position].split(' ')[0]}">${p.position}${p.positionRank}</div>
                                 </div>
                                 <div class="px-2 flex-grow flex items-center">
                                     <div class="flex-grow">
-                                        <div class="font-semibold text-gray-100 text-lg">${p.name}</div>
-                                        <div class="text-xs text-gray-400">
+                                        <div class="font-semibold text-gray-100 text-lgish">${p.name}</div>
+                                        <div class="text-xxs text-gray-400">
                                             <span>${p.team}</span>
                                             ${p.adp ? `<span class="ml-4">ADP: ${p.adp}</span>` : ''}
                                         </div>
@@ -678,12 +690,12 @@
                         <div class="p-2 flex items-stretch gap-2">
                             <div class="w-12 flex flex-col items-center justify-center">
                                 <div class="text-xl font-bold text-gray-100">${p.overallRank}</div>
-                                <div class="text-xs ${cfg.styles.positionBadge[p.position].split(' ')[0]}">${p.position}${p.positionRank}</div>
+                                <div class="text-xxs ${cfg.styles.positionBadge[p.position].split(' ')[0]}">${p.position}${p.positionRank}</div>
                             </div>
                             <div class="drag-area flex items-center flex-grow ${!isDraft ? 'cursor-move' : ''}">
                                 <div class="px-2 flex-grow">
-                                    <div class="font-semibold text-gray-100 text-lg">${p.name}</div>
-                                    <div class="text-xs text-gray-400">
+                                    <div class="font-semibold text-gray-100 text-lgish">${p.name}</div>
+                                    <div class="text-xxs text-gray-400">
                                         <span>${p.team}</span>
                                         ${p.adp ? `<span class="ml-4">ADP: ${p.adp}</span>` : ''}
                                     </div>
@@ -704,12 +716,12 @@
             $('recentlyDraftedList').innerHTML = state.draftedPlayers.slice(0, cfg.recentDraftedCount).map(p => `
                 <div class="bg-slate-900 border border-slate-700 rounded-lg p-2 cursor-pointer hover:bg-slate-800 transition-colors">
                     <div class="flex items-center gap-2">
-                        <span class="${cfg.styles.positionBadge[p.position]} px-2 py-1 rounded text-xs font-medium">${p.position}</span>
+                        <span class="${cfg.styles.positionBadge[p.position]} px-2 py-1 rounded text-xxs font-medium">${p.position}</span>
                         <div class="flex-grow">
                             <span class="font-semibold text-gray-100">${p.name}</span>
-                            <span class="text-xs text-gray-400 ml-2">${p.team}</span>
+                            <span class="text-xxs text-gray-400 ml-2">${p.team}</span>
                         </div>
-                        <button onclick="undraftPlayer('${p.id}')" class="bg-blue-600 border-2 border-blue-500 text-white px-2 py-1 rounded text-xs hover:bg-blue-700 transition-all duration-200 font-medium">UNDO</button>
+                        <button onclick="undraftPlayer('${p.id}')" class="bg-blue-600 border-2 border-blue-500 text-white px-2 py-1 rounded text-xxs hover:bg-blue-700 transition-all duration-200 font-medium">UNDO</button>
                     </div>
                 </div>
             `).join('');
