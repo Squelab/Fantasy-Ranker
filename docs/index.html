@@ -58,12 +58,8 @@
         
         /* Available player styling */
         .available-player {
-            opacity: 0.6;
+            opacity: 1;
             background: rgba(71, 85, 105, 0.3) !important;
-        }
-
-        .available-player button {
-            opacity: 1
         }
 
         .available-player:hover {
@@ -691,7 +687,7 @@
                     <div class="p-2 flex items-stretch gap-2">
                         <div class="w-12 flex flex-col items-center justify-center">
                             <div class="text-xl font-bold text-gray-100">${p.overallRank}</div>
-                            <div class="text-xs text-green-400">${p.position}${p.positionRank}</div>
+                            <div class="text-xs ${cfg.styles.positionBadge[p.position].split(' ')[0]}">${p.position}${p.positionRank}</div>
                         </div>
                         <div class="drag-area flex items-center flex-grow ${!state.isDraftMode ? 'cursor-move' : ''}">
                             <div class="px-2 flex-grow">
