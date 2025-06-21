@@ -1,11 +1,8 @@
 /* Fantasy Football Rankings Styles */
-html {
-    font-size: 90%;
-}
-
 body {
 	font-family: system-ui, sans-serif;
-    background-color: #0f172a; 
+    background-color: #0f172a;
+    font-size: 90%;
 }
 
 .player-item { 
