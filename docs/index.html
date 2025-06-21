@@ -37,7 +37,11 @@
             opacity: 0.6;
             background: rgba(71, 85, 105, 0.3) !important;
         }
-        
+
+        .available-player button {
+            opacity: 1
+        }
+
         .available-player:hover {
             opacity: 0.8;
         }
@@ -604,16 +608,18 @@
             const currentPlayersHTML = state.filteredPlayers.map((p, i) => `
                 <div class="player-item ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
                     <div class="p-2 flex items-stretch gap-2">
-                        <div class="w-12 flex flex-col items-center justify-center">
-                            <div class="text-xl font-bold text-gray-100">${p.overallRank}</div>
-                            <div class="text-xs ${cfg.styles.positionBadge[p.position].split(' ')[0]}">${p.position}${p.positionRank}</div>
-                        </div>
-                        <div class="drag-area flex items-center flex-grow ${!state.isDraftMode ? 'cursor-move' : ''}">
-                            <div class="px-2 flex-grow">
-                                <div class="font-semibold text-gray-100 text-lg">${p.name}</div>
-                                <div class="text-xs text-gray-400">
-                                    <span>${p.team}</span>
-                                    ${p.adp ? `<span class="ml-4">ADP: ${p.adp}</span>` : ''}
+                        <div class="drag-area flex items-stretch gap-2 flex-grow ${!state.isDraftMode ? 'cursor-move' : ''}">
+                            <div class="w-12 flex flex-col items-center justify-center">
+                                <div class="text-xl font-bold text-gray-100">${p.overallRank}</div>
+                                <div class="text-xs text-green-400">${p.position}${p.positionRank}</div>
+                            </div>
+                            <div class="px-2 flex-grow flex items-center">
+                                <div class="flex-grow">
+                                    <div class="font-semibold text-gray-100 text-lg">${p.name}</div>
+                                    <div class="text-xs text-gray-400">
+                                        <span>${p.team}</span>
+                                        ${p.adp ? `<span class="ml-4">ADP: ${p.adp}</span>` : ''}
+                                    </div>
                                 </div>
                             </div>
                         </div>
