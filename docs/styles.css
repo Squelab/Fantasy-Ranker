@@ -12,8 +12,7 @@ input,
 select,
 textarea {
     position: relative;
-    opacity: 1
-    z-index: 10;
+    opacity: 1;
 }
 
 footer {
@@ -84,7 +83,7 @@ footer {
     );
     opacity: 0;
     pointer-events: none;
-    z-index: 1 !important;
+    z-index: -1 !important;
     transition: opacity 0.3s ease;
 }
 
