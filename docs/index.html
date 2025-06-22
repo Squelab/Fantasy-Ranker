@@ -753,7 +753,6 @@
         }
 
         function updatePlayerOrder() {
-            saveState('reorder players');
             document.querySelectorAll('.drag-placeholder').forEach(el => el.remove());
             
             if (state.positionFilter === 'ALL') {
@@ -764,6 +763,7 @@
                     .filter(Boolean);
                 
                 if (newOrder.length === state.players.length) {
+                    saveState('reorder players');
                     state.players = newOrder;
                     recalculateRanks();
                     filterPlayers();
