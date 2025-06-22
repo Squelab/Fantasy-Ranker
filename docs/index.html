@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable-no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Draft Craft</title>
     <meta name="description" content="Free fantasy football draft tool and rankings builder. Create printable cheat sheets, drag and drop players, and dominate your draft. Works on mobile and desktop.">
     <meta name="keywords" content="fantasy football, draft tool, rankings builder, cheat sheet, fantasy draft, football rankings, draft helper, rankings tool">
@@ -30,6 +30,13 @@
     </script>
     <link rel="stylesheet" href="styles.css">
 </head>
+
+<div id="deleteZone" class="w-10 h-10 bg-red-600 border-2 border-red-500 rounded-md flex items-center justify-center hover:bg-red-700 transition-all duration-200 cursor-pointer" title="Drop player here to delete">
+    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+    </svg>
+</div>
+
 <body class="bg-slate-900 min-h-screen text-gray-100">
     <div class="container mx-auto p-4 max-w-6xl">
         <!-- Header Controls -->
@@ -92,11 +99,9 @@
                         </svg>
                     </button>
                 </div>
-                <div id="deleteZone" class="w-10 h-10 bg-red-600 border-2 border-red-500 rounded-md flex items-center justify-center hover:bg-red-700 transition-all duration-200 cursor-pointer" title="Drop player here to delete">
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                    </svg>
-                </div>
+                <button id="positionFilter" class="w-10 h-10 bg-slate-600 border-2 border-slate-500 rounded-md flex items-center justify-center hover:opacity-80 transition-all duration-200 cursor-pointer text-white font-bold text-sm" title="Filter by position">
+                    <img src="favicon.ico" class="w-7 h-7">
+                </button>
             </div>
         </div>
 
@@ -131,6 +136,7 @@
             consensusData: {},
             allConsensusData: {},
             currentFormat: 'PPR',
+            positionFilter: 'ALL',
             notesModal: {
                 isOpen: false,
                 currentPlayerId: null
@@ -163,6 +169,7 @@
             formats: ['PPR', 'Half PPR', 'Standard'],
             fileMap: { 'PPR': 'PPR.json', 'Half PPR': 'HPPR.json', 'Standard': 'STAN.json' },
             skillPositions: ['QB', 'RB', 'WR', 'TE'],
+            positionFilters: ['ALL', 'QB', 'RB', 'WR', 'TE'],
             maxPlayers: 200,
             recentDraftedCount: 3,
             dragThreshold: 15,
@@ -185,6 +192,13 @@
                     TE: 'text-orange-300 bg-orange-900/50', 
                     K: 'text-pink-300 bg-pink-900/50', 
                     DST: 'text-gray-300 bg-gray-700/50' 
+                },
+                positionFilterColors: {
+                    'ALL': 'bg-slate-600 border-slate-500',
+                    'QB': 'bg-purple-600 border-purple-500',
+                    'RB': 'bg-blue-600 border-blue-500', 
+                    'WR': 'bg-green-600 border-green-500',
+                    'TE': 'bg-orange-600 border-orange-500'
                 }
             }
         };
@@ -209,7 +223,8 @@
                 refreshBtnDesktop: ['click', refreshToConsensus],
                 notesModalClose: ['click', closeNotesModal],
                 searchInput: ['input', handleSearchInput],
-                clearSearch: ['click', handleClearSearch]
+                clearSearch: ['click', handleClearSearch],
+                positionFilter: ['click', cyclePositionFilter]
             };
 
             Object.entries(eventMap).forEach(([id, [event, handler]]) => {
@@ -297,6 +312,31 @@
             state.notesModal.isOpen = false;
             state.notesModal.currentPlayerId = null;
             $('notesModal').classList.add('hidden');
+        }
+
+        // Position filter functionality
+        function cyclePositionFilter() {
+            const currentIndex = cfg.positionFilters.indexOf(state.positionFilter);
+            const nextIndex = (currentIndex + 1) % cfg.positionFilters.length;
+            state.positionFilter = cfg.positionFilters[nextIndex];
+            
+            updatePositionFilterButton();
+            filterPlayers();
+        }
+
+        function updatePositionFilterButton() {
+            const btn = $('positionFilter');
+            const colors = cfg.styles.positionFilterColors[state.positionFilter];
+            
+            btn.className = `w-10 h-10 ${colors} border-2 rounded-md flex items-center justify-center hover:opacity-80 transition-all duration-200 cursor-pointer text-white font-bold text-sm`;
+            
+            if (state.positionFilter === 'ALL') {
+                btn.innerHTML = '<img src="favicon.ico" class="w-7 h-7">';
+            } else {
+                btn.innerHTML = state.positionFilter;
+            }
+            
+            btn.title = `Filter by position (${state.positionFilter})`;
         }
 
         // Data loading
@@ -443,22 +483,44 @@
         function filterPlayers() {
             const search = $('searchInput').value.toLowerCase();
             
-            // Filter current players
-            state.filteredPlayers = state.players.filter(p => 
-                p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search)
-            );
-            
-            // Find available players to add (from all consensus data)
-            state.availablePlayers = [];
-            if (search.length >= 2 && state.allConsensusData[state.currentFormat]) {
-                const currentPlayerIds = new Set(state.players.map(p => p.id));
+            if (state.positionFilter === 'ALL') {
+                // Filter current players
+                state.filteredPlayers = state.players.filter(p => 
+                    p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search)
+                );
                 
-                state.availablePlayers = state.allConsensusData[state.currentFormat]
-                    .filter(p => 
-                        !currentPlayerIds.has(p.id) &&
-                        (p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search))
-                    )
-                    .slice(0, 10);
+                // Find available players to add (from all consensus data)
+                state.availablePlayers = [];
+                if (search.length >= 2 && state.allConsensusData[state.currentFormat]) {
+                    const currentPlayerIds = new Set(state.players.map(p => p.id));
+                    
+                    state.availablePlayers = state.allConsensusData[state.currentFormat]
+                        .filter(p => 
+                            !currentPlayerIds.has(p.id) &&
+                            (p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search))
+                        )
+                        .slice(0, 10);
+                }
+            } else {
+                // Show only selected position from current rankings
+                state.filteredPlayers = state.players.filter(p => 
+                    p.position === state.positionFilter && 
+                    (p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search))
+                );
+                
+                // Show available players of this position (not in current rankings)
+                const currentPlayerIds = new Set(state.players.map(p => p.id));
+                state.availablePlayers = [];
+                
+                if (state.allConsensusData[state.currentFormat]) {
+                    state.availablePlayers = state.allConsensusData[state.currentFormat]
+                        .filter(p => 
+                            p.position === state.positionFilter &&
+                            !currentPlayerIds.has(p.id) &&
+                            (search.length === 0 || p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search))
+                        )
+                        .slice(0, 20); // Show more since we're filtering by position
+                }
             }
             
             renderPlayers();
@@ -484,17 +546,51 @@
         function updatePlayerOrder() {
             document.querySelectorAll('.drag-placeholder').forEach(el => el.remove());
             
-            const playerElements = Array.from(document.querySelectorAll('.player-item:not(.drag-placeholder):not(.available-player)'));
-            const newOrder = playerElements
-                .map(el => state.players.find(p => p.id === el.dataset.playerId))
-                .filter(Boolean);
-            
-            if (newOrder.length === state.players.length) {
-                state.players = newOrder;
-                recalculateRanks();
-                filterPlayers();
+            if (state.positionFilter === 'ALL') {
+                // Normal behavior for all positions
+                const playerElements = Array.from(document.querySelectorAll('.player-item:not(.drag-placeholder):not(.available-player)'));
+                const newOrder = playerElements
+                    .map(el => state.players.find(p => p.id === el.dataset.playerId))
+                    .filter(Boolean);
+                
+                if (newOrder.length === state.players.length) {
+                    state.players = newOrder;
+                    recalculateRanks();
+                    filterPlayers();
+                } else {
+                    console.error('Player count mismatch:', newOrder.length, 'vs', state.players.length);
+                    filterPlayers();
+                }
             } else {
-                console.error('Player count mismatch:', newOrder.length, 'vs', state.players.length);
+                // Positional filtering logic
+                const playerElements = Array.from(document.querySelectorAll('.player-item:not(.drag-placeholder):not(.available-player)'));
+                const newPositionalOrder = playerElements
+                    .map(el => state.players.find(p => p.id === el.dataset.playerId))
+                    .filter(Boolean);
+                
+                // Get players not in the current position filter
+                const otherPositionPlayers = state.players.filter(p => p.position !== state.positionFilter);
+                
+                // Rebuild the full rankings by interleaving the reordered position players
+                const newFullRankings = [];
+                let posIndex = 0;
+                
+                for (let i = 0; i < state.players.length; i++) {
+                    const originalPlayer = state.players[i];
+                    
+                    if (originalPlayer.position === state.positionFilter) {
+                        if (posIndex < newPositionalOrder.length) {
+                            newFullRankings.push(newPositionalOrder[posIndex]);
+                            posIndex++;
+                        }
+                    } else {
+                        newFullRankings.push(originalPlayer);
+                    }
+                }
+                
+                // Update the master rankings
+                state.players = newFullRankings;
+                recalculateRanks();
                 filterPlayers();
             }
         }
@@ -572,11 +668,11 @@
             // Available players
             state.availablePlayers.forEach((p, i) => {
                 html.push(`
-                    <div class="player-item available-player ${cfg.styles.posColors[p.position]} hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
+                    <div class="player-item available-player bg-gray-700/50 border-l-4 border-gray-600 hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
                         <div class="p-2 flex items-stretch gap-2">
                             <div class="w-12 flex flex-col items-center justify-center">
-                                <div class="text-mega font-bold text-gray-100">${p.overallRank}</div>
-                                <div class="text-mini ${cfg.styles.positionBadge[p.position].split(' ')[0]}">${p.position}${p.positionRank}</div>
+                                <div class="text-mega font-bold text-gray-100">${p.originalRank || '-'}</div>
+                                <div class="text-mini text-gray-300">${p.position}${p.positionRank || ''}</div>
                             </div>
                             <div class="drag-area flex items-center flex-grow ${!isDraft ? 'cursor-move' : ''}">
                                 <div class="px-2 flex-grow">
@@ -821,8 +917,8 @@
             deleteZone.classList.remove('bg-red-800', 'scale-110');
             deleteZone.classList.add('bg-red-600');
 
-            // Remove red pulse from backghround
-            document.classList.remove('active');
+            // Remove red pulse from background
+            deleteOverlay.classList.remove('active');
             
             state.dragState.wasOverDelete = false;
             
@@ -945,6 +1041,12 @@
         window.refreshToConsensus = refreshToConsensus;
 
         function toggleDraftMode() {
+            // Check if position filter is active
+            if (state.positionFilter !== 'ALL' && !state.isDraftMode) {
+                alert('Please switch to "All Positions" view to enter draft mode');
+                return;
+            }
+            
             if (state.isDraftMode && state.draftedPlayers.length > 0) {
                 state.players.push(...state.draftedPlayers);
                 state.draftedPlayers = [];
@@ -992,6 +1094,10 @@
                         $('rankerName').value = data.rankerName || '';
                         $('scoringFormat').value = data.scoringFormat || 'PPR';
                     }
+                    
+                    // Reset position filter to ALL when loading
+                    state.positionFilter = 'ALL';
+                    updatePositionFilterButton();
                     
                     filterPlayers();
                     if (state.isDraftMode) renderRecentlyDrafted();
