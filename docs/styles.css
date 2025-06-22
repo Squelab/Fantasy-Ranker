@@ -78,20 +78,24 @@ footer {
     transition: opacity 0.3s ease;
 }
 
-/* Force the red overlay further back */
-.delete-overlay {
-    z-index: -1 !important; 
-    pointer-events: auto;
-}
-
 /* Force opaque backgrounds on buttons */
 button,
 input,
 select,
 textarea {
     position: relative;
+    opacity: 1
     z-index: 10;
 }
+
+/* Force opaque versions of Tailwind's button colors */
+.bg-slate-600 { background-color: rgb(71, 85, 105) !important; }
+.bg-slate-700 { background-color: rgb(51, 65, 85) !important; }
+.bg-slate-800 { background-color: rgb(30, 41, 59) !important; }
+.bg-green-600 { background-color: rgb(22, 163, 74) !important; }
+.bg-blue-600 { background-color: rgb(37, 99, 235) !important; }
+.bg-purple-600 { background-color: rgb(147, 51, 234) !important; }
+.bg-orange-600 { background-color: rgb(234, 88, 12) !important; }
 
 /* Let .bg-slate-800 elements get the red glow effect */
 .bg-slate-800 {
