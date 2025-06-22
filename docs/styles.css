@@ -83,8 +83,7 @@ body {
 button,
 input,
 textarea,
-select,
-.bg-slate-800 {
+select {
     position: relative;
     z-index: 10;
 }
