@@ -292,6 +292,37 @@
                 }
             });
 
+            // Reset scroll state when touches are cancelled/interrupted
+            document.addEventListener('touchcancel', () => {
+                if (state.dragState.isScrolling) {
+                    state.dragState.isScrolling = false;
+                    if (state.dragState.timers.scroll) {
+                        cancelAnimationFrame(state.dragState.timers.scroll);
+                    }
+                }
+            });
+            
+            // Reset scroll state when page loses focus
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden && state.dragState.isScrolling) {
+                    state.dragState.isScrolling = false;
+                    if (state.dragState.timers.scroll) {
+                        cancelAnimationFrame(state.dragState.timers.scroll);
+                    }
+                }
+            });
+            
+            // Optional: Add a manual escape hatch - tap outside drag area to reset
+            document.addEventListener('touchend', (e) => {
+                if (state.dragState.isScrolling && !state.dragState.isDragging) {
+                    // If scrolling but not actively dragging, reset scroll state
+                    state.dragState.isScrolling = false;
+                    if (state.dragState.timers.scroll) {
+                        cancelAnimationFrame(state.dragState.timers.scroll);
+                    }
+                }
+            });
+
             on(window, 'resize', () => {
                 cancelDragOperation();
                 clearTimeout(state.dragState.timers.resize);
