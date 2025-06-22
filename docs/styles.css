@@ -21,7 +21,7 @@ body {
 .player-item {
     transition: transform 0.2s, opacity 0.2s;
     margin: 0 0 4px 0;
-    boarder-radius: 0.5rem;
+    border-radius: 0.5rem;
     position: relative;
     z-index: 2;
 }
