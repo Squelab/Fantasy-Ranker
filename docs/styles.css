@@ -10,6 +10,13 @@ body {
     padding: 0;
 }
 
+#deleteZone {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    visibilty: hidden;
+}
+
 /* Player Item Styles */
 .player-item {
     transition: transform 0.2s, opacity 0.2s;
