@@ -84,8 +84,8 @@ button,
 input,
 textarea,
 select,
-#undoBtn,
-#redoBtn {
+button#undoBtn,
+button#redoBtn {
     position: relative;
     z-index: 10;
 }
