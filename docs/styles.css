@@ -74,7 +74,7 @@ footer {
     );
     opacity: 0;
     pointer-events: none;
-    z-index: 0; /* Behind everything */
+    z-index: -1 !important;
     transition: opacity 0.3s ease;
 }
 
