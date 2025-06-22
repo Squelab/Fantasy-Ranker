@@ -71,13 +71,9 @@ body {
     opacity: 1;
 }
 
-/* Force player area above the overlay */
+/* Force player items above the overlay */
 .player-item {
-    position: relative;
-    z-index: 10;
-}
-
-#deleteZone {
+    background: inherit !important;
     position: relative;
     z-index: 10;
 }
