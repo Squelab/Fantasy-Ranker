@@ -287,6 +287,17 @@
             loadAllScoringFormats();
         });
 
+        function handleTouchEnd() {
+            cancelPendingDrag();
+            endDrag();
+    
+            setTimeout(() => {
+                document.body.style.transform = 'translateZ(0)';
+                document.body.offsetHeight; // Force reflow
+                document.body.style.transform = '';
+            }, 50);
+        }
+
         function handleSearchInput() {
             const clearBtn = $('clearSearch');
             const searchValue = $('searchInput').value;
