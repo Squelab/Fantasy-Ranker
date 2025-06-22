@@ -231,6 +231,15 @@
                 on($(id), event, handler);
             });
 
+            document.addEventListener('click', function(e) {
+                if (e.target.tagName === 'BUTTON') {
+                    // Force blur the button after a tiny delay to let the click handler run first
+                    setTimeout(() => {
+                        e.target.blur();
+                    }, 10);
+                }
+            }, true);
+
             // Modal background click to close
             on($('notesModal'), 'click', (e) => {
                 if (e.target === $('notesModal')) {
