@@ -73,7 +73,6 @@ body {
 
 /* Force player items above the overlay */
 .player-item {
-    background: inherit !important;
     position: relative;
     z-index: 2;
 }
