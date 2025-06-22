@@ -157,6 +157,12 @@
             }
         };
 
+        const vibrate = (pattern) => {
+            if (window.navigator.vibrate) {
+                window.navigator.vibrate(pattern);
+            }
+        };
+
         // Create delete overlay
         const deleteOverlay = document.createElement('div');
         deleteOverlay.className = 'delete-overlay';
@@ -958,6 +964,8 @@
                 originalRect: { left: rect.left, top: rect.top },
             });
             
+            vibrate(50);
+            
             state.dragState.placeholder = element.cloneNode(true);
             state.dragState.placeholder.classList.add('drag-placeholder');
 
@@ -1106,12 +1114,14 @@
                 const wasOverDelete = state.dragState.wasOverDelete;
     
                 if (wasOverDelete) {
+                    vibrate([100, 50, 100])
                     const playerId = element.dataset.playerId;
                     deletePlayer(playerId);
         
                     element.remove();
                     placeholder.remove();
                 } else {
+                    vibrate(100)
                     placeholder.parentNode.replaceChild(element, placeholder);
                     element.classList.remove('drag-active');
                     ['width', 'height', 'left', 'top'].forEach(prop => element.style[prop] = '');
