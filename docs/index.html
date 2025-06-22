@@ -194,7 +194,7 @@
             maxPlayers: 200,
             recentDraftedCount: 3,
             dragThreshold: 15,
-            dragDelay: 150,
+            dragDelay: 130,
             styles: {
                 riskBtn: { High: 'bg-red-600', Medium: 'bg-yellow-600', Low: 'bg-green-600' },
                 riskBorder: { High: 'border-red-500', Medium: 'border-yellow-500', Low: 'border-green-500' },
@@ -1104,11 +1104,6 @@
         }
 
         function handleAutoScroll(clientY) {
-            // PREVENT SCROLL IF ALREADY DRAGGING
-            if (state.dragState.isDragging && state.dragState.isScrolling) {
-                return;
-            }
-            
             const isMobile = window.innerWidth < 768;
             const scrollZone = isMobile ? 50 : 80;
             const maxScroll = 35;
@@ -1137,7 +1132,7 @@
             if (scrollSpeed !== 0 && !state.dragState.isScrolling) {
                 state.dragState.isScrolling = true;
                 smoothScroll(scrollSpeed);
-            } else if (scrollSpeed === 0) {
+            } else if (scrollSpeed === 0 && state.dragState.isScrolling) {
                 state.dragState.isScrolling = false;
                 cancelAnimationFrame(state.dragState.timers.scroll);
             }
