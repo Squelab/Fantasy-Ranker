@@ -1142,6 +1142,23 @@
             if (!state.dragState.isDragging || !state.dragState.isScrolling) return;
             
             window.scrollBy(0, speed);
+            
+            // CHECK IF WE SHOULD STOP SCROLLING
+            if (state.dragState.element) {
+                const rect = state.dragState.element.getBoundingClientRect();
+                const centerY = rect.top + rect.height / 2;
+                
+                const isMobile = window.innerWidth < 768;
+                const scrollZone = isMobile ? 50 : 80;
+                const viewportHeight = window.innerHeight;
+                
+                // If we're in the center zone, stop scrolling
+                if (centerY >= scrollZone && centerY <= viewportHeight - scrollZone) {
+                    state.dragState.isScrolling = false;
+                    return; // Don't schedule next frame
+                }
+            }
+            
             state.dragState.timers.scroll = requestAnimationFrame(() => smoothScroll(speed));
         }
 
