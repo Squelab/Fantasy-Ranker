@@ -1374,7 +1374,9 @@
             // Handle possessive correctly
             const rankerName = $('rankerName').value.trim() || 'Your';
             let possessiveName;
-            if (!name.toLowerCase().endsWith('s') && name.toLowerCase() !== 'your') {
+            if (rankerName.toLowerCase() === 'your') {
+                possessiveName = rankerName; // No possessive for "Your"
+            } else if (rankerName.toLowerCase().endsWith('s')) {
                 possessiveName = rankerName + "'";
             } else {
                 possessiveName = rankerName + "'s";
