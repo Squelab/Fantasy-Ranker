@@ -763,10 +763,17 @@
                     .filter(Boolean);
                 
                 if (newOrder.length === state.players.length) {
-                    saveState('reorder players');
-                    state.players = newOrder;
-                    recalculateRanks();
-                    filterPlayers();
+                    // CHECK IF ORDER ACTUALLY CHANGED BEFORE SAVING STATE
+                    const orderChanged = !state.players.every((player, index) => 
+                        player.id === newOrder[index].id
+                    );
+                    
+                    if (orderChanged) {
+                        saveState('reorder players');
+                        state.players = newOrder;
+                        recalculateRanks();
+                        filterPlayers();
+                    }
                 } else {
                     console.error('Player count mismatch:', newOrder.length, 'vs', state.players.length);
                     filterPlayers();
@@ -798,10 +805,18 @@
                     }
                 }
                 
-                // Update the master rankings
-                state.players = newFullRankings;
-                recalculateRanks();
-                filterPlayers();
+                // CHECK IF ORDER ACTUALLY CHANGED BEFORE SAVING STATE
+                const orderChanged = !state.players.every((player, index) => 
+                    player.id === newFullRankings[index].id
+                );
+                
+                if (orderChanged) {
+                    saveState('reorder players');
+                    // Update the master rankings
+                    state.players = newFullRankings;
+                    recalculateRanks();
+                    filterPlayers();
+                }
             }
         }
 
