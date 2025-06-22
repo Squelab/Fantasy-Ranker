@@ -217,55 +217,6 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            
-            
-            const debugDiv = document.createElement('div');
-            debugDiv.style.cssText = `
-                position: fixed; 
-                top: 10px; 
-                left: 10px; 
-                background: black; 
-                color: white; 
-                padding: 10px; 
-                z-index: 9999; 
-                font-size: 12px;
-                border-radius: 5px;
-                max-width: 300px;
-                word-wrap: break-word;
-            `;
-            
-            const vibrateSupported = !!navigator.vibrate;
-            const userAgent = navigator.userAgent;
-            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-            
-            debugDiv.innerHTML = `
-                <strong>Haptic Debug:</strong><br>
-                Vibrate supported: ${vibrateSupported}<br>
-                Is mobile: ${isMobile}<br>
-                Browser: ${userAgent.includes('Chrome') ? 'Chrome' : userAgent.includes('Safari') ? 'Safari' : 'Other'}<br>
-                <button onclick="testVibrate()" style="margin-top: 5px; padding: 5px;">Test Vibrate</button>
-            `;
-            
-            document.body.appendChild(debugDiv);
-            
-            // Test function
-            window.testVibrate = () => {
-                if (navigator.vibrate) {
-                    const result = navigator.vibrate(200);
-                    debugDiv.innerHTML += `<br>Vibrate called, returned: ${result}`;
-                } else {
-                    debugDiv.innerHTML += `<br>Navigator.vibrate not available`;
-                }
-            };
-            
-            // Remove debug after 30 seconds
-            setTimeout(() => {
-                if (debugDiv.parentNode) {
-                    debugDiv.remove();
-                }
-            }, 30000);
-            
-            
             // Set up event listeners using map for cleaner code
             const eventMap = {
                 scoringFormat: ['change', handleScoringFormatChange],
