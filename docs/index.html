@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Draft Craft</title>
     <meta name="description" content="Free fantasy football draft tool and rankings builder. Create printable cheat sheets, drag and drop players, and dominate your draft. Works on mobile and desktop.">
     <meta name="keywords" content="fantasy football, draft tool, rankings builder, cheat sheet, fantasy draft, football rankings, draft helper, rankings tool">
@@ -231,15 +231,6 @@
                 on($(id), event, handler);
             });
 
-            document.addEventListener('click', function(e) {
-                if (e.target.tagName === 'BUTTON') {
-                    // Force blur the button after a tiny delay to let the click handler run first
-                    setTimeout(() => {
-                        e.target.blur();
-                    }, 10);
-                }
-            }, true);
-
             // Modal background click to close
             on($('notesModal'), 'click', (e) => {
                 if (e.target === $('notesModal')) {
@@ -295,17 +286,6 @@
 
             loadAllScoringFormats();
         });
-
-        function handleTouchEnd() {
-            cancelPendingDrag();
-            endDrag();
-    
-            setTimeout(() => {
-                document.body.style.transform = 'translateZ(0)';
-                document.body.offsetHeight; // Force reflow
-                document.body.style.transform = '';
-            }, 50);
-        }
 
         function handleSearchInput() {
             const clearBtn = $('clearSearch');
