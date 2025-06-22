@@ -843,7 +843,7 @@
             if (isDraft) {
                 return `<button onclick="draftPlayer('${player.id}')" class="bg-red-600 border-2 border-red-500 w-10 h-10 rounded text-mini font-bold text-white hover:bg-red-700 transition-all duration-200 flex items-center justify-center">D</button>`;
             }
-            return `<button onclick="cycleRisk('${player.id}')" class="${cfg.styles.riskBtn[player.risk]} border-2 ${cfg.styles.riskBorder[player.risk]} w-10 h-10 rounded text-mini font-bold text-white hover:opacity-80 transition-all duration-200 flex items-center justify-center">${player.risk[0]}</button>`;
+            return `<button onclick="cycleRisk('${player.id}')" class="${cfg.styles.riskBtn[player.risk]} border-2 ${cfg.styles.riskBorder[player.risk]} w-10 h-10 rounded text-mini font-bold text-white transition-all duration-200 flex items-center justify-center">${player.risk[0]}</button>`;
         };
 
         const createNotesIcon = (player, isDraft) => {
