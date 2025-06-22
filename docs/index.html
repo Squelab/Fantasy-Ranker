@@ -78,7 +78,10 @@
         </div>
 
         <!-- Recently Drafted Section -->
-        <div id="recentlyDraftedSection" class="bg-red-950 rounded-lg shadow-xl p-4 mb-2 hidden border border-red-900">
+        <div id="recentlyDraftedSection" class="bg-red-950 rounded-lg shadow-xl p-4 mb-2 hidden border border-red-900 relative">
+            <button onclick="toggleDraftMode()" class="absolute top-3 right-3 w-8 h-8 bg-slate-600 border-2 border-slate-500 rounded hover:bg-slate-700 transition-all duration-200 flex items-center justify-center text-white font-bold">
+                ×
+            </button>
             <h3 class="text-mega font-semibold text-red-400 mb-3">Recently Drafted</h3>
             <div id="recentlyDraftedList" class="space-y-2"></div>
         </div>
@@ -1308,17 +1311,17 @@
                 state.draftedPlayers = [];
                 state.players.sort((a, b) => a.overallRank - b.overallRank);
             }
-    
+        
             state.isDraftMode = !state.isDraftMode;
+            
+            // Button stays the same - just "Draft Day"
             const btn = $('draftBtn');
-            const btnClasses = state.isDraftMode ? 
-                'bg-red-600 border-2 border-red-500 hover:bg-red-700' : 
-                'bg-orange-600 border-2 border-orange-500 hover:bg-orange-700';
-    
-            btn.textContent = state.isDraftMode ? 'Exit Draft' : 'Draft Day';
-            btn.className = `${btnClasses} text-white px-4 py-2 rounded-md transition-all duration-200 h-10 text-center font-medium`;
+            btn.textContent = 'Draft Day'; // Always the same text
+            // Keep original orange styling always
+            btn.className = 'bg-orange-600 border-2 border-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700 transition-all duration-200 h-10 flex items-center justify-center font-medium';
+            
             $('recentlyDraftedSection').classList.toggle('hidden');
-    
+        
             filterPlayers();
             if (state.isDraftMode) renderRecentlyDrafted();
         }
