@@ -77,12 +77,6 @@ body {
     z-index: 10;
 }
 
-/* Force every other interactable above overlay */
-button,
-input,
-textarea,
-select,
-.bg-slate-800,
 #deleteZone {
     position: relative;
     z-index: 10;
