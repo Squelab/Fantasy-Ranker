@@ -6,16 +6,6 @@ body {
     background-color: #0f172a;
 }
 
-/* iOS Safari button focus fix */
-button {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-    /* Force buttons to not stay focused */
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-}
-
 #playersList {
     padding: 0;
 }
@@ -108,17 +98,6 @@ select {
     width: 80px;
     min-width: 80px;
     flex-shrink: 0;
-}
-
-/* Remove focus state on touch devices */
-@media (hover: none) and (pointer: coarse) {
-    button:focus {
-        outline: none;
-        /* Reset any hover/focus styles */
-        opacity: 1 !important;
-        background-color: initial !important;
-        transform: none !important;
-    }
 }
 
 @media (max-width: 640px) {
