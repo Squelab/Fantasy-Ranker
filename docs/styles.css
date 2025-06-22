@@ -6,6 +6,12 @@ body {
     background-color: #0f172a;
 }
 
+button {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
 #playersList {
     padding: 0;
 }
