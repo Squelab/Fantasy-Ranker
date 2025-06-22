@@ -6,6 +6,10 @@ body {
     background-color: #0f172a;
 }
 
+footer {
+    margin-top: 2rem;
+}
+
 #playersList {
     padding: 0;
 }
