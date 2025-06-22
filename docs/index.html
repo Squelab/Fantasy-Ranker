@@ -1016,8 +1016,8 @@
             const elementBelow = document.elementFromPoint(clientX, clientY);
             element.style.pointerEvents = 'auto';
     
-            const targetItem = elementBelow?.closest('.player-item:not(.drag-active):not(.available-player)');
-            if (targetItem && placeholder) {
+            const targetItem = elementBelow?.closest('.player-item');
+            if (targetItem && placeholder && !targetItem.classList.contains('drag-active') && !targetItem.classList.contains('available-player')) {
                 const targetRect = targetItem.getBoundingClientRect();
                 const before = clientY < targetRect.top + targetRect.height / 2;
                 targetItem.parentNode.insertBefore(placeholder, before ? targetItem : targetItem.nextSibling);
