@@ -97,11 +97,6 @@ textarea {
 .bg-purple-600 { background-color: rgb(147, 51, 234) !important; }
 .bg-orange-600 { background-color: rgb(234, 88, 12) !important; }
 
-/* Let .bg-slate-800 elements get the red glow effect */
-.bg-slate-800 {
-    z-index: -2; 
-}
-
 /* Also add this class to body when overlay is active */
 .delete-mode {
     /* Optional: add any body-level styling for delete mode */
