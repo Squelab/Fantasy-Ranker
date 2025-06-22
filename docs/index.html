@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Draft Craft</title>
-    <meta name="description" content="Free fantasy football draft tool and rankings builder. Create printable cheat sheets, drag and drop players, and dominate your draft. Works on mobile and desktop.">
+    <meta name="description" content="Free fantasy football draft tool and rankings builder. Create printable cheat sheets, drag and drop players, and win the draft. Works on mobile and desktop.">
     <meta name="keywords" content="fantasy football, draft tool, rankings builder, cheat sheet, fantasy draft, football rankings, draft helper, rankings tool">
     <meta property="og:title" content="Draft Craft - Fantasy Football Rankings Tool">
-    <meta property="og:description" content="Free fantasy football draft tool and rankings builder. Create printable cheat sheets and dominate your draft.">
+    <meta property="og:description" content="Free fantasy football draft tool and rankings builder. Create printable cheat sheets and win the draft.">
     <meta property="og:url" content="https://drftcrft.com">
     <meta property="og:type" content="website">
     <!-- Standard favicon -->
@@ -305,17 +305,6 @@
             // Reset scroll state when page loses focus
             document.addEventListener('visibilitychange', () => {
                 if (document.hidden && state.dragState.isScrolling) {
-                    state.dragState.isScrolling = false;
-                    if (state.dragState.timers.scroll) {
-                        cancelAnimationFrame(state.dragState.timers.scroll);
-                    }
-                }
-            });
-            
-            // Optional: Add a manual escape hatch - tap outside drag area to reset
-            document.addEventListener('touchend', (e) => {
-                if (state.dragState.isScrolling && !state.dragState.isDragging) {
-                    // If scrolling but not actively dragging, reset scroll state
                     state.dragState.isScrolling = false;
                     if (state.dragState.timers.scroll) {
                         cancelAnimationFrame(state.dragState.timers.scroll);
