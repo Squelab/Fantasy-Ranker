@@ -6,6 +6,10 @@ body {
     background-color: #0f172a;
 }
 
+button:focus {
+  outline: none !important;
+}
+
 #playersList {
     padding: 0;
 }
