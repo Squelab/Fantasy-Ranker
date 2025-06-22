@@ -1306,20 +1306,19 @@
                 return;
             }
             
+            // Add warning when exiting draft mode (but not when entering)
             if (state.isDraftMode && state.draftedPlayers.length > 0) {
+                const confirmExit = confirm('Are you sure you want to exit draft mode? Drafted players will be moved back to your rankings.');
+                if (!confirmExit) {
+                    return; // Don't exit if user cancels
+                }
+                
                 state.players.push(...state.draftedPlayers);
                 state.draftedPlayers = [];
                 state.players.sort((a, b) => a.overallRank - b.overallRank);
             }
         
             state.isDraftMode = !state.isDraftMode;
-            
-            // Button stays the same - just "Draft Day"
-            const btn = $('draftBtn');
-            btn.textContent = 'Draft Day'; // Always the same text
-            // Keep original orange styling always
-            btn.className = 'bg-orange-600 border-2 border-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700 transition-all duration-200 h-10 flex items-center justify-center font-medium';
-            
             $('recentlyDraftedSection').classList.toggle('hidden');
         
             filterPlayers();
