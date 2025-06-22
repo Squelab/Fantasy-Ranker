@@ -71,14 +71,19 @@ body {
     opacity: 1;
 }
 
-/* Force any interactable above the overlay */
-.player-item,
+/* Force player area above the overlay */
+.player-item {
+    position: relative;
+    z-index: 10;
+}
+
+/* Force every other interactable above overlay */
 button,
 input,
 textarea,
 select,
-.bg-slate-800 {
-    background: inherit !important;
+.bg-slate-800,
+#deleteZone {
     position: relative;
     z-index: 10;
 }
