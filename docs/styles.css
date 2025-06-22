@@ -78,21 +78,31 @@ footer {
     transition: opacity 0.3s ease;
 }
 
-.delete-overlay.active {
-    opacity: 1;
+/* Force the red overlay further back */
+.delete-overlay {
+    z-index: -1 !important; 
     pointer-events: auto;
 }
 
-/* Force all UI elements above the red glow */
+/* Force opaque backgrounds on buttons */
 button,
 input,
-textarea,
 select,
-button#undoBtn,
-button#redoBtn {
+textarea {
+    background-color: rgb(51, 65, 85) !important; /* Force solid slate-600 */
     position: relative;
-    z-index: 10;
+    z-index: 1;
 }
+
+/* Let .bg-slate-800 elements get the red glow effect */
+.bg-slate-800 {
+    z-index: 0; 
+}
+
+.bg-green-600 { background-color: rgb(22, 163, 74) !important; }
+.bg-blue-600 { background-color: rgb(37, 99, 235) !important; }
+.bg-purple-600 { background-color: rgb(147, 51, 234) !important; }
+.bg-orange-600 { background-color: rgb(234, 88, 12) !important; }
 
 /* Also add this class to body when overlay is active */
 .delete-mode {
