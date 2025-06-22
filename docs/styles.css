@@ -83,7 +83,9 @@ body {
 button,
 input,
 textarea,
-select {
+select,
+#undoBtn,
+#redoBtn {
     position: relative;
     z-index: 10;
 }
