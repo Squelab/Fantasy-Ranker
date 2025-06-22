@@ -10,6 +10,23 @@ body {
     padding: 0;
 }
 
+#deleteZone {
+  position: fixed;
+  top: -1000px;
+  left: -1000px;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  pointer-events: auto;
+  z-index: 9999; /* if needed */
+}
+
+/* IDK why this centers the 'x' but it does */
+#clearSearch {
+    top: 50% !important;
+    transform: translateY(-60%) !important;
+}
+
 /* Player Item Styles */
 .player-item {
     transition: transform 0.2s, opacity 0.2s;
@@ -211,15 +228,4 @@ textarea {
 
 .notes-modal-textarea::placeholder {
     color: #94a3b8;
-}
-
-#deleteZone {
-  position: fixed;
-  top: -1000px;
-  left: -1000px;
-  width: 40px;
-  height: 40px;
-  opacity: 0;
-  pointer-events: auto;
-  z-index: 9999; /* if needed */
 }

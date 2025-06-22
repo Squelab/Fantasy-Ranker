@@ -46,19 +46,11 @@
                 <div class="grid grid-cols-2 lg:grid-cols-6 gap-3">
                     <input type="text" id="rankerName" placeholder="Your Name" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none h-10">
     
-                    <!-- Mobile: Scoring + Refresh in same cell -->
-                    <div class="flex items-center gap-3 justify-between lg:contents">
-                        <select id="scoringFormat" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 focus:border-blue-500 focus:outline-none h-10 flex-grow lg:flex-grow-0">
-                            <option value="PPR">PPR</option>
-                            <option value="Half PPR">Half PPR</option>
-                            <option value="Standard">Standard</option>
-                        </select>
-                        <button id="refreshBtnMobile" class="lg:hidden bg-yellow-600 border-2 border-yellow-500 text-white w-10 h-10 hover:bg-yellow-700 transition-all duration-200 flex items-center justify-center flex-shrink-0 rounded-md" title="Refresh to Expert Consensus">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                            </svg>
-                        </button>
-                    </div>
+                    <select id="scoringFormat" class="bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-gray-100 focus:border-blue-500 focus:outline-none h-10">
+                        <option value="PPR">PPR</option>
+                        <option value="Half PPR">Half PPR</option>
+                        <option value="Standard">Standard</option>
+                    </select>
 
                     <label class="bg-blue-600 border-2 border-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 cursor-pointer transition-all duration-200 flex items-center justify-center text-center h-10 font-medium">
                         Load Rankings
@@ -69,15 +61,7 @@
 
                     <button id="draftBtn" class="bg-orange-600 border-2 border-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700 transition-all duration-200 h-10 flex items-center justify-center font-medium">Draft Day</button>
 
-                    <!-- Desktop: Printable + Refresh in same cell -->
-                    <div class="flex items-center gap-3 justify-end">
-                        <button id="printBtn" class="bg-purple-600 border-2 border-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-all duration-200 h-10 flex-grow flex items-center justify-center font-medium">Printable</button>
-                        <button id="refreshBtnDesktop" class="hidden lg:flex bg-yellow-600 border-2 border-yellow-500 text-white w-10 h-10 hover:bg-yellow-700 transition-all duration-200 items-center justify-center flex-shrink-0 rounded-md" title="Refresh to Expert Consensus">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                            </svg>
-                        </button>
-                    </div>
+                    <button id="printBtn" class="bg-purple-600 border-2 border-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-all duration-200 h-10 flex items-center justify-center font-medium">Printable</button>
                 </div>
             </div>
         </div>
@@ -92,7 +76,7 @@
         <div class="bg-slate-800 rounded-lg shadow-xl p-4 mb-2 border border-slate-700">
             <div class="flex gap-3">
                 <div class="relative flex-grow">
-                    <input type="text" id="searchInput" placeholder="Search players..." class="h-10 w-full bg-slate-700 border border-slate-600 rounded-md px-3 py-2 pr-10 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">
+                    <input type="text" id="searchInput" placeholder="Search players & teams..." class="h-10 w-full bg-slate-700 border border-slate-600 rounded-md px-3 py-2 pr-10 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none">
                     <button id="clearSearch" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-200 transition-colors" style="display: none;">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -102,6 +86,18 @@
                 <button id="positionFilter" class="w-10 h-10 bg-slate-600 border-2 border-slate-500 rounded-md flex items-center justify-center hover:opacity-80 transition-all duration-200 cursor-pointer text-white font-bold text-sm" title="Filter by position">
                     <img src="favicon.ico" class="w-7 h-7">
                 </button>
+                <div class="flex flex-col gap-1">
+                    <button id="undoBtn" class="w-10 h-5 bg-slate-600 border-2 border-slate-500 rounded-md flex items-center justify-center hover:bg-slate-700 transition-all duration-200 cursor-pointer text-white disabled:opacity-50 disabled:cursor-not-allowed" title="Undo (Ctrl+Z)" disabled>
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                        </svg>
+                    </button>
+                    <button id="redoBtn" class="w-10 h-5 bg-slate-600 border-2 border-slate-500 rounded-md flex items-center justify-center hover:bg-slate-700 transition-all duration-200 cursor-pointer text-white disabled:opacity-50 disabled:cursor-not-allowed" title="Redo (Ctrl+Y)" disabled>
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 10h-10a8 8 0 00-8 8v2m18-10l-6 6m6-6l-6-6"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -137,6 +133,11 @@
             allConsensusData: {},
             currentFormat: 'PPR',
             positionFilter: 'ALL',
+	    history: {
+	        undoStack: [],
+  	      redoStack: [],
+   	     maxSize: 50
+	    },
             notesModal: {
                 isOpen: false,
                 currentPlayerId: null
@@ -219,12 +220,12 @@
                 saveBtn: ['click', saveRankings],
                 printBtn: ['click', downloadPrintable],
                 draftBtn: ['click', toggleDraftMode],
-                refreshBtnMobile: ['click', refreshToConsensus],
-                refreshBtnDesktop: ['click', refreshToConsensus],
                 notesModalClose: ['click', closeNotesModal],
                 searchInput: ['input', handleSearchInput],
                 clearSearch: ['click', handleClearSearch],
-                positionFilter: ['click', cyclePositionFilter]
+                positionFilter: ['click', cyclePositionFilter],
+                undoBtn: ['click', undo],
+                redoBtn: ['click', redo]
             };
 
             Object.entries(eventMap).forEach(([id, [event, handler]]) => {
@@ -238,10 +239,36 @@
                 }
             });
 
-            // Escape key to close modal
+            // Keyboard shortcuts
             on(document, 'keydown', (e) => {
+                // Escape key to close modal
                 if (e.key === 'Escape' && state.notesModal.isOpen) {
                     closeNotesModal();
+                    return;
+                }
+
+                // Undo/Redo shortcuts (but not when typing in inputs)
+                if (!['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+                    if (e.ctrlKey || e.metaKey) {
+                        // Check for Shift+Z first (Redo)
+                        if (e.key === 'Z' && e.shiftKey) {
+                            e.preventDefault();
+                            redo();
+                            console.log('Redo triggered'); // Debug log
+                        }
+                        // Then check for just Z (Undo)
+                        else if (e.key === 'z' && !e.shiftKey) {
+                            e.preventDefault();
+                            undo();
+                            console.log('Undo triggered'); // Debug log
+                        }
+                        // Also check for Ctrl+Y (alternative redo)
+                        else if (e.key === 'y') {
+                            e.preventDefault();
+                            redo();
+                            console.log('Redo (Ctrl+Y) triggered'); // Debug log
+                        }
+                    }
                 }
             });
 
@@ -282,6 +309,91 @@
             filterPlayers();
         }
         
+        // History management for undo/redo
+        function saveState(action = 'action') {
+            // Clear redo stack when new action is performed
+            state.history.redoStack = [];
+    
+            // Save current state to undo stack
+            const snapshot = {
+                players: deepCopy(state.players),
+                draftedPlayers: deepCopy(state.draftedPlayers),
+                action: action,
+                timestamp: Date.now()
+            };
+    
+            state.history.undoStack.push(snapshot);
+    
+            // Limit undo stack size
+            if (state.history.undoStack.length > state.history.maxSize) {
+                state.history.undoStack.shift();
+            }
+    
+            updateUndoRedoButtons();
+        }
+
+        function undo() {
+            if (state.history.undoStack.length === 0) return;
+    
+            // Save current state to redo stack
+            const currentSnapshot = {
+                players: deepCopy(state.players),
+                draftedPlayers: deepCopy(state.draftedPlayers),
+                action: 'current',
+                timestamp: Date.now()
+            };
+            state.history.redoStack.push(currentSnapshot);
+    
+            // Restore previous state
+            const previousSnapshot = state.history.undoStack.pop();
+            state.players = previousSnapshot.players;
+            state.draftedPlayers = previousSnapshot.draftedPlayers;
+    
+            recalculateRanks();
+            filterPlayers();
+            if (state.isDraftMode) renderRecentlyDrafted();
+            updateUndoRedoButtons();
+        }
+
+        function redo() {
+            if (state.history.redoStack.length === 0) return;
+    
+            // Save current state to undo stack
+            const currentSnapshot = {
+                players: deepCopy(state.players),
+                draftedPlayers: deepCopy(state.draftedPlayers),
+                action: 'undo',
+                timestamp: Date.now()
+            };
+            state.history.undoStack.push(currentSnapshot);
+    
+            // Restore next state
+            const nextSnapshot = state.history.redoStack.pop();
+            state.players = nextSnapshot.players;
+            state.draftedPlayers = nextSnapshot.draftedPlayers;
+    
+            recalculateRanks();
+            filterPlayers();
+            if (state.isDraftMode) renderRecentlyDrafted();
+            updateUndoRedoButtons();
+        }
+
+        function updateUndoRedoButtons() {
+            const undoBtn = $('undoBtn');
+            const redoBtn = $('redoBtn');
+    
+            undoBtn.disabled = state.history.undoStack.length === 0;
+            redoBtn.disabled = state.history.redoStack.length === 0;
+        }
+
+
+
+
+
+
+
+
+
         // Notes Modal Functions
         function openNotesModal(playerId) {
             const player = state.players.find(p => p.id === playerId);
@@ -386,6 +498,10 @@
             state.players = deepCopy(state.consensusData[format]);
             recalculateRanks();
             state.originalConsensus[format] = deepCopy(state.players);
+            // Clear history when loading fresh data
+            state.history.undoStack = [];
+            state.history.redoStack = [];
+            updateUndoRedoButtons();
             filterPlayers();
         }
         
@@ -464,12 +580,6 @@
             filterPlayers();
         }
 
-        function refreshToConsensus() {
-            if (confirm('Are you sure you want to refresh these rankings to Fantasy Pros expert consensus?\n\nYou will lose all your unsaved changes.')) {
-                loadPlayersFromConsensus(state.currentFormat);
-            }
-        }
-
         // Player management
         function recalculateRanks() {
             const posCounts = {};
@@ -482,22 +592,22 @@
 
         function filterPlayers() {
             const search = $('searchInput').value.toLowerCase();
-            
+    
             if (state.positionFilter === 'ALL') {
-                // Filter current players
+                // Filter current players with advanced search
                 state.filteredPlayers = state.players.filter(p => 
-                    p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search)
+                    advancedPlayerSearch(p, search)
                 );
-                
+        
                 // Find available players to add (from all consensus data)
                 state.availablePlayers = [];
                 if (search.length >= 2 && state.allConsensusData[state.currentFormat]) {
                     const currentPlayerIds = new Set(state.players.map(p => p.id));
-                    
+            
                     state.availablePlayers = state.allConsensusData[state.currentFormat]
                         .filter(p => 
                             !currentPlayerIds.has(p.id) &&
-                            (p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search))
+                            advancedPlayerSearch(p, search)
                         )
                         .slice(0, 10);
                 }
@@ -505,28 +615,128 @@
                 // Show only selected position from current rankings
                 state.filteredPlayers = state.players.filter(p => 
                     p.position === state.positionFilter && 
-                    (p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search))
+                    advancedPlayerSearch(p, search)
                 );
-                
+        
                 // Show available players of this position (not in current rankings)
                 const currentPlayerIds = new Set(state.players.map(p => p.id));
                 state.availablePlayers = [];
-                
+        
                 if (state.allConsensusData[state.currentFormat]) {
                     state.availablePlayers = state.allConsensusData[state.currentFormat]
                         .filter(p => 
                             p.position === state.positionFilter &&
                             !currentPlayerIds.has(p.id) &&
-                            (search.length === 0 || p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search))
+                            (search.length === 0 || advancedPlayerSearch(p, search))
                         )
                         .slice(0, 20); // Show more since we're filtering by position
                 }
             }
-            
+    
             renderPlayers();
         }
 
+        function advancedPlayerSearch(player, searchTerm) {
+            if (!searchTerm) return true;
+    
+            // Normalize function to handle punctuation and case
+            const normalize = (str) => {
+                return str.toLowerCase()
+                    .replace(/[''`]/g, "'")  // Normalize apostrophes
+                    .replace(/[^\w\s']/g, '') // Remove punctuation except apostrophes
+                    .replace(/\s+/g, ' ')     // Normalize spaces
+                    .trim();
+            };
+    
+            // Team name mappings for common abbreviations
+            const teamMappings = {
+                'arizona': ['ari', 'cardinals', 'arizona'],
+                'atlanta': ['atl', 'falcons', 'atlanta'],
+                'baltimore': ['bal', 'ravens', 'baltimore'],
+                'buffalo': ['buf', 'bills', 'buffalo'],
+                'carolina': ['car', 'panthers', 'carolina'],
+                'chicago': ['chi', 'bears', 'chicago'],
+                'cincinnati': ['cin', 'bengals', 'cincinnati'],
+                'cleveland': ['cle', 'browns', 'cleveland'],
+                'dallas': ['dal', 'cowboys', 'dallas'],
+                'denver': ['den', 'broncos', 'denver'],
+                'detroit': ['det', 'lions', 'detroit'],
+                'green bay': ['gb', 'packers', 'green bay'],
+                'houston': ['hou', 'texans', 'houston'],
+                'indianapolis': ['ind', 'colts', 'indianapolis'],
+                'jacksonville': ['jax', 'jaguars', 'jacksonville'],
+                'kansas city': ['kc', 'chiefs', 'kansas city'],
+                'las vegas': ['lv', 'raiders', 'las vegas'],
+                'los angeles chargers': ['lac', 'chargers', 'los angeles chargers'],
+                'los angeles rams': ['lar', 'rams', 'los angeles rams'],
+                'miami': ['mia', 'dolphins', 'miami'],
+                'minnesota': ['min', 'vikings', 'minnesota'],
+                'new england': ['ne', 'patriots', 'new england'],
+                'new orleans': ['no', 'saints', 'new orleans'],
+                'new york giants': ['nyg', 'giants', 'new york giants'],
+                'new york jets': ['nyj', 'jets', 'new york jets'],
+                'philadelphia': ['phi', 'eagles', 'philadelphia'],
+                'pittsburgh': ['pit', 'steelers', 'pittsburgh'],
+                'san francisco': ['sf', '49ers', 'niners', 'san francisco'],
+                'seattle': ['sea', 'seahawks', 'seattle'],
+                'tampa bay': ['tb', 'buccaneers', 'bucs', 'tampa bay'],
+                'tennessee': ['ten', 'titans', 'tennessee'],
+                'washington': ['was', 'commanders', 'washington']
+            };
+    
+            const normalizedSearch = normalize(searchTerm);
+            const normalizedName = normalize(player.name);
+            const normalizedTeam = normalize(player.team);
+    
+            // Create expanded team search terms
+            let teamSearchTerms = [normalizedTeam, player.team.toLowerCase()];
+    
+            // Add team mappings
+            Object.values(teamMappings).forEach(aliases => {
+                if (aliases.some(alias => alias === normalizedTeam || alias === player.team.toLowerCase())) {
+                    teamSearchTerms.push(...aliases);
+                }
+            });
+    
+            // For name matching, try different approaches
+            const nameMatches = (searchWord) => {
+                // Direct substring match
+                if (normalizedName.includes(searchWord)) return true;
+    
+                // Check if search word matches start of any name part
+                const nameParts = normalizedName.split(' ');
+                if (nameParts.some(part => part.startsWith(searchWord))) return true;
+    
+                // NEW: Try inserting apostrophes at different positions in the search word
+                // This handles cases like "jam" -> "ja'm" to match "ja'marr"
+                for (let i = 1; i < searchWord.length; i++) {
+                    const withApostrophe = searchWord.slice(0, i) + "'" + searchWord.slice(i);
+                    if (normalizedName.includes(withApostrophe)) return true;
+        
+                    // Also check if it matches start of name parts
+                    if (nameParts.some(part => part.startsWith(withApostrophe))) return true;
+                }
+    
+                return false;
+            };
+    
+            const teamMatches = (searchWord) => {
+                return teamSearchTerms.some(term => 
+                    term.includes(searchWord) || term.startsWith(searchWord)
+                );
+            };
+    
+            // Split search into words for multi-word matching
+            const searchWords = normalizedSearch.split(' ').filter(word => word.length > 0);
+    
+            // Check if all search words match somewhere in name or team
+            return searchWords.every(word => {
+                return nameMatches(word) || teamMatches(word);
+            });
+        }
+
         function addPlayer(playerId) {
+            saveState('add player');
             const playerToAdd = state.allConsensusData[state.currentFormat]?.find(p => p.id === playerId);
             if (!playerToAdd) return;
             
@@ -544,6 +754,7 @@
         }
 
         function updatePlayerOrder() {
+            saveState('reorder players');
             document.querySelectorAll('.drag-placeholder').forEach(el => el.remove());
             
             if (state.positionFilter === 'ALL') {
@@ -673,7 +884,7 @@
                             <div class="drag-area flex items-stretch gap-2 flex-grow ${!isDraft ? 'cursor-move' : ''} lg:items-center lg:gap-1">
                                 <div class="w-12 flex flex-col items-center justify-center lg:text-center">
                                     <div class="text-mega font-bold text-gray-100 lg:text-2xl">${p.originalRank || '-'}</div>
-                                    <div class="text-mini text-gray-300 lg:hidden">${p.position}${p.positionRank || ''}</div>
+                                    <div class="text-mini ${cfg.styles.positionBadge[p.position].split(' ')[0]} lg:hidden">${p.position}${p.positionRank}</div>
                                 </div>
                                 <span class="text-gray-300 px-2 py-1 rounded text-sm font-medium hidden lg:inline">${p.position}${p.positionRank || ''}</span>
                                 <div class="px-2 flex-grow flex items-center">
@@ -900,6 +1111,7 @@
         }
 
         function deletePlayer(playerId) {
+            saveState('delete player');
             const playerIndex = state.players.findIndex(p => p.id === playerId);
             if (playerIndex !== -1) {
                 state.players.splice(playerIndex, 1);
@@ -1003,6 +1215,7 @@
         
         // Player actions
         window.cycleRisk = id => {
+            saveState('change risk');
             const p = state.players.find(x => x.id === id);
             if (p) {
                 const i = cfg.risks.indexOf(p.risk);
@@ -1023,6 +1236,7 @@
         window.openNotesModal = openNotesModal;
 
         window.draftPlayer = id => {
+            saveState('draft player');
             const i = state.players.findIndex(p => p.id === id);
             if (i !== -1) {
                 state.draftedPlayers.unshift(state.players.splice(i, 1)[0]);
@@ -1032,6 +1246,7 @@
         };
 
         window.undraftPlayer = id => {
+            saveState('undraft player');
             const i = state.draftedPlayers.findIndex(p => p.id === id);
             if (i !== -1) {
                 state.players.push(state.draftedPlayers.splice(i, 1)[0]);
@@ -1040,8 +1255,6 @@
                 renderRecentlyDrafted();
             }
         };
-
-        window.refreshToConsensus = refreshToConsensus;
 
         function toggleDraftMode() {
             // Check if position filter is active
@@ -1102,6 +1315,11 @@
                     state.positionFilter = 'ALL';
                     updatePositionFilterButton();
                     
+                    // Clear history when loading new data
+                    state.history.undoStack = [];
+                    state.history.redoStack = [];
+                    updateUndoRedoButtons();
+
                     filterPlayers();
                     if (state.isDraftMode) renderRecentlyDrafted();
                 } catch (err) {
@@ -1120,14 +1338,27 @@
                 draftedPlayers: state.draftedPlayers
             };
 
-            const name = data.rankerName || 'Your';
-            downloadFile(JSON.stringify(data, null, 2), `${name}${cfg.year}${cfg.fileMap[data.scoringFormat].replace('.json', '') || 'PPR'}Rankings.json`, 'application/json');
+            let name = data.rankerName || 'Your';
+            // Add 's' if name doesn't already end with 's' (case-insensitive)
+            if (!name.toLowerCase().endsWith('s') && name.toLowerCase() !== 'your') {
+                name += 's';
+            }
+    
+            const backendFormat = cfg.fileMap[data.scoringFormat].replace('.json', '') || 'PPR';
+            downloadFile(JSON.stringify(data, null, 2), `${name}${cfg.year}${backendFormat}Rankings.json`, 'application/json');
         }
 
         function downloadPrintable() {
-            const name = $('rankerName').value.trim() || 'Your';
+            let name = $('rankerName').value.trim() || 'Your';
+            // Add 's' if name doesn't already end with 's' (case-insensitive)
+            if (!name.toLowerCase().endsWith('s') && name.toLowerCase() !== 'your') {
+                name += 's';
+            }
+    
             const scoring = $('scoringFormat').value || 'PPR';
-            downloadFile(generatePrintableHTML(), `${name}${cfg.year}${scoring}Printable.html`, 'text/html');
+            const backendFormat = cfg.fileMap[scoring].replace('.json', '');
+    
+            downloadFile(generatePrintableHTML(), `${name}${cfg.year}${backendFormat}Printable.html`, 'text/html');
         }
 
         function downloadFile(content, filename, type) {
@@ -1140,8 +1371,17 @@
 
         // Printable generation
         function generatePrintableHTML() {
-            const title = `${$('rankerName').value.trim() || 'Your'} ${cfg.year} ${$('scoringFormat').value} Rankings`;
-            const perCol = 25, perPage = 50;
+            // Handle possessive correctly
+            const rankerName = $('rankerName').value.trim() || 'Your';
+            let possessiveName;
+            if (!name.toLowerCase().endsWith('s') && name.toLowerCase() !== 'your') {
+                possessiveName = rankerName + "'";
+            } else {
+                possessiveName = rankerName + "'s";
+            }
+            
+            const title = `${possessiveName} ${cfg.year} ${$('scoringFormat').value} Rankings`;
+            const perCol = 30, perPage = 60;
             
             const genPlayer = p => {
                 const [first, ...last] = p.name.split(/\s+/);
