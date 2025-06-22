@@ -71,20 +71,6 @@ body {
     opacity: 1;
 }
 
-/* Force player items above the overlay */
-.player-item {
-    position: relative;
-    z-index: 2;
-}
-
-/* When delete overlay is active, create masks around player items */
-body.delete-active .player-item {
-    box-shadow: 
-        0 0 0 2000px rgba(220, 38, 38, 0.3),
-        inset 0 0 0 2000px transparent;
-    clip-path: polygon(-2000px -2000px, -2000px 0, 0 0, 0 -2000px);
-}
-
 /* Notes Section - Responsive */
 .notes-section {
     width: 80px;
