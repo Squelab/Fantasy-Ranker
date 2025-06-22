@@ -6,8 +6,10 @@ body {
     background-color: #0f172a;
 }
 
-button:focus {
+button:focus,
+button:active {
   outline: none !important;
+  transition: all 0.15 ease-out !important;
 }
 
 #playersList {
