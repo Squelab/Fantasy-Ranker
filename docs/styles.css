@@ -55,7 +55,7 @@ body {
     background: #1e293b;
 }
 
-/* Delete Overlay - completely avoids player items */
+/* Update your delete overlay CSS */
 .delete-overlay {
     position: fixed;
     top: 0;
@@ -70,13 +70,28 @@ body {
     );
     opacity: 0;
     pointer-events: none;
-    z-index: 1;
+    z-index: 0; /* Behind everything */
     transition: opacity 0.3s ease;
 }
 
 .delete-overlay.active {
     opacity: 1;
     pointer-events: auto;
+}
+
+/* Force all UI elements above the red glow */
+button,
+input,
+textarea,
+select,
+.bg-slate-800 {
+    position: relative;
+    z-index: 10;
+}
+
+/* Also add this class to body when overlay is active */
+.delete-mode {
+    /* Optional: add any body-level styling for delete mode */
 }
 
 /* Notes Section - Responsive */
