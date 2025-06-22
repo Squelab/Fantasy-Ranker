@@ -983,7 +983,7 @@
             
             state.dragState.placeholder = element.cloneNode(true);
             state.dragState.placeholder.classList.add('drag-placeholder');
-
+        
             // Replace the risk button with delete button in placeholder
             const placeholderRiskBtn = state.dragState.placeholder.querySelector('button[onclick*="cycleRisk"]');
             if (placeholderRiskBtn) {
@@ -997,7 +997,21 @@
                 `;
             }
             
-            element.parentNode.insertBefore(state.dragState.placeholder, element);
+            // SAFETY CHECK: Make sure parent exists before inserting placeholder
+            if (!element.parentNode) {
+                console.warn('Element has no parent - aborting drag');
+                state.dragState.isDragging = false;
+                return;
+            }
+            
+            // Insert placeholder
+            try {
+                element.parentNode.insertBefore(state.dragState.placeholder, element);
+            } catch (e) {
+                console.warn('Failed to insert placeholder:', e);
+                state.dragState.isDragging = false;
+                return;
+            }
             
             element.classList.add('drag-active');
             Object.assign(element.style, {
