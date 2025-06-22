@@ -6,6 +6,16 @@ body {
     background-color: #0f172a;
 }
 
+/* Force opaque backgrounds on buttons */
+button,
+input,
+select,
+textarea {
+    position: relative;
+    opacity: 1
+    z-index: 10;
+}
+
 footer {
     margin-top: 1rem;
 }
@@ -80,16 +90,6 @@ footer {
 
 .delete-overlay.active {
     opacity: 1 !important;
-}
-
-/* Force opaque backgrounds on buttons */
-button,
-input,
-select,
-textarea {
-    position: relative;
-    opacity: 1
-    z-index: 10;
 }
 
 /* Force opaque versions of Tailwind's button colors */
