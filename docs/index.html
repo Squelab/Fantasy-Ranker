@@ -989,6 +989,12 @@
         }
         
         function initDrag(element, clientX, clientY) {
+            // PREVENT DRAG IF ALREADY SCROLLING
+            if (state.dragState.isScrolling) {
+                console.log('Blocked drag - scroll in progress');
+                return;
+            }
+            
             const rect = element.getBoundingClientRect();
             Object.assign(state.dragState, {
                 element,
@@ -1098,6 +1104,11 @@
         }
 
         function handleAutoScroll(clientY) {
+            // PREVENT SCROLL IF ALREADY DRAGGING
+            if (state.dragState.isDragging && state.dragState.isScrolling) {
+                return;
+            }
+            
             const isMobile = window.innerWidth < 768;
             const scrollZone = isMobile ? 50 : 80;
             const maxScroll = 35;
@@ -1223,13 +1234,13 @@
             const touch = e.touches[0];
             const playerItem = e.target.closest('.player-item');
             if (!playerItem || playerItem.classList.contains('available-player')) return;
-            
+        
             state.dragState.startX = touch.clientX;
             state.dragState.startY = touch.clientY;
             state.dragState.pendingDrag = true;
             
             state.dragState.timers.touch = setTimeout(() => {
-                if (state.dragState.pendingDrag) {
+                if (state.dragState.pendingDrag && !state.dragState.isScrolling) {
                     initDrag(playerItem, touch.clientX, touch.clientY);
                     if (navigator.vibrate) navigator.vibrate(50);
                 }
@@ -1254,7 +1265,6 @@
                 moveDrag(touch.clientX, touch.clientY);
             }
         }
-
         function handleTouchEnd() {
             cancelPendingDrag();
             endDrag();
