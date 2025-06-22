@@ -71,8 +71,13 @@ body {
     opacity: 1;
 }
 
-/* Force player items above the overlay */
-.player-item {
+/* Force any interactable above the overlay */
+.player-item,
+button,
+input,
+textarea,
+select,
+.bg-slate-800 {
     background: inherit !important;
     position: relative;
     z-index: 10;
