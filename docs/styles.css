@@ -95,7 +95,7 @@ footer {
 /* Force opaque versions of Tailwind's button colors */
 .bg-slate-600 { background-color: rgb(71, 85, 105) !important; }
 .bg-slate-700 { background-color: rgb(51, 65, 85) !important; }
-.bg-slate-800 { background-color: rgb(30, 41, 59) !important; }
+.bg-slate-800 { background-color: rgb(30, 41, 59, 0.85) !important; }
 .bg-green-600 { background-color: rgb(22, 163, 74) !important; }
 .bg-blue-600 { background-color: rgb(37, 99, 235) !important; }
 .bg-purple-600 { background-color: rgb(147, 51, 234) !important; }
