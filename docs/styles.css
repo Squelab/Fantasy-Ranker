@@ -14,7 +14,7 @@ body {
     position: absolute;
     top: -9999px;
     left: -9999px;
-    visibilty: hidden;
+    visibility: hidden;
 }
 
 /* Player Item Styles */
