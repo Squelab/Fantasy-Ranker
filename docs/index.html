@@ -670,16 +670,19 @@
                 html.push(`
                     <div class="player-item available-player bg-gray-700/50 border-l-4 border-gray-600 hover:shadow-lg" data-player-id="${p.id}" data-index="${i}">
                         <div class="p-2 flex items-stretch gap-2">
-                            <div class="w-12 flex flex-col items-center justify-center">
-                                <div class="text-mega font-bold text-gray-100">${p.originalRank || '-'}</div>
-                                <div class="text-mini text-gray-300">${p.position}${p.positionRank || ''}</div>
-                            </div>
-                            <div class="drag-area flex items-center flex-grow ${!isDraft ? 'cursor-move' : ''}">
-                                <div class="px-2 flex-grow">
-                                    <div class="font-semibold text-gray-100 text-mega">${p.name}</div>
-                                    <div class="text-mini text-gray-400">
-                                         <span>${p.team}</span>
-                                         ${p.adp ? `<span class="ml-4 text-gray-400">ADP: ${p.adp}</span>` : ''}
+                            <div class="drag-area flex items-stretch gap-2 flex-grow ${!isDraft ? 'cursor-move' : ''} lg:items-center lg:gap-1">
+                                <div class="w-12 flex flex-col items-center justify-center lg:text-center">
+                                    <div class="text-mega font-bold text-gray-100 lg:text-2xl">${p.originalRank || '-'}</div>
+                                    <div class="text-mini text-gray-300 lg:hidden">${p.position}${p.positionRank || ''}</div>
+                                </div>
+                                <span class="text-gray-300 px-2 py-1 rounded text-sm font-medium hidden lg:inline">${p.position}${p.positionRank || ''}</span>
+                                <div class="px-2 flex-grow flex items-center">
+                                    <div class="flex-grow">
+                                        <div class="font-semibold text-mega text-gray-100">${p.name}</div>
+                                        <div class="text-mini text-gray-400">
+                                            <span>${p.team}</span>
+                                            ${p.adp ? `<span class="ml-4 text-gray-400">ADP: ${p.adp}</span>` : ''}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1177,7 +1180,7 @@
                     </div>
                 </div>`);
             }
-
+            
             const styles = `
 *{margin:0;padding:0;box-sizing:border-box}body{font:10px/1.1 Arial,sans-serif;color:#333;background:#fff}
 .page{width:8.5in;height:11in;margin:0 auto;padding:.2in;page-break-after:always;position:relative;display:flex;flex-direction:column}
