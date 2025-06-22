@@ -6,25 +6,8 @@ body {
     background-color: #0f172a;
 }
 
-button:focus,
-button:active {
-  outline: none !important;
-  transition: all 0.15 ease-out !important;
-}
-
 #playersList {
     padding: 0;
-}
-
-#deleteZone {
-  position: fixed;
-  top: -1000px;
-  left: -1000px;
-  width: 40px;
-  height: 40px;
-  opacity: 0;
-  pointer-events: auto;
-  z-index: 9999; /* if needed */
 }
 
 /* Player Item Styles */
@@ -65,7 +48,7 @@ button:active {
     background: #1e293b;
 }
 
-/* Delete Overlay */
+/* Delete Overlay - completely avoids player items */
 .delete-overlay {
     position: fixed;
     top: 0;
@@ -74,18 +57,33 @@ button:active {
     bottom: 0;
     background: radial-gradient(
         circle at center,
-        rgba(220, 38, 38, 0.3) 0%,
-        rgba(220, 38, 38, 0.18) 50%,
-        rgba(220, 38, 38, 0.08) 100%
+        rgba(220, 38, 38, 0.4) 0%,
+        rgba(220, 38, 38, 0.25) 50%,
+        rgba(220, 38, 38, 0.1) 100%
     );
     opacity: 0;
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
     transition: opacity 0.3s ease;
 }
 
 .delete-overlay.active {
     opacity: 1;
+}
+
+/* Force player items above the overlay */
+.player-item {
+    background: inherit !important;
+    position: relative;
+    z-index: 10;
+}
+
+/* When delete overlay is active, create masks around player items */
+body.delete-active .player-item {
+    box-shadow: 
+        0 0 0 2000px rgba(220, 38, 38, 0.3),
+        inset 0 0 0 2000px transparent;
+    clip-path: polygon(-2000px -2000px, -2000px 0, 0 0, 0 -2000px);
 }
 
 /* Notes Section - Responsive */
