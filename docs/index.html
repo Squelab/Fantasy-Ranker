@@ -1098,19 +1098,19 @@
             
             // TOP ZONES
             if (clientY < fastZone) {
-                scrollSpeed = -20;
+                scrollSpeed = -4;
             } else if (clientY < mediumZone) {
-                scrollSpeed = -10;
+                scrollSpeed = -2;
             } else if (clientY < slowZone) {
-                scrollSpeed = -5;
+                scrollSpeed = -1;
             }
             // BOTTOM ZONES
             else if (clientY > viewportHeight - fastZone) {
-                scrollSpeed = 20;
+                scrollSpeed = 4;
             } else if (clientY > viewportHeight - mediumZone) {
-                scrollSpeed = 10;
+                scrollSpeed = 2;
             } else if (clientY > viewportHeight - slowZone) {
-                scrollSpeed = 5;
+                scrollSpeed = 1;
             }
             
             // Handle scrolling
