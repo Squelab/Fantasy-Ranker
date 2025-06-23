@@ -1113,31 +1113,27 @@
                 scrollSpeed = 5;
             }
             
-            // UPDATE SPEED IF ALREADY SCROLLING
-            if (state.dragState.isScrolling) {
-                state.dragState.currentScrollSpeed = scrollSpeed;
+            // Handle scrolling
+            if (scrollSpeed !== 0) {
+                // Scroll immediately
+                window.scrollBy(0, scrollSpeed);
                 
-                // Stop if speed is 0
-                if (scrollSpeed === 0) {
-                    state.dragState.isScrolling = false;
-                    state.dragState.currentScrollSpeed = 0;
-                    cancelAnimationFrame(state.dragState.timers.scroll);
-                }
-            }
-            // START SCROLLING IF NOT ALREADY
-            else if (scrollSpeed !== 0) {
+                // Update state
                 state.dragState.isScrolling = true;
                 state.dragState.currentScrollSpeed = scrollSpeed;
-                smoothScroll();
+                
+                // Continue scrolling next frame (if still dragging)
+                if (state.dragState.isDragging) {
+                    state.dragState.timers.scroll = requestAnimationFrame(() => {
+                        handleAutoScroll(clientY); // Call self with same Y position
+                    });
+                }
+            } else {
+                // Stop scrolling
+                state.dragState.isScrolling = false;
+                state.dragState.currentScrollSpeed = 0;
+                cancelAnimationFrame(state.dragState.timers.scroll);
             }
-        }
-        
-        function smoothScroll() {
-            if (!state.dragState.isDragging || !state.dragState.isScrolling) return;
-            
-            // Use current speed (updated by handleAutoScroll)
-            window.scrollBy(0, state.dragState.currentScrollSpeed);
-            state.dragState.timers.scroll = requestAnimationFrame(smoothScroll);
         }
 
         function endDrag() {
