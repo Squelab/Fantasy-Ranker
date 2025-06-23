@@ -10,21 +10,18 @@
     <meta property="og:description" content="Free fantasy football draft tool and rankings builder. Create printable cheat sheets and win the draft.">
     <meta property="og:url" content="https://drftcrft.com">
     <meta property="og:type" content="website">
-    <!-- Standard favicon -->
     <link rel="icon" href="favicon.ico?v=2" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon">
     <link rel="icon" type="image/png" href="favicon.png?v=2">    
-    <!-- Apple Touch Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.png?v=2">
     <link rel="apple-touch-icon" sizes="152x152" href="favicon.png?v=2">
     <link rel="apple-touch-icon" sizes="120x120" href="favicon.png?v=2">
     <link rel="apple-touch-icon" sizes="76x76" href="favicon.png?v=2">
     <link rel="apple-touch-icon" href="favicon.png?v=2">
-    <!-- Android/Chrome -->
     <link rel="icon" type="image/png" sizes="192x192" href="favicon.png?v=2">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png?v=2">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.png?v=2">
-    <!-- Web App Manifest -->
+
     <link rel="manifest" href="/site.webmanifest">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -172,6 +169,7 @@
             }
         };
 
+        // Idk if this works I onky have an iphone
         const vibrate = (pattern) => {
             if (window.navigator.vibrate) {
                 window.navigator.vibrate(pattern);
@@ -270,19 +268,15 @@
                 // Undo/Redo shortcuts (but not when typing in inputs)
                 if (!['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
                     if (e.ctrlKey || e.metaKey) {
-                        // Check for Shift+Z first (Redo)
+                        // Shift+Z (Redo) - just Z (Undo) - Ctrl+Y (alternative redo)
                         if (e.key === 'Z' && e.shiftKey) {
                             e.preventDefault();
                             redo();
-                            console.log('Redo triggered'); // Debug log
                         }
-                        // Then check for just Z (Undo)
                         else if (e.key === 'z' && !e.shiftKey) {
                             e.preventDefault();
                             undo();
-                            console.log('Undo triggered'); // Debug log
                         }
-                        // Also check for Ctrl+Y (alternative redo)
                         else if (e.key === 'y') {
                             e.preventDefault();
                             redo();
@@ -426,14 +420,6 @@
             redoBtn.disabled = state.history.redoStack.length === 0;
         }
 
-
-
-
-
-
-
-
-
         // Notes Modal Functions
         function openNotesModal(playerId) {
             const player = state.players.find(p => p.id === playerId);
@@ -446,7 +432,6 @@
             $('notesModalTextarea').value = player.notes || '';
             $('notesModal').classList.remove('hidden');
             
-            // Focus the textarea
             setTimeout(() => {
                 $('notesModalTextarea').focus();
             }, 100);
@@ -455,7 +440,6 @@
         function closeNotesModal() {
             if (!state.notesModal.isOpen) return;
 
-            // Auto-save the notes
             const notes = $('notesModalTextarea').value;
             if (state.notesModal.currentPlayerId) {
                 updateNotes(state.notesModal.currentPlayerId, notes);
@@ -634,7 +618,6 @@
             const search = $('searchInput').value.toLowerCase();
     
             if (state.positionFilter === 'ALL') {
-                // Filter current players with advanced search
                 state.filteredPlayers = state.players.filter(p => 
                     advancedPlayerSearch(p, search)
                 );
@@ -669,7 +652,7 @@
                             !currentPlayerIds.has(p.id) &&
                             (search.length === 0 || advancedPlayerSearch(p, search))
                         )
-                        .slice(0, 20); // Show more since we're filtering by position
+                        .slice(0, 20); 
                 }
             }
     
@@ -682,9 +665,9 @@
             // Normalize function to handle punctuation and case
             const normalize = (str) => {
                 return str.toLowerCase()
-                    .replace(/[''`]/g, "'")  // Normalize apostrophes
-                    .replace(/[^\w\s']/g, '') // Remove punctuation except apostrophes
-                    .replace(/\s+/g, ' ')     // Normalize spaces
+                    .replace(/[''`]/g, "'")  
+                    .replace(/[^\w\s']/g, '')
+                    .replace(/\s+/g, ' ')
                     .trim();
             };
     
@@ -747,7 +730,6 @@
                 const nameParts = normalizedName.split(' ');
                 if (nameParts.some(part => part.startsWith(searchWord))) return true;
     
-                // NEW: Try inserting apostrophes at different positions in the search word
                 // This handles cases like "jam" -> "ja'm" to match "ja'marr"
                 for (let i = 1; i < searchWord.length; i++) {
                     const withApostrophe = searchWord.slice(0, i) + "'" + searchWord.slice(i);
@@ -899,7 +881,6 @@
             const search = $('searchInput').value.toLowerCase();
             const isDraft = state.isDraftMode;
             
-            // Build HTML in one pass
             const html = [];
             
             // Current players
@@ -1023,7 +1004,7 @@
                 `;
             }
             
-            // SAFETY CHECK: Make sure parent exists before inserting placeholder
+            // Make sure parent exists before inserting placeholder
             if (!element.parentNode) {
                 console.warn('Element has no parent - aborting drag');
                 state.dragState.isDragging = false;
@@ -1104,31 +1085,34 @@
         }
 
         function handleAutoScroll(clientY) {
-            const isMobile = window.innerWidth < 768;
-            const scrollZone = isMobile ? 50 : 80;
-            const maxScroll = 35;
             const viewportHeight = window.innerHeight;
+            const isMobile = window.innerWidth < 768;
+            
+            // Define scroll zones (adjust these numbers as needed)
+            const fastZone = isMobile ? 30 : 40;    // Closest to edge - fast scroll
+            const mediumZone = isMobile ? 60 : 80;  // Medium distance - medium scroll
+            const slowZone = isMobile ? 90 : 120;   // Furthest - slow scroll
             
             let scrollSpeed = 0;
             
-            if (clientY < scrollZone) {
-                const distance = scrollZone - clientY;
-                const ratio = distance / scrollZone;
-                scrollSpeed = -Math.max(1, Math.round(Math.pow(ratio, 0.5) * maxScroll));
-                
-                if (clientY < 10) {
-                    scrollSpeed = -maxScroll * 2.5;
-                }
-            } else if (clientY > viewportHeight - scrollZone) {
-                const distance = clientY - (viewportHeight - scrollZone);
-                const ratio = distance / scrollZone;
-                scrollSpeed = Math.max(1, Math.round(Math.pow(ratio, 0.5) * maxScroll));
-                
-                if (clientY > viewportHeight - 10) {
-                    scrollSpeed = maxScroll * 2.5;
-                }
+            // TOP ZONES
+            if (clientY < fastZone) {
+                scrollSpeed = -20;  // Fast upward
+            } else if (clientY < mediumZone) {
+                scrollSpeed = -10;  // Medium upward
+            } else if (clientY < slowZone) {
+                scrollSpeed = -5;   // Slow upward
+            }
+            // BOTTOM ZONES
+            else if (clientY > viewportHeight - fastZone) {
+                scrollSpeed = 20;   // Fast downward
+            } else if (clientY > viewportHeight - mediumZone) {
+                scrollSpeed = 10;   // Medium downward
+            } else if (clientY > viewportHeight - slowZone) {
+                scrollSpeed = 5;    // Slow downward
             }
             
+            // Start or stop scrolling
             if (scrollSpeed !== 0 && !state.dragState.isScrolling) {
                 state.dragState.isScrolling = true;
                 smoothScroll(scrollSpeed);
@@ -1137,28 +1121,11 @@
                 cancelAnimationFrame(state.dragState.timers.scroll);
             }
         }
-
+        
         function smoothScroll(speed) {
             if (!state.dragState.isDragging || !state.dragState.isScrolling) return;
             
             window.scrollBy(0, speed);
-            
-            // CHECK IF WE SHOULD STOP SCROLLING
-            if (state.dragState.element) {
-                const rect = state.dragState.element.getBoundingClientRect();
-                const centerY = rect.top + rect.height / 2;
-                
-                const isMobile = window.innerWidth < 768;
-                const scrollZone = isMobile ? 50 : 80;
-                const viewportHeight = window.innerHeight;
-                
-                // If we're in the center zone, stop scrolling
-                if (centerY >= scrollZone && centerY <= viewportHeight - scrollZone) {
-                    state.dragState.isScrolling = false;
-                    return; // Don't schedule next frame
-                }
-            }
-            
             state.dragState.timers.scroll = requestAnimationFrame(() => smoothScroll(speed));
         }
 
