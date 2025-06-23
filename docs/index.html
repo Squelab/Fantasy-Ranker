@@ -165,7 +165,8 @@
                 originalRect: null,
                 timers: { touch: null, resize: null, scroll: null },
                 isScrolling: false,
-                wasOverDelete: false
+                wasOverDelete: false,
+                state.dragState.currentScrollSpeed = 0;
             }
         };
 
@@ -1088,45 +1089,55 @@
             const viewportHeight = window.innerHeight;
             const isMobile = window.innerWidth < 768;
             
-            // Define scroll zones (adjust these numbers as needed)
-            const fastZone = isMobile ? 30 : 40;    // Closest to edge - fast scroll
-            const mediumZone = isMobile ? 60 : 80;  // Medium distance - medium scroll
-            const slowZone = isMobile ? 90 : 120;   // Furthest - slow scroll
+            // Define scroll zones
+            const fastZone = isMobile ? 30 : 40;
+            const mediumZone = isMobile ? 60 : 80;
+            const slowZone = isMobile ? 90 : 120;
             
             let scrollSpeed = 0;
             
             // TOP ZONES
             if (clientY < fastZone) {
-                scrollSpeed = -20;  // Fast upward
+                scrollSpeed = -20;
             } else if (clientY < mediumZone) {
-                scrollSpeed = -10;  // Medium upward
+                scrollSpeed = -10;
             } else if (clientY < slowZone) {
-                scrollSpeed = -5;   // Slow upward
+                scrollSpeed = -5;
             }
             // BOTTOM ZONES
             else if (clientY > viewportHeight - fastZone) {
-                scrollSpeed = 20;   // Fast downward
+                scrollSpeed = 20;
             } else if (clientY > viewportHeight - mediumZone) {
-                scrollSpeed = 10;   // Medium downward
+                scrollSpeed = 10;
             } else if (clientY > viewportHeight - slowZone) {
-                scrollSpeed = 5;    // Slow downward
+                scrollSpeed = 5;
             }
             
-            // Start or stop scrolling
-            if (scrollSpeed !== 0 && !state.dragState.isScrolling) {
+            // UPDATE SPEED IF ALREADY SCROLLING
+            if (state.dragState.isScrolling) {
+                state.dragState.currentScrollSpeed = scrollSpeed;
+                
+                // Stop if speed is 0
+                if (scrollSpeed === 0) {
+                    state.dragState.isScrolling = false;
+                    state.dragState.currentScrollSpeed = 0;
+                    cancelAnimationFrame(state.dragState.timers.scroll);
+                }
+            }
+            // START SCROLLING IF NOT ALREADY
+            else if (scrollSpeed !== 0) {
                 state.dragState.isScrolling = true;
-                smoothScroll(scrollSpeed);
-            } else if (scrollSpeed === 0 && state.dragState.isScrolling) {
-                state.dragState.isScrolling = false;
-                cancelAnimationFrame(state.dragState.timers.scroll);
+                state.dragState.currentScrollSpeed = scrollSpeed;
+                smoothScroll();
             }
         }
         
-        function smoothScroll(speed) {
+        function smoothScroll() {
             if (!state.dragState.isDragging || !state.dragState.isScrolling) return;
             
-            window.scrollBy(0, speed);
-            state.dragState.timers.scroll = requestAnimationFrame(() => smoothScroll(speed));
+            // Use current speed (updated by handleAutoScroll)
+            window.scrollBy(0, state.dragState.currentScrollSpeed);
+            state.dragState.timers.scroll = requestAnimationFrame(smoothScroll);
         }
 
         function endDrag() {
