@@ -1102,17 +1102,17 @@
             if (clientY < fastZone) {
                 scrollSpeed = -12;
             } else if (clientY < mediumZone) {
-                scrollSpeed = -9;
-            } else if (clientY < slowZone) {
                 scrollSpeed = -6;
+            } else if (clientY < slowZone) {
+                scrollSpeed = -3;
             }
             // BOTTOM ZONES
             else if (clientY > viewportHeight - fastZone) {
                 scrollSpeed = 12;
             } else if (clientY > viewportHeight - mediumZone) {
-                scrollSpeed = 9;
-            } else if (clientY > viewportHeight - slowZone) {
                 scrollSpeed = 6;
+            } else if (clientY > viewportHeight - slowZone) {
+                scrollSpeed = 3;
             }
             
             // Update scroll speed (don't call this function recursively!)
@@ -1132,6 +1132,17 @@
                 
                 if (state.dragState.currentScrollSpeed !== 0) {
                     window.scrollBy(0, state.dragState.currentScrollSpeed);
+                    
+                    // Update placeholder position during scroll using the stored touch/mouse position
+                    if (state.dragState.element && state.dragState.placeholder) {
+                        // Get the current drag element position to simulate the touch point
+                        const dragRect = state.dragState.element.getBoundingClientRect();
+                        const centerX = dragRect.left + dragRect.width / 2;
+                        const centerY = dragRect.top + dragRect.height / 2;
+                        
+                        // Update placeholder using the drag element's center point
+                        updatePlaceholderPosition(centerX, centerY);
+                    }
                 }
                 
                 state.dragState.timers.scroll = requestAnimationFrame(scrollLoop);
@@ -1147,6 +1158,22 @@
             }
             state.dragState.isScrolling = false;
             state.dragState.currentScrollSpeed = 0;
+        }
+        
+        function updatePlaceholderPosition(clientX, clientY) {
+            const { element, placeholder } = state.dragState;
+            if (!element || !placeholder) return;
+            
+            element.style.pointerEvents = 'none';
+            const elementBelow = document.elementFromPoint(clientX, clientY);
+            element.style.pointerEvents = 'auto';
+        
+            const targetItem = elementBelow?.closest('.player-item');
+            if (targetItem && !targetItem.classList.contains('drag-active') && !targetItem.classList.contains('available-player')) {
+                const targetRect = targetItem.getBoundingClientRect();
+                const before = clientY < targetRect.top + targetRect.height / 2;
+                targetItem.parentNode.insertBefore(placeholder, before ? targetItem : targetItem.nextSibling);
+            }
         }
         
         function endDrag() {
