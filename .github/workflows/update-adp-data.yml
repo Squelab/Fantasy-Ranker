@@ -1,7 +1,7 @@
 name: Update ADP Data
 on:
   schedule:
-    # Run every 6 hours (at 0:00, 6:00, 12:00, 18:00 UTC)
+    # Run every 48 hours (at 0:00, 6:00, 12:00, 18:00 UTC)
     - cron: '0 */48 * * *'
   workflow_dispatch: # Allows manual triggering from GitHub UI
 
